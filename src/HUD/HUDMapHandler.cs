@@ -15,14 +15,14 @@ namespace ZeldaGame.HUD
         private List<Rectangle> sourceRectangle;
         private List<Rectangle> targetRectangle;
 
-        public HUDMapHandler(Vector3 map_size, Vector2 scale, Texture2D texture)
+        public HUDMapHandler(Vector3 map_size, Vector2 scale, Texture2D texture, MapHandler map)
         {
             this.map_size = map_size;
             this.scale = scale;
             this.texture = texture;
             sourceRectangle = new List<Rectangle>();
             targetRectangle = new List<Rectangle>();
-            mapType = new HUDMapType(map_size, scale);
+            mapType = new HUDMapType(map_size, scale, map);
         }
 
         public void Draw(SpriteBatch spriteBatch, int isDisplayed)
