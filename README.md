@@ -14,12 +14,25 @@ a. download the repository to your local machine
 ```shell
 git clone https://github.com/DeFisch/ZeldaGame.git
 ```
-
-```
+b.(update the remote changes of the repository to your local machine)
+```shell
 git pull
 ```
-(update the remote changes of the repository to your local machine)
-```git status``` (check the changes you made since last commit/pull)
-```git add [filename]```(record your changes of the file) or alternatively ~~~git add *~~~ (record all the changes you made to the repository)
-```git commit -m "[your commit message here]"``` (gather all your record of changes to a single commit, message usually explains what functionality you adds in these changes)
-```~~~git push~~~``` (update all your local commits to the GitHub repo so everyone can access it)
+c.(check the changes you made since last commit/pull)
+```shell
+git status
+```
+d.(record your changes of the file)
+```shell
+git add [filename]
+```
+e. or alternatively, (record all the changes you made to the repository)
+```shell
+git add
+```
+f. (gather all your record of changes to a single commit, message usually explains what functionality you adds in these changes)
+```shell
+git commit -m "[your commit message here]"
+```
+g. (update all your local commits to the GitHub repo so everyone can access it)
+```git push```
