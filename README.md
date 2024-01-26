@@ -10,10 +10,11 @@ OSU CSE 3902 Zelda Game Project
 - Zhiyang Xu      xu.4082@osu.edu
 
 ## GitHub basic commands:
-```
+a. download the repository to your local machine
+```shell
 git clone https://github.com/DeFisch/ZeldaGame.git
 ```
-(download the repository to your local machine)
+
 ```
 git pull
 ```
