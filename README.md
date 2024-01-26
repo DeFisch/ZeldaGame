@@ -1,5 +1,5 @@
 # ZeldaGame
-OSU CSE 3902 Zelda Game Project\
+OSU CSE 3902 Zelda Game Project
 
 ## Team member:
 - Leslie Cobbold	cobbold.4@osu.edu
