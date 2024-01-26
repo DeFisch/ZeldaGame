@@ -35,4 +35,6 @@ e. Gather all your record of changes to a single commit, commit message usually 
 git commit -m "[your commit message here]"
 ```
 g. Update all your local commits to the GitHub repo so everyone can access it
-```git push```
+```shell
+git push
+```
