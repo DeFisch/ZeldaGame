@@ -28,7 +28,7 @@ git add [filename]
 ```
 or alternatively, record all the changes you made to the repository
 ```shell
-git add \*
+git add *
 ```
 e. Gather all your record of changes to a single commit, commit message usually explains what functionality you adds in these changes
 ```shell
