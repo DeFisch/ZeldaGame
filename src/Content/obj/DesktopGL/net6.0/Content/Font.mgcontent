@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PipelineBuildEvent xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <SourceFile>/Users/daniel/Documents/code/c_sharp/cse_3902/ZeldaGame/src/Content/Font.spritefont</SourceFile>
+  <SourceTime>2024-01-22T19:08:26-05:00</SourceTime>
+  <DestFile>/Users/daniel/Documents/code/c_sharp/cse_3902/ZeldaGame/src/Content/bin/DesktopGL/Content/Font.xnb</DestFile>
+  <DestTime>2024-01-31T15:20:38.8247891-05:00</DestTime>
+  <Importer>FontDescriptionImporter</Importer>
+  <ImporterTime>2022-07-26T07:44:56-04:00</ImporterTime>
+  <Processor>FontDescriptionProcessor</Processor>
+  <ProcessorTime>2022-07-26T07:44:56-04:00</ProcessorTime>
+  <Parameters>
+    <Key>PremultiplyAlpha</Key>
+    <Value>True</Value>
+  </Parameters>
+  <Parameters>
+    <Key>TextureFormat</Key>
+    <Value>Compressed</Value>
+  </Parameters>
+  <Dependencies />
+  <BuildAsset />
+  <BuildOutput />
+</PipelineBuildEvent>

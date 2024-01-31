@@ -1,0 +1,3 @@
+Source File,Dest File,Processor Type,Content Type,Source File Size,Dest File Size,Build Seconds
+"C:/Users/dlper/OneDrive/Desktop/CSE 3902 MonoGame/Sprint0/Sprint0/Content/Font.spritefont","C:/Users/dlper/OneDrive/Desktop/CSE 3902 MonoGame/Sprint0/Sprint0/Content/bin/DesktopGL/Font.xnb","FontDescriptionProcessor","SpriteFontContent",2068,37919,0.5089162
+"C:/Users/dlper/OneDrive/Desktop/CSE 3902 MonoGame/Sprint0/Sprint0/Content/Link.png","C:/Users/dlper/OneDrive/Desktop/CSE 3902 MonoGame/Sprint0/Sprint0/Content/bin/DesktopGL/Link.xnb","TextureProcessor","Texture2DContent",19462,460125,0.1198714
