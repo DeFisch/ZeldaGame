@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("ZeldaGame")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+18deea954ad5ef066adfa8d50757e3894bdd3aa7")]
 [assembly: System.Reflection.AssemblyProductAttribute("ZeldaGame")]
 [assembly: System.Reflection.AssemblyTitleAttribute("ZeldaGame")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

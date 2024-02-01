@@ -4,10 +4,12 @@
   <Platform>DesktopGL</Platform>
   <Config />
   <SourceFiles>
+    <File>/Users/daniel/Documents/code/c_sharp/cse_3902/ZeldaGame/src/Content/enemies.png</File>
     <File>/Users/daniel/Documents/code/c_sharp/cse_3902/ZeldaGame/src/Content/Font.spritefont</File>
     <File>/Users/daniel/Documents/code/c_sharp/cse_3902/ZeldaGame/src/Content/Link.png</File>
   </SourceFiles>
   <DestFiles>
+    <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
   </DestFiles>

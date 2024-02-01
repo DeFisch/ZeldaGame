@@ -27,4 +27,5 @@
 /Users/daniel/Documents/code/c_sharp/cse_3902/ZeldaGame/src/obj/Debug/net6.0/ZeldaGame.pdb
 /Users/daniel/Documents/code/c_sharp/cse_3902/ZeldaGame/src/obj/Debug/net6.0/ZeldaGame.genruntimeconfig.cache
 /Users/daniel/Documents/code/c_sharp/cse_3902/ZeldaGame/src/obj/Debug/net6.0/ref/ZeldaGame.dll
+/Users/daniel/Documents/code/c_sharp/cse_3902/ZeldaGame/src/bin/Debug/net6.0/Content/enemies.xnb
 /Users/daniel/Documents/code/c_sharp/cse_3902/ZeldaGame/src/obj/Debug/net6.0/ZeldaGame.sourcelink.json

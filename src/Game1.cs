@@ -1,11 +1,15 @@
-﻿using Microsoft.Xna.Framework;
+﻿using System;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using ZeldaGame.Enemy;
 
 namespace ZeldaGame
 {
     public class Game1 : Game
     {
+        private int window_width = 800;
+        private int window_height = 600;
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
 
@@ -14,6 +18,7 @@ namespace ZeldaGame
 
         private Vector2 location;
         private SpriteFont font;
+        private EnemyFactory enemyFactory;
         int framesPerSecond;
 
         private IController<Keys> keyboardController;
@@ -35,6 +40,11 @@ namespace ZeldaGame
             // Initialize controllers
             keyboardController = new KeyboardController();
             mouseController = new MouseController();
+
+            // set fixed window size
+            _graphics.PreferredBackBufferWidth = this.window_width;
+            _graphics.PreferredBackBufferHeight = this.window_height;
+            _graphics.ApplyChanges();
             
             base.Initialize();
         }
@@ -46,8 +56,16 @@ namespace ZeldaGame
             // Load content
             sprite = Content.Load<Texture2D>("Link");
             font = Content.Load<SpriteFont>("Font");
-            // Initializes Link with Sprite1
+            Texture2D enemies = Content.Load<Texture2D>("enemies");
+
+            // Initializes object classes
             Link = new Sprite1(sprite);
+            enemyFactory = new EnemyFactory(enemies);
+            Random random = new Random();
+            for (int i = 0; i < 100; i++)
+            {
+                enemyFactory.AddEnemy("Stalfos", new Vector2(random.Next(0, window_width-16), random.Next(0, window_height-16)));
+            }
 
             // Registers commands with Keys as the identifier
             keyboardController.RegisterCommand(Keys.D0, new QuitCommand(this));
@@ -83,6 +101,7 @@ namespace ZeldaGame
             }
 
             base.Update(gameTime);
+            enemyFactory.Update();
         }
 
         protected override void Draw(GameTime gameTime)
@@ -92,11 +111,17 @@ namespace ZeldaGame
             // Draws Link
             Link.Draw(_spriteBatch, location);
 
-            // Draws credits
             _spriteBatch.Begin();
+
+            // Draws credits
             _spriteBatch.DrawString(font, "Credits", new Vector2(250, 300), Color.Black);
             _spriteBatch.DrawString(font, "Project Made By: Dan Perry", new Vector2(250, 325), Color.Black);
             _spriteBatch.DrawString(font, "Sprites From: \nhttps://www.spriters-resource.com\n/nes/legendofzelda/sheet/8366/", new Vector2(250, 350), Color.Black);
+            
+            
+            // Draws enemies
+            enemyFactory.Draw(_spriteBatch);
+            
             _spriteBatch.End();
 
             base.Draw(gameTime);
