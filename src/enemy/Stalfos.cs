@@ -17,6 +17,7 @@ public class Stalfos : IEnemy
     private int scale = 2;
     private int speed = 2;
 <<<<<<< HEAD
+<<<<<<< HEAD
     public Stalfos(Texture2D texture, Vector2 window_size)
     {
         this.texture = texture;
@@ -27,6 +28,12 @@ public class Stalfos : IEnemy
         this.texture = texture;
         this.position = position;
 >>>>>>> ba547e7 (initial implementation of enemy code)
+=======
+    public Stalfos(Texture2D texture, Vector2 window_size)
+    {
+        this.texture = texture;
+        this.position = new Vector2(new Random().Next(0, (int)window_size.X - character_sprites[2] * scale), new Random().Next(0, (int)window_size.Y - character_sprites[3] * scale));
+>>>>>>> 46588a7 (add enemies variations)
         state = State.Walking;
         direction = Direction.Down;
     }
@@ -39,10 +46,14 @@ public class Stalfos : IEnemy
         if (direction == Direction.Left)
             sprite_effect = SpriteEffects.FlipHorizontally;
 <<<<<<< HEAD
+<<<<<<< HEAD
         if ((direction == Direction.Up || direction == Direction.Down) && (frameID / 30) % 2 == 0)
 =======
         if ((direction == Direction.Up || direction == Direction.Down) && new Random().Next(0, 2) == 1)
 >>>>>>> ba547e7 (initial implementation of enemy code)
+=======
+        if ((direction == Direction.Up || direction == Direction.Down) && (frameID / 30) % 2 == 0)
+>>>>>>> 46588a7 (add enemies variations)
             sprite_effect = SpriteEffects.FlipHorizontally;
         spriteBatch.Draw(texture, destinationRectangle, sourceRectangle, Color.White, rotation:0, new Vector2(0,0) , effects: sprite_effect, 1);
     }
