@@ -7,20 +7,28 @@ public class EnemyFactory
 {
     private List<IEnemy> enemies;
     private Texture2D texture;
+    private Vector2 window_size;
 
-    public EnemyFactory(Texture2D texture)
+    public EnemyFactory(Texture2D texture, Vector2 window_size)
     {
         enemies = new List<IEnemy>();
         this.texture = texture;
+        this.window_size = window_size;
     }
 
-    public void AddEnemy(string enemy_name, Vector2 position)
+    public void AddEnemy(string enemy_name, string color_variation = null)
     {
         IEnemy enemy = null;
         switch (enemy_name)
         {
             case "Stalfos":
-                enemy = new Stalfos(texture, position);
+                enemy = new Stalfos(texture, window_size);
+                break;
+            case "Gibdo":
+                enemy = new Gibdo(texture, window_size);
+                break;
+            case "KeeseGoriya":
+                enemy = new KeeseGoriya(texture, window_size, color_variation);
                 break;
             default:
                 break;

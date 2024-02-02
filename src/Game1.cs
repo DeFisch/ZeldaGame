@@ -60,11 +60,16 @@ namespace ZeldaGame
 
             // Initializes object classes
             Link = new Sprite1(sprite);
-            enemyFactory = new EnemyFactory(enemies);
+            enemyFactory = new EnemyFactory(enemies, window_size: new Vector2(window_width, window_height));
             Random random = new Random();
-            for (int i = 0; i < 100; i++)
+            for (int i = 0; i < 5; i++) // spawn 5 enemies of each type
             {
-                enemyFactory.AddEnemy("Stalfos", new Vector2(random.Next(0, window_width-16), random.Next(0, window_height-16)));
+                enemyFactory.AddEnemy("Stalfos");
+                enemyFactory.AddEnemy("Gibdo");
+                if (i % 2 == 0)
+                    enemyFactory.AddEnemy("KeeseGoriya", color_variation: "blue");
+                else
+                    enemyFactory.AddEnemy("KeeseGoriya", color_variation: "red");
             }
 
             // Registers commands with Keys as the identifier
@@ -108,16 +113,7 @@ namespace ZeldaGame
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
-            // Draws Link
-            Link.Draw(_spriteBatch, location);
-
             _spriteBatch.Begin();
-
-            // Draws credits
-            _spriteBatch.DrawString(font, "Credits", new Vector2(250, 300), Color.Black);
-            _spriteBatch.DrawString(font, "Project Made By: Dan Perry", new Vector2(250, 325), Color.Black);
-            _spriteBatch.DrawString(font, "Sprites From: \nhttps://www.spriters-resource.com\n/nes/legendofzelda/sheet/8366/", new Vector2(250, 350), Color.Black);
-            
             
             // Draws enemies
             enemyFactory.Draw(_spriteBatch);

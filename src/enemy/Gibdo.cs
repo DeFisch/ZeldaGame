@@ -4,7 +4,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace ZeldaGame.Enemy;
 
-public class Stalfos : IEnemy
+public class Gibdo : IEnemy
 {
     enum State { Idle, Walking, Attacking, Dead };
     enum Direction { Up, Down, Left, Right };
@@ -13,13 +13,13 @@ public class Stalfos : IEnemy
     private Vector2 position;
     private State state;
     private Direction direction;
-    private static int[] character_sprites = new int[] { 1, 59, 16, 16 }; // x, y, width, height
+    private static int[] character_sprites = new int[] { 90, 90, 16, 16 }; // x, y, width, height
     private int scale = 2;
     private int speed = 2;
-    public Stalfos(Texture2D texture, Vector2 window_size)
+    public Gibdo(Texture2D texture, Vector2 window_size)
     {
         this.texture = texture;
-        this.position = new Vector2(new Random().Next(0, (int)window_size.X - character_sprites[2] * scale), new Random().Next(0, (int)window_size.Y - character_sprites[3] * scale));
+        position = new Vector2(new Random().Next(0, (int)window_size.X - character_sprites[2] * scale), new Random().Next(0, (int)window_size.Y - character_sprites[3] * scale));
         state = State.Walking;
         direction = Direction.Down;
     }
@@ -31,7 +31,7 @@ public class Stalfos : IEnemy
         SpriteEffects sprite_effect = SpriteEffects.None;
         if (direction == Direction.Left)
             sprite_effect = SpriteEffects.FlipHorizontally;
-        if ((direction == Direction.Up || direction == Direction.Down) && (frameID / 30) % 2 == 0)
+        if ((direction == Direction.Up || direction == Direction.Down) && (frameID / 20) % 2 == 0)
             sprite_effect = SpriteEffects.FlipHorizontally;
         spriteBatch.Draw(texture, destinationRectangle, sourceRectangle, Color.White, rotation:0, new Vector2(0,0) , effects: sprite_effect, 1);
     }
@@ -62,25 +62,25 @@ public class Stalfos : IEnemy
                     if (position.Y > 0)
                         position.Y -= speed;
                     else
-                        direction = Direction.Right;
+                        direction = Direction.Down;
                     break;
                 case Direction.Down:
                     if (position.Y < 600 - character_sprites[3]*scale)
                         position.Y += speed;
                     else
-                        direction = Direction.Left;
+                        direction = Direction.Up;
                     break;
                 case Direction.Left:
                     if (position.X > 0)
                         position.X -= speed;
                     else
-                        direction = Direction.Up;
+                        direction = Direction.Right;
                     break;
                 case Direction.Right:
                     if (position.X < 800 - character_sprites[2]*scale)
                         position.X += speed;
                     else
-                        direction = Direction.Down;
+                        direction = Direction.Left;
                     break;
             }
     }
