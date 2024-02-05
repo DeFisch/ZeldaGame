@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -16,13 +17,12 @@ namespace ZeldaGame
         public ISprite Link;
         public Texture2D sprite;
 
-        private Vector2 location;
-        private SpriteFont font;
         private EnemyFactory enemyFactory;
-        int framesPerSecond;
+        private int framesPerSecond;
 
-        private IController<Keys> keyboardController;
-        private IController<Rectangle> mouseController;
+        private KeyboardController keyboardController;
+        private MouseController mouseController;
+        private List<IController> controllers;
 
         public Game1()
         {
@@ -35,11 +35,11 @@ namespace ZeldaGame
         {
             // Initialize variables
             framesPerSecond = 0;
-            location = new Vector2(350, 200);
 
             // Initialize controllers
             keyboardController = new KeyboardController();
             mouseController = new MouseController();
+            controllers = new List<IController> { keyboardController, mouseController };
 
             // set fixed window size
             _graphics.PreferredBackBufferWidth = this.window_width;
@@ -55,7 +55,6 @@ namespace ZeldaGame
 
             // Load content
             sprite = Content.Load<Texture2D>("Link");
-            font = Content.Load<SpriteFont>("Font");
             Texture2D enemies = Content.Load<Texture2D>("enemies");
 
             // Initializes object classes
@@ -93,9 +92,10 @@ namespace ZeldaGame
                 Exit();
             }
 
-            // Updates the controllers
-            keyboardController.Update();
-            mouseController.Update();
+            foreach (IController controller in controllers)
+            {
+                controller.Update();
+            }
 
             // Delays frames to show animation
             framesPerSecond++;
