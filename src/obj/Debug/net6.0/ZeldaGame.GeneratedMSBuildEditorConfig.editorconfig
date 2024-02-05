@@ -8,6 +8,6 @@ build_property.PlatformNeutralAssembly =
 build_property.EnforceExtendedAnalyzerRules = 
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = ZeldaGame
-build_property.ProjectDir = /Users/daniel/Documents/code/c_sharp/cse_3902/ZeldaGame/src/
+build_property.ProjectDir = C:\Users\dlper\OneDrive\Desktop\CSE 3902 MonoGame\Zelda Game\src\
 build_property.EnableComHosting = 
 build_property.EnableGeneratedComInterfaceComImportInterop = 

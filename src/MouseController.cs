@@ -5,7 +5,7 @@ using System.Collections.Generic;
 /*
  * Controller class for the Mouse
  */
-public class MouseController : IController<Rectangle>
+public class MouseController : IController
 {
     private Dictionary<Rectangle, ICommand> quadrants;
 

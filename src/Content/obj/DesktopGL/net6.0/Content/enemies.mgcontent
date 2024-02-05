@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <SourceFile>/Users/daniel/Documents/code/c_sharp/cse_3902/ZeldaGame/src/Content/enemies.png</SourceFile>
-  <SourceTime>2024-02-02T12:55:42.5585862-05:00</SourceTime>
-  <DestFile>/Users/daniel/Documents/code/c_sharp/cse_3902/ZeldaGame/src/Content/bin/DesktopGL/Content/enemies.xnb</DestFile>
-  <DestTime>2024-02-02T12:57:02.9928985-05:00</DestTime>
+  <SourceFile>C:/Users/dlper/OneDrive/Desktop/CSE 3902 MonoGame/Zelda Game/src/Content/enemies.png</SourceFile>
+  <SourceTime>2024-02-05T10:54:00.0183154-05:00</SourceTime>
+  <DestFile>C:/Users/dlper/OneDrive/Desktop/CSE 3902 MonoGame/Zelda Game/src/Content/bin/DesktopGL/Content/enemies.xnb</DestFile>
+  <DestTime>2024-02-05T10:57:10.8703306-05:00</DestTime>
   <Importer>TextureImporter</Importer>
   <ImporterTime>2022-07-26T07:44:56-04:00</ImporterTime>
   <Processor>TextureProcessor</Processor>

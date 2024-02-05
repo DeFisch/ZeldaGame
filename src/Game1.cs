@@ -9,6 +9,10 @@ namespace ZeldaGame
 {
     public class Game1 : Game
     {
+        public enum State { Attack, Idle, Left, Right, Forward, Backward}
+        public enum Direction { Left, Right, Forward, Backward}
+        public enum Health { Damaged, Dead, Healthy}
+
         private int window_width = 800;
         private int window_height = 600;
         private GraphicsDeviceManager _graphics;
@@ -58,7 +62,8 @@ namespace ZeldaGame
             Texture2D enemies = Content.Load<Texture2D>("enemies");
 
             // Initializes object classes
-            Link = new Sprite1(sprite);
+            Link = new IdleState(Direction.Forward, Health.Healthy);
+
             enemyFactory = new EnemyFactory(enemies, window_size: new Vector2(window_width, window_height));
             Random random = new Random();
             for (int i = 0; i < 5; i++) // spawn 5 enemies of each type
@@ -77,6 +82,7 @@ namespace ZeldaGame
             keyboardController.RegisterCommand(Keys.D2, new SetSprite2Command(this));
             keyboardController.RegisterCommand(Keys.D3, new SetSprite3Command(this));
             keyboardController.RegisterCommand(Keys.D4, new SetSprite4Command(this));
+            //keyboardController.RegisterCommand(Keys.Z, new AttackingState());
 
             // Registers commands with Rectangles as the identifier
             mouseController.RegisterCommand(new Rectangle(0, 0, 400, 250), new SetSprite1Command(this));

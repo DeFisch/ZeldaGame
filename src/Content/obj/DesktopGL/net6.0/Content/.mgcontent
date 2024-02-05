@@ -4,9 +4,9 @@
   <Platform>DesktopGL</Platform>
   <Config />
   <SourceFiles>
-    <File>/Users/daniel/Documents/code/c_sharp/cse_3902/ZeldaGame/src/Content/enemies.png</File>
-    <File>/Users/daniel/Documents/code/c_sharp/cse_3902/ZeldaGame/src/Content/Font.spritefont</File>
-    <File>/Users/daniel/Documents/code/c_sharp/cse_3902/ZeldaGame/src/Content/Link.png</File>
+    <File>C:/Users/dlper/OneDrive/Desktop/CSE 3902 MonoGame/Zelda Game/src/Content/enemies.png</File>
+    <File>C:/Users/dlper/OneDrive/Desktop/CSE 3902 MonoGame/Zelda Game/src/Content/Font.spritefont</File>
+    <File>C:/Users/dlper/OneDrive/Desktop/CSE 3902 MonoGame/Zelda Game/src/Content/Link.png</File>
   </SourceFiles>
   <DestFiles>
     <File xsi:nil="true" />

@@ -6,7 +6,7 @@ using ZeldaGame;
 /*
  * Controller class for the Keyboard
  */
-public class KeyboardController : IController<Keys>
+public class KeyboardController : IController
 {
     private Dictionary<Keys, ICommand> controllerMappings;
 
