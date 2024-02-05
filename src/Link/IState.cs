@@ -7,8 +7,8 @@ using ZeldaGame;
 
 public interface IState
 {
-    public Game1.Direction Direction();
+    public void ChangeState();
 
-    public Game1.Health Health();
+    public void SetSprite();
 
 }

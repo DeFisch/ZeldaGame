@@ -9,10 +9,6 @@ namespace ZeldaGame
 {
     public class Game1 : Game
     {
-        public enum State { Attack, Idle, Left, Right, Forward, Backward}
-        public enum Direction { Left, Right, Forward, Backward}
-        public enum Health { Damaged, Dead, Healthy}
-
         private int window_width = 800;
         private int window_height = 600;
         private GraphicsDeviceManager _graphics;
@@ -62,7 +58,7 @@ namespace ZeldaGame
             Texture2D enemies = Content.Load<Texture2D>("enemies");
 
             // Initializes object classes
-            Link = new IdleState(Direction.Forward, Health.Healthy);
+            
 
             enemyFactory = new EnemyFactory(enemies, window_size: new Vector2(window_width, window_height));
             Random random = new Random();
