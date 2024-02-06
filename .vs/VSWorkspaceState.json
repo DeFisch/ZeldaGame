@@ -1,6 +1,8 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\src",
+    "\\src\\Player"
   ],
   "SelectedNode": "\\Zelda.sln",
   "PreviewInSolutionExplorer": false
