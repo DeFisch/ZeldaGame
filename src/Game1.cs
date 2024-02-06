@@ -115,11 +115,14 @@ namespace ZeldaGame
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
+            // Draws Link
+            Link.Draw(_spriteBatch, location);
+
+            // Draws credits
             _spriteBatch.Begin();
-            
-            // Draws enemies
-            enemyFactory.Draw(_spriteBatch);
-            
+            _spriteBatch.DrawString(font, "Credits", new Vector2(250, 300), Color.Black);
+            _spriteBatch.DrawString(font, "Project Made By: Dan Perry", new Vector2(250, 325), Color.Black);
+            _spriteBatch.DrawString(font, "Sprites From: \nhttps://www.spriters-resource.com\n/nes/legendofzelda/sheet/8366/", new Vector2(250, 350), Color.Black);
             _spriteBatch.End();
 
             base.Draw(gameTime);

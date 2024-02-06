@@ -1,4 +1,0 @@
-Source File,Dest File,Processor Type,Content Type,Source File Size,Dest File Size,Build Seconds
-"C:/Users/dlper/OneDrive/Desktop/CSE 3902 MonoGame/Zelda Game/src/Content/enemies.png","C:/Users/dlper/OneDrive/Desktop/CSE 3902 MonoGame/Zelda Game/src/Content/bin/DesktopGL/Content/enemies.xnb","TextureProcessor","Texture2DContent",20387,416869,0.2901799
-"C:/Users/dlper/OneDrive/Desktop/CSE 3902 MonoGame/Zelda Game/src/Content/Font.spritefont","C:/Users/dlper/OneDrive/Desktop/CSE 3902 MonoGame/Zelda Game/src/Content/bin/DesktopGL/Content/Font.xnb","FontDescriptionProcessor","SpriteFontContent",2068,37919,0.2192315
-"C:/Users/dlper/OneDrive/Desktop/CSE 3902 MonoGame/Zelda Game/src/Content/Link.png","C:/Users/dlper/OneDrive/Desktop/CSE 3902 MonoGame/Zelda Game/src/Content/bin/DesktopGL/Content/Link.xnb","TextureProcessor","Texture2DContent",19462,460125,0.0187938
