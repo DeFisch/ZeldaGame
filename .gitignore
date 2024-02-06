@@ -3,3 +3,5 @@ src/bin
 src/obj
 src/Content/bin
 src/Content/obj
+/.vs/slnx.sqlite
+*.vsidx
