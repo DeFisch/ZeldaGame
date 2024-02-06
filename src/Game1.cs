@@ -58,8 +58,9 @@ namespace ZeldaGame
             Texture2D enemies = Content.Load<Texture2D>("enemies");
 
             // Initializes object classes
-            Link = new Sprite1(sprite);
-            enemyFactory = new EnemyFactory(enemies);
+            
+
+            enemyFactory = new EnemyFactory(enemies, window_size: new Vector2(window_width, window_height));
             Random random = new Random();
             for (int i = 0; i < 5; i++) // spawn 5 enemies of each type
             {
@@ -114,14 +115,7 @@ namespace ZeldaGame
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
-            // Draws credits
             _spriteBatch.Begin();
-
-            // Draws credits
-            _spriteBatch.DrawString(font, "Credits", new Vector2(250, 300), Color.Black);
-            _spriteBatch.DrawString(font, "Project Made By: Dan Perry", new Vector2(250, 325), Color.Black);
-            _spriteBatch.DrawString(font, "Sprites From: \nhttps://www.spriters-resource.com\n/nes/legendofzelda/sheet/8366/", new Vector2(250, 350), Color.Black);
-            
             
             // Draws enemies
             enemyFactory.Draw(_spriteBatch);

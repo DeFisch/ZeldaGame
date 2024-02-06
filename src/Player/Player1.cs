@@ -7,9 +7,9 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace ZeldaGame.Player {
-	internal class Player1 : IPlayer {
+	public class Player1 : IPlayer {
 		PlayerStateMachine stateMachine;
-
+		ISprite sprite = PlayerSpriteFactory.Instance.CreateIdleDownPlayer();
 
 		public Player1(Texture2D texture, Vector2 window_size) {
 			stateMachine = new PlayerStateMachine();
@@ -20,10 +20,11 @@ namespace ZeldaGame.Player {
 		}
 
 		public void Draw(SpriteBatch spriteBatch) {
+			stateMachine.Draw(spriteBatch);
 		}
 
 		public void Update() {
-
+			
 		}
 	}
 }

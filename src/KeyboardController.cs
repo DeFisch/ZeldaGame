@@ -27,7 +27,9 @@ public class KeyboardController : IController
 
         foreach (Keys key in pressedKeys)
         {
-            controllerMappings[key].Execute();
+            if (controllerMappings.ContainsKey(key)) {
+                controllerMappings[key].Execute();
+            }
         }
     }
 }
