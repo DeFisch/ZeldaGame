@@ -21,7 +21,7 @@ namespace ZeldaGame
         private EnemyFactory enemyFactory;
         private int framesPerSecond;
 
-        private BlockSpriteFactory blockSpriteFactory;
+        public BlockSpriteFactory blockSpriteFactory;
 
         private KeyboardController keyboardController;
         private MouseController mouseController;

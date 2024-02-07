@@ -1,10 +1,6 @@
-﻿using Microsoft.Xna.Framework.Graphics;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Numerics;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace Sprint0.Block
 {
@@ -14,7 +10,8 @@ namespace Sprint0.Block
         private Texture2D texture;
         private Vector2 position;
         private IBlock block;
-        int cycleIndex = 0;
+        private int cycleIndex;
+        private int listLength;
 
         public BlockSpriteFactory(Texture2D texture)
         {
@@ -22,9 +19,11 @@ namespace Sprint0.Block
             this.texture = texture; 
             position = new Vector2(200, 150);
             block = null;
-        }
+            cycleIndex = 0;
+            listLength = 0;
+    }
 
-        public void AddBlocks(String blockType)
+        public void AddBlocks(string blockType)
         {
             switch (blockType)
             {
@@ -36,14 +35,31 @@ namespace Sprint0.Block
                     block = new Walls(texture, position); 
                     break;
 
+                case "Ground":
+                    block = new Ground(texture, position);
+                    break;
+
+                case "Obstacle":
+                    block = new Obstacle(texture, position);
+                    break;
+
                 default:
                     break;
             }
             blockList.Add(block);
         }
 
-        public void cycleList()
+        public void cycleList(int cycleDirection)
         {
+            listLength = blockList.Count;
+            if (cycleDirection == 1 && cycleIndex < listLength - 1)
+                cycleIndex++;
+            else if (cycleDirection == 0 && cycleIndex > 0)
+                cycleIndex--;
+            else if (cycleIndex >= listLength)
+                cycleIndex -= listLength;
+            else if (cycleIndex < 0)
+                cycleIndex += listLength;
 
         }
 

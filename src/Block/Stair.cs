@@ -1,7 +1,6 @@
 ﻿using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
 
-
 namespace Sprint0.Block
 {
     public class Stair: IBlock
@@ -24,9 +23,6 @@ namespace Sprint0.Block
             Rectangle sourceRectangle = new Rectangle(386, 81, 16, 16);
             Rectangle destinationRectangle = new Rectangle((int)position.X,(int)position.Y, 32, 32);
             spriteBatch.Draw(texture, destinationRectangle, sourceRectangle, Color.White);
-
         }
-
-
     }
 }
