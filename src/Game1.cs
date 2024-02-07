@@ -5,6 +5,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Sprint0.Block;
 using ZeldaGame.Enemy;
+using ZeldaGame.Player;
 
 namespace ZeldaGame
 {
@@ -15,8 +16,9 @@ namespace ZeldaGame
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
 
-        public ISprite Link;
+        public IPlayer Link;
         public Texture2D sprite;
+        public PlayerSpriteFactory playerFactory;
 
         private EnemyFactory enemyFactory;
         private int framesPerSecond;
@@ -57,7 +59,10 @@ namespace ZeldaGame
             _spriteBatch = new SpriteBatch(GraphicsDevice);
 
             // Load content
-            sprite = Content.Load<Texture2D>("Link");
+            //sprite = Content.Load<Texture2D>("Link");
+            PlayerSpriteFactory.Instance.LoadAllTextures(Content);
+            IPlayer Link = new Player1(new Vector2(window_width, window_height));
+
             Texture2D enemies = Content.Load<Texture2D>("enemies");
             blockSpriteFactory = new BlockSpriteFactory(Content.Load<Texture2D>("Level1_Map"));
 
@@ -83,10 +88,12 @@ namespace ZeldaGame
             blockSpriteFactory.AddBlocks("Obstacle");
 
             // Registers commands with Keys as the identifier
+            /*
             keyboardController.RegisterCommand(Keys.D1, new SetSprite1Command(this));
             keyboardController.RegisterCommand(Keys.D2, new SetSprite2Command(this));
             keyboardController.RegisterCommand(Keys.D3, new SetSprite3Command(this));
             keyboardController.RegisterCommand(Keys.D4, new SetSprite4Command(this));
+            */
 
             //Registers commands with Keys for blocks
             keyboardController.RegisterCommand(Keys.T, new NextBlockCommand(this));
@@ -95,10 +102,12 @@ namespace ZeldaGame
             //keyboardController.RegisterCommand(Keys.Z, new AttackingState());
 
             // Registers commands with Rectangles as the identifier
+            /*
             mouseController.RegisterCommand(new Rectangle(0, 0, 400, 250), new SetSprite1Command(this));
             mouseController.RegisterCommand(new Rectangle(401, 0, 800, 250), new SetSprite2Command(this));
             mouseController.RegisterCommand(new Rectangle(0, 251, 400, 500), new SetSprite3Command(this));
             mouseController.RegisterCommand(new Rectangle(401, 251, 800, 500), new SetSprite4Command(this));
+            */
         }
 
         protected override void Update(GameTime gameTime)

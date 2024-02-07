@@ -65,7 +65,7 @@ namespace ZeldaGame.Player {
 		}
 
 		public void Draw(SpriteBatch spriteBatch) {
-			spriteBatch.Draw();
+			spriteBatch.Draw(sprite.);
 		}
 	}
 }

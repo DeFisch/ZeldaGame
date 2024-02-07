@@ -22,17 +22,17 @@ public class PlayerSpriteFactory {
 		playerTexture = content.Load<Texture2D>("Link");
 	}
 
-	public ISprite CreateIdleUpPlayer(Vector2 location) {
-		return new IdleUpSprite(playerTexture, location); // will make ISprite methods later
+	public ISprite CreateIdleUpPlayer() {
+		return new IdleUpSprite(playerTexture); // will make ISprite methods later
 	}
-	public ISprite CreateIdleLeftPlayer(Vector2 location) {
-		return new IdleLeftSprite(playerTexture, location);
+	public ISprite CreateIdleLeftPlayer() {
+		return new IdleLeftSprite(playerTexture);
 	}
-	public ISprite CreateIdleDownPlayer(Vector2 location) {
-		return new IdleDownSprite(playerTexture, location);
+	public ISprite CreateIdleDownPlayer() {
+		return new IdleDownSprite(playerTexture);
 	}
-	public ISprite CreateIdleRightPlayer(Vector2 location) {
-		return new IdleRightSprite(playerTexture, location);
+	public ISprite CreateIdleRightPlayer() {
+		return new IdleRightSprite(playerTexture);
 	}
 	/*
 		Add additional methods for attack, use item, etc.
