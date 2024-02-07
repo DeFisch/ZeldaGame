@@ -83,7 +83,6 @@ namespace ZeldaGame
             blockSpriteFactory.AddBlocks("Obstacle");
 
             // Registers commands with Keys as the identifier
-            keyboardController.RegisterCommand(Keys.D0, new QuitCommand(this));
             keyboardController.RegisterCommand(Keys.D1, new SetSprite1Command(this));
             keyboardController.RegisterCommand(Keys.D2, new SetSprite2Command(this));
             keyboardController.RegisterCommand(Keys.D3, new SetSprite3Command(this));
