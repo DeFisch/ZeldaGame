@@ -86,16 +86,19 @@ namespace ZeldaGame
             blockSpriteFactory.AddBlocks("Obstacle");
 
             // Registers commands with Keys as the identifier
-            keyboardController.RegisterCommand(Keys.W, new SetWalkUpSpriteCommand(this));  //should be walking command
-            keyboardController.RegisterCommand(Keys.A, new SetWalkLeftSpriteCommand(this)); //should be walking command
-			keyboardController.RegisterCommand(Keys.S, new SetWalkDownSpriteCommand(this)); //should be walking command
-			keyboardController.RegisterCommand(Keys.D, new SetWalkRightSpriteCommand(this)); //should be walking command
+            keyboardController.RegisterCommand(Keys.W, new SetWalkUpSpriteCommand(this));
+            keyboardController.RegisterCommand(Keys.A, new SetWalkLeftSpriteCommand(this));
+            keyboardController.RegisterCommand(Keys.S, new SetWalkDownSpriteCommand(this));
+			keyboardController.RegisterCommand(Keys.D, new SetWalkRightSpriteCommand(this));
+
+			keyboardController.RegisterCommand(Keys.Up, new SetWalkUpSpriteCommand(this));
+			keyboardController.RegisterCommand(Keys.Left, new SetWalkLeftSpriteCommand(this));
+			keyboardController.RegisterCommand(Keys.Down, new SetWalkDownSpriteCommand(this));
+			keyboardController.RegisterCommand(Keys.Right, new SetWalkRightSpriteCommand(this));
 
 			//Registers commands with Keys for blocks
 			keyboardController.RegisterCommand(Keys.T, new NextBlockCommand(this));
             keyboardController.RegisterCommand(Keys.Y, new PreviousBlockCommand(this));
-
-            //keyboardController.RegisterCommand(Keys.Z, new AttackingState());
 
             // Registers commands with Rectangles as the identifier
             /*
