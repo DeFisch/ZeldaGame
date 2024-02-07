@@ -52,15 +52,18 @@ namespace Sprint0.Block
         public void cycleList(int cycleDirection)
         {
             listLength = blockList.Count;
-            if (cycleDirection == 1 && cycleIndex < listLength - 1)
+            if (cycleDirection == 1 && cycleIndex < listLength)
+            {
                 cycleIndex++;
-            else if (cycleDirection == 0 && cycleIndex > 0)
+                if (cycleIndex >= listLength)
+                    cycleIndex -= listLength;
+            }
+            else if (cycleDirection == 0 && cycleIndex >= 0)
+            {
                 cycleIndex--;
-            else if (cycleIndex >= listLength)
-                cycleIndex -= listLength;
-            else if (cycleIndex < 0)
-                cycleIndex += listLength;
-
+                if (cycleIndex < 0)
+                    cycleIndex += listLength;
+            }
         }
 
         public void Draw(SpriteBatch spriteBatch)
