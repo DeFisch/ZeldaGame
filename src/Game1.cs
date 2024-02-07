@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using Sprint0.Block;
 using ZeldaGame.Enemy;
 
 namespace ZeldaGame
@@ -19,6 +20,8 @@ namespace ZeldaGame
 
         private EnemyFactory enemyFactory;
         private int framesPerSecond;
+
+        private BlockSpriteFactory blockSpriteFactory;
 
         private KeyboardController keyboardController;
         private MouseController mouseController;
@@ -56,9 +59,10 @@ namespace ZeldaGame
             // Load content
             sprite = Content.Load<Texture2D>("Link");
             Texture2D enemies = Content.Load<Texture2D>("enemies");
+            blockSpriteFactory = new BlockSpriteFactory(Content.Load<Texture2D>("Level1_Map"));
 
             // Initializes object classes
-            
+
 
             enemyFactory = new EnemyFactory(enemies, window_size: new Vector2(window_width, window_height));
             Random random = new Random();
@@ -71,6 +75,12 @@ namespace ZeldaGame
                 else
                     enemyFactory.AddEnemy("KeeseGoriya", color_variation: "red");
             }
+
+            //Add Blocks
+            blockSpriteFactory.AddBlocks("Stair");
+            blockSpriteFactory.AddBlocks("Walls");
+            blockSpriteFactory.AddBlocks("Ground");
+            blockSpriteFactory.AddBlocks("Obstacle");
 
             // Registers commands with Keys as the identifier
             keyboardController.RegisterCommand(Keys.D0, new QuitCommand(this));
@@ -119,7 +129,10 @@ namespace ZeldaGame
             
             // Draws enemies
             enemyFactory.Draw(_spriteBatch);
-            
+
+            //Draws Blocks
+            blockSpriteFactory.Draw(_spriteBatch);
+
             _spriteBatch.End();
 
             base.Draw(gameTime);
