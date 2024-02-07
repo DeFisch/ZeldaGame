@@ -88,6 +88,11 @@ namespace ZeldaGame
             keyboardController.RegisterCommand(Keys.D2, new SetSprite2Command(this));
             keyboardController.RegisterCommand(Keys.D3, new SetSprite3Command(this));
             keyboardController.RegisterCommand(Keys.D4, new SetSprite4Command(this));
+
+            //Registers commands with Keys for blocks
+            keyboardController.RegisterCommand(Keys.T, new NextBlockCommand(this));
+            keyboardController.RegisterCommand(Keys.Y, new PreviousBlockCommand(this));
+
             //keyboardController.RegisterCommand(Keys.Z, new AttackingState());
 
             // Registers commands with Rectangles as the identifier
