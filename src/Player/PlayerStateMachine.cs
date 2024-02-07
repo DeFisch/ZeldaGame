@@ -16,16 +16,24 @@ namespace ZeldaGame.Player {
 		private Health health;
 		private ISprite sprite;
 
+		public void BeHurt() {
+			if (health != Health.Hurt) // Note: the if is needed so we only do the transition once
+			{
+				health = Health.Hurt;
+				// Compute and construct player sprite - probably going to use decorator
+			}
+		}
+
 		public void SetDirection(int direction) { // 0 = up, 1 = left, 2 = down, 3 = right
 			this.direction = (Direction)direction;
 		}
 
-		public int GetDirection() {
+		public int GetDirection() { // may be unneccessary, possible delete
 			return (int)direction;
 		}
 
 		public void Idle() {
-			switch (direction) {
+			switch (direction) { // switch case is repetitive, could create sprite selector class + method
 				case Direction.Up:
 					sprite = PlayerSpriteFactory.Instance.CreateIdleUpPlayer();
 					break;
@@ -38,7 +46,6 @@ namespace ZeldaGame.Player {
 				case Direction.Right:
 					sprite = PlayerSpriteFactory.Instance.CreateIdleRightPlayer();
 					break;
-
 			}
 		}
 		public void Walk() {
@@ -56,13 +63,7 @@ namespace ZeldaGame.Player {
 		public void Block() {
 			// change sprite to block
 		}
-		public void BeHurt() {
-			if (health != Health.Hurt) // Note: the if is needed so we only do the transition once
-			{
-				health = Health.Hurt;
-				// Compute and construct player sprite - probably going to use decorator
-			}
-		}
+
 		public void Draw(SpriteBatch spriteBatch) {
 			spriteBatch.Draw();
 		}
