@@ -6,6 +6,7 @@ using Microsoft.Xna.Framework.Input;
 using Sprint0.Block;
 using ZeldaGame.Enemy;
 using ZeldaGame.Player;
+using ZeldaGame.Player.Commands;
 
 namespace ZeldaGame
 {
@@ -16,12 +17,11 @@ namespace ZeldaGame
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
 
-        public IPlayer Link;
+        public Player1 Link;
         public Texture2D sprite;
         public PlayerSpriteFactory playerFactory;
 
         private EnemyFactory enemyFactory;
-        private int framesPerSecond;
 
         public BlockSpriteFactory blockSpriteFactory;
 
@@ -38,11 +38,9 @@ namespace ZeldaGame
 
         protected override void Initialize()
         {
-            // Initialize variables
-            framesPerSecond = 0;
 
-            // Initialize controllers
-            keyboardController = new KeyboardController();
+			// Initialize controllers
+			keyboardController = new KeyboardController();
             mouseController = new MouseController();
             controllers = new List<IController> { keyboardController, mouseController };
 
@@ -61,9 +59,9 @@ namespace ZeldaGame
             // Load content
             //sprite = Content.Load<Texture2D>("Link");
             PlayerSpriteFactory.Instance.LoadAllTextures(Content);
-            IPlayer Link = new Player1(new Vector2(window_width, window_height));
+			Link = new Player1(new Vector2(window_width, window_height));
 
-            Texture2D enemies = Content.Load<Texture2D>("enemies");
+			Texture2D enemies = Content.Load<Texture2D>("enemies");
             blockSpriteFactory = new BlockSpriteFactory(Content.Load<Texture2D>("Level1_Map"));
 
             // Initializes object classes
@@ -88,15 +86,13 @@ namespace ZeldaGame
             blockSpriteFactory.AddBlocks("Obstacle");
 
             // Registers commands with Keys as the identifier
-            /*
-            keyboardController.RegisterCommand(Keys.D1, new SetSprite1Command(this));
-            keyboardController.RegisterCommand(Keys.D2, new SetSprite2Command(this));
-            keyboardController.RegisterCommand(Keys.D3, new SetSprite3Command(this));
-            keyboardController.RegisterCommand(Keys.D4, new SetSprite4Command(this));
-            */
+            keyboardController.RegisterCommand(Keys.W, new SetWalkUpSpriteCommand(this));  //should be walking command
+            keyboardController.RegisterCommand(Keys.A, new SetWalkLeftSpriteCommand(this)); //should be walking command
+			keyboardController.RegisterCommand(Keys.S, new SetWalkDownSpriteCommand(this)); //should be walking command
+			keyboardController.RegisterCommand(Keys.D, new SetWalkRightSpriteCommand(this)); //should be walking command
 
-            //Registers commands with Keys for blocks
-            keyboardController.RegisterCommand(Keys.T, new NextBlockCommand(this));
+			//Registers commands with Keys for blocks
+			keyboardController.RegisterCommand(Keys.T, new NextBlockCommand(this));
             keyboardController.RegisterCommand(Keys.Y, new PreviousBlockCommand(this));
 
             //keyboardController.RegisterCommand(Keys.Z, new AttackingState());
@@ -110,7 +106,11 @@ namespace ZeldaGame
             */
         }
 
-        protected override void Update(GameTime gameTime)
+		public void setSprite(ISprite sprite) {
+			this.Link.SetSprite(sprite);
+		}
+
+		protected override void Update(GameTime gameTime)
         {
             if (Keyboard.GetState().IsKeyDown(Keys.D0) || Mouse.GetState().RightButton == ButtonState.Pressed)
             {
@@ -122,13 +122,7 @@ namespace ZeldaGame
                 controller.Update();
             }
 
-            // Delays frames to show animation
-            framesPerSecond++;
-            if (framesPerSecond == 10)
-            {
-                Link.Update();
-                framesPerSecond = 0;
-            }
+            Link.Update();
 
             base.Update(gameTime);
             enemyFactory.Update();
@@ -145,6 +139,9 @@ namespace ZeldaGame
 
             //Draws Blocks
             blockSpriteFactory.Draw(_spriteBatch);
+
+            // Draws player
+            Link.Draw(_spriteBatch);
 
             _spriteBatch.End();
 

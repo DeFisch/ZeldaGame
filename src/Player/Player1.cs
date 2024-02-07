@@ -10,15 +10,24 @@ using System.Threading.Tasks;
 namespace ZeldaGame.Player {
 	public class Player1 : IPlayer {
 		PlayerStateMachine stateMachine;
-		ISprite sprite = PlayerSpriteFactory.Instance.CreateIdleDownPlayer();
+		ISprite sprite;
 		Vector2 position;
 		int direction;
 		int speed = 2;
 
 		public Player1(Vector2 window_size) {
-			stateMachine = new PlayerStateMachine();
+			sprite = PlayerSpriteFactory.Instance.CreateIdleDownPlayer();
+			stateMachine = new PlayerStateMachine(sprite);
 			position = new Vector2(window_size.X/2, window_size.Y/2);
 			direction = 2; //down
+		}
+
+		public ISprite GetSprite() {
+			return sprite;
+		}
+
+		public void SetSprite(ISprite sprite) {
+			this.sprite = sprite;
 		}
 
 		public void TakeDamage() {
@@ -27,6 +36,11 @@ namespace ZeldaGame.Player {
 
 		public void SetDirection(int direction) {// 0 = up, 1 = left, 2 = down, 3 = right
 			stateMachine.SetDirection(direction);
+			this.direction = direction;
+		}
+
+		public void Idle() {
+			stateMachine.Idle();
 		}
 
 		public void Walk() {
@@ -62,10 +76,10 @@ namespace ZeldaGame.Player {
 		}
 
 		public void Update() {
-			//sprite animator update
+			sprite.Update();
 		}
 		public void Draw(SpriteBatch spriteBatch) {
-			sprite.Draw();
+			sprite.Draw(spriteBatch, position);
 		}
 	}
 }
