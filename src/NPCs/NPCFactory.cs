@@ -9,6 +9,8 @@ public class NPCFactory
     private Texture2D texture;
     private Vector2 position;
     private INPC npc;
+    private int cycleIndex;
+    private int listLength;
 
     public NPCFactory(Texture2D texture, Vector2 position)
     {
@@ -16,6 +18,8 @@ public class NPCFactory
         this.texture = texture;
         this.position = position;
         npc = null;
+        cycleIndex = 0;
+        listLength = 0;
     }
 
     public void AddNPC(string npcName)
@@ -42,13 +46,26 @@ public class NPCFactory
         }
         npcList.Add(npc);
     }
-
+    public void cycleList(int cycleDirection)
+    {
+        listLength = npcList.Count;
+        if (cycleDirection == 1 && cycleIndex < listLength)
+        {
+            cycleIndex++;
+            if (cycleIndex >= listLength)
+                cycleIndex -= listLength;
+        }
+        else if (cycleDirection == 0 && cycleIndex >= 0)
+        {
+            cycleIndex--;
+            if (cycleIndex < 0)
+                cycleIndex += listLength;
+        }
+    }
     public void Draw(SpriteBatch spriteBatch)
     {
-        foreach (INPC npc in npcList)
-        {
-            npc.Draw(spriteBatch);
-        }
+        npc = npcList[cycleIndex];
+        npc.Draw(spriteBatch);
     }
     public void Update()
     {

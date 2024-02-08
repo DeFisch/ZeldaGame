@@ -9,10 +9,15 @@ public class Flame : INPC
     private Texture2D texture;
     private Vector2 position;
 
+    public int currentFrame;
+    public int totalFrames;
+
     public Flame(Texture2D texture, Vector2 position)
     {
         this.texture = texture;
         this.position = position;
+        currentFrame = 0;
+        totalFrames = 1;
     }
 
     public void Draw(SpriteBatch spriteBatch)
@@ -24,6 +29,7 @@ public class Flame : INPC
 
     public void Update()
     {
+        currentFrame = (currentFrame + 1) % totalFrames;
 
     }
 }
