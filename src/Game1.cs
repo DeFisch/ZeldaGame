@@ -4,6 +4,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using ZeldaGame.Enemy;
+using ZeldaGame.NPCs;
 
 namespace ZeldaGame
 {
@@ -16,6 +17,9 @@ namespace ZeldaGame
 
         public ISprite Link;
         public Texture2D sprite;
+
+        public Texture2D npcs;
+        private NPCFactory NPCFactory;
 
         private EnemyFactory enemyFactory;
         private int framesPerSecond;
@@ -56,9 +60,10 @@ namespace ZeldaGame
             // Load content
             sprite = Content.Load<Texture2D>("Link");
             Texture2D enemies = Content.Load<Texture2D>("enemies");
+            npcs = Content.Load<Texture2D>("NPCs");
+            NPCFactory = new NPCFactory(npcs, new Vector2(window_width/2, window_height/2));
 
             // Initializes object classes
-            
 
             enemyFactory = new EnemyFactory(enemies, window_size: new Vector2(window_width, window_height));
             Random random = new Random();
@@ -71,6 +76,12 @@ namespace ZeldaGame
                 else
                     enemyFactory.AddEnemy("KeeseGoriya", color_variation: "red");
             }
+
+            //NPCFactory.AddNPC("Fairy");
+            //NPCFactory.AddNPC("Flame");
+            //NPCFactory.AddNPC("Merchant");
+            //NPCFactory.AddNPC("OldMan");
+            //NPCFactory.AddNPC("Zelda");
 
             // Registers commands with Keys as the identifier
             keyboardController.RegisterCommand(Keys.D0, new QuitCommand(this));
@@ -109,6 +120,7 @@ namespace ZeldaGame
 
             base.Update(gameTime);
             enemyFactory.Update();
+            NPCFactory.Update();
         }
 
         protected override void Draw(GameTime gameTime)
@@ -119,7 +131,7 @@ namespace ZeldaGame
             
             // Draws enemies
             enemyFactory.Draw(_spriteBatch);
-            
+            NPCFactory.Draw(_spriteBatch);
             _spriteBatch.End();
 
             base.Draw(gameTime);
