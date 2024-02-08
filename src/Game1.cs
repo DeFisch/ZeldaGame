@@ -3,8 +3,11 @@ using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using Sprint0.Block;
 using ZeldaGame.Enemy;
 using ZeldaGame.NPCs;
+using ZeldaGame.Player;
+using ZeldaGame.Player.Commands;
 
 namespace ZeldaGame
 {
@@ -15,14 +18,16 @@ namespace ZeldaGame
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
 
-        public ISprite Link;
+        public Player1 Link;
         public Texture2D sprite;
+        public PlayerSpriteFactory playerFactory;
 
         public Texture2D npcs;
         private NPCFactory NPCFactory;
 
         private EnemyFactory enemyFactory;
-        private int framesPerSecond;
+
+        public BlockSpriteFactory blockSpriteFactory;
 
         private KeyboardController keyboardController;
         private MouseController mouseController;
@@ -37,11 +42,9 @@ namespace ZeldaGame
 
         protected override void Initialize()
         {
-            // Initialize variables
-            framesPerSecond = 0;
 
-            // Initialize controllers
-            keyboardController = new KeyboardController();
+			// Initialize controllers
+			keyboardController = new KeyboardController();
             mouseController = new MouseController();
             controllers = new List<IController> { keyboardController, mouseController };
 
@@ -64,6 +67,15 @@ namespace ZeldaGame
             NPCFactory = new NPCFactory(npcs, new Vector2(window_width/2, window_height/2));
 
             // Initializes object classes
+            //sprite = Content.Load<Texture2D>("Link");
+            PlayerSpriteFactory.Instance.LoadAllTextures(Content);
+			Link = new Player1(new Vector2(window_width, window_height));
+
+			Texture2D enemies = Content.Load<Texture2D>("enemies");
+            blockSpriteFactory = new BlockSpriteFactory(Content.Load<Texture2D>("Level1_Map"));
+
+            // Initializes object classes
+
 
             enemyFactory = new EnemyFactory(enemies, window_size: new Vector2(window_width, window_height));
             Random random = new Random();
@@ -82,23 +94,41 @@ namespace ZeldaGame
             //NPCFactory.AddNPC("Merchant");
             //NPCFactory.AddNPC("OldMan");
             //NPCFactory.AddNPC("Zelda");
+            //Add Blocks
+            blockSpriteFactory.AddBlocks("Stair");
+            blockSpriteFactory.AddBlocks("Walls");
+            blockSpriteFactory.AddBlocks("Ground");
+            blockSpriteFactory.AddBlocks("Obstacle");
 
             // Registers commands with Keys as the identifier
-            keyboardController.RegisterCommand(Keys.D0, new QuitCommand(this));
-            keyboardController.RegisterCommand(Keys.D1, new SetSprite1Command(this));
-            keyboardController.RegisterCommand(Keys.D2, new SetSprite2Command(this));
-            keyboardController.RegisterCommand(Keys.D3, new SetSprite3Command(this));
-            keyboardController.RegisterCommand(Keys.D4, new SetSprite4Command(this));
-            //keyboardController.RegisterCommand(Keys.Z, new AttackingState());
+            keyboardController.RegisterCommand(Keys.W, new SetWalkUpSpriteCommand(this));
+            keyboardController.RegisterCommand(Keys.A, new SetWalkLeftSpriteCommand(this));
+            keyboardController.RegisterCommand(Keys.S, new SetWalkDownSpriteCommand(this));
+			keyboardController.RegisterCommand(Keys.D, new SetWalkRightSpriteCommand(this));
+
+			keyboardController.RegisterCommand(Keys.Up, new SetWalkUpSpriteCommand(this));
+			keyboardController.RegisterCommand(Keys.Left, new SetWalkLeftSpriteCommand(this));
+			keyboardController.RegisterCommand(Keys.Down, new SetWalkDownSpriteCommand(this));
+			keyboardController.RegisterCommand(Keys.Right, new SetWalkRightSpriteCommand(this));
+
+			//Registers commands with Keys for blocks
+			keyboardController.RegisterCommand(Keys.T, new NextBlockCommand(this));
+            keyboardController.RegisterCommand(Keys.Y, new PreviousBlockCommand(this));
 
             // Registers commands with Rectangles as the identifier
+            /*
             mouseController.RegisterCommand(new Rectangle(0, 0, 400, 250), new SetSprite1Command(this));
             mouseController.RegisterCommand(new Rectangle(401, 0, 800, 250), new SetSprite2Command(this));
             mouseController.RegisterCommand(new Rectangle(0, 251, 400, 500), new SetSprite3Command(this));
             mouseController.RegisterCommand(new Rectangle(401, 251, 800, 500), new SetSprite4Command(this));
+            */
         }
 
-        protected override void Update(GameTime gameTime)
+		public void setSprite(ISprite sprite) {
+			this.Link.SetSprite(sprite);
+		}
+
+		protected override void Update(GameTime gameTime)
         {
             if (Keyboard.GetState().IsKeyDown(Keys.D0) || Mouse.GetState().RightButton == ButtonState.Pressed)
             {
@@ -110,13 +140,7 @@ namespace ZeldaGame
                 controller.Update();
             }
 
-            // Delays frames to show animation
-            framesPerSecond++;
-            if (framesPerSecond == 10)
-            {
-                Link.Update();
-                framesPerSecond = 0;
-            }
+            Link.Update();
 
             base.Update(gameTime);
             enemyFactory.Update();
@@ -131,7 +155,15 @@ namespace ZeldaGame
             
             // Draws enemies
             enemyFactory.Draw(_spriteBatch);
+
             NPCFactory.Draw(_spriteBatch);
+
+            //Draws Blocks
+            blockSpriteFactory.Draw(_spriteBatch);
+
+            // Draws player
+            Link.Draw(_spriteBatch);
+
             _spriteBatch.End();
 
             base.Draw(gameTime);
