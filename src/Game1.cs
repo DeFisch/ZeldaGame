@@ -25,6 +25,8 @@ namespace ZeldaGame
         public Texture2D npcs;
         private NPCFactory NPCFactory;
 
+        public Texture2D Objects;
+
         private EnemyFactory enemyFactory;
 
         public BlockSpriteFactory blockSpriteFactory;
@@ -65,6 +67,7 @@ namespace ZeldaGame
             Texture2D enemies = Content.Load<Texture2D>("enemies");
             npcs = Content.Load<Texture2D>("NPCs");
             NPCFactory = new NPCFactory(npcs, new Vector2(window_width/2, window_height/2));
+            Objects = Content.Load<Texture2D>("Objects");
 
             // Initializes object classes
             //sprite = Content.Load<Texture2D>("Link");
