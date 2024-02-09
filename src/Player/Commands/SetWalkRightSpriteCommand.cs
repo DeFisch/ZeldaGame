@@ -13,7 +13,7 @@
         public void Execute()
         {
             MyGame.Link.SetDirection(3);
-			MyGame.Link.SetSprite(PlayerSpriteFactory.Instance.CreateIdleRightPlayer());
+			MyGame.Link.SetSprite(PlayerSpriteFactory.Instance.CreateWalkRightSprite());
 			MyGame.Link.Walk();
         }
     }
