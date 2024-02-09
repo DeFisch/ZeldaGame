@@ -23,7 +23,7 @@ namespace ZeldaGame
         public PlayerSpriteFactory playerFactory;
 
         public Texture2D npcs;
-        private NPCFactory NPCFactory;
+        public NPCFactory NPCFactory;
 
         public Texture2D Objects;
 
@@ -74,7 +74,6 @@ namespace ZeldaGame
 			Link = new Player1(new Vector2(window_width, window_height));
 			//NPCFactory = new NPCFactory(npcs, new Vector2(window_width/2, window_height/2));
 
-			Texture2D enemies = Content.Load<Texture2D>("enemies");
             blockSpriteFactory = new BlockSpriteFactory(Content.Load<Texture2D>("Level1_Map"));
 
             // Initializes object classes
