@@ -12,14 +12,18 @@ namespace ZeldaGame.Player {
 		PlayerStateMachine stateMachine;
 		ISprite sprite;
 		Vector2 position;
+		Vector2 movement;
+
+		int speed;
 		int direction;
-		int speed = 2;
 
 		public Player1(Vector2 window_size) {
-			sprite = PlayerSpriteFactory.Instance.CreateIdleDownPlayer();
+			sprite = PlayerSpriteFactory.Instance.CreateIdleDownSprite();
 			stateMachine = new PlayerStateMachine(sprite);
 			position = new Vector2(window_size.X/2, window_size.Y/2);
+			movement = new Vector2(0, 0);
 			direction = 2; //down
+			speed = 2;
 		}
 
 		public ISprite GetSprite() {
@@ -40,27 +44,28 @@ namespace ZeldaGame.Player {
 		}
 
 		public void Idle() {
+			movement = new Vector2(0, 0);
 			stateMachine.Idle();
 		}
 
 		public void Walk() {
-			stateMachine.Walk();
 			switch (direction) {
 				case 0:
-					position.Y -= speed;
+					movement = new Vector2(0, -speed);
 					break;
 				case 1:
-					position.X -= speed;
+					movement = new Vector2(-speed, 0);
 					break;
 				case 2:
-					position.Y += speed;
+					movement = new Vector2(0, speed);
 					break;
 				case 3:
-					position.X += speed;
+					movement = new Vector2(speed, 0);
 					break;
 				default:
 					break;
 			}
+			stateMachine.Walk();
 		}
 		public void Attack() {
 			// change sprite to attack
@@ -76,6 +81,7 @@ namespace ZeldaGame.Player {
 		}
 
 		public void Update() {
+			position = position + movement;
 			sprite.Update();
 		}
 		public void Draw(SpriteBatch spriteBatch) {
