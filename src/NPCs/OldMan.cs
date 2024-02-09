@@ -18,7 +18,7 @@ public class OldMan : INPC
     public void Draw(SpriteBatch spriteBatch)
     {
         Rectangle sourceRectangle = new Rectangle(1, 11, 16, 16);
-        Rectangle destinationRectangle = new Rectangle((int)position.X, (int)position.Y, 15*4, 15*4);
+        Rectangle destinationRectangle = new Rectangle((int)position.X, (int)position.Y, sourceRectangle.Width * 3, sourceRectangle.Height * 3);
         spriteBatch.Draw(texture, destinationRectangle, sourceRectangle, Color.White);
     }
 

@@ -9,27 +9,37 @@ public class Flame : INPC
     private Texture2D texture;
     private Vector2 position;
 
-    public int currentFrame;
-    public int totalFrames;
+    private int currentFrame = 0;
+    private int totalFrames = 2;
+    private static int[,] character_sprites = new int[,] { { 52, 11, 15, 16 }, { 69, 11, 16, 16 } };
+    private int switchFrameDelay = 15;
+    private int frameCounter = 0;
 
     public Flame(Texture2D texture, Vector2 position)
     {
         this.texture = texture;
         this.position = position;
-        currentFrame = 0;
-        totalFrames = 1;
     }
 
     public void Draw(SpriteBatch spriteBatch)
     {
-        Rectangle sourceRectangle = new Rectangle(52, 11, 15, 16);
-        Rectangle destinationRectangle = new Rectangle((int)position.X, (int)position.Y, 15*4, 15*4);
+        int sprite_id = currentFrame % 2;
+        Rectangle sourceRectangle = new Rectangle(character_sprites[sprite_id, 0], character_sprites[sprite_id, 1], character_sprites[sprite_id, 2], character_sprites[sprite_id, 3]);
+        Rectangle destinationRectangle = new Rectangle((int)position.X, (int)position.Y, 15 * 4, 15 * 4);
         spriteBatch.Draw(texture, destinationRectangle, sourceRectangle, Color.White);
     }
 
     public void Update()
     {
-        currentFrame = (currentFrame + 1) % totalFrames;
-
+        frameCounter++;
+        if (frameCounter >= switchFrameDelay)
+        {
+            currentFrame++;
+            if (currentFrame >= totalFrames)
+            {
+                currentFrame = 0;
+            }
+            frameCounter = 0;
+        }
     }
 }

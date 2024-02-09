@@ -23,7 +23,7 @@ namespace ZeldaGame
         public PlayerSpriteFactory playerFactory;
 
         public Texture2D npcs;
-        private NPCFactory NPCFactory;
+        public NPCFactory NPCFactory;
 
         private EnemyFactory enemyFactory;
 
@@ -62,9 +62,9 @@ namespace ZeldaGame
 
             // Load content
             sprite = Content.Load<Texture2D>("Link");
-            Texture2D enemies = Content.Load<Texture2D>("enemies");
+            //Texture2D enemies = Content.Load<Texture2D>("enemies");
             npcs = Content.Load<Texture2D>("NPCs");
-            NPCFactory = new NPCFactory(npcs, new Vector2(window_width/2, window_height/2));
+            NPCFactory = new NPCFactory(npcs, new Vector2(window_width, window_height));
 
             // Initializes object classes
             //sprite = Content.Load<Texture2D>("Link");
@@ -89,11 +89,13 @@ namespace ZeldaGame
                     enemyFactory.AddEnemy("KeeseGoriya", color_variation: "red");
             }
 
-            //NPCFactory.AddNPC("Fairy");
-            //NPCFactory.AddNPC("Flame");
-            //NPCFactory.AddNPC("Merchant");
-            //NPCFactory.AddNPC("OldMan");
-            //NPCFactory.AddNPC("Zelda");
+            //Add NPCs
+            NPCFactory.AddNPC("Fairy");
+            NPCFactory.AddNPC("Flame");
+            NPCFactory.AddNPC("Merchant");
+            NPCFactory.AddNPC("OldMan");
+            NPCFactory.AddNPC("Zelda");
+            NPCFactory.AddNPC("OldWoman");
             //Add Blocks
             blockSpriteFactory.AddBlocks("Stair");
             blockSpriteFactory.AddBlocks("Walls");
@@ -114,6 +116,10 @@ namespace ZeldaGame
 			//Registers commands with Keys for blocks
 			keyboardController.RegisterCommand(Keys.T, new NextBlockCommand(this));
             keyboardController.RegisterCommand(Keys.Y, new PreviousBlockCommand(this));
+
+            //Registers commands with Keys for npcs
+            keyboardController.RegisterCommand(Keys.O, new NextNPCCommand(this));
+            keyboardController.RegisterCommand(Keys.P, new PreviousNPCCommand(this));
 
             // Registers commands with Rectangles as the identifier
             /*

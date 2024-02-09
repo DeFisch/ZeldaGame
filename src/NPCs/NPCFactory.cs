@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using ZeldaGame.Enemy;
 namespace ZeldaGame.NPCs;
 
 public class NPCFactory
@@ -12,11 +13,11 @@ public class NPCFactory
     private int cycleIndex;
     private int listLength;
 
-    public NPCFactory(Texture2D texture, Vector2 position)
+    public NPCFactory(Texture2D texture, Vector2 window_size)
     {
         npcList = new List<INPC>();
         this.texture = texture;
-        this.position = position;
+        this.position = new Vector2(window_size.X / 3, window_size.Y / 3);
         npc = null;
         cycleIndex = 0;
         listLength = 0;
@@ -29,8 +30,8 @@ public class NPCFactory
             case "OldMan":
                 npc = new OldMan(texture, position);
                 break;
-            case "Flame":
-                npc = new Flame(texture, position);
+            case "OldWoman":
+                npc = new OldWoman(texture, position);
                 break;
             case "Zelda":
                 npc = new Zelda(texture, position);
@@ -48,19 +49,15 @@ public class NPCFactory
     }
     public void cycleList(int cycleDirection)
     {
-        listLength = npcList.Count;
-        if (cycleDirection == 1 && cycleIndex < listLength)
-        {
-            cycleIndex++;
-            if (cycleIndex >= listLength)
-                cycleIndex -= listLength;
-        }
-        else if (cycleDirection == 0 && cycleIndex >= 0)
-        {
-            cycleIndex--;
-            if (cycleIndex < 0)
-                cycleIndex += listLength;
-        }
+          listLength = npcList.Count;
+          if (cycleDirection == 1)
+          {
+              cycleIndex = (cycleIndex + 1) % listLength;
+          }
+          else if (cycleDirection == 0)
+          {
+              cycleIndex = (cycleIndex - 1 + listLength) % listLength;
+          }
     }
     public void Draw(SpriteBatch spriteBatch)
     {
@@ -69,9 +66,7 @@ public class NPCFactory
     }
     public void Update()
     {
-        foreach (INPC npc in npcList)
-        {
-            npc.Update();
-        }
+        npc = npcList[cycleIndex];
+        npc.Update();
     }
 }
