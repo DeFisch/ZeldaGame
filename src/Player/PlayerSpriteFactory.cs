@@ -22,29 +22,29 @@ public class PlayerSpriteFactory {
 		playerTexture = content.Load<Texture2D>("Link");
 	}
 
-	public ISprite CreateIdleUpPlayer() {
+	public ISprite CreateIdleUpSprite() {
 		return new IdleUpSprite(playerTexture); // will make ISprite methods later
 	}
-	public ISprite CreateIdleLeftPlayer() {
+	public ISprite CreateIdleLeftSprite() {
 		return new IdleLeftSprite(playerTexture);
 	}
-	public ISprite CreateIdleDownPlayer() {
+	public ISprite CreateIdleDownSprite() {
 		return new IdleDownSprite(playerTexture);
 	}
-	public ISprite CreateIdleRightPlayer() {
+	public ISprite CreateIdleRightSprite() {
 		return new IdleRightSprite(playerTexture);
 	}
-	public ISprite CreateWalkUpPlayer() {
-		return new IdleUpSprite(playerTexture); // will make ISprite methods later
+	public ISprite CreateWalkUpSprite() {
+		return new WalkUpSprite(playerTexture);
 	}
-	public ISprite CreateWalkLeftPlayer() {
-		return new IdleLeftSprite(playerTexture);
+	public ISprite CreateWalkLeftSprite() {
+		return new WalkLeftSprite(playerTexture);
 	}
-	public ISprite CreateWalkDownPlayer() {
-		return new IdleDownSprite(playerTexture);
+	public ISprite CreateWalkDownSprite() {
+		return new WalkDownSprite(playerTexture);
 	}
-	public ISprite CreateWalkRightPlayer() {
-		return new IdleRightSprite(playerTexture);
+	public ISprite CreateWalkRightSprite() {
+		return new WalkRightSprite(playerTexture);
 	}
 	/*
 		Add additional methods for attack, use item, etc.

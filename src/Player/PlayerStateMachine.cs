@@ -32,12 +32,16 @@ namespace ZeldaGame.Player {
 			}
 		}
 
+		public int GetDirection() { // may be unneccessary, possible delete
+			return (int)direction;
+		}
+
 		public void SetDirection(int direction) { // 0 = up, 1 = left, 2 = down, 3 = right
 			this.direction = (Direction)direction;
 		}
 
-		public int GetDirection() { // may be unneccessary, possible delete
-			return (int)direction;
+		public int GetState() {
+			return (int)state;
 		}
 
 		public void Idle() {
@@ -45,16 +49,16 @@ namespace ZeldaGame.Player {
 				state = State.Idle;
 				switch (direction) { // switch case is repetitive, could create sprite selector class + method
 					case Direction.Up:
-						sprite = PlayerSpriteFactory.Instance.CreateIdleUpPlayer();
+						sprite = PlayerSpriteFactory.Instance.CreateIdleUpSprite();
 						break;
 					case Direction.Left:
-						sprite = PlayerSpriteFactory.Instance.CreateIdleLeftPlayer();
+						sprite = PlayerSpriteFactory.Instance.CreateIdleLeftSprite();
 						break;
 					case Direction.Down:
-						sprite = PlayerSpriteFactory.Instance.CreateIdleDownPlayer();
+						sprite = PlayerSpriteFactory.Instance.CreateIdleDownSprite();
 						break;
 					case Direction.Right:
-						sprite = PlayerSpriteFactory.Instance.CreateIdleRightPlayer();
+						sprite = PlayerSpriteFactory.Instance.CreateIdleRightSprite();
 						break;
 				}
 			}
@@ -64,16 +68,16 @@ namespace ZeldaGame.Player {
 				state = State.Walk;
 				switch (direction) { // switch case is repetitive, could create sprite selector class + method
 					case Direction.Up:
-						sprite = PlayerSpriteFactory.Instance.CreateWalkUpPlayer();
+						sprite = PlayerSpriteFactory.Instance.CreateWalkUpSprite();
 						break;
 					case Direction.Left:
-						sprite = PlayerSpriteFactory.Instance.CreateWalkLeftPlayer();
+						sprite = PlayerSpriteFactory.Instance.CreateWalkLeftSprite();
 						break;
 					case Direction.Down:
-						sprite = PlayerSpriteFactory.Instance.CreateWalkDownPlayer();
+						sprite = PlayerSpriteFactory.Instance.CreateWalkDownSprite();
 						break;
 					case Direction.Right:
-						sprite = PlayerSpriteFactory.Instance.CreateWalkRightPlayer();
+						sprite = PlayerSpriteFactory.Instance.CreateWalkRightSprite();
 						break;
 				}
 			}
