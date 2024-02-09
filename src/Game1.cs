@@ -61,15 +61,12 @@ namespace ZeldaGame
             _spriteBatch = new SpriteBatch(GraphicsDevice);
 
             // Load content
-            sprite = Content.Load<Texture2D>("Link");
-            Texture2D enemies = Content.Load<Texture2D>("enemies");
-            npcs = Content.Load<Texture2D>("NPCs");
-            NPCFactory = new NPCFactory(npcs, new Vector2(window_width/2, window_height/2));
+            //npcs = Content.Load<Texture2D>("NPCs");
 
             // Initializes object classes
-            //sprite = Content.Load<Texture2D>("Link");
             PlayerSpriteFactory.Instance.LoadAllTextures(Content);
 			Link = new Player1(new Vector2(window_width, window_height));
+			//NPCFactory = new NPCFactory(npcs, new Vector2(window_width/2, window_height/2));
 
 			Texture2D enemies = Content.Load<Texture2D>("enemies");
             blockSpriteFactory = new BlockSpriteFactory(Content.Load<Texture2D>("Level1_Map"));
@@ -101,19 +98,29 @@ namespace ZeldaGame
             blockSpriteFactory.AddBlocks("Obstacle");
 
             // Registers commands with Keys as the identifier
-            keyboardController.RegisterCommand(Keys.W, new SetWalkUpSpriteCommand(this));
-            keyboardController.RegisterCommand(Keys.A, new SetWalkLeftSpriteCommand(this));
-            keyboardController.RegisterCommand(Keys.S, new SetWalkDownSpriteCommand(this));
-			keyboardController.RegisterCommand(Keys.D, new SetWalkRightSpriteCommand(this));
+            keyboardController.RegisterCommand(Keys.W, new SetWalkUpSpriteCommand(this), 1);
+            keyboardController.RegisterCommand(Keys.A, new SetWalkLeftSpriteCommand(this), 1);
+            keyboardController.RegisterCommand(Keys.S, new SetWalkDownSpriteCommand(this), 1);
+			keyboardController.RegisterCommand(Keys.D, new SetWalkRightSpriteCommand(this), 1);
 
-			keyboardController.RegisterCommand(Keys.Up, new SetWalkUpSpriteCommand(this));
-			keyboardController.RegisterCommand(Keys.Left, new SetWalkLeftSpriteCommand(this));
-			keyboardController.RegisterCommand(Keys.Down, new SetWalkDownSpriteCommand(this));
-			keyboardController.RegisterCommand(Keys.Right, new SetWalkRightSpriteCommand(this));
+			keyboardController.RegisterCommand(Keys.W, new SetIdleUpSpriteCommand(this), 2);
+			keyboardController.RegisterCommand(Keys.A, new SetIdleLeftSpriteCommand(this), 2);
+			keyboardController.RegisterCommand(Keys.S, new SetIdleDownSpriteCommand(this), 2);
+			keyboardController.RegisterCommand(Keys.D, new SetIdleRightSpriteCommand(this), 2);
+
+			keyboardController.RegisterCommand(Keys.Up, new SetWalkUpSpriteCommand(this), 1);
+			keyboardController.RegisterCommand(Keys.Left, new SetWalkLeftSpriteCommand(this), 1);
+			keyboardController.RegisterCommand(Keys.Down, new SetWalkDownSpriteCommand(this), 1);
+			keyboardController.RegisterCommand(Keys.Right, new SetWalkRightSpriteCommand(this), 1);
+
+			keyboardController.RegisterCommand(Keys.Up, new SetIdleUpSpriteCommand(this), 2);
+			keyboardController.RegisterCommand(Keys.Left, new SetIdleLeftSpriteCommand(this), 2);
+			keyboardController.RegisterCommand(Keys.Down, new SetIdleDownSpriteCommand(this), 2);
+			keyboardController.RegisterCommand(Keys.Right, new SetIdleRightSpriteCommand(this), 2);
 
 			//Registers commands with Keys for blocks
-			keyboardController.RegisterCommand(Keys.T, new NextBlockCommand(this));
-            keyboardController.RegisterCommand(Keys.Y, new PreviousBlockCommand(this));
+			keyboardController.RegisterCommand(Keys.T, new NextBlockCommand(this), 0);
+            keyboardController.RegisterCommand(Keys.Y, new PreviousBlockCommand(this), 0);
 
             // Registers commands with Rectangles as the identifier
             /*
@@ -144,7 +151,7 @@ namespace ZeldaGame
 
             base.Update(gameTime);
             enemyFactory.Update();
-            NPCFactory.Update();
+            //NPCFactory.Update();
         }
 
         protected override void Draw(GameTime gameTime)
@@ -156,7 +163,7 @@ namespace ZeldaGame
             // Draws enemies
             enemyFactory.Draw(_spriteBatch);
 
-            NPCFactory.Draw(_spriteBatch);
+            //NPCFactory.Draw(_spriteBatch);
 
             //Draws Blocks
             blockSpriteFactory.Draw(_spriteBatch);
