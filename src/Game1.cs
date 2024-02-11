@@ -7,6 +7,7 @@ using Microsoft.Xna.Framework.Input;
 using Sprint0.Block;
 using ZeldaGame.Enemy;
 using ZeldaGame.Items;
+using ZeldaGame.Enemy.Commands;
 using ZeldaGame.NPCs;
 using ZeldaGame.Player;
 using ZeldaGame.Player.Commands;
@@ -31,7 +32,7 @@ namespace ZeldaGame
         private BlueRuby blueRuby;
         public ObjectSpriteFactory objectFactory;
 
-        private EnemyFactory enemyFactory;
+        public EnemyFactory enemyFactory;
 
         public BlockSpriteFactory blockSpriteFactory;
 
@@ -89,14 +90,9 @@ namespace ZeldaGame
 
             enemyFactory = new EnemyFactory(enemies, window_size: new Vector2(window_width, window_height));
             Random random = new Random();
-            for (int i = 0; i < 5; i++) // spawn 5 enemies of each type
+            for (int i = 0; i < 5; i++) // spawn 5 enemies
             {
                 enemyFactory.AddEnemy("Stalfos");
-                enemyFactory.AddEnemy("Gibdo");
-                if (i % 2 == 0)
-                    enemyFactory.AddEnemy("KeeseGoriya", color_variation: "blue");
-                else
-                    enemyFactory.AddEnemy("KeeseGoriya", color_variation: "red");
             }
 
             //Add NPCs
@@ -142,9 +138,16 @@ namespace ZeldaGame
             keyboardController.RegisterCommand(Keys.T, new NextBlockCommand(this), 0);
             keyboardController.RegisterCommand(Keys.Y, new PreviousBlockCommand(this), 0);
 
+            //Register commands with keys for items
+            keyboardController.RegisterCommand(Keys.I, new NextItemCommand(this), 0);
+            keyboardController.RegisterCommand(Keys.U, new LastItemCommand(this), 0);
+
             //Registers commands with Keys for npcs
             //keyboardController.RegisterCommand(Keys.O, new NextNPCCommand(this));
             //keyboardController.RegisterCommand(Keys.P, new PreviousNPCCommand(this));
+            // Registers commands with Keys for enemies
+            keyboardController.RegisterCommand(Keys.O, new previousEnemyCommand(this), 0);
+            keyboardController.RegisterCommand(Keys.P, new nextEnemyCommand(this), 0);
 
             // Registers commands with Rectangles as the identifier
             /*

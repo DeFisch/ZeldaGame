@@ -39,6 +39,10 @@ namespace ZeldaGame
             if (lastOrNext == 0) //Cycling backwards
             {
                 cycler--;
+                if (cycler < 0)
+                {
+                    cycler = objectList.Count - 1;
+                }
                 index = cycler % objectList.Count;
             }
             if (lastOrNext == 1)
