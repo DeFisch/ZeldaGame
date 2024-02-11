@@ -9,6 +9,14 @@ OSU CSE 3902 Zelda Game Project
 - Daniel Feng     feng.1270@osu.edu
 - Zhiyang Xu      xu.4082@osu.edu
 
+## Sprint 2 Task Distribution:
+- Enemy: Daniel
+- Item: Olivia
+- Player - Movement: Olu
+- Player - Interactions: Dan
+- NPC - Leslie
+- Obstacle - Zhiyang
+
 ## GitHub basic commands:
 a. Download the repository to your local machine
 ```shell
