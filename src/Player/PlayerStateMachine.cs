@@ -45,19 +45,21 @@ namespace ZeldaGame.Player {
 			return (int)state;
 		}
 
-		public void Idle() {
+		public ISprite Idle() {
 			if (state != State.Idle)
 			{
 				state = State.Idle;
 				sprite = PlayerSpriteFactory.Instance.CreateIdleSprite(direction);
 			}
+			return sprite;
 		}
-		public void Walk() {
+		public ISprite Walk() {
 			if (state != State.Walk)
 			{
 				state = State.Walk;
 				sprite = PlayerSpriteFactory.Instance.CreateWalkSprite(direction);
 			}
+			return sprite;
 		}
 		public ISprite Attack() {
             if (state != State.Attack)

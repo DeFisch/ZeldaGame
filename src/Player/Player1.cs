@@ -47,7 +47,7 @@ namespace ZeldaGame.Player {
 
 		public void Idle() {
 			movement = new Vector2(0, 0);
-			stateMachine.Idle();
+			sprite = stateMachine.Idle();
 		}
 
 		public void Walk() {
@@ -67,7 +67,7 @@ namespace ZeldaGame.Player {
 				default:
 					break;
 			}
-			stateMachine.Walk();
+			sprite = stateMachine.Walk();
 		}
 		public void Attack() {
 			sprite = stateMachine.Attack();
