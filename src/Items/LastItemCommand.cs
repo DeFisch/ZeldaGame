@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace ZeldaGame.Items
 {
-    public class NextItemCommand : ICommand
+    public class LastItemCommand : ICommand
     {
-        private int lastOrNext = 1;
+        private int lastOrNext = 0;
         private Game1 MyGame;
-        public NextItemCommand(Game1 myGame)
+        public LastItemCommand(Game1 myGame)
         {
             MyGame = myGame;
         }
@@ -20,3 +20,4 @@ namespace ZeldaGame.Items
         }
     }
 }
+
