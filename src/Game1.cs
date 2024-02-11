@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -134,8 +135,11 @@ namespace ZeldaGame
 			keyboardController.RegisterCommand(Keys.Right, new SetWalkRightSpriteCommand(this), 0);
 			keyboardController.RegisterCommand(Keys.Right, new SetIdleRightSpriteCommand(this), 2);
 
-			//Registers commands with Keys for blocks
-			keyboardController.RegisterCommand(Keys.T, new NextBlockCommand(this), 0);
+            keyboardController.RegisterCommand(Keys.Z, new AttackCommand(this), 0);
+            keyboardController.RegisterCommand(Keys.N, new AttackCommand(this), 0);
+
+            //Registers commands with Keys for blocks
+            keyboardController.RegisterCommand(Keys.T, new NextBlockCommand(this), 0);
             keyboardController.RegisterCommand(Keys.Y, new PreviousBlockCommand(this), 0);
 
             //Registers commands with Keys for npcs

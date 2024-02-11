@@ -1,9 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-/*
- *  SetSprite1 class for non-moving, non-animated sprite
- */
 public class IdleDownSprite : ISprite
 {
     private Texture2D Sprite;

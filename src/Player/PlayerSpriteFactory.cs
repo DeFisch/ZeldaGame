@@ -46,14 +46,30 @@ public class PlayerSpriteFactory {
 	public ISprite CreateWalkRightSprite() {
 		return new WalkRightSprite(playerTexture);
 	}
-	/*
+	public ISprite CreateAttackUpSprite()
+	{
+		return new AttackUpSprite(playerTexture);
+	}
+	public ISprite CreateAttackLeftSprite()
+	{
+		return new AttackLeftSprite(playerTexture);
+	}
+	public ISprite CreateAttackRightSprite()
+	{
+		return new AttackRightSprite(playerTexture);
+	}
+	public ISprite CreateAttackDownSprite() {
+		return new AttackDownSprite(playerTexture);
+	}
+
+    /*
 		Add additional methods for attack, use item, etc.
 	 */
 
-	//public void Draw(SpriteBatch spriteBatch) {
-	//player.Draw(spriteBatch);
-	//}
-	//public void Update() {
-	//player.Update();
-	//}
+    //public void Draw(SpriteBatch spriteBatch) {
+    //player.Draw(spriteBatch);
+    //}
+    //public void Update() {
+    //player.Update();
+    //}
 }

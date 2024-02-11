@@ -5,6 +5,7 @@ using System.Linq;
 using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
+using Sprint0;
 
 namespace ZeldaGame.Player {
 	public class PlayerStateMachine {
@@ -82,10 +83,28 @@ namespace ZeldaGame.Player {
 				}
 			}
 		}
-		public void Attack() {
-			state = State.Attack;
-			// change sprite to attack
-		}
+		public ISprite Attack() {
+            if (state != State.Attack)
+            {
+                state = State.Attack;
+                switch (direction)
+                { // switch case is repetitive, could create sprite selector class + method
+                    case Direction.Up:
+                        sprite = PlayerSpriteFactory.Instance.CreateAttackUpSprite();
+                        break;
+                    case Direction.Left:
+                        sprite = PlayerSpriteFactory.Instance.CreateAttackLeftSprite();
+                        break;
+                    case Direction.Down:
+                        sprite = PlayerSpriteFactory.Instance.CreateAttackDownSprite();
+                        break;
+                    case Direction.Right:
+                        sprite = PlayerSpriteFactory.Instance.CreateAttackRightSprite();
+                        break;
+                }
+            }
+			return sprite;
+        }
 		public void PickUp() {
 			state = State.PickUp;
 			// change sprite to pick up item
