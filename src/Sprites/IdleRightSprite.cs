@@ -1,10 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-/*
- *  SetSprite1 class for non-moving, non-animated sprite
- */
-public class IdleUpSprite : ISprite
+public class IdleRightSprite : ISprite
 {
     private Texture2D Sprite;
 
@@ -12,7 +9,7 @@ public class IdleUpSprite : ISprite
 	public int totalFrames;
 
 	// Constructor
-	public IdleUpSprite(Texture2D sprite)
+	public IdleRightSprite(Texture2D sprite)
 	{
         Sprite = sprite;
 
@@ -22,7 +19,7 @@ public class IdleUpSprite : ISprite
 
     public void Draw(SpriteBatch spriteBatch, Vector2 location)
     {
-		Rectangle sourceRectangle = new Rectangle(69, 11, 16, 16);
+		Rectangle sourceRectangle = new Rectangle(35, 11, 16, 16);
 		Rectangle destinationRectangle = new Rectangle((int)location.X, (int)location.Y, sourceRectangle.Width * 2, sourceRectangle.Height * 2);
 		SpriteEffects effect = SpriteEffects.None;
 		//spriteBatch.Begin();

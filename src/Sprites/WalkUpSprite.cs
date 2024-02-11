@@ -1,10 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-/*
- *  SetSprite1 class for non-moving, non-animated sprite
- */
-public class WalkLeftSprite : ISprite
+public class WalkUpSprite : ISprite
 {
 	private Texture2D sprite;
 	private Rectangle srcRectangle;
@@ -14,7 +11,7 @@ public class WalkLeftSprite : ISprite
 	public int totalFrames;
 
 	// Constructor
-	public WalkLeftSprite(Texture2D sprite) {
+	public WalkUpSprite(Texture2D sprite) {
 		srcRectangle = new Rectangle();
 		destRectangle = new Rectangle();
 		this.sprite = sprite;
@@ -26,15 +23,15 @@ public class WalkLeftSprite : ISprite
 
 		switch (currentFrame) {
 			case 0:
-				srcRectangle = new Rectangle(35, 11, 16, 16);
+				srcRectangle = new Rectangle(69, 11, 16, 16);
 				break;
 			case 6:
-				srcRectangle = new Rectangle(52, 11, 16, 16);
+				srcRectangle = new Rectangle(86, 11, 16, 16);
 				break;
 		}
 
 		destRectangle = new Rectangle((int)location.X, (int)location.Y, srcRectangle.Width * 2, srcRectangle.Height * 2);
-		SpriteEffects effect = SpriteEffects.FlipHorizontally;
+		SpriteEffects effect = SpriteEffects.None;
 
 		spriteBatch.Draw(sprite, destRectangle, srcRectangle, Color.White, rotation: 0, new Vector2(0, 0), effects: effect, 1);
 	}
@@ -42,4 +39,5 @@ public class WalkLeftSprite : ISprite
 	public void Update() {
 		currentFrame = (currentFrame + 1) % totalFrames;
 	}
+
 }

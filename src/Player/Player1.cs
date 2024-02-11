@@ -68,7 +68,7 @@ namespace ZeldaGame.Player {
 			stateMachine.Walk();
 		}
 		public void Attack() {
-			// change sprite to attack
+			sprite = stateMachine.Attack();
 		}
 		public void PickUp() {
 			// change sprite to pick up item
