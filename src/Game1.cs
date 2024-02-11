@@ -5,6 +5,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Sprint0.Block;
 using ZeldaGame.Enemy;
+using ZeldaGame.Items;
 using ZeldaGame.NPCs;
 using ZeldaGame.Player;
 using ZeldaGame.Player.Commands;
@@ -79,7 +80,7 @@ namespace ZeldaGame
             objectFactory = new ObjectSpriteFactory(Objects);
             //NPCFactory = new NPCFactory(npcs, new Vector2(window_width/2, window_height/2));
 
-            //Texture2D enemies = Content.Load<Texture2D>("enemies");
+            Texture2D enemies = Content.Load<Texture2D>("enemies");
             blockSpriteFactory = new BlockSpriteFactory(Content.Load<Texture2D>("Level1_Map"));
             blueRuby = new BlueRuby(Objects, new Vector2(300, 150));
             // Initializes object classes
@@ -109,6 +110,8 @@ namespace ZeldaGame
             blockSpriteFactory.AddBlocks("Walls");
             blockSpriteFactory.AddBlocks("Ground");
             blockSpriteFactory.AddBlocks("Obstacle");
+            //Add items
+            objectFactory.ObjectList();
 
             // Registers commands with Keys as the identifier
             keyboardController.RegisterCommand(Keys.W, new SetWalkUpSpriteCommand(this), 0);
@@ -136,8 +139,8 @@ namespace ZeldaGame
             keyboardController.RegisterCommand(Keys.Y, new PreviousBlockCommand(this), 0);
 
             //Registers commands with Keys for npcs
-            keyboardController.RegisterCommand(Keys.O, new NextNPCCommand(this));
-            keyboardController.RegisterCommand(Keys.P, new PreviousNPCCommand(this));
+            //keyboardController.RegisterCommand(Keys.O, new NextNPCCommand(this));
+            //keyboardController.RegisterCommand(Keys.P, new PreviousNPCCommand(this));
 
             // Registers commands with Rectangles as the identifier
             /*
@@ -186,7 +189,8 @@ namespace ZeldaGame
             blockSpriteFactory.Draw(_spriteBatch);
 
             //Draws objects
-            blueRuby.Draw(_spriteBatch, new Vector2(300, 150));
+            objectFactory.Draw(_spriteBatch);
+            //blueRuby.Draw(_spriteBatch, new Vector2(300, 150));
 
             // Draws player
             Link.Draw(_spriteBatch);
