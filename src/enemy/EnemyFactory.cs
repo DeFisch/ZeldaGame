@@ -8,6 +8,7 @@ public class EnemyFactory
     private List<IEnemy> enemies;
     private Texture2D texture;
     private Vector2 window_size;
+    public string[] enemy_types = new string[] { "Stalfos", "Gibdo", "KeeseGoriya"};
 
     public EnemyFactory(Texture2D texture, Vector2 window_size)
     {
@@ -44,14 +45,16 @@ public class EnemyFactory
     {
         foreach (IEnemy enemy in enemies)
         {
-            enemy.Draw(spriteBatch);
+            if(enemy != null)
+                enemy.Draw(spriteBatch);
         }
     }
     public void Update()
     {
         foreach (IEnemy enemy in enemies)
         {
-            enemy.Update();
+            if(enemy != null)
+                enemy.Update();
         }
     }
 }
