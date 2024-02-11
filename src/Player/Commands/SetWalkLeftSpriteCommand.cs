@@ -1,4 +1,6 @@
-﻿namespace ZeldaGame.Player.Commands {
+﻿using static ZeldaGame.Player.PlayerStateMachine;
+
+namespace ZeldaGame.Player.Commands {
 	public class SetWalkLeftSpriteCommand : ICommand {
 		private Game1 MyGame;
 
@@ -9,8 +11,8 @@
 
 		public void Execute() {
 			MyGame.Link.SetDirection(1);
-			MyGame.Link.SetSprite(PlayerSpriteFactory.Instance.CreateWalkLeftSprite());
-			MyGame.Link.Walk();
+            MyGame.Link.SetSprite(PlayerSpriteFactory.Instance.CreateWalkSprite(Direction.Left));
+            MyGame.Link.Walk();
 		}
 	}
 }

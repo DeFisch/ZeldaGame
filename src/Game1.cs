@@ -11,6 +11,7 @@ using ZeldaGame.Enemy.Commands;
 using ZeldaGame.NPCs;
 using ZeldaGame.Player;
 using ZeldaGame.Player.Commands;
+using System.Data;
 
 namespace ZeldaGame
 {
@@ -131,8 +132,12 @@ namespace ZeldaGame
 			keyboardController.RegisterCommand(Keys.Right, new SetWalkRightSpriteCommand(this), 0);
 			keyboardController.RegisterCommand(Keys.Right, new SetIdleRightSpriteCommand(this), 2);
 
+            // Attack
             keyboardController.RegisterCommand(Keys.Z, new AttackCommand(this), 0);
             keyboardController.RegisterCommand(Keys.N, new AttackCommand(this), 0);
+
+            // Use items
+            keyboardController.RegisterCommand(Keys.D1, new UseItemCommand(this), 0);
 
             //Registers commands with Keys for blocks
             keyboardController.RegisterCommand(Keys.T, new NextBlockCommand(this), 0);

@@ -1,4 +1,6 @@
-﻿namespace ZeldaGame.Player.Commands
+﻿using static ZeldaGame.Player.PlayerStateMachine;
+
+namespace ZeldaGame.Player.Commands
 {
     public class SetIdleRightSpriteCommand : ICommand
     {
@@ -13,8 +15,8 @@
         public void Execute()
         {
             MyGame.Link.SetDirection(3);
-			MyGame.Link.SetSprite(PlayerSpriteFactory.Instance.CreateIdleRightSprite());
-			MyGame.Link.Idle();
+            MyGame.Link.SetSprite(PlayerSpriteFactory.Instance.CreateIdleSprite(Direction.Right));
+            MyGame.Link.Idle();
         }
     }
 }

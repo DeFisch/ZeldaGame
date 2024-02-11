@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 namespace ZeldaGame.Player {
 	public class HurtPlayer : IPlayer {
 		PlayerStateMachine stateMachine;
-		ISprite sprite = PlayerSpriteFactory.Instance.CreateIdleDownSprite();
+		ISprite sprite = PlayerSpriteFactory.Instance.CreateIdleSprite(PlayerStateMachine.Direction.Down);
 		
 		Vector2 position;
 		int direction;
