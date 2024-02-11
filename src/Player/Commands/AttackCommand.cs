@@ -1,4 +1,4 @@
-﻿using System.Diagnostics;
+﻿
 
 namespace ZeldaGame.Player.Commands
 {
@@ -6,7 +6,6 @@ namespace ZeldaGame.Player.Commands
     {
         private Game1 MyGame;
 
-        // Constructor
         public AttackCommand(Game1 myGame)
         {
             MyGame = myGame;

@@ -10,6 +10,7 @@ using ZeldaGame.Items;
 using ZeldaGame.NPCs;
 using ZeldaGame.Player;
 using ZeldaGame.Player.Commands;
+using System.Data;
 
 namespace ZeldaGame
 {
@@ -115,28 +116,32 @@ namespace ZeldaGame
             objectFactory.ObjectList();
 
             // Registers commands with Keys as the identifier
-            keyboardController.RegisterCommand(Keys.W, new SetWalkUpSpriteCommand(this), 0);
-			keyboardController.RegisterCommand(Keys.W, new SetIdleUpSpriteCommand(this), 2);
-			keyboardController.RegisterCommand(Keys.Up, new SetWalkUpSpriteCommand(this), 0);
-			keyboardController.RegisterCommand(Keys.Up, new SetIdleUpSpriteCommand(this), 2);
+            keyboardController.RegisterCommand(Keys.W, new SetWalkSpriteCommand(this, 0), 0);
+			keyboardController.RegisterCommand(Keys.W, new SetIdleSpriteCommand(this), 2);
+			keyboardController.RegisterCommand(Keys.Up, new SetWalkSpriteCommand(this, 0), 0);
+			keyboardController.RegisterCommand(Keys.Up, new SetIdleSpriteCommand(this), 2);
 
-			keyboardController.RegisterCommand(Keys.A, new SetWalkLeftSpriteCommand(this), 0);
-			keyboardController.RegisterCommand(Keys.A, new SetIdleLeftSpriteCommand(this), 2);
-			keyboardController.RegisterCommand(Keys.Left, new SetWalkLeftSpriteCommand(this), 0);
-			keyboardController.RegisterCommand(Keys.Left, new SetIdleLeftSpriteCommand(this), 2);
+			keyboardController.RegisterCommand(Keys.A, new SetWalkSpriteCommand(this, 1), 0);
+			keyboardController.RegisterCommand(Keys.A, new SetIdleSpriteCommand(this), 2);
+			keyboardController.RegisterCommand(Keys.Left, new SetWalkSpriteCommand(this, 1), 0);
+			keyboardController.RegisterCommand(Keys.Left, new SetIdleSpriteCommand(this), 2);
 
-			keyboardController.RegisterCommand(Keys.S, new SetWalkDownSpriteCommand(this), 0);
-			keyboardController.RegisterCommand(Keys.S, new SetIdleDownSpriteCommand(this), 2);
-			keyboardController.RegisterCommand(Keys.Down, new SetWalkDownSpriteCommand(this), 0);
-			keyboardController.RegisterCommand(Keys.Down, new SetIdleDownSpriteCommand(this), 2);
+			keyboardController.RegisterCommand(Keys.S, new SetWalkSpriteCommand(this, 2), 0);
+			keyboardController.RegisterCommand(Keys.S, new SetIdleSpriteCommand(this), 2);
+			keyboardController.RegisterCommand(Keys.Down, new SetWalkSpriteCommand(this, 2), 0);
+			keyboardController.RegisterCommand(Keys.Down, new SetIdleSpriteCommand(this), 2);
 
-			keyboardController.RegisterCommand(Keys.D, new SetWalkRightSpriteCommand(this), 0);
-			keyboardController.RegisterCommand(Keys.D, new SetIdleRightSpriteCommand(this), 2);
-			keyboardController.RegisterCommand(Keys.Right, new SetWalkRightSpriteCommand(this), 0);
-			keyboardController.RegisterCommand(Keys.Right, new SetIdleRightSpriteCommand(this), 2);
+			keyboardController.RegisterCommand(Keys.D, new SetWalkSpriteCommand(this, 3), 0);
+			keyboardController.RegisterCommand(Keys.D, new SetIdleSpriteCommand(this), 2);
+			keyboardController.RegisterCommand(Keys.Right, new SetWalkSpriteCommand(this, 3), 0);
+			keyboardController.RegisterCommand(Keys.Right, new SetIdleSpriteCommand(this), 2);
 
+            // Attack
             keyboardController.RegisterCommand(Keys.Z, new AttackCommand(this), 0);
             keyboardController.RegisterCommand(Keys.N, new AttackCommand(this), 0);
+
+            // Use items
+            keyboardController.RegisterCommand(Keys.D1, new UseItemCommand(this), 0);
 
             //Registers commands with Keys for blocks
             keyboardController.RegisterCommand(Keys.T, new NextBlockCommand(this), 0);

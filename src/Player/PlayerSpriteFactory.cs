@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
+using static ZeldaGame.Player.PlayerStateMachine;
 namespace ZeldaGame.Player;
 
 public class PlayerSpriteFactory {
@@ -22,54 +23,77 @@ public class PlayerSpriteFactory {
 		playerTexture = content.Load<Texture2D>("Link");
 	}
 
-	public ISprite CreateIdleUpSprite() {
-		return new IdleUpSprite(playerTexture); // will make ISprite methods later
-	}
-	public ISprite CreateIdleLeftSprite() {
-		return new IdleLeftSprite(playerTexture);
-	}
-	public ISprite CreateIdleDownSprite() {
-		return new IdleDownSprite(playerTexture);
-	}
-	public ISprite CreateIdleRightSprite() {
-		return new IdleRightSprite(playerTexture);
-	}
-	public ISprite CreateWalkUpSprite() {
-		return new WalkUpSprite(playerTexture);
-	}
-	public ISprite CreateWalkLeftSprite() {
-		return new WalkLeftSprite(playerTexture);
-	}
-	public ISprite CreateWalkDownSprite() {
-		return new WalkDownSprite(playerTexture);
-	}
-	public ISprite CreateWalkRightSprite() {
-		return new WalkRightSprite(playerTexture);
-	}
-	public ISprite CreateAttackUpSprite()
+	public ISprite CreateWalkSprite(Direction direction)
 	{
-		return new AttackUpSprite(playerTexture);
-	}
-	public ISprite CreateAttackLeftSprite()
-	{
-		return new AttackLeftSprite(playerTexture);
-	}
-	public ISprite CreateAttackRightSprite()
-	{
-		return new AttackRightSprite(playerTexture);
-	}
-	public ISprite CreateAttackDownSprite() {
-		return new AttackDownSprite(playerTexture);
-	}
+        switch (direction)
+        {
+            case Direction.Up:
+				return new WalkUpSprite(playerTexture);
+            case Direction.Left:
+                return new WalkLeftSprite(playerTexture);
+            case Direction.Down:
+				return new WalkDownSprite(playerTexture);
+            case Direction.Right:
+                return new WalkRightSprite(playerTexture);
+        }
+		return null;
+    }
 
-    /*
-		Add additional methods for attack, use item, etc.
-	 */
+	public ISprite CreateIdleSprite(Direction direction)
+	{
+        switch (direction)
+        {
+            case Direction.Up:
+                return new IdleUpSprite(playerTexture);
+            case Direction.Left:
+                return new IdleLeftSprite(playerTexture);
+            case Direction.Down:
+                return new IdleDownSprite(playerTexture);
+            case Direction.Right:
+                return new IdleRightSprite(playerTexture);
+        }
+        return null;
+    }
 
-    //public void Draw(SpriteBatch spriteBatch) {
-    //player.Draw(spriteBatch);
-    //}
-    //public void Update() {
-    //player.Update();
-    //}
-}
+	public ISprite CreateAttackSprite(Direction direction)
+	{
+        switch (direction)
+        {
+            case Direction.Up:
+                return new AttackUpSprite(playerTexture);
+            case Direction.Left:
+                return new AttackLeftSprite(playerTexture);
+            case Direction.Down:
+                return new AttackDownSprite(playerTexture);
+            case Direction.Right:
+                return new AttackRightSprite(playerTexture);
+        }
+        return null;
+    }
+
+    public ISprite CreateUseItemSprite(Direction direction)
+    {
+        switch (direction)
+        {
+            case Direction.Up:
+                return new UseItemUpSprite(playerTexture);
+            case Direction.Left:
+                return new UseItemLeftSprite(playerTexture);
+            case Direction.Down:
+                return new UseItemDownSprite(playerTexture);
+            case Direction.Right:
+                return new UseItemRightSprite(playerTexture);
+        }
+        return null;
+    }
+        /*
+            Add additional methods for attack, use item, etc.
+         */
+
+        //public void Draw(SpriteBatch spriteBatch) {
+        //player.Draw(spriteBatch);
+        //}
+        //public void Update() {
+        //player.Update();
+        //}
+ }
