@@ -6,7 +6,6 @@ using Microsoft.Xna.Framework.Input;
 using Sprint0.Block;
 using ZeldaGame.Enemy;
 using ZeldaGame.Items;
-using ZeldaGame.Enemy.Commands;
 using ZeldaGame.NPCs;
 using ZeldaGame.Player;
 using ZeldaGame.Player.Commands;
@@ -29,9 +28,9 @@ namespace ZeldaGame
 
         public Texture2D Objects;
         private BlueRuby blueRuby;
-        public ObjectSpriteFactory objectFactory;
+        public ItemSpriteFactory objectFactory;
 
-        public EnemyFactory enemyFactory;
+        private EnemyFactory enemyFactory;
 
         public BlockSpriteFactory blockSpriteFactory;
 
@@ -78,7 +77,7 @@ namespace ZeldaGame
             // Initializes object classes
             PlayerSpriteFactory.Instance.LoadAllTextures(Content);
 			Link = new Player1(new Vector2(window_width, window_height));
-            objectFactory = new ObjectSpriteFactory(Objects);
+            objectFactory = new ItemSpriteFactory(Objects);
             //NPCFactory = new NPCFactory(npcs, new Vector2(window_width/2, window_height/2));
 
             Texture2D enemies = Content.Load<Texture2D>("enemies");
@@ -89,9 +88,14 @@ namespace ZeldaGame
 
             enemyFactory = new EnemyFactory(enemies, window_size: new Vector2(window_width, window_height));
             Random random = new Random();
-            for (int i = 0; i < 5; i++) // spawn 5 enemies
+            for (int i = 0; i < 5; i++) // spawn 5 enemies of each type
             {
                 enemyFactory.AddEnemy("Stalfos");
+                enemyFactory.AddEnemy("Gibdo");
+                if (i % 2 == 0)
+                    enemyFactory.AddEnemy("KeeseGoriya", color_variation: "blue");
+                else
+                    enemyFactory.AddEnemy("KeeseGoriya", color_variation: "red");
             }
 
             //Add NPCs
@@ -141,9 +145,6 @@ namespace ZeldaGame
             //Registers commands with Keys for npcs
             //keyboardController.RegisterCommand(Keys.O, new NextNPCCommand(this));
             //keyboardController.RegisterCommand(Keys.P, new PreviousNPCCommand(this));
-            // Registers commands with Keys for enemies
-            keyboardController.RegisterCommand(Keys.O, new previousEnemyCommand(this), 0);
-            keyboardController.RegisterCommand(Keys.P, new nextEnemyCommand(this), 0);
 
             // Registers commands with Rectangles as the identifier
             /*
@@ -193,7 +194,6 @@ namespace ZeldaGame
 
             //Draws objects
             objectFactory.Draw(_spriteBatch);
-            //blueRuby.Draw(_spriteBatch, new Vector2(300, 150));
 
             // Draws player
             Link.Draw(_spriteBatch);

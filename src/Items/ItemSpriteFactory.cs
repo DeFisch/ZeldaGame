@@ -8,14 +8,14 @@ using System.Threading.Tasks;
 
 namespace ZeldaGame.Items
 {
-    public class ObjectSpriteFactory
+    public class ItemSpriteFactory
     {
         List<ISprite> objectList;
         BlueRuby blueRuby;
         Texture2D texture;
         Vector2 pos;
 
-        public ObjectSpriteFactory(Texture2D texture)
+        public ItemSpriteFactory(Texture2D texture)
         {
             objectList = new List<ISprite>();
             this.texture = texture;

@@ -8,14 +8,14 @@ public class previousEnemyCommand : ICommand {
 	// Constructor
 	public previousEnemyCommand(Game1 myGame) {
 		MyGame = myGame;
-		enemy_types = MyGame.enemyFactory.enemy_types;
+		//enemy_types = MyGame.enemyFactory.enemy_types;
 	}
 
 	public void Execute() {
-		MyGame.enemyFactory.ClearEnemies();
+		//MyGame.enemyFactory.ClearEnemies();
 		current_enemy = current_enemy - 1 < 0 ? enemy_types.Length - 1 : current_enemy - 1;
 		for(int i = 0; i < max_enemies; i++){
-			MyGame.enemyFactory.AddEnemy(enemy_types[current_enemy]);
+			//MyGame.enemyFactory.AddEnemy(enemy_types[current_enemy]);
 		}
 	}
 }

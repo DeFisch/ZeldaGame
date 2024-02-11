@@ -9,28 +9,40 @@ using ZeldaGame.Items;
 
 namespace ZeldaGame
 {
-    public class ObjectSpriteFactory
+    public class ItemSpriteFactory
     {
         List<ISprite> objectList;
         BlueRuby blueRuby;
         YellowRuby yellowRuby;
+        Heart heart;
+        HeartContainer heartContainer;
+        Triforce triforce; 
+
         Texture2D texture;
         Vector2 pos;
         private int cycler = 0;
         private int index = 0;
 
-        public ObjectSpriteFactory(Texture2D texture) {
+        public ItemSpriteFactory(Texture2D texture) {
            objectList = new List<ISprite>();
            this.texture = texture;
            this.pos = new Vector2(300, 150);
            blueRuby = new BlueRuby(this.texture, this.pos);
            yellowRuby = new YellowRuby(this.texture, this.pos);
+           heart = new Heart(this.texture, this.pos);
+           triforce = new Triforce(this.texture, this.pos); 
+           heartContainer = new HeartContainer(this.texture, this.pos);
         }
 
         public void ObjectList()
         {
             objectList.Add(blueRuby);
             objectList.Add(yellowRuby);
+            objectList.Add(heart);
+            objectList.Add(triforce);
+            objectList.Add(heartContainer);
+
+
 
         }
 
@@ -53,7 +65,7 @@ namespace ZeldaGame
         }
         public void Draw(SpriteBatch spriteBatch)
         {
-            //blueRuby.Draw(spriteBatch, this.pos);
+            
             objectList[index].Draw(spriteBatch, this.pos);
         }
     }
