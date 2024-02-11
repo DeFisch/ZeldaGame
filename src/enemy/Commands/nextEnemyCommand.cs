@@ -7,14 +7,14 @@ namespace ZeldaGame.Enemy.Commands {
 		// Constructor
 		public nextEnemyCommand(Game1 myGame) {
 			MyGame = myGame;
-            enemy_types = MyGame.enemyFactory.enemy_types;
+            //enemy_types = MyGame.enemyFactory.enemy_types;
 		}
 
 		public void Execute() {
-			MyGame.enemyFactory.ClearEnemies();
+			//MyGame.enemyFactory.ClearEnemies();
             current_enemy = (current_enemy + 1) % enemy_types.Length;
             for(int i = 0; i < max_enemies; i++){
-                MyGame.enemyFactory.AddEnemy(enemy_types[current_enemy]);
+                //MyGame.enemyFactory.AddEnemy(enemy_types[current_enemy]);
             }
 		}
 	}
