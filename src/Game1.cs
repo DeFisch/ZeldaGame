@@ -133,6 +133,11 @@ namespace ZeldaGame
 
             // Use items
             keyboardController.RegisterCommand(Keys.D1, new UseItemCommand(this, 0), 0);
+            keyboardController.RegisterCommand(Keys.D2, new UseItemCommand(this, 1), 0);
+            keyboardController.RegisterCommand(Keys.D3, new UseItemCommand(this, 2), 0);
+            keyboardController.RegisterCommand(Keys.D4, new UseItemCommand(this, 3), 0);
+            keyboardController.RegisterCommand(Keys.D5, new UseItemCommand(this, 4), 0);
+            keyboardController.RegisterCommand(Keys.D6, new UseItemCommand(this, 5), 0);
 
             //Registers commands with Keys for blocks
             keyboardController.RegisterCommand(Keys.T, new NextBlockCommand(this), 0);

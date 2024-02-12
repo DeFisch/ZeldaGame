@@ -8,6 +8,7 @@ namespace ZeldaGame.Player;
 public class PlayerItemSpriteFactory
 {
     private Texture2D playerTexture;
+    private List<IProjectile> projectiles;
 
     private static PlayerItemSpriteFactory instance = new PlayerItemSpriteFactory();
 
@@ -28,19 +29,66 @@ public class PlayerItemSpriteFactory
         playerTexture = content.Load<Texture2D>("Link");
     }
 
-    public IProjectile CreateItemSprite(Direction direction)
+    public IProjectile CreateItemSprite(Direction direction, int item)
+    {
+        projectiles = new List<IProjectile>
+        { 
+            CreateArrowSprite(direction), CreateBlueArrowSprite(direction), CreateBoomerangSprite(direction),
+            CreateBlueBoomerangSprite(direction), CreateBombSprite(direction), CreateFireballSprite(direction)
+        };
+
+        return projectiles[item];
+    }
+
+    public IProjectile CreateArrowSprite(Direction direction)
     {
         switch (direction)
         {
             case Direction.Up:
-                return new UseArrowVerticalSprite(playerTexture, Direction.Up);
+                return new ArrowVerticalSprite(playerTexture, Direction.Up);
             case Direction.Left:
-                return new UseArrowHorizontalSprite(playerTexture, Direction.Left);
+                return new ArrowHorizontalSprite(playerTexture, Direction.Left);
             case Direction.Down:
-                return new UseArrowVerticalSprite(playerTexture, Direction.Down);
+                return new ArrowVerticalSprite(playerTexture, Direction.Down);
             case Direction.Right:
-                return new UseArrowHorizontalSprite(playerTexture, Direction.Right);
+                return new ArrowHorizontalSprite(playerTexture, Direction.Right);
         }
         return null;
+    }
+
+    public IProjectile CreateBlueArrowSprite(Direction direction)
+    {
+        switch (direction)
+        {
+            case Direction.Up:
+                return new BlueArrowVerticalSprite(playerTexture, Direction.Up);
+            case Direction.Left:
+                return new BlueArrowHorizontalSprite(playerTexture, Direction.Left);
+            case Direction.Down:
+                return new BlueArrowVerticalSprite(playerTexture, Direction.Down);
+            case Direction.Right:
+                return new BlueArrowHorizontalSprite(playerTexture, Direction.Right);
+        }
+        return null;
+    }
+
+    public IProjectile CreateBoomerangSprite(Direction direction)
+    {
+        return new BoomerangSprite(playerTexture, direction);
+    }
+
+    public IProjectile CreateBlueBoomerangSprite(Direction direction)
+    {
+        return new BlueBoomerangSprite(playerTexture, direction);
+    }
+
+    public IProjectile CreateBombSprite(Direction direction)
+    {
+        return new BombSprite(playerTexture, direction);
+    }
+
+    public IProjectile CreateFireballSprite(Direction direction)
+    {
+        return new FireballSprite(playerTexture, direction);
     }
 }

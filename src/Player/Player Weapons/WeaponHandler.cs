@@ -16,8 +16,13 @@ public class WeaponHandler
 
     public void UseItem(int item, Vector2 location, Direction direction)
     {
-        IProjectile weapon = PlayerItemSpriteFactory.Instance.CreateItemSprite(direction);
+        IProjectile weapon = PlayerItemSpriteFactory.Instance.CreateItemSprite(direction, item);
         activeProjectiles.Add(weapon, location);
+    }
+
+    public void ProjectileExpiration(IProjectile projectile)
+    {
+        activeProjectiles.Remove(projectile);
     }
 
     public void Update()

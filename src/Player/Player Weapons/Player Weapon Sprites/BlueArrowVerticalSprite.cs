@@ -2,13 +2,13 @@
 using Microsoft.Xna.Framework.Graphics;
 using static ZeldaGame.Player.PlayerStateMachine;
 
-public class UseArrowVerticalSprite : IProjectile
+public class BlueArrowVerticalSprite : IProjectile
 {
     SpriteEffects effect;
     private Texture2D Sprite;
     private Direction direction;
 
-    public UseArrowVerticalSprite(Texture2D sprite, Direction direction)
+    public BlueArrowVerticalSprite(Texture2D sprite, Direction direction)
     {
         Sprite = sprite;
         effect = SpriteEffects.None;
@@ -23,7 +23,7 @@ public class UseArrowVerticalSprite : IProjectile
     public void Draw(SpriteBatch spriteBatch, Vector2 location)
     {
 
-        Rectangle sourceRectangle = new Rectangle(1, 185, 8, 15);
+        Rectangle sourceRectangle = new Rectangle(27, 185, 8, 15);
         Rectangle destinationRectangle = new Rectangle((int)location.X, (int)location.Y, sourceRectangle.Width * 2, sourceRectangle.Height * 2);
         if (direction == Direction.Down) // 1 indicates down
         {
