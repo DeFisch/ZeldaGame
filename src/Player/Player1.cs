@@ -81,7 +81,7 @@ namespace ZeldaGame.Player {
 		}
 		public void UseItem(int item) {
 			sprite = stateMachine.UseItem();
-			weaponHandler.UseItem(item);
+			//weaponHandler.UseItem(item);
 		}
 		public void Block() {
 			// change sprite to block
