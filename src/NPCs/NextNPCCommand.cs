@@ -14,6 +14,6 @@ public class NextNPCCommand : ICommand
 
     public void Execute()
     {
-        MyGame.NPCFactory.cycleList(next);
+       //MyGame.NPCFactory.cycleList(next);
     }
 }

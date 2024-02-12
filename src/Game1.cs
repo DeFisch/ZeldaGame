@@ -1,13 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Sprint0.Block;
 using ZeldaGame.Enemy;
+using ZeldaGame.Items;
 using ZeldaGame.NPCs;
 using ZeldaGame.Player;
 using ZeldaGame.Player.Commands;
+using System.Data;
 
 namespace ZeldaGame
 {
@@ -26,6 +29,8 @@ namespace ZeldaGame
         public NPCFactory NPCFactory;
 
         public Texture2D Objects;
+        private BlueRuby blueRuby;
+        public ItemSpriteFactory objectFactory;
 
         private EnemyFactory enemyFactory;
 
@@ -68,14 +73,17 @@ namespace ZeldaGame
             npcs = Content.Load<Texture2D>("NPCs");
             NPCFactory = new NPCFactory(npcs, new Vector2(window_width, window_height));
             Objects = Content.Load<Texture2D>("Objects");
+            
 
             // Initializes object classes
             PlayerSpriteFactory.Instance.LoadAllTextures(Content);
 			Link = new Player1(new Vector2(window_width, window_height));
+            objectFactory = new ItemSpriteFactory(Objects);
+            //NPCFactory = new NPCFactory(npcs, new Vector2(window_width/2, window_height/2));
+
             Texture2D enemies = Content.Load<Texture2D>("enemies");
-
             blockSpriteFactory = new BlockSpriteFactory(Content.Load<Texture2D>("Level1_Map"));
-
+            blueRuby = new BlueRuby(Objects, new Vector2(300, 150));
             // Initializes object classes
 
 
@@ -103,31 +111,44 @@ namespace ZeldaGame
             blockSpriteFactory.AddBlocks("Walls");
             blockSpriteFactory.AddBlocks("Ground");
             blockSpriteFactory.AddBlocks("Obstacle");
+            //Add items
+            objectFactory.ObjectList();
 
             // Registers commands with Keys as the identifier
-            keyboardController.RegisterCommand(Keys.W, new SetWalkUpSpriteCommand(this), 0);
-			keyboardController.RegisterCommand(Keys.W, new SetIdleUpSpriteCommand(this), 2);
-			keyboardController.RegisterCommand(Keys.Up, new SetWalkUpSpriteCommand(this), 0);
-			keyboardController.RegisterCommand(Keys.Up, new SetIdleUpSpriteCommand(this), 2);
+            keyboardController.RegisterCommand(Keys.W, new SetWalkSpriteCommand(this, 0), 0);
+			keyboardController.RegisterCommand(Keys.W, new SetIdleSpriteCommand(this), 2);
+			keyboardController.RegisterCommand(Keys.Up, new SetWalkSpriteCommand(this, 0), 0);
+			keyboardController.RegisterCommand(Keys.Up, new SetIdleSpriteCommand(this), 2);
 
-			keyboardController.RegisterCommand(Keys.A, new SetWalkLeftSpriteCommand(this), 0);
-			keyboardController.RegisterCommand(Keys.A, new SetIdleLeftSpriteCommand(this), 2);
-			keyboardController.RegisterCommand(Keys.Left, new SetWalkLeftSpriteCommand(this), 0);
-			keyboardController.RegisterCommand(Keys.Left, new SetIdleLeftSpriteCommand(this), 2);
+			keyboardController.RegisterCommand(Keys.A, new SetWalkSpriteCommand(this, 1), 0);
+			keyboardController.RegisterCommand(Keys.A, new SetIdleSpriteCommand(this), 2);
+			keyboardController.RegisterCommand(Keys.Left, new SetWalkSpriteCommand(this, 1), 0);
+			keyboardController.RegisterCommand(Keys.Left, new SetIdleSpriteCommand(this), 2);
 
-			keyboardController.RegisterCommand(Keys.S, new SetWalkDownSpriteCommand(this), 0);
-			keyboardController.RegisterCommand(Keys.S, new SetIdleDownSpriteCommand(this), 2);
-			keyboardController.RegisterCommand(Keys.Down, new SetWalkDownSpriteCommand(this), 0);
-			keyboardController.RegisterCommand(Keys.Down, new SetIdleDownSpriteCommand(this), 2);
+			keyboardController.RegisterCommand(Keys.S, new SetWalkSpriteCommand(this, 2), 0);
+			keyboardController.RegisterCommand(Keys.S, new SetIdleSpriteCommand(this), 2);
+			keyboardController.RegisterCommand(Keys.Down, new SetWalkSpriteCommand(this, 2), 0);
+			keyboardController.RegisterCommand(Keys.Down, new SetIdleSpriteCommand(this), 2);
 
-			keyboardController.RegisterCommand(Keys.D, new SetWalkRightSpriteCommand(this), 0);
-			keyboardController.RegisterCommand(Keys.D, new SetIdleRightSpriteCommand(this), 2);
-			keyboardController.RegisterCommand(Keys.Right, new SetWalkRightSpriteCommand(this), 0);
-			keyboardController.RegisterCommand(Keys.Right, new SetIdleRightSpriteCommand(this), 2);
+			keyboardController.RegisterCommand(Keys.D, new SetWalkSpriteCommand(this, 3), 0);
+			keyboardController.RegisterCommand(Keys.D, new SetIdleSpriteCommand(this), 2);
+			keyboardController.RegisterCommand(Keys.Right, new SetWalkSpriteCommand(this, 3), 0);
+			keyboardController.RegisterCommand(Keys.Right, new SetIdleSpriteCommand(this), 2);
 
-			//Registers commands with Keys for blocks
-			keyboardController.RegisterCommand(Keys.T, new NextBlockCommand(this), 0);
+            // Attack
+            keyboardController.RegisterCommand(Keys.Z, new AttackCommand(this), 0);
+            keyboardController.RegisterCommand(Keys.N, new AttackCommand(this), 0);
+
+            // Use items
+            keyboardController.RegisterCommand(Keys.D1, new UseItemCommand(this), 0);
+
+            //Registers commands with Keys for blocks
+            keyboardController.RegisterCommand(Keys.T, new NextBlockCommand(this), 0);
             keyboardController.RegisterCommand(Keys.Y, new PreviousBlockCommand(this), 0);
+
+            //Register commands with keys for items
+            keyboardController.RegisterCommand(Keys.I, new NextItemCommand(this), 0);
+            keyboardController.RegisterCommand(Keys.U, new LastItemCommand(this), 0);
 
             //Registers commands with Keys for npcs
             //keyboardController.RegisterCommand(Keys.O, new NextNPCCommand(this));
@@ -178,6 +199,9 @@ namespace ZeldaGame
 
             //Draws Blocks
             blockSpriteFactory.Draw(_spriteBatch);
+
+            //Draws objects
+            objectFactory.Draw(_spriteBatch);
 
             // Draws player
             Link.Draw(_spriteBatch);

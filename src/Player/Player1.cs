@@ -6,6 +6,8 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static ZeldaGame.Player.PlayerStateMachine;
+
 
 namespace ZeldaGame.Player {
 	public class Player1 : IPlayer {
@@ -18,7 +20,7 @@ namespace ZeldaGame.Player {
 		int direction;
 
 		public Player1(Vector2 window_size) {
-			sprite = PlayerSpriteFactory.Instance.CreateIdleDownSprite();
+			sprite = PlayerSpriteFactory.Instance.CreateIdleSprite(Direction.Down);
 			stateMachine = new PlayerStateMachine(sprite);
 			position = new Vector2(window_size.X/2, window_size.Y/2);
 			movement = new Vector2(0, 0);
@@ -45,7 +47,7 @@ namespace ZeldaGame.Player {
 
 		public void Idle() {
 			movement = new Vector2(0, 0);
-			stateMachine.Idle();
+			sprite = stateMachine.Idle();
 		}
 
 		public void Walk() {
@@ -65,16 +67,16 @@ namespace ZeldaGame.Player {
 				default:
 					break;
 			}
-			stateMachine.Walk();
+			sprite = stateMachine.Walk();
 		}
 		public void Attack() {
-			// change sprite to attack
+			sprite = stateMachine.Attack();
 		}
 		public void PickUp() {
 			// change sprite to pick up item
 		}
 		public void UseItem() {
-			// change sprite to use item
+			sprite = stateMachine.UseItem();
 		}
 		public void Block() {
 			// change sprite to block

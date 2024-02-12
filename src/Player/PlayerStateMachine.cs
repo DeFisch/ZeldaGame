@@ -5,12 +5,13 @@ using System.Linq;
 using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
+using Sprint0;
 
 namespace ZeldaGame.Player {
 	public class PlayerStateMachine {
-		enum Direction { Up, Left, Down, Right };
-		enum State { Idle, Walk, Attack, PickUp, UseItem, Block };
-		enum Health { Normal, Hurt };
+		public enum Direction { Up, Left, Down, Right };
+		public enum State { Idle, Walk, Attack, PickUp, UseItem, Block };
+		public enum Health { Normal, Hurt };
 
 		private Direction direction;
 		private State state;
@@ -44,55 +45,41 @@ namespace ZeldaGame.Player {
 			return (int)state;
 		}
 
-		public void Idle() {
-			if (state != State.Idle) {
+		public ISprite Idle() {
+			if (state != State.Idle)
+			{
 				state = State.Idle;
-				switch (direction) { // switch case is repetitive, could create sprite selector class + method
-					case Direction.Up:
-						sprite = PlayerSpriteFactory.Instance.CreateIdleUpSprite();
-						break;
-					case Direction.Left:
-						sprite = PlayerSpriteFactory.Instance.CreateIdleLeftSprite();
-						break;
-					case Direction.Down:
-						sprite = PlayerSpriteFactory.Instance.CreateIdleDownSprite();
-						break;
-					case Direction.Right:
-						sprite = PlayerSpriteFactory.Instance.CreateIdleRightSprite();
-						break;
-				}
+				sprite = PlayerSpriteFactory.Instance.CreateIdleSprite(direction);
 			}
+			return sprite;
 		}
-		public void Walk() {
-			if (state != State.Walk) {
+		public ISprite Walk() {
+			if (state != State.Walk)
+			{
 				state = State.Walk;
-				switch (direction) { // switch case is repetitive, could create sprite selector class + method
-					case Direction.Up:
-						sprite = PlayerSpriteFactory.Instance.CreateWalkUpSprite();
-						break;
-					case Direction.Left:
-						sprite = PlayerSpriteFactory.Instance.CreateWalkLeftSprite();
-						break;
-					case Direction.Down:
-						sprite = PlayerSpriteFactory.Instance.CreateWalkDownSprite();
-						break;
-					case Direction.Right:
-						sprite = PlayerSpriteFactory.Instance.CreateWalkRightSprite();
-						break;
-				}
+				sprite = PlayerSpriteFactory.Instance.CreateWalkSprite(direction);
 			}
+			return sprite;
 		}
-		public void Attack() {
-			state = State.Attack;
-			// change sprite to attack
-		}
+		public ISprite Attack() {
+            if (state != State.Attack)
+            {
+                state = State.Attack;
+                sprite = PlayerSpriteFactory.Instance.CreateAttackSprite(direction);
+            }
+			return sprite;
+        }
 		public void PickUp() {
 			state = State.PickUp;
 			// change sprite to pick up item
 		}
-		public void UseItem() {
-			state = State.UseItem;
-			// change sprite to use item
+		public ISprite UseItem() {
+			if (state != State.UseItem)
+			{
+                state = State.UseItem;
+				sprite = PlayerSpriteFactory.Instance.CreateUseItemSprite(direction);
+            }
+			return sprite;
 		}
 		public void Block() {
 			state = State.Block;
