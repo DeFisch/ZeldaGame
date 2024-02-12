@@ -12,19 +12,20 @@ using static ZeldaGame.Player.PlayerStateMachine;
 namespace ZeldaGame.Player {
 	public class Player1 : IPlayer {
 		PlayerStateMachine stateMachine;
-		PlayerItemSpriteFactory itemSpriteFactory;
+		WeaponHandler weaponHandler;
 		ISprite sprite;
-		ISprite item;
 		Vector2 position;
+		Vector2 itemPosition;
 		Vector2 movement;
 
 		int speed;
 		int direction;
 
-		public Player1(Vector2 window_size, Texture2D texture) {
-			itemSpriteFactory = new PlayerItemSpriteFactory(texture);
+		public Player1(Vector2 window_size) {
+			
 			sprite = PlayerSpriteFactory.Instance.CreateIdleSprite(Direction.Down);
 			stateMachine = new PlayerStateMachine(sprite);
+
 			position = new Vector2(window_size.X/2, window_size.Y/2);
 			movement = new Vector2(0, 0);
 			direction = 2; //down
@@ -33,11 +34,6 @@ namespace ZeldaGame.Player {
 
 		public ISprite GetSprite() {
 			return sprite;
-		}
-
-		public Vector2 getPosition()
-		{
-			return position;
 		}
 
 		public void SetSprite(ISprite sprite) {
@@ -85,8 +81,7 @@ namespace ZeldaGame.Player {
 		}
 		public void UseItem(int item) {
 			sprite = stateMachine.UseItem();
-			this.item = itemSpriteFactory.CreateItemSprite(stateMachine.GetDirection() , item);
-
+			weaponHandler.UseItem(item);
 		}
 		public void Block() {
 			// change sprite to block
@@ -94,15 +89,11 @@ namespace ZeldaGame.Player {
 
 		public void Update() {
 			position = position + movement;
+			itemPosition += new Vector2(2, 0); // make directional and not reliant on current state
 			sprite.Update();
 		}
 		public void Draw(SpriteBatch spriteBatch) {
 			sprite.Draw(spriteBatch, position);
-			// Prints item if there is one being used
-			if (stateMachine.GetCurrentState() == State.UseItem)
-			{
-				item.Draw(spriteBatch, position);
-			}
 		}
 	}
 }

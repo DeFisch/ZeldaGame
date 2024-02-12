@@ -37,11 +37,6 @@ namespace ZeldaGame.Player {
 			return direction;
 		}
 
-		public State GetCurrentState()
-		{
-			return state;
-		}
-
 		public void SetDirection(int direction) { // 0 = up, 1 = left, 2 = down, 3 = right
 			this.direction = (Direction)direction;
 		}

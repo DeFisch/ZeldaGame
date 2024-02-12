@@ -76,7 +76,8 @@ namespace ZeldaGame
 
             // Initializes object classes
             PlayerSpriteFactory.Instance.LoadAllTextures(Content);
-			Link = new Player1(new Vector2(window_width, window_height), sprite);
+            PlayerItemSpriteFactory.Instance.LoadAllTextures(Content);
+			Link = new Player1(new Vector2(window_width, window_height));
             NPCFactory = new NPCFactory(npcs, new Vector2(window_width, window_height));
             objectFactory = new ItemSpriteFactory(Objects);
 

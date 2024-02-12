@@ -6,7 +6,6 @@ public class UseArrowHorizontalSprite : ISprite
     SpriteEffects effect;
     private Texture2D Sprite;
     private int direction;
-    private int X;
 
     public UseArrowHorizontalSprite(Texture2D sprite, int direction)
     {
@@ -17,7 +16,6 @@ public class UseArrowHorizontalSprite : ISprite
 
     public void Draw(SpriteBatch spriteBatch, Vector2 location)
     {
-
         Rectangle sourceRectangle = new Rectangle(10, 185, 15, 15);
         Rectangle destinationRectangle = new Rectangle((int)location.X, (int)location.Y, sourceRectangle.Width * 2, sourceRectangle.Height * 2);
         if (direction == 1) // 1 indicates left
@@ -29,7 +27,7 @@ public class UseArrowHorizontalSprite : ISprite
 
     public void Update()
     {
-
+        
     }
 
 }
