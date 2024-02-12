@@ -11,8 +11,8 @@ namespace ZeldaGame.Items
     public class ItemSpriteFactory
     {
         List<ISprite> objectList;
-        BlueRuby blueRuby;
         YellowRuby yellowRuby;
+        BlueRuby blueRuby;
         Heart heart;
         HeartContainer heartContainer;
         Triforce triforce;
@@ -27,8 +27,8 @@ namespace ZeldaGame.Items
             objectList = new List<ISprite>();
             this.texture = texture;
             pos = new Vector2(300, 150);
-            blueRuby = new BlueRuby(this.texture, pos);
             yellowRuby = new YellowRuby(this.texture, pos);
+            blueRuby = new BlueRuby(this.texture, pos);
             heart = new Heart(this.texture, pos);
             triforce = new Triforce(this.texture, pos);
             heartContainer = new HeartContainer(this.texture, pos);

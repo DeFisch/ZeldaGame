@@ -29,7 +29,7 @@ namespace ZeldaGame
         public NPCFactory NPCFactory;
 
         public Texture2D Objects;
-        private BlueRuby blueRuby;
+        private YellowRuby blueRuby;
         public ItemSpriteFactory objectFactory;
 
         private EnemyFactory enemyFactory;
@@ -84,7 +84,7 @@ namespace ZeldaGame
 
             Texture2D enemies = Content.Load<Texture2D>("enemies");
             blockSpriteFactory = new BlockSpriteFactory(Content.Load<Texture2D>("Level1_Map"));
-            blueRuby = new BlueRuby(Objects, new Vector2(300, 150));
+            blueRuby = new YellowRuby(Objects, new Vector2(300, 150));
             // Initializes object classes
 
 
