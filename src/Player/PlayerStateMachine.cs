@@ -13,16 +13,18 @@ namespace ZeldaGame.Player {
 		public enum State { Idle, Walk, Attack, PickUp, UseItem, Block };
 		public enum Health { Normal, Hurt };
 
-		private Direction direction;
+		public Direction direction;
 		private State state;
 		private Health health;
 		private ISprite sprite;
+		private int animTimer;
 
 		public PlayerStateMachine(ISprite sprite) {
 			direction = Direction.Down;
 			state = State.Idle;
 			health = Health.Normal;
 			this.sprite = sprite;
+			animTimer = -1;
 		}
 
 		public void BeHurt() {
@@ -37,8 +39,13 @@ namespace ZeldaGame.Player {
 			return direction;
 		}
 
-		public void SetDirection(int direction) { // 0 = up, 1 = left, 2 = down, 3 = right
-			this.direction = (Direction)direction;
+		public State GetCurrentState()
+		{
+			return state;
+		}
+
+		public void SetDirection(Direction direction) { // 0 = up, 1 = left, 2 = down, 3 = right
+			this.direction = direction;
 		}
 
 		public int GetState() {
@@ -66,6 +73,7 @@ namespace ZeldaGame.Player {
             {
                 state = State.Attack;
                 sprite = PlayerSpriteFactory.Instance.CreateAttackSprite(direction);
+				animTimer = 12;
             }
 			return sprite;
         }

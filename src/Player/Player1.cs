@@ -3,6 +3,7 @@ using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -18,7 +19,8 @@ namespace ZeldaGame.Player {
 		Vector2 movement;
 
 		int speed;
-		int direction;
+		Direction direction;
+		int animTimer;
 
 		public Player1(Vector2 window_size, WeaponHandler weaponHandler) {
 			
@@ -28,8 +30,8 @@ namespace ZeldaGame.Player {
 
 			position = new Vector2(window_size.X/2, window_size.Y/2);
 			movement = new Vector2(0, 0);
-			direction = 2; //down
 			speed = 2;
+			animTimer = -1;
 		}
 
 		public ISprite GetSprite() {
@@ -44,7 +46,7 @@ namespace ZeldaGame.Player {
 			stateMachine.BeHurt();
 		}
 
-		public void SetDirection(int direction) {// 0 = up, 1 = left, 2 = down, 3 = right
+		public void SetDirection(Direction direction) {// 0 = up, 1 = left, 2 = down, 3 = right
 			stateMachine.SetDirection(direction);
 			this.direction = direction;
 		}
@@ -55,26 +57,31 @@ namespace ZeldaGame.Player {
 		}
 
 		public void Walk() {
-			switch (direction) {
-				case 0:
+			if (animTimer == -1) {
+				switch (direction) {
+				case Direction.Up:
 					movement = new Vector2(0, -speed);
 					break;
-				case 1:
+				case Direction.Left:
 					movement = new Vector2(-speed, 0);
 					break;
-				case 2:
+				case Direction.Down:
 					movement = new Vector2(0, speed);
 					break;
-				case 3:
+				case Direction.Right:
 					movement = new Vector2(speed, 0);
 					break;
 				default:
 					break;
+				}
+				sprite = stateMachine.Walk();
 			}
-			sprite = stateMachine.Walk();
 		}
 		public void Attack() {
-			sprite = stateMachine.Attack();
+			if (animTimer == -1) {
+				sprite = stateMachine.Attack();
+				animTimer = 12;
+			}
 		}
 		public void PickUp() {
 			// change sprite to pick up item
@@ -82,12 +89,22 @@ namespace ZeldaGame.Player {
 		public void UseItem(int item) {
 			sprite = stateMachine.UseItem();
 			weaponHandler.UseItem(item, position, stateMachine.GetDirection());
+			animTimer = 12;
 		}
 		public void Block() {
 			// change sprite to block
 		}
 
 		public void Update() {
+			if (animTimer >= 0) {
+				animTimer--;
+				Debug.WriteLine("Timer: " + animTimer);
+			}
+			if (animTimer == 0) {
+				Debug.WriteLine("Done.");
+				Idle();
+			}
+
 			position = position + movement;
 			sprite.Update();
 		}

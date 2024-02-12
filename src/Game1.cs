@@ -1,17 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Diagnostics;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Sprint0.Block;
-using ZeldaGame.Enemy;
-using ZeldaGame.Items;
-using ZeldaGame.NPCs;
 using ZeldaGame.Player;
 using ZeldaGame.Player.Commands;
-using System.Data;
+using ZeldaGame.Enemy;
 using ZeldaGame.Enemy.Commands;
+using ZeldaGame.Items;
+using ZeldaGame.NPCs;
 
 namespace ZeldaGame
 {
