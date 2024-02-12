@@ -5,11 +5,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static ZeldaGame.Player.PlayerStateMachine;
 
 namespace ZeldaGame.Player {
 	public class HurtPlayer : IPlayer {
 		PlayerStateMachine stateMachine;
-		ISprite sprite = PlayerSpriteFactory.Instance.CreateIdleSprite(PlayerStateMachine.Direction.Down);
+		ISprite sprite;
 		
 		Vector2 position;
 		int direction;
@@ -21,6 +22,7 @@ namespace ZeldaGame.Player {
 
 		public HurtPlayer(IPlayer decoratedPlayer, Game1 game) {
 			this.decoratedPlayer = decoratedPlayer;
+			sprite = PlayerSpriteFactory.Instance.CreateIdleSprite(Direction.Down);
 			this.game = game;
 		}
 
@@ -29,7 +31,7 @@ namespace ZeldaGame.Player {
 		}
 
 		public void SetDirection(int direction) {// 0 = up, 1 = left, 2 = down, 3 = right
-			stateMachine.SetDirection(direction);
+			stateMachine.SetDirection((Direction)direction);
 		}
 
 		public void Update() {

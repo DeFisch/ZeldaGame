@@ -1,15 +1,17 @@
-﻿namespace ZeldaGame.Player.Commands
+﻿using static ZeldaGame.Player.PlayerStateMachine;
+
+namespace ZeldaGame.Player.Commands
 {
     public class SetWalkSpriteCommand : ICommand
     {
         private Game1 MyGame;
-        private int direction;
+        private Direction direction;
 
         // Constructor
         public SetWalkSpriteCommand(Game1 myGame, int direction)
         {
             MyGame = myGame;
-            this.direction = direction;
+            this.direction = (Direction)direction;
         }
 
         public void Execute()
