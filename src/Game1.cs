@@ -66,13 +66,13 @@ namespace ZeldaGame
             sprite = Content.Load<Texture2D>("Link");
             //Texture2D enemies = Content.Load<Texture2D>("enemies");
             npcs = Content.Load<Texture2D>("NPCs");
-            NPCFactory = new NPCFactory(npcs, new Vector2(window_width/2, window_height/2));
+            NPCFactory = new NPCFactory(npcs, new Vector2(window_width, window_height));
             Objects = Content.Load<Texture2D>("Objects");
 
             // Initializes object classes
             PlayerSpriteFactory.Instance.LoadAllTextures(Content);
 			Link = new Player1(new Vector2(window_width, window_height));
-			//NPCFactory = new NPCFactory(npcs, new Vector2(window_width/2, window_height/2));
+            Texture2D enemies = Content.Load<Texture2D>("enemies");
 
             blockSpriteFactory = new BlockSpriteFactory(Content.Load<Texture2D>("Level1_Map"));
 
@@ -130,8 +130,8 @@ namespace ZeldaGame
             keyboardController.RegisterCommand(Keys.Y, new PreviousBlockCommand(this), 0);
 
             //Registers commands with Keys for npcs
-            keyboardController.RegisterCommand(Keys.O, new NextNPCCommand(this));
-            keyboardController.RegisterCommand(Keys.P, new PreviousNPCCommand(this));
+            //keyboardController.RegisterCommand(Keys.O, new NextNPCCommand(this));
+            //keyboardController.RegisterCommand(Keys.P, new PreviousNPCCommand(this));
 
             // Registers commands with Rectangles as the identifier
             /*
