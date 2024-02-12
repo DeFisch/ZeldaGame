@@ -13,6 +13,6 @@ namespace ZeldaGame.NPCs;
 
         public void Execute()
         {
-            //MyGame.NPCFactory.cycleList(previous);
+            MyGame.NPCFactory.cycleList(previous);
         }
     }

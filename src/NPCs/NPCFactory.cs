@@ -27,6 +27,9 @@ public class NPCFactory
     {
         switch (npcName)
         {
+            case "Fairy":
+                npc = new Fairy(texture, position);
+                break;
             case "OldMan":
                 npc = new OldMan(texture, position);
                 break;
@@ -38,9 +41,6 @@ public class NPCFactory
                 break;
             case "Merchant":
                 npc = new Merchant(texture, position);
-                break;
-            case "Fairy":
-                npc = new Fairy(texture, position);
                 break;
             default:
                 break;
