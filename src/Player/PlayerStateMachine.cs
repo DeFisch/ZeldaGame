@@ -2,7 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Numerics;
+using Microsoft.Xna.Framework;
 using System.Text;
 using System.Threading.Tasks;
 using Sprint0;
@@ -33,8 +33,13 @@ namespace ZeldaGame.Player {
 			}
 		}
 
-		public int GetDirection() { // may be unneccessary, possible delete
-			return (int)direction;
+		public Direction GetDirection() { // may be unneccessary, possible delete
+			return direction;
+		}
+
+		public State GetCurrentState()
+		{
+			return state;
 		}
 
 		public void SetDirection(int direction) { // 0 = up, 1 = left, 2 = down, 3 = right
@@ -84,10 +89,6 @@ namespace ZeldaGame.Player {
 		public void Block() {
 			state = State.Block;
 			// change sprite to block
-		}
-
-		public void Draw(SpriteBatch spriteBatch, Vector2 location) {
-			sprite.Draw(spriteBatch, location);
 		}
 	}
 }

@@ -74,11 +74,11 @@ namespace ZeldaGame
             NPCFactory = new NPCFactory(npcs, new Vector2(window_width/2, window_height/2));
             
             Objects = Content.Load<Texture2D>("Objects");
-            
+
 
             // Initializes object classes
             PlayerSpriteFactory.Instance.LoadAllTextures(Content);
-			Link = new Player1(new Vector2(window_width, window_height));
+            Link = new Player1(new Vector2(window_width, window_height), sprite);
             objectFactory = new ItemSpriteFactory(Objects);
             //NPCFactory = new NPCFactory(npcs, new Vector2(window_width/2, window_height/2));
 
@@ -141,7 +141,7 @@ namespace ZeldaGame
             keyboardController.RegisterCommand(Keys.N, new AttackCommand(this), 0);
 
             // Use items
-            keyboardController.RegisterCommand(Keys.D1, new UseItemCommand(this), 0);
+            keyboardController.RegisterCommand(Keys.D1, new UseItemCommand(this, 0), 0);
 
             //Registers commands with Keys for blocks
             keyboardController.RegisterCommand(Keys.T, new NextBlockCommand(this), 0);

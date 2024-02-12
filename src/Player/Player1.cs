@@ -12,14 +12,17 @@ using static ZeldaGame.Player.PlayerStateMachine;
 namespace ZeldaGame.Player {
 	public class Player1 : IPlayer {
 		PlayerStateMachine stateMachine;
+		PlayerItemSpriteFactory itemSpriteFactory;
 		ISprite sprite;
+		ISprite item;
 		Vector2 position;
 		Vector2 movement;
 
 		int speed;
 		int direction;
 
-		public Player1(Vector2 window_size) {
+		public Player1(Vector2 window_size, Texture2D texture) {
+			itemSpriteFactory = new PlayerItemSpriteFactory(texture);
 			sprite = PlayerSpriteFactory.Instance.CreateIdleSprite(Direction.Down);
 			stateMachine = new PlayerStateMachine(sprite);
 			position = new Vector2(window_size.X/2, window_size.Y/2);
@@ -30,6 +33,11 @@ namespace ZeldaGame.Player {
 
 		public ISprite GetSprite() {
 			return sprite;
+		}
+
+		public Vector2 getPosition()
+		{
+			return position;
 		}
 
 		public void SetSprite(ISprite sprite) {
@@ -75,8 +83,10 @@ namespace ZeldaGame.Player {
 		public void PickUp() {
 			// change sprite to pick up item
 		}
-		public void UseItem() {
+		public void UseItem(int item) {
 			sprite = stateMachine.UseItem();
+			this.item = itemSpriteFactory.CreateItemSprite(stateMachine.GetDirection() , item);
+
 		}
 		public void Block() {
 			// change sprite to block
@@ -88,6 +98,11 @@ namespace ZeldaGame.Player {
 		}
 		public void Draw(SpriteBatch spriteBatch) {
 			sprite.Draw(spriteBatch, position);
+			// Prints item if there is one being used
+			if (stateMachine.GetCurrentState() == State.UseItem)
+			{
+				item.Draw(spriteBatch, position);
+			}
 		}
 	}
 }
