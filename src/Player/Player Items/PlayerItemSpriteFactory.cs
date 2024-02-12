@@ -12,7 +12,6 @@ public class PlayerItemSpriteFactory
     private List<ISprite> leftItemSprites;
     private List<ISprite> downItemSprites;
     private List<ISprite> rightItemSprites;
-    private ISprite sprite;
 
     public PlayerItemSpriteFactory(Texture2D texture)
     {
@@ -37,6 +36,6 @@ public class PlayerItemSpriteFactory
             case Direction.Right:
                 return rightItemSprites[item];
         }
-        return new UseArrowHorizontalSprite(playerTexture, 1);
+        return null;
     }
 }
