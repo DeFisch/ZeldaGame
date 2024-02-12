@@ -95,12 +95,7 @@ namespace ZeldaGame
             }
 
             //Add NPCs
-            NPCFactory.AddNPC("Fairy");
-            NPCFactory.AddNPC("Flame");
-            NPCFactory.AddNPC("Merchant");
-            NPCFactory.AddNPC("OldMan");
-            NPCFactory.AddNPC("Zelda");
-            NPCFactory.AddNPC("OldWoman");
+            NPCFactory.AddNPCs();
             //Add Blocks
             blockSpriteFactory.AddBlocks("Stair");
             blockSpriteFactory.AddBlocks("Walls");

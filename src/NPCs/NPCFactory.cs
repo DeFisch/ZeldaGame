@@ -9,7 +9,6 @@ public class NPCFactory
     private List<INPC> npcList;
     private Texture2D texture;
     private Vector2 position;
-    private INPC npc;
     private int cycleIndex;
     private int listLength;
 
@@ -18,34 +17,19 @@ public class NPCFactory
         npcList = new List<INPC>();
         this.texture = texture;
         this.position = new Vector2(window_size.X / 3, window_size.Y / 3);
-        npc = null;
         cycleIndex = 0;
         listLength = 0;
+        AddNPCs();
     }
 
-    public void AddNPC(string npcName)
+    public void AddNPCs()
     {
-        switch (npcName)
-        {
-            case "Fairy":
-                npc = new Fairy(texture, position);
-                break;
-            case "OldMan":
-                npc = new OldMan(texture, position);
-                break;
-            case "OldWoman":
-                npc = new OldWoman(texture, position);
-                break;
-            case "Zelda":
-                npc = new Zelda(texture, position);
-                break;
-            case "Merchant":
-                npc = new Merchant(texture, position);
-                break;
-            default:
-                break;
-        }
-        npcList.Add(npc);
+        npcList.Add(new Fairy(texture, position));
+        npcList.Add(new Flame(texture, position));
+        npcList.Add(new Merchant(texture, position));
+        npcList.Add(new OldMan(texture, position));
+        npcList.Add(new OldWoman(texture, position));
+        npcList.Add(new Zelda(texture, position));
     }
     public void cycleList(int cycleDirection)
     {
@@ -61,12 +45,11 @@ public class NPCFactory
     }
     public void Draw(SpriteBatch spriteBatch)
     {
-        npc = npcList[cycleIndex];
-        npc.Draw(spriteBatch);
+        npcList[cycleIndex].Draw(spriteBatch);
     }
     public void Update()
     {
-        npc = npcList[cycleIndex];
-        npc.Update();
+        npcList[cycleIndex].Update();
+        
     }
 }

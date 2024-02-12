@@ -25,7 +25,7 @@ public class Flame : INPC
     {
         int sprite_id = currentFrame % 2;
         Rectangle sourceRectangle = new Rectangle(character_sprites[sprite_id, 0], character_sprites[sprite_id, 1], character_sprites[sprite_id, 2], character_sprites[sprite_id, 3]);
-        Rectangle destinationRectangle = new Rectangle((int)position.X, (int)position.Y, 15 * 4, 15 * 4);
+        Rectangle destinationRectangle = new Rectangle((int)position.X, (int)position.Y, sourceRectangle.Width * 3, sourceRectangle.Height * 3);
         spriteBatch.Draw(texture, destinationRectangle, sourceRectangle, Color.White);
     }
 
