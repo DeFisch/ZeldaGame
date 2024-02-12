@@ -29,7 +29,7 @@ namespace ZeldaGame
         public NPCFactory NPCFactory;
 
         public Texture2D Objects;
-        private BlueRuby blueRuby;
+        private YellowRuby blueRuby;
         public ItemSpriteFactory objectFactory;
 
         private EnemyFactory enemyFactory;
@@ -71,7 +71,8 @@ namespace ZeldaGame
             sprite = Content.Load<Texture2D>("Link");
             //Texture2D enemies = Content.Load<Texture2D>("enemies");
             npcs = Content.Load<Texture2D>("NPCs");
-            NPCFactory = new NPCFactory(npcs, new Vector2(window_width, window_height));
+            NPCFactory = new NPCFactory(npcs, new Vector2(window_width/2, window_height/2));
+            
             Objects = Content.Load<Texture2D>("Objects");
             
 
@@ -83,7 +84,7 @@ namespace ZeldaGame
 
             Texture2D enemies = Content.Load<Texture2D>("enemies");
             blockSpriteFactory = new BlockSpriteFactory(Content.Load<Texture2D>("Level1_Map"));
-            blueRuby = new BlueRuby(Objects, new Vector2(300, 150));
+            blueRuby = new YellowRuby(Objects, new Vector2(300, 150));
             // Initializes object classes
 
 
