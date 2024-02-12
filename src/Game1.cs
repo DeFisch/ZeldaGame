@@ -25,6 +25,7 @@ namespace ZeldaGame
         public Player1 Link;
         public Texture2D sprite;
         public PlayerSpriteFactory playerFactory;
+        public WeaponHandler weaponHandler;
 
         public Texture2D npcs;
         public NPCFactory NPCFactory;
@@ -77,7 +78,8 @@ namespace ZeldaGame
             // Initializes object classes
             PlayerSpriteFactory.Instance.LoadAllTextures(Content);
             PlayerItemSpriteFactory.Instance.LoadAllTextures(Content);
-			Link = new Player1(new Vector2(window_width, window_height));
+            weaponHandler = new WeaponHandler();
+			Link = new Player1(new Vector2(window_width, window_height), weaponHandler);
             NPCFactory = new NPCFactory(npcs, new Vector2(window_width, window_height));
             objectFactory = new ItemSpriteFactory(Objects);
 
@@ -173,6 +175,7 @@ namespace ZeldaGame
                 controller.Update();
             }
 
+            weaponHandler.Update();
             Link.Update();
 
             base.Update(gameTime);
@@ -200,6 +203,9 @@ namespace ZeldaGame
 
             // Draws player
             Link.Draw(_spriteBatch);
+
+            // Draws active weapon items
+            weaponHandler.Draw(_spriteBatch);
 
             _spriteBatch.End();
 

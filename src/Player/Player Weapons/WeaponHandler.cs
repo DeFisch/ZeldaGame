@@ -1,29 +1,55 @@
-﻿using System;
+﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using ZeldaGame.Player;
+using static ZeldaGame.Player.PlayerStateMachine;
 
 public class WeaponHandler
 {
-    private PlayerItemSpriteFactory weaponFactory;
-    private IPlayerItem item;
+    private Dictionary<IProjectile, Vector2> activeProjectiles;
+    private Vector2 projectileMovement;
+    private int projectileSpeed = 3;
     public WeaponHandler()
     {
-        weaponFactory = new PlayerItemSpriteFactory();
+        activeProjectiles = new Dictionary<IProjectile, Vector2>();
     }
 
-    public void UseItem(int item)
+    public void UseItem(int item, Vector2 location, Direction direction)
     {
-
+        IProjectile weapon = PlayerItemSpriteFactory.Instance.CreateItemSprite(direction);
+        activeProjectiles.Add(weapon, location);
     }
 
-    public void Draw()
+    public void Update()
     {
-
+        foreach (IProjectile weapon in activeProjectiles.Keys)
+        {
+            switch(weapon.GetDirection())
+            {
+                case Direction.Up:
+                    projectileMovement = new Vector2(0, -projectileSpeed);
+                    break;
+                case Direction.Down:
+                    projectileMovement = new Vector2(0, projectileSpeed);
+                    break;
+                case Direction.Left:
+                    projectileMovement = new Vector2(-projectileSpeed, 0);
+                    break;
+                case Direction.Right:
+                    projectileMovement = new Vector2(projectileSpeed, 0);
+                    break;
+            }
+            activeProjectiles[weapon] = activeProjectiles[weapon] + projectileMovement;
+            weapon.Update();
+        }
     }
 
-
+    public void Draw(SpriteBatch spriteBatch)
+    {
+        foreach (IProjectile weapon in activeProjectiles.Keys)
+        {
+            weapon.Draw(spriteBatch, activeProjectiles[weapon]);
+        }
+    }
 }
 

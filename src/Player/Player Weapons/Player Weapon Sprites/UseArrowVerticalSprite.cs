@@ -1,17 +1,23 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using static ZeldaGame.Player.PlayerStateMachine;
 
-public class UseArrowVerticalSprite : ISprite
+public class UseArrowVerticalSprite : IProjectile
 {
     SpriteEffects effect;
     private Texture2D Sprite;
-    private int direction;
+    private Direction direction;
 
-    public UseArrowVerticalSprite(Texture2D sprite, int direction)
+    public UseArrowVerticalSprite(Texture2D sprite, Direction direction)
     {
         Sprite = sprite;
         effect = SpriteEffects.None;
         this.direction = direction;
+    }
+
+    public Direction GetDirection()
+    {
+        return direction;
     }
 
     public void Draw(SpriteBatch spriteBatch, Vector2 location)
@@ -19,7 +25,7 @@ public class UseArrowVerticalSprite : ISprite
 
         Rectangle sourceRectangle = new Rectangle(1, 185, 8, 15);
         Rectangle destinationRectangle = new Rectangle((int)location.X, (int)location.Y, sourceRectangle.Width * 2, sourceRectangle.Height * 2);
-        if (direction == 1) // 1 indicates down
+        if (direction == Direction.Down) // 1 indicates down
         {
             effect = SpriteEffects.FlipVertically;
         }

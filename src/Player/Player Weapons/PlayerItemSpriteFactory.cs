@@ -28,18 +28,18 @@ public class PlayerItemSpriteFactory
         playerTexture = content.Load<Texture2D>("Link");
     }
 
-    public ISprite CreateItemSprite(Direction direction, int item)
+    public IProjectile CreateItemSprite(Direction direction)
     {
         switch (direction)
         {
             case Direction.Up:
-                return new UseArrowVerticalSprite(playerTexture, 0);
+                return new UseArrowVerticalSprite(playerTexture, Direction.Up);
             case Direction.Left:
-                return new UseArrowHorizontalSprite(playerTexture, 1);
+                return new UseArrowHorizontalSprite(playerTexture, Direction.Left);
             case Direction.Down:
-                return new UseArrowVerticalSprite(playerTexture, 1);
+                return new UseArrowVerticalSprite(playerTexture, Direction.Down);
             case Direction.Right:
-                return new UseArrowHorizontalSprite(playerTexture, 0);
+                return new UseArrowHorizontalSprite(playerTexture, Direction.Right);
         }
         return null;
     }

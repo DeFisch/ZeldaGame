@@ -15,16 +15,16 @@ namespace ZeldaGame.Player {
 		WeaponHandler weaponHandler;
 		ISprite sprite;
 		Vector2 position;
-		Vector2 itemPosition;
 		Vector2 movement;
 
 		int speed;
 		int direction;
 
-		public Player1(Vector2 window_size) {
+		public Player1(Vector2 window_size, WeaponHandler weaponHandler) {
 			
 			sprite = PlayerSpriteFactory.Instance.CreateIdleSprite(Direction.Down);
 			stateMachine = new PlayerStateMachine(sprite);
+			this.weaponHandler = weaponHandler;
 
 			position = new Vector2(window_size.X/2, window_size.Y/2);
 			movement = new Vector2(0, 0);
@@ -81,7 +81,7 @@ namespace ZeldaGame.Player {
 		}
 		public void UseItem(int item) {
 			sprite = stateMachine.UseItem();
-			//weaponHandler.UseItem(item);
+			weaponHandler.UseItem(item, position, stateMachine.GetDirection());
 		}
 		public void Block() {
 			// change sprite to block
@@ -89,7 +89,6 @@ namespace ZeldaGame.Player {
 
 		public void Update() {
 			position = position + movement;
-			itemPosition += new Vector2(2, 0); // make directional and not reliant on current state
 			sprite.Update();
 		}
 		public void Draw(SpriteBatch spriteBatch) {
