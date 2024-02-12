@@ -11,6 +11,7 @@ using ZeldaGame.NPCs;
 using ZeldaGame.Player;
 using ZeldaGame.Player.Commands;
 using System.Data;
+using ZeldaGame.Enemy.Commands;
 
 namespace ZeldaGame
 {
@@ -32,7 +33,7 @@ namespace ZeldaGame
         private YellowRuby blueRuby;
         public ItemSpriteFactory objectFactory;
 
-        private EnemyFactory enemyFactory;
+        public EnemyFactory enemyFactory;
 
         public BlockSpriteFactory blockSpriteFactory;
 
@@ -93,11 +94,6 @@ namespace ZeldaGame
             for (int i = 0; i < 5; i++) // spawn 5 enemies of each type
             {
                 enemyFactory.AddEnemy("Stalfos");
-                enemyFactory.AddEnemy("Gibdo");
-                if (i % 2 == 0)
-                    enemyFactory.AddEnemy("KeeseGoriya", color_variation: "blue");
-                else
-                    enemyFactory.AddEnemy("KeeseGoriya", color_variation: "red");
             }
 
             //Add NPCs
@@ -154,6 +150,10 @@ namespace ZeldaGame
             //Registers commands with Keys for npcs
             //keyboardController.RegisterCommand(Keys.O, new NextNPCCommand(this));
             //keyboardController.RegisterCommand(Keys.P, new PreviousNPCCommand(this));
+
+            //Registers commands with Keys for enemies
+            keyboardController.RegisterCommand(Keys.O, new nextEnemyCommand(this), 0);
+            keyboardController.RegisterCommand(Keys.P, new previousEnemyCommand(this), 0);
 
             // Registers commands with Rectangles as the identifier
             /*
