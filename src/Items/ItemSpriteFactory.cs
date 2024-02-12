@@ -11,11 +11,18 @@ namespace ZeldaGame.Items
     public class ItemSpriteFactory
     {
         List<ISprite> objectList;
-        BlueRuby blueRuby;
         YellowRuby yellowRuby;
+        BlueRuby blueRuby;
         Heart heart;
         HeartContainer heartContainer;
         Triforce triforce;
+        Compass compass;
+        Map map;
+        Key key;
+        Clock clock;
+        Boomerang boomerang;
+        Bow bow;
+        Bomb bomb;
 
         Texture2D texture;
         Vector2 pos;
@@ -27,11 +34,18 @@ namespace ZeldaGame.Items
             objectList = new List<ISprite>();
             this.texture = texture;
             pos = new Vector2(300, 150);
-            blueRuby = new BlueRuby(this.texture, pos);
             yellowRuby = new YellowRuby(this.texture, pos);
+            blueRuby = new BlueRuby(this.texture, pos);
             heart = new Heart(this.texture, pos);
             triforce = new Triforce(this.texture, pos);
             heartContainer = new HeartContainer(this.texture, pos);
+            compass = new Compass(this.texture, pos);
+            map = new Map(this.texture, pos);
+            key = new Key(this.texture, pos);
+            clock = new Clock(this.texture, pos);
+            boomerang = new Boomerang(this.texture, pos);
+            bow = new Bow(this.texture, pos);
+            bomb = new Bomb(this.texture, pos);
         }
 
         public void ObjectList()
@@ -41,9 +55,13 @@ namespace ZeldaGame.Items
             objectList.Add(heart);
             objectList.Add(triforce);
             objectList.Add(heartContainer);
-
-
-
+            objectList.Add(compass);
+            objectList.Add(map);
+            objectList.Add(key);
+            objectList.Add(clock);
+            objectList.Add(boomerang);
+            objectList.Add(bow);
+            objectList.Add(bomb);
         }
 
         public void Cycle(int lastOrNext)

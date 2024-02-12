@@ -23,11 +23,11 @@ namespace ZeldaGame.Items
         public void Draw(SpriteBatch spriteBatch, Vector2 location)
         {
             
-            Rectangle sourceRectangle_1 = new Rectangle(274, 2, 10, 10);
-            Rectangle destinationRectangle_1 = new Rectangle((int)pos.X, (int)pos.Y, 20, 20);
+            Rectangle sourceRectangle_1 = new Rectangle(274, 2, 12, 10);
+            Rectangle destinationRectangle_1 = new Rectangle((int)pos.X, (int)pos.Y, 24, 20);
 
-            Rectangle sourceRectangle_2 = new Rectangle(274, 19, 10, 10);
-            Rectangle destinationRectangle_2 = new Rectangle((int)pos.X, (int)pos.Y, 20, 20);
+            Rectangle sourceRectangle_2 = new Rectangle(274, 19, 12, 10);
+            Rectangle destinationRectangle_2 = new Rectangle((int)pos.X, (int)pos.Y, 24, 20);
 
             if (counter <= 10)
             {

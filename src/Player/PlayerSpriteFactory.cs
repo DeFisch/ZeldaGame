@@ -7,7 +7,7 @@ namespace ZeldaGame.Player;
 
 public class PlayerSpriteFactory {
 	private Texture2D playerTexture;
-	//private Vector2 window_size;
+    //private Vector2 window_size;
 
 	private static PlayerSpriteFactory instance = new PlayerSpriteFactory();
 
@@ -16,7 +16,8 @@ public class PlayerSpriteFactory {
 			return instance;
 		}
 	}
-	private PlayerSpriteFactory() {
+	private PlayerSpriteFactory()
+    {
 	}
 
 	public void LoadAllTextures(ContentManager content) {
@@ -70,7 +71,6 @@ public class PlayerSpriteFactory {
         }
         return null;
     }
-
     public ISprite CreateUseItemSprite(Direction direction)
     {
         switch (direction)
@@ -86,14 +86,8 @@ public class PlayerSpriteFactory {
         }
         return null;
     }
-        /*
-            Add additional methods for attack, use item, etc.
-         */
+    /*
+        Add additional methods for attack, use item, etc.
+     */
 
-        //public void Draw(SpriteBatch spriteBatch) {
-        //player.Draw(spriteBatch);
-        //}
-        //public void Update() {
-        //player.Update();
-        //}
- }
+}
