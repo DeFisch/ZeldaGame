@@ -19,7 +19,6 @@ namespace ZeldaGame.Player {
 		private State prevState;
 		private Health health;
 		private ISprite sprite;
-		private int animTimer;
 
 		public PlayerStateMachine(ISprite sprite) {
 			direction = Direction.Down;
@@ -27,7 +26,6 @@ namespace ZeldaGame.Player {
 			prevState = state;
 			health = Health.Normal;
 			this.sprite = sprite;
-			animTimer = -1;
 		}
 
 		public void BeHurt() {
@@ -63,6 +61,7 @@ namespace ZeldaGame.Player {
 				}
 				else {
 					sprite = PlayerSpriteFactory.Instance.CreateWalkSprite(direction);
+					sprite.Pause();
 				}
 				//sprite = PlayerSpriteFactory.Instance.CreateIdleSprite(direction);
 				state = State.Idle;
@@ -77,6 +76,7 @@ namespace ZeldaGame.Player {
 				}
 				else {
 					sprite = PlayerSpriteFactory.Instance.CreateWalkSprite(direction);
+					sprite.Play();
 				}
 				state = State.Walk;
 			}
@@ -87,7 +87,6 @@ namespace ZeldaGame.Player {
 				prevState = state;
 				state = State.Attack;
 				sprite = PlayerSpriteFactory.Instance.CreateAttackSprite(direction);
-				animTimer = 12;
 			}
 			return sprite;
 		}

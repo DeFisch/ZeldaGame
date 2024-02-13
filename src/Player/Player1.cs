@@ -87,9 +87,11 @@ namespace ZeldaGame.Player {
 			// change sprite to pick up item
 		}
 		public void UseItem(int item) {
-			sprite = stateMachine.UseItem();
-			weaponHandler.UseItem(item, position, stateMachine.GetDirection());
-			animTimer = 12;
+			if (animTimer == -1) {
+				sprite = stateMachine.UseItem();
+				weaponHandler.UseItem(item, position, stateMachine.GetDirection());
+				animTimer = 20;
+			}
 		}
 		public void Block() {
 			// change sprite to block
@@ -98,7 +100,6 @@ namespace ZeldaGame.Player {
 		public void Update() {
 			if (animTimer >= 0) {
 				animTimer--;
-				Debug.WriteLine("Timer: " + animTimer);
 			}
 			if (animTimer == 0) {
 				Debug.WriteLine("Done.");

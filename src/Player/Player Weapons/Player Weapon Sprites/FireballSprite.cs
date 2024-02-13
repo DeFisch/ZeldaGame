@@ -28,9 +28,10 @@ public class FireballSprite : IProjectile {
 	}
 
 	public void Draw(SpriteBatch spriteBatch, Vector2 location) {
-		Rectangle sourceRectangle = new Rectangle(191 + (currentFrame * 9), 185, 15, 15);
+
+		Rectangle sourceRectangle = new Rectangle(191, 185, 16, 16);
 		Rectangle destinationRectangle = new Rectangle((int)location.X, (int)location.Y, sourceRectangle.Width * 2, sourceRectangle.Height * 2);
-		spriteBatch.Draw(Sprite, destinationRectangle, sourceRectangle, Color.White, rotation: 0, new Vector2(0, 0), effects: effect, 1);
+		spriteBatch.Draw(Sprite, destinationRectangle, sourceRectangle, Color.White, rotation: 0, new Vector2(0, 0), effect, 1);
 	}
 
 	public void Update() {
@@ -42,6 +43,15 @@ public class FireballSprite : IProjectile {
 
 		if (currentFrame == totalFrames) {
 			currentFrame = 0;
+		}
+
+		switch (currentFrame) {
+			case 0:
+				effect = SpriteEffects.None;
+				break;
+			case 2:
+				effect = SpriteEffects.FlipHorizontally;
+				break;
 		}
 	}
 

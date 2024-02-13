@@ -14,7 +14,7 @@ public class Fairy : INPC {
 	}
 
 	public void Draw(SpriteBatch spriteBatch) {
-		Rectangle sourceRectangle = new Rectangle(186, 11, 7, 16);
+		Rectangle sourceRectangle = new Rectangle(186, 11, 8, 16);
 		Rectangle destinationRectangle = new Rectangle((int)position.X, (int)position.Y, sourceRectangle.Width * 3, sourceRectangle.Height * 3);
 		spriteBatch.Draw(texture, destinationRectangle, sourceRectangle, Color.White);
 	}

@@ -18,7 +18,7 @@ public class BlueArrowHorizontalSprite : IProjectile {
 	}
 
 	public void Draw(SpriteBatch spriteBatch, Vector2 location) {
-		Rectangle sourceRectangle = new Rectangle(36, 185, 15, 15);
+		Rectangle sourceRectangle = new Rectangle(36, 185, 16, 16);
 		Rectangle destinationRectangle = new Rectangle((int)location.X, (int)location.Y, sourceRectangle.Width * 2, sourceRectangle.Height * 2);
 		if (direction == Direction.Left) {
 			effect = SpriteEffects.FlipHorizontally;

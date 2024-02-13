@@ -28,7 +28,7 @@ public class BlueBoomerangSprite : IProjectile {
 	}
 
 	public void Draw(SpriteBatch spriteBatch, Vector2 location) {
-		Rectangle sourceRectangle = new Rectangle(91 + (currentFrame * 9), 185, 8, 15);
+		Rectangle sourceRectangle = new Rectangle(91 + (currentFrame * 9), 185, 8, 16);
 		Rectangle destinationRectangle = new Rectangle((int)location.X, (int)location.Y, sourceRectangle.Width * 2, sourceRectangle.Height * 2);
 		spriteBatch.Draw(Sprite, destinationRectangle, sourceRectangle, Color.White, rotation: 0, new Vector2(0, 0), effects: effect, 1);
 	}

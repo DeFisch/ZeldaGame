@@ -2,12 +2,12 @@
 using Microsoft.Xna.Framework.Graphics;
 using static ZeldaGame.Player.PlayerStateMachine;
 
-public class ArrowHorizontalSprite : IProjectile {
+public class WoodSwordHorizontalSprite : IProjectile {
 	SpriteEffects effect;
 	private Texture2D Sprite;
 	private Direction direction;
 
-	public ArrowHorizontalSprite(Texture2D sprite, Direction direction) {
+	public WoodSwordHorizontalSprite(Texture2D sprite, Direction direction) {
 		Sprite = sprite;
 		effect = SpriteEffects.None;
 		this.direction = direction;
@@ -18,7 +18,7 @@ public class ArrowHorizontalSprite : IProjectile {
 	}
 
 	public void Draw(SpriteBatch spriteBatch, Vector2 location) {
-		Rectangle sourceRectangle = new Rectangle(10, 185, 16, 16);
+		Rectangle sourceRectangle = new Rectangle(10, 154, 8, 16);
 		Rectangle destinationRectangle = new Rectangle((int)location.X, (int)location.Y, sourceRectangle.Width * 2, sourceRectangle.Height * 2);
 		if (direction == Direction.Left) {
 			effect = SpriteEffects.FlipHorizontally;

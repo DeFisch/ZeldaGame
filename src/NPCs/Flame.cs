@@ -10,7 +10,7 @@ public class Flame : INPC {
 
 	private int currentFrame = 0;
 	private int totalFrames = 2;
-	private static int[,] character_sprites = new int[,] { { 52, 11, 15, 16 }, { 69, 11, 16, 16 } };
+	private static int[,] character_sprites = new int[,] { { 52, 11, 16, 16 }, { 69, 11, 16, 16 } };
 	private int switchFrameDelay = 15;
 	private int frameCounter = 0;
 

@@ -19,7 +19,7 @@ public class BlueArrowVerticalSprite : IProjectile {
 
 	public void Draw(SpriteBatch spriteBatch, Vector2 location) {
 
-		Rectangle sourceRectangle = new Rectangle(27, 185, 8, 15);
+		Rectangle sourceRectangle = new Rectangle(27, 185, 8, 16);
 		Rectangle destinationRectangle = new Rectangle((int)location.X, (int)location.Y, sourceRectangle.Width * 2, sourceRectangle.Height * 2);
 		if (direction == Direction.Down) // 1 indicates down
 		{
