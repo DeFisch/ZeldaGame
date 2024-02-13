@@ -22,11 +22,11 @@ namespace ZeldaGame.Player {
 		Direction direction;
 		int animTimer;
 
-		public Player1(Vector2 window_size) {
+		public Player1(Vector2 window_size, WeaponHandler weaponHandler ) {
 
 			sprite = PlayerSpriteFactory.Instance.CreateWalkSprite(Direction.Down);
 			stateMachine = new PlayerStateMachine(sprite);
-			weaponHandler = new WeaponHandler();
+			this.weaponHandler = weaponHandler;
 
 			position = new Vector2(window_size.X / 2, window_size.Y / 2);
 			movement = new Vector2(0, 0);
