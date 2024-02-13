@@ -39,4 +39,12 @@ public class AttackLeftSprite : ISprite {
 	public void PlayToggle() {
 		isPlaying = !isPlaying;
 	}
+
+	public void Pause() {
+		throw new System.NotImplementedException();
+	}
+
+	public void Play() {
+		throw new System.NotImplementedException();
+	}
 }

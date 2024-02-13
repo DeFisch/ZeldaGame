@@ -22,13 +22,13 @@ namespace ZeldaGame.Player {
 		Direction direction;
 		int animTimer;
 
-		public Player1(Vector2 window_size, WeaponHandler weaponHandler) {
-			
-			sprite = PlayerSpriteFactory.Instance.CreateIdleSprite(Direction.Down);
-			stateMachine = new PlayerStateMachine(sprite);
-			this.weaponHandler = weaponHandler;
+		public Player1(Vector2 window_size) {
 
-			position = new Vector2(window_size.X/2, window_size.Y/2);
+			sprite = PlayerSpriteFactory.Instance.CreateWalkSprite(Direction.Down);
+			stateMachine = new PlayerStateMachine(sprite);
+			weaponHandler = new WeaponHandler();
+
+			position = new Vector2(window_size.X / 2, window_size.Y / 2);
 			movement = new Vector2(0, 0);
 			speed = 2;
 			animTimer = -1;
@@ -59,20 +59,20 @@ namespace ZeldaGame.Player {
 		public void Walk() {
 			if (animTimer == -1) {
 				switch (direction) {
-				case Direction.Up:
-					movement = new Vector2(0, -speed);
-					break;
-				case Direction.Left:
-					movement = new Vector2(-speed, 0);
-					break;
-				case Direction.Down:
-					movement = new Vector2(0, speed);
-					break;
-				case Direction.Right:
-					movement = new Vector2(speed, 0);
-					break;
-				default:
-					break;
+					case Direction.Up:
+						movement = new Vector2(0, -speed);
+						break;
+					case Direction.Left:
+						movement = new Vector2(-speed, 0);
+						break;
+					case Direction.Down:
+						movement = new Vector2(0, speed);
+						break;
+					case Direction.Right:
+						movement = new Vector2(speed, 0);
+						break;
+					default:
+						break;
 				}
 				sprite = stateMachine.Walk();
 			}

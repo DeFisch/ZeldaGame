@@ -5,13 +5,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ZeldaGame.NPCs
-{
-    public interface INPC
-    {
-        void Update();
+namespace ZeldaGame.NPCs {
+	public interface INPC {
+		void Update();
 
-        void Draw(SpriteBatch spriteBatch);
+		void Draw(SpriteBatch spriteBatch);
 
-    }
+	}
 }

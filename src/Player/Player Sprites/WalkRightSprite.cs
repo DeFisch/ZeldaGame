@@ -1,8 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-public class WalkRightSprite : ISprite
-{
+public class WalkRightSprite : ISprite {
 	private Texture2D sprite;
 	private Rectangle srcRectangle;
 	private Rectangle destRectangle;
@@ -44,7 +43,11 @@ public class WalkRightSprite : ISprite
 		}
 	}
 
-	public void PlayToggle() {
-		isPlaying = !isPlaying;
+	public void Play() {
+		isPlaying = true;
+	}
+
+	public void Pause() {
+		isPlaying = false;
 	}
 }

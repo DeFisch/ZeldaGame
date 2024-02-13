@@ -14,7 +14,9 @@ namespace ZeldaGame.Player {
 		public enum Health { Normal, Hurt };
 
 		public Direction direction;
+		public Direction prevDirection;
 		private State state;
+		private State prevState;
 		private Health health;
 		private ISprite sprite;
 		private int animTimer;
@@ -22,6 +24,7 @@ namespace ZeldaGame.Player {
 		public PlayerStateMachine(ISprite sprite) {
 			direction = Direction.Down;
 			state = State.Idle;
+			prevState = state;
 			health = Health.Normal;
 			this.sprite = sprite;
 			animTimer = -1;
@@ -39,12 +42,12 @@ namespace ZeldaGame.Player {
 			return direction;
 		}
 
-		public State GetCurrentState()
-		{
+		public State GetCurrentState() {
 			return state;
 		}
 
 		public void SetDirection(Direction direction) { // 0 = up, 1 = left, 2 = down, 3 = right
+			prevDirection = this.direction;
 			this.direction = direction;
 		}
 
@@ -53,48 +56,56 @@ namespace ZeldaGame.Player {
 		}
 
 		public ISprite Idle() {
-			if (state != State.Idle)
-			{
-				if (state == State.Walk) {
-					sprite.PlayToggle();
-				} else {
+			if (state != State.Idle) {
+				prevState = state;
+				state = State.Idle;
+				if (prevState == State.Walk && direction == prevDirection) {
+					sprite.Pause();
+				}
+				else {
 					sprite = PlayerSpriteFactory.Instance.CreateWalkSprite(direction);
 				}
-				state = State.Idle;
 				//sprite = PlayerSpriteFactory.Instance.CreateIdleSprite(direction);
 			}
 			return sprite;
 		}
 		public ISprite Walk() {
-			if (state != State.Walk)
-			{
-				state = State.Walk;
-				sprite = PlayerSpriteFactory.Instance.CreateWalkSprite(direction);
+			prevState = state;
+			state = State.Walk;
+			if (state != State.Walk) {
+				if (prevState == State.Idle && direction == prevDirection) {
+					sprite.Play();
+				}
+				else {
+					sprite = PlayerSpriteFactory.Instance.CreateWalkSprite(direction);
+				}
 			}
 			return sprite;
 		}
 		public ISprite Attack() {
-            if (state != State.Attack)
-            {
-                state = State.Attack;
-                sprite = PlayerSpriteFactory.Instance.CreateAttackSprite(direction);
+			if (state != State.Attack) {
+				prevState = state;
+				state = State.Attack;
+				sprite = PlayerSpriteFactory.Instance.CreateAttackSprite(direction);
 				animTimer = 12;
-            }
+			}
 			return sprite;
-        }
+		}
 		public void PickUp() {
+			prevState = state;
 			state = State.PickUp;
 			// change sprite to pick up item
 		}
 		public ISprite UseItem() {
-			if (state != State.UseItem)
-			{
-                state = State.UseItem;
+			if (state != State.UseItem) {
+				prevState = state;
+				state = State.UseItem;
 				sprite = PlayerSpriteFactory.Instance.CreateUseItemSprite(direction);
-            }
+			}
 			return sprite;
 		}
 		public void Block() {
+			prevState = state;
 			state = State.Block;
 			// change sprite to block
 		}

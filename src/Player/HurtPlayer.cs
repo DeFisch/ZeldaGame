@@ -11,7 +11,7 @@ namespace ZeldaGame.Player {
 	public class HurtPlayer : IPlayer {
 		PlayerStateMachine stateMachine;
 		ISprite sprite;
-		
+
 		Vector2 position;
 		int direction;
 		int speed = 2;

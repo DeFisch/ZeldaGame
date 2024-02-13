@@ -2,11 +2,10 @@
 using Microsoft.Xna.Framework.Graphics;
 using static ZeldaGame.Player.PlayerStateMachine;
 
-public interface IProjectile
-{
-    public Direction GetDirection();
+public interface IProjectile {
+	public Direction GetDirection();
 
-    public void Update();
+	public void Update();
 
-    public void Draw(SpriteBatch spriteBatch, Vector2 location);
+	public void Draw(SpriteBatch spriteBatch, Vector2 location);
 }

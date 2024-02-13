@@ -13,7 +13,7 @@ namespace ZeldaGame.Enemy.Commands {
 		public void Execute() {
 			MyGame.enemyFactory.ClearEnemies();
 			current_enemy = (current_enemy + 1) % enemy_types.Length;
-			for(int i = 0; i < max_enemies; i++){
+			for (int i = 0; i < max_enemies; i++) {
 				MyGame.enemyFactory.AddEnemy(enemy_types[current_enemy]);
 			}
 		}

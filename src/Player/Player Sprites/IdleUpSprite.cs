@@ -1,24 +1,21 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-public class IdleUpSprite : ISprite
-{
-    private Texture2D Sprite;
+public class IdleUpSprite : ISprite {
+	private Texture2D Sprite;
 
 	public int currentFrame;
 	public int totalFrames;
 
 	// Constructor
-	public IdleUpSprite(Texture2D sprite)
-	{
-        Sprite = sprite;
+	public IdleUpSprite(Texture2D sprite) {
+		Sprite = sprite;
 
 		currentFrame = 0;
 		totalFrames = 1;
 	}
 
-    public void Draw(SpriteBatch spriteBatch, Vector2 location)
-    {
+	public void Draw(SpriteBatch spriteBatch, Vector2 location) {
 		Rectangle sourceRectangle = new Rectangle(69, 11, 16, 16);
 		Rectangle destinationRectangle = new Rectangle((int)location.X, (int)location.Y, sourceRectangle.Width * 2, sourceRectangle.Height * 2);
 		SpriteEffects effect = SpriteEffects.None;
@@ -27,12 +24,19 @@ public class IdleUpSprite : ISprite
 		//spriteBatch.End();
 	}
 
-	public void Update()
-    {
+	public void Update() {
 		currentFrame = (currentFrame + 1) % totalFrames;
 	}
 
 	public void PlayToggle() {
+		throw new System.NotImplementedException();
+	}
+
+	public void Pause() {
+		throw new System.NotImplementedException();
+	}
+
+	public void Play() {
 		throw new System.NotImplementedException();
 	}
 }

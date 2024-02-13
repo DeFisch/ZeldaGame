@@ -2,26 +2,24 @@
 using Microsoft.Xna.Framework.Graphics;
 using System.Collections;
 
-public class WalkDownSprite : ISprite
-{
-    private Texture2D sprite;
+public class WalkDownSprite : ISprite {
+	private Texture2D sprite;
 	private Rectangle srcRectangle;
 	private Rectangle destRectangle;
 	private bool isPlaying;
-	
+
 	public int currentFrame;
 	public int totalFrames;
 
 	// Constructor
-	public WalkDownSprite(Texture2D sprite)
-	{
-		isPlaying = true;
+	public WalkDownSprite(Texture2D sprite) {
+		isPlaying = false;
 		srcRectangle = new Rectangle();
 		destRectangle = new Rectangle();
 		this.sprite = sprite;
-        currentFrame = 0;
-        totalFrames = 12;
-    }
+		currentFrame = 0;
+		totalFrames = 12;
+	}
 
 	public void Draw(SpriteBatch spriteBatch, Vector2 location) {
 
@@ -36,17 +34,21 @@ public class WalkDownSprite : ISprite
 
 		destRectangle = new Rectangle((int)location.X, (int)location.Y, srcRectangle.Width * 2, srcRectangle.Height * 2);
 		SpriteEffects effect = SpriteEffects.None;
-		
+
 		spriteBatch.Draw(sprite, destRectangle, srcRectangle, Color.White, rotation: 0, new Vector2(0, 0), effects: effect, 1);
 	}
 
 	public void Update() {
-		while (isPlaying) {
+		if (isPlaying) {
 			currentFrame = (currentFrame + 1) % totalFrames;
 		}
 	}
 
-	public void PlayToggle() {
-		isPlaying = !isPlaying;
+	public void Play() {
+		isPlaying = true;
+	}
+
+	public void Pause() {
+		isPlaying = false;
 	}
 }
