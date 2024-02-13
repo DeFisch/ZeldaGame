@@ -162,7 +162,7 @@ namespace ZeldaGame {
 		}
 
 		protected override void Update(GameTime gameTime) {
-			if (Keyboard.GetState().IsKeyDown(Keys.D0) || Mouse.GetState().RightButton == ButtonState.Pressed) {
+			if (Keyboard.GetState().IsKeyDown(Keys.Q) || Mouse.GetState().RightButton == ButtonState.Pressed) {
 				Exit();
 			}
 
