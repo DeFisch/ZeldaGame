@@ -22,7 +22,7 @@ namespace ZeldaGame.Player {
 
 		public HurtPlayer(IPlayer decoratedPlayer, Game1 game) {
 			this.decoratedPlayer = decoratedPlayer;
-			sprite = PlayerSpriteFactory.Instance.CreateIdleSprite(Direction.Down);
+			sprite = PlayerSpriteFactory.Instance.CreateWalkSprite(Direction.Down);
 			this.game = game;
 		}
 

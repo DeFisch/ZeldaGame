@@ -11,6 +11,7 @@ namespace ZeldaGame.Items {
 		private int counter = 0;
 		private Texture2D texture;
 		private Vector2 pos;
+		private bool isPlaying;
 		public Heart(Texture2D texture, Vector2 pos) {
 			this.texture = texture;
 			this.pos = pos;
@@ -41,16 +42,12 @@ namespace ZeldaGame.Items {
 			}
 		}
 
-		public void Pause() {
-			throw new NotImplementedException();
-		}
-
 		public void Play() {
-			throw new NotImplementedException();
+			isPlaying = true;
 		}
 
-		public void PlayToggle() {
-			throw new NotImplementedException();
+		public void Pause() {
+			isPlaying = false;
 		}
 
 		public void Update() {

@@ -20,7 +20,7 @@ public class AttackUpSprite : ISprite {
 	}
 
 	public void Draw(SpriteBatch spriteBatch, Vector2 location) {
-		while (isPlaying) {
+		if (isPlaying) {
 			Rectangle sourceRectangle = new Rectangle(141, 11, 16, 16);
 			Rectangle destinationRectangle = new Rectangle((int)location.X, (int)location.Y, sourceRectangle.Width * 2, sourceRectangle.Height * 2);
 			SpriteEffects effect = SpriteEffects.None;
@@ -36,15 +36,11 @@ public class AttackUpSprite : ISprite {
 		}
 	}
 
-	public void PlayToggle() {
-		isPlaying = !isPlaying;
+	public void Play() {
+		isPlaying = true;
 	}
 
 	public void Pause() {
-		throw new System.NotImplementedException();
-	}
-
-	public void Play() {
-		throw new System.NotImplementedException();
+		isPlaying = false;
 	}
 }

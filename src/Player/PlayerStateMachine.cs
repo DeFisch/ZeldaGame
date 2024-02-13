@@ -58,27 +58,30 @@ namespace ZeldaGame.Player {
 		public ISprite Idle() {
 			if (state != State.Idle) {
 				prevState = state;
-				state = State.Idle;
 				if (prevState == State.Walk && direction == prevDirection) {
 					sprite.Pause();
 				}
 				else {
 					sprite = PlayerSpriteFactory.Instance.CreateWalkSprite(direction);
+					sprite.Pause();
 				}
+				state = State.Idle;
 				//sprite = PlayerSpriteFactory.Instance.CreateIdleSprite(direction);
 			}
 			return sprite;
 		}
 		public ISprite Walk() {
-			prevState = state;
-			state = State.Walk;
+			
 			if (state != State.Walk) {
+				prevState = state;
 				if (prevState == State.Idle && direction == prevDirection) {
 					sprite.Play();
 				}
 				else {
 					sprite = PlayerSpriteFactory.Instance.CreateWalkSprite(direction);
+					sprite.Play();
 				}
+				state = State.Walk;
 			}
 			return sprite;
 		}
@@ -87,7 +90,7 @@ namespace ZeldaGame.Player {
 				prevState = state;
 				state = State.Attack;
 				sprite = PlayerSpriteFactory.Instance.CreateAttackSprite(direction);
-				animTimer = 12;
+				animTimer = 12; //actual time
 			}
 			return sprite;
 		}
@@ -101,12 +104,14 @@ namespace ZeldaGame.Player {
 				prevState = state;
 				state = State.UseItem;
 				sprite = PlayerSpriteFactory.Instance.CreateUseItemSprite(direction);
+				animTimer = 12; //random number, will change l8r
 			}
 			return sprite;
 		}
 		public void Block() {
 			prevState = state;
 			state = State.Block;
+			animTimer = 5; //idk actual anim timer
 			// change sprite to block
 		}
 	}

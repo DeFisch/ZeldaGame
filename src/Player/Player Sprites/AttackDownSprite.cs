@@ -24,7 +24,7 @@ public class AttackDownSprite : ISprite {
 	}
 
 	public void Update() {
-		if (!isPlaying) {
+		if (isPlaying) {
 			currentFrame++;
 			if (currentFrame == totalFrames) {
 				currentFrame = 0;
@@ -32,15 +32,11 @@ public class AttackDownSprite : ISprite {
 		}
 	}
 
-	public void PlayToggle() {
-		isPlaying = !isPlaying;
+	public void Play() {
+		isPlaying = true;
 	}
 
 	public void Pause() {
-		throw new System.NotImplementedException();
-	}
-
-	public void Play() {
-		throw new System.NotImplementedException();
+		isPlaying = false;
 	}
 }

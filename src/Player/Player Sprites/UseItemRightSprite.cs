@@ -3,6 +3,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 public class UseItemRightSprite : ISprite {
 	private Texture2D Sprite;
+	private bool isPlaying;
 
 	public UseItemRightSprite(Texture2D sprite) {
 		Sprite = sprite;
@@ -15,17 +16,12 @@ public class UseItemRightSprite : ISprite {
 		SpriteEffects effect = SpriteEffects.None;
 		spriteBatch.Draw(Sprite, destinationRectangle, sourceRectangle, Color.White, rotation: 0, new Vector2(0, 0), effects: effect, 1);
 	}
+	public void Play() {
+		isPlaying = true;
+	}
 
 	public void Pause() {
-		throw new System.NotImplementedException();
-	}
-
-	public void Play() {
-		throw new System.NotImplementedException();
-	}
-
-	public void PlayToggle() {
-		throw new System.NotImplementedException();
+		isPlaying = false;
 	}
 
 	public void Update() {

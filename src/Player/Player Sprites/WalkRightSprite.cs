@@ -12,7 +12,7 @@ public class WalkRightSprite : ISprite {
 
 	// Constructor
 	public WalkRightSprite(Texture2D sprite) {
-		isPlaying = true;
+		isPlaying = false;
 		srcRectangle = new Rectangle();
 		destRectangle = new Rectangle();
 		this.sprite = sprite;
