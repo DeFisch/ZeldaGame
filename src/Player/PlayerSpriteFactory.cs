@@ -37,6 +37,20 @@ public class PlayerSpriteFactory {
 		return null;
 	}
 
+	public ISprite CreateIdleSprite(Direction direction) {
+		switch (direction) {
+			case Direction.Up:
+				return new IdleUpSprite(playerTexture);
+			case Direction.Left:
+				return new IdleLeftSprite(playerTexture);
+			case Direction.Down:
+				return new IdleDownSprite(playerTexture);
+			case Direction.Right:
+				return new IdleRightSprite(playerTexture);
+		}
+		return null;
+	}
+
 	public ISprite CreateAttackSprite(Direction direction) {
 		switch (direction) {
 			case Direction.Up:

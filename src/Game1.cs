@@ -69,9 +69,9 @@ namespace ZeldaGame {
 
 
 			// Initializes object classes
-			weaponHandler = new WeaponHandler();
 			PlayerSpriteFactory.Instance.LoadAllTextures(Content);
 			PlayerItemSpriteFactory.Instance.LoadAllTextures(Content);
+			weaponHandler = new WeaponHandler();
 			Link = new Player1(new Vector2(window_width, window_height), weaponHandler);
 			NPCFactory = new NPCFactory(npcs, new Vector2(window_width, window_height));
 			objectFactory = new ItemSpriteFactory(Objects);
