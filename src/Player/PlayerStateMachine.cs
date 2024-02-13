@@ -55,8 +55,13 @@ namespace ZeldaGame.Player {
 		public ISprite Idle() {
 			if (state != State.Idle)
 			{
+				if (state == State.Walk) {
+					sprite.PlayToggle();
+				} else {
+					sprite = PlayerSpriteFactory.Instance.CreateWalkSprite(direction);
+				}
 				state = State.Idle;
-				sprite = PlayerSpriteFactory.Instance.CreateIdleSprite(direction);
+				//sprite = PlayerSpriteFactory.Instance.CreateIdleSprite(direction);
 			}
 			return sprite;
 		}

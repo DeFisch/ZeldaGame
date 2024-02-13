@@ -6,12 +6,14 @@ public class WalkRightSprite : ISprite
 	private Texture2D sprite;
 	private Rectangle srcRectangle;
 	private Rectangle destRectangle;
+	private bool isPlaying;
 
 	public int currentFrame;
 	public int totalFrames;
 
 	// Constructor
 	public WalkRightSprite(Texture2D sprite) {
+		isPlaying = true;
 		srcRectangle = new Rectangle();
 		destRectangle = new Rectangle();
 		this.sprite = sprite;
@@ -37,7 +39,12 @@ public class WalkRightSprite : ISprite
 	}
 
 	public void Update() {
-		currentFrame = (currentFrame + 1) % totalFrames;
+		if (isPlaying) {
+			currentFrame = (currentFrame + 1) % totalFrames;
+		}
 	}
 
+	public void PlayToggle() {
+		isPlaying = !isPlaying;
+	}
 }

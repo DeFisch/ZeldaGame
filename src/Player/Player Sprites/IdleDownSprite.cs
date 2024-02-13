@@ -31,4 +31,7 @@ public class IdleDownSprite : ISprite
 		currentFrame = (currentFrame + 1) % totalFrames;
 	}
 
+	public void PlayToggle() {
+		throw new System.NotImplementedException();
+	}
 }

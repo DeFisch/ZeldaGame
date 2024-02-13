@@ -7,13 +7,15 @@ public class WalkDownSprite : ISprite
     private Texture2D sprite;
 	private Rectangle srcRectangle;
 	private Rectangle destRectangle;
-
+	private bool isPlaying;
+	
 	public int currentFrame;
 	public int totalFrames;
 
 	// Constructor
 	public WalkDownSprite(Texture2D sprite)
 	{
+		isPlaying = true;
 		srcRectangle = new Rectangle();
 		destRectangle = new Rectangle();
 		this.sprite = sprite;
@@ -38,9 +40,13 @@ public class WalkDownSprite : ISprite
 		spriteBatch.Draw(sprite, destRectangle, srcRectangle, Color.White, rotation: 0, new Vector2(0, 0), effects: effect, 1);
 	}
 
-	public void Update()
-    {
-		currentFrame = (currentFrame + 1) % totalFrames;
+	public void Update() {
+		while (isPlaying) {
+			currentFrame = (currentFrame + 1) % totalFrames;
+		}
 	}
 
+	public void PlayToggle() {
+		isPlaying = !isPlaying;
+	}
 }

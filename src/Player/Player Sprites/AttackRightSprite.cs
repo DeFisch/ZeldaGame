@@ -5,6 +5,7 @@ public class AttackRightSprite : ISprite
 {
     private Texture2D Sprite;
 
+    public bool isPlaying;
     public int currentFrame;
     public int totalFrames;
     public int timesLooped;
@@ -12,6 +13,7 @@ public class AttackRightSprite : ISprite
     // Constructor
     public AttackRightSprite(Texture2D sprite)
     {
+        isPlaying = true;
         Sprite = sprite;
         currentFrame = 0;
         totalFrames = 12;
@@ -27,14 +29,17 @@ public class AttackRightSprite : ISprite
         spriteBatch.Draw(Sprite, destinationRectangle, sourceRectangle, Color.White, rotation: 0, new Vector2(0, 0), effects: effect, 1);
     }
 
-    public void Update()
-    {
-        currentFrame++;
-        if (currentFrame == totalFrames)
-        {
-            currentFrame = 0;
-            timesLooped++;
+    public void Update() {
+        if (isPlaying) {
+            currentFrame++;
+            if (currentFrame == totalFrames) {
+                currentFrame = 0;
+                timesLooped++;
+            }
         }
     }
 
+	public void PlayToggle() {
+		isPlaying = !isPlaying;
+	}
 }

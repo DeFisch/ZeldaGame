@@ -20,7 +20,11 @@ public class UseItemDownSprite : ISprite
         spriteBatch.Draw(Sprite, destinationRectangle, sourceRectangle, Color.White, rotation: 0, new Vector2(0, 0), effects: effect, 1);
     }
 
-    public void Update()
+	public void PlayToggle() {
+		throw new System.NotImplementedException();
+	}
+
+	public void Update()
     {
 
     }

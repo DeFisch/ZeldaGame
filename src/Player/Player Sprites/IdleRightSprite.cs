@@ -32,4 +32,7 @@ public class IdleRightSprite : ISprite
 		currentFrame = (currentFrame + 1) % totalFrames;
 	}
 
+	public void PlayToggle() {
+		throw new System.NotImplementedException();
+	}
 }

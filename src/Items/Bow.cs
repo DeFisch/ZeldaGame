@@ -25,7 +25,12 @@ namespace ZeldaGame.Items
             Rectangle destinationRectangle = new Rectangle((int)pos.X, (int)pos.Y, 16, 38);
             spriteBatch.Draw(texture, destinationRectangle, sourceRectangle, Color.White);
         }
-        public void Update()
+
+		public void PlayToggle() {
+			throw new NotImplementedException();
+		}
+
+		public void Update()
         {
 
         }

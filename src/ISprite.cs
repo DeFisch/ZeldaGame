@@ -16,4 +16,8 @@ public interface ISprite
      */
     void Draw(SpriteBatch spriteBatch, Vector2 location);
 
+    /*
+	 * Pauses / resumes animation of the sprite.
+     */
+	void PlayToggle();
 }

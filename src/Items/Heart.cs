@@ -47,7 +47,12 @@ namespace ZeldaGame.Items
                 counter = 0;
             }
         }
-        public void Update()
+
+		public void PlayToggle() {
+			throw new NotImplementedException();
+		}
+
+		public void Update()
         {
 
         }
