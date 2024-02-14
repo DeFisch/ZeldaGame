@@ -6,7 +6,5 @@ namespace Sprint0.Block {
 		public void Update();
 
 		public void Draw(SpriteBatch spriteBatch);
-
-
 	}
 }

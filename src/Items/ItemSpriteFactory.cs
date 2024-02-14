@@ -78,5 +78,12 @@ namespace ZeldaGame.Items {
 
 			objectList[index].Draw(spriteBatch, pos);
 		}
+
+		public void Reset()
+		{
+            pos = new Vector2(300, 150);
+            cycler = 0;
+            index = 0;
+        }
 	}
 }

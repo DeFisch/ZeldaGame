@@ -145,6 +145,9 @@ namespace ZeldaGame {
 			keyboardController.RegisterCommand(Keys.O, new nextEnemyCommand(this), 0);
 			keyboardController.RegisterCommand(Keys.P, new previousEnemyCommand(this), 0);
 
+			//Registers commands with Keys for Reset
+			keyboardController.RegisterCommand(Keys.R, new ResetCommand(this), 0);
+
 			// Registers commands with Rectangles as the identifier
 			/*
             mouseController.RegisterCommand(new Rectangle(0, 0, 400, 250), new SetSprite1Command(this));
@@ -181,14 +184,14 @@ namespace ZeldaGame {
 
 			_spriteBatch.Begin();
 
-			// Draws enemies
-			enemyFactory.Draw(_spriteBatch);
+            //Draws Blocks
+            blockSpriteFactory.Draw(_spriteBatch);
+
+            // Draws enemies
+            enemyFactory.Draw(_spriteBatch);
 
 			//Draws NPCs
 			NPCFactory.Draw(_spriteBatch);
-
-			//Draws Blocks
-			blockSpriteFactory.Draw(_spriteBatch);
 
 			//Draws objects
 			objectFactory.Draw(_spriteBatch);

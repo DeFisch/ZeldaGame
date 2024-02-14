@@ -17,6 +17,7 @@ namespace ZeldaGame.Player {
 		ISprite sprite;
 		Vector2 position;
 		Vector2 movement;
+		Vector2 resetPosition;
 
 		int speed;
 		Direction direction;
@@ -29,6 +30,7 @@ namespace ZeldaGame.Player {
 			this.weaponHandler = weaponHandler;
 
 			position = new Vector2(window_size.X / 2, window_size.Y / 2);
+			resetPosition = position;
 			movement = new Vector2(0, 0);
 			speed = 2;
 			animTimer = -1;
@@ -112,5 +114,14 @@ namespace ZeldaGame.Player {
 		public void Draw(SpriteBatch spriteBatch) {
 			sprite.Draw(spriteBatch, position);
 		}
+
+		public void Reset()
+		{
+            sprite = PlayerSpriteFactory.Instance.CreateWalkSprite(Direction.Down);
+            stateMachine = new PlayerStateMachine(sprite);
+			position = resetPosition;
+            movement = new Vector2(0, 0);
+            animTimer = -1;
+        }
 	}
 }

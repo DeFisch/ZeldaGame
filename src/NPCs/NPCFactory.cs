@@ -44,4 +44,10 @@ public class NPCFactory {
 		npcList[cycleIndex].Update();
 
 	}
+
+	public void Reset()
+	{
+        cycleIndex = 0;
+        listLength = 0;
+    }
 }
