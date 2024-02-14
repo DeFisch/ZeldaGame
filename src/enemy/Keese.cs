@@ -4,18 +4,18 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace ZeldaGame.Enemy;
 
-public class KeeseGoriya : IEnemy {
+public class Keese : IEnemy {
 	enum State { Idle, Walking, Attacking, Dead };
 	private int frameID = 0;
 	private Texture2D texture;
 	private Vector2 position;
 	private State state;
-	private static int[,] character_sprites = new int[,] { { 183, 11, 16, 16 }, { 200, 11, 16, 16 } }; // x, y, width, height
+	private int[,] character_sprites = new int[,] { { 183, 11, 16, 16 }, { 200, 11, 16, 16 } }; // x, y, width, height
 	private int scale = 2;
 	private double speedX = 0;
 	private double speedY = 0;
 	private double general_speed = 4;
-	public KeeseGoriya(Texture2D texture, Vector2 window_size, string color) {
+	public Keese(Texture2D texture, Vector2 window_size, string color) {
 		this.texture = texture;
 		this.position = new Vector2(new Random().Next(0, (int)window_size.X - character_sprites[0, 2] * scale), new Random().Next(0, (int)window_size.Y - character_sprites[0, 3] * scale));
 		state = State.Walking;

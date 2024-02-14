@@ -7,7 +7,7 @@ public class EnemyFactory {
 	private List<IEnemy> enemies;
 	private Texture2D texture;
 	private Vector2 window_size;
-	public string[] enemy_types = new string[] { "Stalfos", "Gibdo", "KeeseGoriya" };
+	public string[] enemy_types = new string[] { "Stalfos", "Gibdo", "Keese", "WizzRobe", "DarkNut" };
 
 	public EnemyFactory(Texture2D texture, Vector2 window_size) {
 		enemies = new List<IEnemy>();
@@ -24,8 +24,14 @@ public class EnemyFactory {
 			case "Gibdo":
 				enemy = new Gibdo(texture, window_size);
 				break;
-			case "KeeseGoriya":
-				enemy = new KeeseGoriya(texture, window_size, color_variation);
+			case "Keese":
+				enemy = new Keese(texture, window_size, color_variation);
+				break;
+			case "WizzRobe":
+				enemy = new WizzRobe(texture, window_size, color_variation);
+				break;
+			case "DarkNut":
+				enemy = new DarkNut(texture, window_size, color_variation);
 				break;
 			default:
 				break;
