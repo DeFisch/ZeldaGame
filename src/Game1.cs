@@ -92,10 +92,7 @@ namespace ZeldaGame {
 			//Add NPCs
 			NPCFactory.AddNPCs();
 			//Add Blocks
-			blockSpriteFactory.AddBlocks("Stair");
-			blockSpriteFactory.AddBlocks("Walls");
-			blockSpriteFactory.AddBlocks("Ground");
-			blockSpriteFactory.AddBlocks("Obstacle");
+			blockSpriteFactory.AddBlock();
 			//Add items
 			objectFactory.ObjectList();
 

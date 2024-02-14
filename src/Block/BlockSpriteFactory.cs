@@ -20,7 +20,7 @@ namespace Sprint0.Block {
 			listLength = 0;
 		}
 
-		public void AddBlocks(string blockType) {
+		public void AddToList(string blockType) {
 			switch (blockType) {
 				case "Stair":
 					block = new Stair(texture, position);
@@ -44,17 +44,22 @@ namespace Sprint0.Block {
 			blockList.Add(block);
 		}
 
+		public void AddBlock () 
+		{
+			AddToList("Stair");
+			AddToList("Walls");
+			AddToList("Ground");
+			AddToList("Obstacle");
+		}
+		
+
 		public void cycleList(int cycleDirection) {
 			listLength = blockList.Count;
-			if (cycleDirection == 1 && cycleIndex < listLength) {
-				cycleIndex++;
-				if (cycleIndex >= listLength)
-					cycleIndex -= listLength;
+			if (cycleDirection == 1 ) {
+				cycleIndex = (cycleIndex + 1) % listLength;
 			}
-			else if (cycleDirection == 0 && cycleIndex >= 0) {
-				cycleIndex--;
-				if (cycleIndex < 0)
-					cycleIndex += listLength;
+			else if (cycleDirection == 0) {
+				cycleIndex = (cycleIndex - 1 + listLength) % listLength;
 			}
 		}
 
