@@ -2,7 +2,7 @@
 using Microsoft.Xna.Framework.Graphics;
 using static ZeldaGame.Player.PlayerStateMachine;
 
-public interface IProjectile {
+public interface IPlayerProjectile {
 	public Direction GetDirection();
 
 	public void Update();

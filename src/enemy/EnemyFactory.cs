@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Enemy;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 namespace ZeldaGame.Enemy;
@@ -8,11 +9,12 @@ public class EnemyFactory {
 	private Texture2D[] textures;
 	private Vector2 window_size;
 	public string[] enemy_types = new string[] { "Stalfos", "Gibdo", "Keese", "WizzRobe", "DarkNut" };
-
+	public EnemyProjectileFactory enemyProjectileFactory;
 	public EnemyFactory(Texture2D[] textures, Vector2 window_size) {
 		enemies = new List<IEnemy>();
 		this.textures = textures;
 		this.window_size = window_size;
+		enemyProjectileFactory = new EnemyProjectileFactory(textures[1]);
 	}
 
 	public void AddEnemy(string enemy_name, string color_variation = null) {
@@ -28,7 +30,7 @@ public class EnemyFactory {
 				enemy = new Keese(textures[0], window_size, color_variation);
 				break;
 			case "WizzRobe":
-				enemy = new WizzRobe(textures[0], window_size, color_variation);
+				enemy = new WizzRobe(textures[0], window_size, enemyProjectileFactory, color_variation);
 				break;
 			case "DarkNut":
 				enemy = new DarkNut(textures[0], window_size, color_variation);
@@ -41,18 +43,21 @@ public class EnemyFactory {
 
 	public void ClearEnemies() {
 		enemies.Clear();
+		enemyProjectileFactory.ClearAllProjectiles();
 	}
 	public void Draw(SpriteBatch spriteBatch) {
 		foreach (IEnemy enemy in enemies) {
 			if (enemy != null)
 				enemy.Draw(spriteBatch);
 		}
+		enemyProjectileFactory.DrawProjectiles(spriteBatch);
 	}
 	public void Update() {
 		foreach (IEnemy enemy in enemies) {
 			if (enemy != null)
 				enemy.Update();
 		}
+		enemyProjectileFactory.UpdateProjectiles();
 	}
 
 	public void Reset()

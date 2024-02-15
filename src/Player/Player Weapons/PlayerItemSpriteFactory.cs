@@ -7,7 +7,7 @@ namespace ZeldaGame.Player;
 
 public class PlayerItemSpriteFactory {
 	private Texture2D playerTexture;
-	private List<IProjectile> projectiles;
+	private List<IPlayerProjectile> projectiles;
 
 	private static PlayerItemSpriteFactory instance = new PlayerItemSpriteFactory();
 
@@ -24,8 +24,8 @@ public class PlayerItemSpriteFactory {
 		playerTexture = content.Load<Texture2D>("Link");
 	}
 
-	public IProjectile CreateItemSprite(Direction direction, int item) {
-		projectiles = new List<IProjectile>
+	public IPlayerProjectile CreateItemSprite(Direction direction, int item) {
+		projectiles = new List<IPlayerProjectile>
 		{
 			CreateArrowSprite(direction), CreateBlueArrowSprite(direction), CreateBoomerangSprite(direction),
 			CreateBlueBoomerangSprite(direction), CreateBombSprite(direction), CreateFireballSprite(direction)
@@ -34,7 +34,7 @@ public class PlayerItemSpriteFactory {
 		return projectiles[item];
 	}
 
-	public IProjectile CreateArrowSprite(Direction direction) {
+	public IPlayerProjectile CreateArrowSprite(Direction direction) {
 		switch (direction) {
 			case Direction.Up:
 				return new ArrowVerticalSprite(playerTexture, Direction.Up);
@@ -48,7 +48,7 @@ public class PlayerItemSpriteFactory {
 		return null;
 	}
 
-	public IProjectile CreateBlueArrowSprite(Direction direction) {
+	public IPlayerProjectile CreateBlueArrowSprite(Direction direction) {
 		switch (direction) {
 			case Direction.Up:
 				return new BlueArrowVerticalSprite(playerTexture, Direction.Up);
@@ -62,19 +62,19 @@ public class PlayerItemSpriteFactory {
 		return null;
 	}
 
-	public IProjectile CreateBoomerangSprite(Direction direction) {
+	public IPlayerProjectile CreateBoomerangSprite(Direction direction) {
 		return new BoomerangSprite(playerTexture, direction);
 	}
 
-	public IProjectile CreateBlueBoomerangSprite(Direction direction) {
+	public IPlayerProjectile CreateBlueBoomerangSprite(Direction direction) {
 		return new BlueBoomerangSprite(playerTexture, direction);
 	}
 
-	public IProjectile CreateBombSprite(Direction direction) {
+	public IPlayerProjectile CreateBombSprite(Direction direction) {
 		return new BombSprite(playerTexture, direction);
 	}
 
-	public IProjectile CreateFireballSprite(Direction direction) {
+	public IPlayerProjectile CreateFireballSprite(Direction direction) {
 		return new FireballSprite(playerTexture, direction);
 	}
 }

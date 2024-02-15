@@ -2,7 +2,7 @@
 using Microsoft.Xna.Framework.Graphics;
 using static ZeldaGame.Player.PlayerStateMachine;
 
-public class BlueArrowVerticalSprite : IProjectile {
+public class BlueArrowVerticalSprite : IPlayerProjectile {
 	SpriteEffects effect;
 	private Texture2D Sprite;
 	private Direction direction;
