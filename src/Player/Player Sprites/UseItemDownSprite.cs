@@ -5,11 +5,6 @@ public class UseItemDownSprite : ISprite {
 	private Texture2D Sprite;
 	private bool isPlaying;
 
-    private static int frameID = 0;
-    private readonly int frameRate = 8;
-
-
-    // Constructor
     public UseItemDownSprite(Texture2D sprite) {
 		Sprite = sprite;
 	}

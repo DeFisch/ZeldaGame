@@ -22,13 +22,11 @@ namespace ZeldaGame {
 
 		public Player1 Link;
 		public PlayerSpriteFactory playerFactory;
-		public WeaponHandler weaponHandler;
 
 		public Texture2D npcs;
 		public NPCFactory NPCFactory;
 
 		public Texture2D Objects;
-		private YellowRuby blueRuby;
 		public ItemSpriteFactory objectFactory;
 
 		public EnemyFactory enemyFactory;
@@ -48,12 +46,12 @@ namespace ZeldaGame {
 		protected override void Initialize() {
 
             // Initialize controllers
-            keyboardController = new KeyboardController(this);
+            keyboardController = new KeyboardController();
             mouseController = new MouseController();
 			controllers = new List<IController> { keyboardController, mouseController };
 
-			// set fixed window size
-			_graphics.PreferredBackBufferWidth = this.window_width;
+            // set fixed window size
+            _graphics.PreferredBackBufferWidth = this.window_width;
 			_graphics.PreferredBackBufferHeight = this.window_height;
 			_graphics.ApplyChanges();
 
@@ -71,17 +69,13 @@ namespace ZeldaGame {
 			// Initializes object classes
 			PlayerSpriteFactory.Instance.LoadAllTextures(Content);
 			PlayerItemSpriteFactory.Instance.LoadAllTextures(Content);
-			weaponHandler = new WeaponHandler();
-			Link = new Player1(new Vector2(window_width, window_height), weaponHandler);
+            Link = new Player1(new Vector2(window_width, window_height));
+
             NPCFactory = new NPCFactory(npcs, new Vector2(window_width, window_height));
 			objectFactory = new ItemSpriteFactory(Objects);
 
 			Texture2D[] enemies = {Content.Load<Texture2D>("enemies"),Content.Load<Texture2D>("enemies_1")};
 			blockSpriteFactory = new BlockSpriteFactory(Content.Load<Texture2D>("Level1_Map"));
-			blueRuby = new YellowRuby(Objects, new Vector2(300, 150));
-			// Initializes object classes
-
-
 			enemyFactory = new EnemyFactory(enemies, window_size: new Vector2(window_width, window_height));
 			Random random = new Random();
 			for (int i = 0; i < 5; i++) // spawn 5 enemies of each type
@@ -148,17 +142,19 @@ namespace ZeldaGame {
 				Exit();
 			}
 
+			// Updates controllers
 			foreach (IController controller in controllers) {
 				controller.Update();
 			}
 
-			Link.Update();
-
-			weaponHandler.Update();
+			// Updates enemies
+            enemyFactory.Update();
+			// Updates npc's
+            NPCFactory.Update();
+			// Updates Link
+            Link.Update();
 
 			base.Update(gameTime);
-			enemyFactory.Update();
-			NPCFactory.Update();
 		}
 
 		protected override void Draw(GameTime gameTime) {
@@ -168,21 +164,14 @@ namespace ZeldaGame {
 
             //Draws Blocks
             blockSpriteFactory.Draw(_spriteBatch);
-
             // Draws enemies
             enemyFactory.Draw(_spriteBatch);
-
 			//Draws NPCs
 			NPCFactory.Draw(_spriteBatch);
-
 			//Draws objects
 			objectFactory.Draw(_spriteBatch);
-
 			// Draws player
-			Link.Draw(_spriteBatch);
-
-			// Draws player items
-			weaponHandler.Draw(_spriteBatch);
+			Link.Draw(_spriteBatch);;
 
 			_spriteBatch.End();
 

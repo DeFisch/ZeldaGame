@@ -1,12 +1,6 @@
-﻿using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Input;
+﻿using Microsoft.Xna.Framework.Input;
 using System.Collections.Generic;
-using System.Data.Common;
-using System.Diagnostics;
 using ZeldaGame;
-using ZeldaGame.Player;
-using ZeldaGame.Player.Commands;
-using static ZeldaGame.Player.PlayerStateMachine;
 
 /*
  * Controller class for the Keyboard
@@ -17,7 +11,7 @@ public class KeyboardController : IController
 	private Dictionary<Keys, ICommand> holdKeys;
 	private Dictionary<Keys, ICommand> pressKeys;
 
-	public KeyboardController(Game1 myGame) {
+	public KeyboardController() {
 		keyboardHandler = new KeyboardHandler();
 		holdKeys = new Dictionary<Keys, ICommand>();
 		pressKeys = new Dictionary<Keys, ICommand>();

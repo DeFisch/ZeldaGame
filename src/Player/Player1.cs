@@ -1,12 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using static ZeldaGame.Player.PlayerStateMachine;
 
 
@@ -25,11 +18,12 @@ namespace ZeldaGame.Player {
 		private Direction direction;
 		private int animTimer;
 
-		public Player1(Vector2 window_size, WeaponHandler weaponHandler )
+		public Player1(Vector2 window_size)
 		{
 			sprite = PlayerSpriteFactory.Instance.CreateWalkSprite(Direction.Down);
 			stateMachine = new PlayerStateMachine(sprite);
-			this.weaponHandler = weaponHandler;
+			//this.weaponHandler = weaponHandler;
+			weaponHandler = new WeaponHandler();
 
 			position = new Vector2(window_size.X / 2, window_size.Y / 2);
 			resetPosition = position;
@@ -63,11 +57,9 @@ namespace ZeldaGame.Player {
 
 		public void Walk()
 		{
-			if (animTimer == -1) {
-				UpdateMovementVector();
-                sprite = stateMachine.Walk();
-				isMoving = true;
-            }
+			UpdateMovementVector();
+            sprite = stateMachine.Walk();
+			isMoving = true;
 		}
 
 		public void Attack()
@@ -111,10 +103,13 @@ namespace ZeldaGame.Player {
 				Idle();
 			}
 
+			// Updates player sprite and weapon sprites
+			weaponHandler.Update();
             sprite.Update();
 		}
 		public void Draw(SpriteBatch spriteBatch)
 		{
+			weaponHandler.Draw(spriteBatch);
 			sprite.Draw(spriteBatch, position);
 		}
 
