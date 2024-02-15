@@ -47,9 +47,9 @@ namespace ZeldaGame {
 
 		protected override void Initialize() {
 
-			// Initialize controllers
-			keyboardController = new KeyboardController();
-			mouseController = new MouseController();
+            // Initialize controllers
+            keyboardController = new KeyboardController(this);
+            mouseController = new MouseController();
 			controllers = new List<IController> { keyboardController, mouseController };
 
 			// set fixed window size
@@ -73,7 +73,7 @@ namespace ZeldaGame {
 			PlayerItemSpriteFactory.Instance.LoadAllTextures(Content);
 			weaponHandler = new WeaponHandler();
 			Link = new Player1(new Vector2(window_width, window_height), weaponHandler);
-			NPCFactory = new NPCFactory(npcs, new Vector2(window_width, window_height));
+            NPCFactory = new NPCFactory(npcs, new Vector2(window_width, window_height));
 			objectFactory = new ItemSpriteFactory(Objects);
 
 			Texture2D enemies = Content.Load<Texture2D>("enemies");
@@ -97,53 +97,53 @@ namespace ZeldaGame {
 			objectFactory.ObjectList();
 
 			// Registers commands with Keys as the identifier
-			keyboardController.RegisterCommand(Keys.W, new SetWalkSpriteCommand(this, 0), 0);
-			keyboardController.RegisterCommand(Keys.W, new SetIdleSpriteCommand(this), 2);
-			keyboardController.RegisterCommand(Keys.Up, new SetWalkSpriteCommand(this, 0), 0);
-			keyboardController.RegisterCommand(Keys.Up, new SetIdleSpriteCommand(this), 2);
+			keyboardController.RegisterHoldKey(Keys.W, new SetWalkSpriteCommand(this, 0));
+			keyboardController.RegisterHoldKey(Keys.T, new SetIdleSpriteCommand(this));
+			//keyboardController.RegisterCommand(Keys.Up, new SetWalkSpriteCommand(this, 0));
+			//keyboardController.RegisterCommand(Keys.Up, new SetIdleSpriteCommand(this), 2);
 
-			keyboardController.RegisterCommand(Keys.A, new SetWalkSpriteCommand(this, 1), 0);
-			keyboardController.RegisterCommand(Keys.A, new SetIdleSpriteCommand(this), 2);
-			keyboardController.RegisterCommand(Keys.Left, new SetWalkSpriteCommand(this, 1), 0);
-			keyboardController.RegisterCommand(Keys.Left, new SetIdleSpriteCommand(this), 2);
+			keyboardController.RegisterHoldKey(Keys.A, new SetWalkSpriteCommand(this, 1));
+			//keyboardController.RegisterCommand(Keys.A, new SetIdleSpriteCommand(this), 2);
+			//keyboardController.RegisterCommand(Keys.Left, new SetWalkSpriteCommand(this, 1));
+			//keyboardController.RegisterCommand(Keys.Left, new SetIdleSpriteCommand(this), 2);
 
-			keyboardController.RegisterCommand(Keys.S, new SetWalkSpriteCommand(this, 2), 0);
-			keyboardController.RegisterCommand(Keys.S, new SetIdleSpriteCommand(this), 2);
-			keyboardController.RegisterCommand(Keys.Down, new SetWalkSpriteCommand(this, 2), 0);
-			keyboardController.RegisterCommand(Keys.Down, new SetIdleSpriteCommand(this), 2);
+			keyboardController.RegisterHoldKey(Keys.S, new SetWalkSpriteCommand(this, 2));
+			//keyboardController.RegisterCommand(Keys.S, new SetIdleSpriteCommand(this), 2);
+			//keyboardController.RegisterCommand(Keys.Down, new SetWalkSpriteCommand(this, 2));
+			//keyboardController.RegisterCommand(Keys.Down, new SetIdleSpriteCommand(this), 2);
 
-			keyboardController.RegisterCommand(Keys.D, new SetWalkSpriteCommand(this, 3), 0);
-			keyboardController.RegisterCommand(Keys.D, new SetIdleSpriteCommand(this), 2);
-			keyboardController.RegisterCommand(Keys.Right, new SetWalkSpriteCommand(this, 3), 0);
-			keyboardController.RegisterCommand(Keys.Right, new SetIdleSpriteCommand(this), 2);
+			keyboardController.RegisterHoldKey(Keys.D, new SetWalkSpriteCommand(this, 3));
+			//keyboardController.RegisterCommand(Keys.D, new SetIdleSpriteCommand(this), 2);
+			//keyboardController.RegisterCommand(Keys.Right, new SetWalkSpriteCommand(this, 3));
+			//keyboardController.RegisterCommand(Keys.Right, new SetIdleSpriteCommand(this), 2);
 
 			// Attack
-			keyboardController.RegisterCommand(Keys.Z, new AttackCommand(this), 0);
-			keyboardController.RegisterCommand(Keys.N, new AttackCommand(this), 0);
+			/*keyboardController.RegisterCommand(Keys.Z, new AttackCommand(this), 0);
+			keyboardController.RegisterCommand(Keys.N, new AttackCommand(this), 0);*/
 
 			// Use items
-			keyboardController.RegisterCommand(Keys.D1, new UseItemCommand(this, 0), 0);
-			keyboardController.RegisterCommand(Keys.D2, new UseItemCommand(this, 1), 0);
-			keyboardController.RegisterCommand(Keys.D3, new UseItemCommand(this, 2), 0);
-			keyboardController.RegisterCommand(Keys.D4, new UseItemCommand(this, 3), 0);
-			keyboardController.RegisterCommand(Keys.D5, new UseItemCommand(this, 4), 0);
-			keyboardController.RegisterCommand(Keys.D6, new UseItemCommand(this, 5), 0);
+			keyboardController.RegisterPressKey(Keys.D1, new UseItemCommand(this, 0));
+			/*keyboardController.RegisterCommand(Keys.D2, new UseItemCommand(this, 1));
+			keyboardController.RegisterCommand(Keys.D3, new UseItemCommand(this, 2));
+			keyboardController.RegisterCommand(Keys.D4, new UseItemCommand(this, 3));
+			keyboardController.RegisterCommand(Keys.D5, new UseItemCommand(this, 4));
+			keyboardController.RegisterCommand(Keys.D6, new UseItemCommand(this, 5));*/
 
 			//Registers commands with Keys for blocks
-			keyboardController.RegisterCommand(Keys.T, new NextBlockCommand(this), 0);
+			/*keyboardController.RegisterCommand(Keys.T, new NextBlockCommand(this), 0);
 			keyboardController.RegisterCommand(Keys.Y, new PreviousBlockCommand(this), 0);
 
 			//Register commands with keys for items
 			keyboardController.RegisterCommand(Keys.I, new NextItemCommand(this), 0);
-			keyboardController.RegisterCommand(Keys.U, new LastItemCommand(this), 0);
+			keyboardController.RegisterCommand(Keys.U, new LastItemCommand(this), 0);*/
 
 			
-			keyboardController.RegisterCommand(Keys.O, new NextNPCCommand(this), 0);
-			keyboardController.RegisterCommand(Keys.P, new PreviousNPCCommand(this), 0);
+			/*keyboardController.RegisterCommand(Keys.O, new NextNPCCommand(this), 0);
+			keyboardController.RegisterCommand(Keys.P, new PreviousNPCCommand(this), 0);*/
 
 			//Registers commands with Keys for enemies
-			keyboardController.RegisterCommand(Keys.O, new nextEnemyCommand(this), 0);
-			keyboardController.RegisterCommand(Keys.P, new previousEnemyCommand(this), 0);
+			/*keyboardController.RegisterCommand(Keys.O, new nextEnemyCommand(this), 0);
+			keyboardController.RegisterCommand(Keys.P, new previousEnemyCommand(this), 0);*/
 
 			// Registers commands with Rectangles as the identifier
 			/*

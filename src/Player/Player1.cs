@@ -12,18 +12,20 @@ using static ZeldaGame.Player.PlayerStateMachine;
 
 namespace ZeldaGame.Player {
 	public class Player1 : IPlayer {
-		PlayerStateMachine stateMachine;
-		WeaponHandler weaponHandler;
-		ISprite sprite;
-		Vector2 position;
-		Vector2 movement;
+		private PlayerStateMachine stateMachine;
+		private WeaponHandler weaponHandler;
+		private ISprite sprite;
+		private Vector2 position;
+		private Vector2 movement;
+
+		public static bool isMoving;
 
 		int speed;
 		Direction direction;
 		int animTimer;
 
-		public Player1(Vector2 window_size, WeaponHandler weaponHandler ) {
-
+		public Player1(Vector2 window_size, WeaponHandler weaponHandler )
+		{
 			sprite = PlayerSpriteFactory.Instance.CreateWalkSprite(Direction.Down);
 			stateMachine = new PlayerStateMachine(sprite);
 			this.weaponHandler = weaponHandler;
@@ -32,6 +34,8 @@ namespace ZeldaGame.Player {
 			movement = new Vector2(0, 0);
 			speed = 2;
 			animTimer = -1;
+
+			isMoving = false;
 		}
 
 		public ISprite GetSprite() {
@@ -52,41 +56,30 @@ namespace ZeldaGame.Player {
 		}
 
 		public void Idle() {
-			movement = new Vector2(0, 0);
-			sprite = stateMachine.Idle();
+			stateMachine.Idle();
 		}
 
-		public void Walk() {
+		public void Walk()
+		{
 			if (animTimer == -1) {
-				switch (direction) {
-					case Direction.Up:
-						movement = new Vector2(0, -speed);
-						break;
-					case Direction.Left:
-						movement = new Vector2(-speed, 0);
-						break;
-					case Direction.Down:
-						movement = new Vector2(0, speed);
-						break;
-					case Direction.Right:
-						movement = new Vector2(speed, 0);
-						break;
-					default:
-						break;
-				}
-				sprite = stateMachine.Walk();
-			}
+				UpdateMovementVector();
+                sprite = stateMachine.Walk();
+				isMoving = true;
+            }
 		}
-		public void Attack() {
+		public void Attack()
+		{
 			if (animTimer == -1) {
 				sprite = stateMachine.Attack();
 				animTimer = 12;
 			}
 		}
-		public void PickUp() {
+		public void PickUp()
+		{
 			// change sprite to pick up item
 		}
-		public void UseItem(int item) {
+		public void UseItem(int item)
+		{
 			if (animTimer == -1) {
 				sprite = stateMachine.UseItem();
 				weaponHandler.UseItem(item, position, stateMachine.GetDirection());
@@ -97,7 +90,8 @@ namespace ZeldaGame.Player {
 			// change sprite to block
 		}
 
-		public void Update() {
+		public void Update()
+		{
 			if (animTimer >= 0) {
 				animTimer--;
 			}
@@ -106,11 +100,45 @@ namespace ZeldaGame.Player {
 				Idle();
 			}
 
-			position = position + movement;
-			sprite.Update();
+            if (isMoving)
+			{
+				position += movement;
+				isMoving = false; // Set to false, will make Link idle if Walk() does not get called again
+			} else
+			{
+				Idle();
+			}
+
+            sprite.Update();
 		}
-		public void Draw(SpriteBatch spriteBatch) {
+		public void Draw(SpriteBatch spriteBatch)
+		{
 			sprite.Draw(spriteBatch, position);
 		}
+
+		/*
+		 * Class methods
+		 */
+		private void UpdateMovementVector()
+		{
+            switch (direction)
+            {
+                case Direction.Up:
+                    movement = new Vector2(0, -speed);
+                    break;
+                case Direction.Left:
+                    movement = new Vector2(-speed, 0);
+                    break;
+                case Direction.Down:
+                    movement = new Vector2(0, speed);
+                    break;
+                case Direction.Right:
+                    movement = new Vector2(speed, 0);
+                    break;
+                default:
+                    break;
+            }
+        }
+
 	}
 }

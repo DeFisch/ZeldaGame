@@ -6,6 +6,7 @@ using Microsoft.Xna.Framework;
 using System.Text;
 using System.Threading.Tasks;
 using Sprint0;
+using System.Diagnostics;
 
 namespace ZeldaGame.Player {
 	public class PlayerStateMachine {
@@ -19,6 +20,7 @@ namespace ZeldaGame.Player {
 		private State prevState;
 		private Health health;
 		private ISprite sprite;
+		private int animTimer;
 
 		public PlayerStateMachine(ISprite sprite) {
 			direction = Direction.Down;
@@ -26,6 +28,7 @@ namespace ZeldaGame.Player {
 			prevState = state;
 			health = Health.Normal;
 			this.sprite = sprite;
+			animTimer = -1;
 		}
 
 		public void BeHurt() {
@@ -53,33 +56,12 @@ namespace ZeldaGame.Player {
 			return (int)state;
 		}
 
-		public ISprite Idle() {
-			if (state != State.Idle) {
-				prevState = state;
-				if (prevState == State.Walk && direction == prevDirection) {
-					sprite.Pause();
-				}
-				else {
-					sprite = PlayerSpriteFactory.Instance.CreateWalkSprite(direction);
-					sprite.Pause();
-				}
-				//sprite = PlayerSpriteFactory.Instance.CreateIdleSprite(direction);
-				state = State.Idle;
-			}
-			return sprite;
+		public void Idle() {
+			sprite.Pause();
 		}
 		public ISprite Walk() {
-			if (state != State.Walk) {
-				prevState = state;
-				if (prevState == State.Idle && direction == prevDirection) {
-					sprite.Play();
-				}
-				else {
-					sprite = PlayerSpriteFactory.Instance.CreateWalkSprite(direction);
-					sprite.Play();
-				}
-				state = State.Walk;
-			}
+			sprite = PlayerSpriteFactory.Instance.CreateWalkSprite(direction);
+            sprite.Play();
 			return sprite;
 		}
 		public ISprite Attack() {
@@ -87,6 +69,7 @@ namespace ZeldaGame.Player {
 				prevState = state;
 				state = State.Attack;
 				sprite = PlayerSpriteFactory.Instance.CreateAttackSprite(direction);
+				animTimer = 12; //actual time
 			}
 			return sprite;
 		}
@@ -100,12 +83,14 @@ namespace ZeldaGame.Player {
 				prevState = state;
 				state = State.UseItem;
 				sprite = PlayerSpriteFactory.Instance.CreateUseItemSprite(direction);
+				animTimer = 12; //random number, will change l8r
 			}
 			return sprite;
 		}
 		public void Block() {
 			prevState = state;
 			state = State.Block;
+			animTimer = 5; //idk actual anim timer
 			// change sprite to block
 		}
 	}
