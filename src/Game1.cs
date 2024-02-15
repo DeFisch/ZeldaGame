@@ -76,7 +76,7 @@ namespace ZeldaGame {
             NPCFactory = new NPCFactory(npcs, new Vector2(window_width, window_height));
 			objectFactory = new ItemSpriteFactory(Objects);
 
-			Texture2D enemies = Content.Load<Texture2D>("enemies");
+			Texture2D[] enemies = {Content.Load<Texture2D>("enemies"),Content.Load<Texture2D>("enemies_1")};
 			blockSpriteFactory = new BlockSpriteFactory(Content.Load<Texture2D>("Level1_Map"));
 			blueRuby = new YellowRuby(Objects, new Vector2(300, 150));
 			// Initializes object classes
