@@ -11,20 +11,19 @@ using static ZeldaGame.Player.PlayerStateMachine;
 
 
 namespace ZeldaGame.Player {
-	public class Player1 : IPlayer {
+	public class Player1 : IPlayer
+	{
 		private PlayerStateMachine stateMachine;
 		private WeaponHandler weaponHandler;
 		private ISprite sprite;
 		private Vector2 position;
 		private Vector2 movement;
-
 		private Vector2 resetPosition;
-
 		private static bool isMoving;
 
-		int speed;
-		Direction direction;
-		int animTimer;
+		private int speed;
+		private Direction direction;
+		private int animTimer;
 
 		public Player1(Vector2 window_size, WeaponHandler weaponHandler )
 		{
@@ -70,6 +69,7 @@ namespace ZeldaGame.Player {
 				isMoving = true;
             }
 		}
+
 		public void Attack()
 		{
 			if (animTimer == -1) {
@@ -81,6 +81,7 @@ namespace ZeldaGame.Player {
 		{
 			// change sprite to pick up item
 		}
+
 		public void UseItem(int item)
 		{
 			if (animTimer == -1) {
@@ -89,20 +90,18 @@ namespace ZeldaGame.Player {
 				animTimer = 20;
 			}
 		}
-		public void Block() {
-			// change sprite to block
-		}
 
 		public void Update()
 		{
-			if (animTimer >= 0) {
+			// Animates attack or item use, then resets to idle
+			if (animTimer >= 0)
 				animTimer--;
-			}
 			if (animTimer == 0) {
-				Debug.WriteLine("Done.");
+				sprite = PlayerSpriteFactory.Instance.CreateWalkSprite(direction);
 				Idle();
 			}
 
+			// Updates position if Walk() is active AKA if player is moving, otherwise idle
             if (isMoving)
 			{
 				position += movement;
@@ -119,10 +118,19 @@ namespace ZeldaGame.Player {
 			sprite.Draw(spriteBatch, position);
 		}
 
-		/*
+        public void Reset()
+        {
+            sprite = PlayerSpriteFactory.Instance.CreateWalkSprite(Direction.Down);
+            stateMachine = new PlayerStateMachine(sprite);
+            position = resetPosition;
+            movement = new Vector2(0, 0);
+            animTimer = -1;
+        }
+
+        /*
 		 * Class methods
 		 */
-		private void UpdateMovementVector()
+        private void UpdateMovementVector()
 		{
             switch (direction)
             {
@@ -141,15 +149,6 @@ namespace ZeldaGame.Player {
                 default:
                     break;
             }
-        }
-
-		public void Reset()
-		{
-            sprite = PlayerSpriteFactory.Instance.CreateWalkSprite(Direction.Down);
-            stateMachine = new PlayerStateMachine(sprite);
-			position = resetPosition;
-            movement = new Vector2(0, 0);
-            animTimer = -1;
         }
 	}
 }

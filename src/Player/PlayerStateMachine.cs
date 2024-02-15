@@ -56,37 +56,43 @@ namespace ZeldaGame.Player {
 			return (int)state;
 		}
 
-		public void Idle() {
-			sprite.Pause();
+		public void Idle()
+		{
+            state = State.Idle;
+            sprite.Pause();	
 		}
-		public ISprite Walk() {
+
+		public ISprite Walk()
+		{
+			state = State.Walk;
 			sprite = PlayerSpriteFactory.Instance.CreateWalkSprite(direction);
             sprite.Play();
 			return sprite;
 		}
+
 		public ISprite Attack() {
-			if (state != State.Attack) {
-				prevState = state;
-				state = State.Attack;
-				sprite = PlayerSpriteFactory.Instance.CreateAttackSprite(direction);
-				animTimer = 12; //actual time
-			}
+			prevState = state;
+			state = State.Attack;
+			sprite = PlayerSpriteFactory.Instance.CreateAttackSprite(direction);
+			animTimer = 12; //actual time
+
 			return sprite;
 		}
+
 		public void PickUp() {
 			prevState = state;
 			state = State.PickUp;
 			// change sprite to pick up item
 		}
+
 		public ISprite UseItem() {
-			if (state != State.UseItem) {
-				prevState = state;
-				state = State.UseItem;
-				sprite = PlayerSpriteFactory.Instance.CreateUseItemSprite(direction);
-				animTimer = 12; //random number, will change l8r
-			}
+			//prevState = state;
+			state = State.UseItem;
+			sprite = PlayerSpriteFactory.Instance.CreateUseItemSprite(direction);
+			//animTimer = 12; //random number, will change l8r
 			return sprite;
 		}
+
 		public void Block() {
 			prevState = state;
 			state = State.Block;

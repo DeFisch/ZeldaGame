@@ -5,8 +5,12 @@ public class UseItemDownSprite : ISprite {
 	private Texture2D Sprite;
 	private bool isPlaying;
 
-	// Constructor
-	public UseItemDownSprite(Texture2D sprite) {
+    private static int frameID = 0;
+    private readonly int frameRate = 8;
+
+
+    // Constructor
+    public UseItemDownSprite(Texture2D sprite) {
 		Sprite = sprite;
 	}
 
@@ -28,6 +32,6 @@ public class UseItemDownSprite : ISprite {
 
 	public void Update() {
 
-	}
+    }
 
 }
