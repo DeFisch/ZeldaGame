@@ -8,7 +8,8 @@ public class EnemyFactory {
 	private List<IEnemy> enemies;
 	private Texture2D[] textures;
 	private Vector2 window_size;
-	public string[] enemy_types = new string[] { "Stalfos", "Gibdo", "Keese", "WizzRobe", "DarkNut", "Goriya" };
+	public int current_enemy = 0;
+	public string[] enemy_types = new string[] { "Stalfos", "Gibdo", "Keese", "WizzRobe", "DarkNut", "Goriya", "Aquamentus" };
 	public EnemyProjectileFactory enemyProjectileFactory;
 	public EnemyFactory(Texture2D[] textures, Vector2 window_size) {
 		enemies = new List<IEnemy>();
@@ -38,6 +39,10 @@ public class EnemyFactory {
 			case "Goriya":
 				enemy = new Goriya(textures[0], window_size, enemyProjectileFactory, color_variation);
 				break;
+			case "Aquamentus":
+				if (enemies.Count == 0) // Only one Aquamentus allowed
+					enemy = new Aquamentus(textures[1], window_size, enemyProjectileFactory);
+				break; 
 			default:
 				break;
 		}
