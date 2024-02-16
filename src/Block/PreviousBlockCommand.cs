@@ -1,21 +1,17 @@
 ﻿using ZeldaGame;
 
-namespace Sprint0.Block
-{
-        public class PreviousBlockCommand : ICommand
-        {
-            private Game1 MyGame;
-            private int previous = 0;
+namespace Sprint0.Block {
+	public class PreviousBlockCommand : ICommand {
+		private Game1 MyGame;
+		private int previous = 0;
 
-            // Constructor
-            public PreviousBlockCommand(Game1 myGame)
-            {
-                MyGame = myGame;
-            }
+		// Constructor
+		public PreviousBlockCommand(Game1 myGame) {
+			MyGame = myGame;
+		}
 
-            public void Execute()
-            {
-                MyGame.blockSpriteFactory.cycleList(previous);
-            }
-        }
+		public void Execute() {
+			MyGame.blockSpriteFactory.cycleList(previous);
+		}
+	}
 }

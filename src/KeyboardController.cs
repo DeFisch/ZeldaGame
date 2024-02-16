@@ -1,7 +1,5 @@
-﻿using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Input;
+﻿using Microsoft.Xna.Framework.Input;
 using System.Collections.Generic;
-using System.Data.Common;
 using ZeldaGame;
 
 /*
@@ -9,57 +7,46 @@ using ZeldaGame;
  */
 public class KeyboardController : IController
 {
-    private Dictionary<KeyValuePair<Keys, ICommand>, int> controllerMappings;
-    private KeyboardHandler keyboardHandler;
+	private KeyboardHandler keyboardHandler;
+	private Dictionary<Keys, ICommand> holdKeys;
+	private Dictionary<Keys, ICommand> pressKeys;
 
-    // Constructor: Initializes the commands based off the keys pressed
-    public KeyboardController()
-    {
-        controllerMappings = new Dictionary<KeyValuePair<Keys, ICommand>, int>();
+	public KeyboardController() {
 		keyboardHandler = new KeyboardHandler();
-    }
+		holdKeys = new Dictionary<Keys, ICommand>();
+		pressKeys = new Dictionary<Keys, ICommand>();
 
-    public void RegisterCommand(Keys identifier, ICommand command, int commandType) // 0 = isPressed, 1 = isHeld, 2 = isRelease
-	{
-		controllerMappings.Add(new KeyValuePair<Keys, ICommand>(identifier, command), commandType);
 	}
+
+	public void RegisterHoldKey(Keys key, ICommand command)
+	{
+		holdKeys.Add(key, command);
+	}
+
+    public void RegisterPressKey(Keys key, ICommand command)
+    {
+        pressKeys.Add(key, command);
+    }
 
 	public void Update()
-    {
-        keyboardHandler.Update();
+	{
 
-        foreach (KeyValuePair<KeyValuePair<Keys, ICommand>, int> keyCommandTypePair in controllerMappings) {
-            switch (keyCommandTypePair.Value) {
-                case 0:
-                    if (keyboardHandler.IsPressed(keyCommandTypePair.Key.Key)) {
-                        Pressed(keyCommandTypePair.Key);
-                    }
-                    break;
-                case 1:
-                    if (keyboardHandler.IsHeld(keyCommandTypePair.Key.Key)) {
-                        Held(keyCommandTypePair.Key);
-                    }
-                    break;
-                case 2:
-                    if (keyboardHandler.IsReleased(keyCommandTypePair.Key.Key)) {
-                        Released(keyCommandTypePair.Key);
-                    }
-                    break;
-                default:
-                    break;
-            }
-        }
-    }
+		Keys[] pressedKeys = Keyboard.GetState().GetPressedKeys();
 
-    public void Pressed(KeyValuePair<Keys, ICommand> keyPair) {
-        keyPair.Value.Execute(); 
-    }
+		keyboardHandler.Update();
 
-	public void Held(KeyValuePair<Keys, ICommand> keyPair) {
-		keyPair.Value.Execute();
+		foreach (Keys key in pressedKeys)
+		{
+			if (holdKeys.ContainsKey(key) && keyboardHandler.IsHeld(key))
+			{
+				holdKeys[key].Execute();
+			}
+
+			if (pressKeys.ContainsKey(key) && keyboardHandler.IsPressed(key))
+			{
+				pressKeys[key].Execute();
+			}
+		}
 	}
 
-	public void Released(KeyValuePair<Keys, ICommand> keyPair) {
-		keyPair.Value.Execute();
-	}
 }

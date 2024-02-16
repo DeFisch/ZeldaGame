@@ -1,9 +1,4 @@
 ﻿using Microsoft.Xna.Framework.Input;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ZeldaGame {
 	public class KeyboardHandler {
@@ -27,10 +22,6 @@ namespace ZeldaGame {
 
 		public bool IsHeld(Keys key) {
 			return (oldState.IsKeyDown(key) == true) && (newState.IsKeyDown(key) == true);
-		}
-
-		public bool IsReleased(Keys key) {
-			return (oldState.IsKeyDown(key) == true) && (newState.IsKeyDown(key) == false);
 		}
 	}
 }
