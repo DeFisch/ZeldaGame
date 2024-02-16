@@ -21,16 +21,21 @@ namespace ZeldaGame.Items {
 		Boomerang boomerang;
 		Bow bow;
 		Bomb bomb;
+		FairyItem fairy;
+		FireItem fire;
 
 		Texture2D texture;
+		Texture2D texture2;
 		Vector2 pos;
 		private int cycler = 0;
 		private int index = 0;
 
-		public ItemSpriteFactory(Texture2D texture) {
+		public ItemSpriteFactory(Texture2D texture, Texture2D texture2) {
 			objectList = new List<ISprite>();
 			this.texture = texture;
+			this.texture2 = texture2;
 			pos = new Vector2(300, 150);
+			
 			yellowRuby = new YellowRuby(this.texture, pos);
 			blueRuby = new BlueRuby(this.texture, pos);
 			heart = new Heart(this.texture, pos);
@@ -43,6 +48,9 @@ namespace ZeldaGame.Items {
 			boomerang = new Boomerang(this.texture, pos);
 			bow = new Bow(this.texture, pos);
 			bomb = new Bomb(this.texture, pos);
+			fairy = new FairyItem(this.texture, pos);
+			fire = new FireItem(this.texture2, pos);
+
 		}
 
 		public void ObjectList() {
@@ -58,6 +66,8 @@ namespace ZeldaGame.Items {
 			objectList.Add(boomerang);
 			objectList.Add(bow);
 			objectList.Add(bomb);
+			objectList.Add(fairy);
+			objectList.Add(fire);
 		}
 
 		public void Cycle(int lastOrNext) {

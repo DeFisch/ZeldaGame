@@ -7,12 +7,12 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace ZeldaGame.Items {
-	public class YellowRuby : ISprite {
+	public class FairyItem : ISprite {
 		private int counter = 0;
 		private Texture2D texture;
 		private Vector2 pos;
 		private bool isPlaying;
-		public YellowRuby(Texture2D texture, Vector2 pos) {
+		public FairyItem(Texture2D texture, Vector2 pos) {
 			this.texture = texture;
 			this.pos = pos;
 
@@ -20,11 +20,11 @@ namespace ZeldaGame.Items {
 
 		public void Draw(SpriteBatch spriteBatch, Vector2 location) {
 
-			Rectangle sourceRectangle_1 = new Rectangle(72, 16, 8, 16);
-			Rectangle destinationRectangle_1 = new Rectangle((int)pos.X, (int)pos.Y, 16, 42);
+			Rectangle sourceRectangle_1 = new Rectangle(39, 0, 9, 16);
+			Rectangle destinationRectangle_1 = new Rectangle((int)pos.X, (int)pos.Y, 27, 48);
 
-			Rectangle sourceRectangle_2 = new Rectangle(72, 0, 8, 16);
-			Rectangle destinationRectangle_2 = new Rectangle((int)pos.X, (int)pos.Y, 16, 42);
+			Rectangle sourceRectangle_2 = new Rectangle(47, 0, 9, 16);
+			Rectangle destinationRectangle_2 = new Rectangle((int)pos.X, (int)pos.Y, 27, 48);
 
 			if (counter <= 10) {
 				counter++;

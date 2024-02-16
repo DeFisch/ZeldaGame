@@ -72,7 +72,7 @@ namespace ZeldaGame {
             Link = new Player1(new Vector2(window_width, window_height));
 
             NPCFactory = new NPCFactory(npcs, new Vector2(window_width, window_height));
-			objectFactory = new ItemSpriteFactory(Objects);
+			objectFactory = new ItemSpriteFactory(Objects, npcs);
 
 			Texture2D[] enemies = {Content.Load<Texture2D>("enemies"),Content.Load<Texture2D>("enemies_1")};
 			blockSpriteFactory = new BlockSpriteFactory(Content.Load<Texture2D>("Level1_Map"));
