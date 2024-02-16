@@ -24,57 +24,58 @@ public class PlayerItemSpriteFactory {
 		playerTexture = content.Load<Texture2D>("Link");
 	}
 
-	public IPlayerProjectile CreateItemSprite(Direction direction, int item) {
+	public IPlayerProjectile CreateItemSprite(Direction direction, int item, Vector2 position) {
 		projectiles = new List<IPlayerProjectile>
 		{
-			CreateArrowSprite(direction), CreateBlueArrowSprite(direction), CreateBoomerangSprite(direction),
-			CreateBlueBoomerangSprite(direction), CreateBombSprite(direction), CreateFireballSprite(direction)
+			CreateArrowSprite(direction, position), CreateBlueArrowSprite(direction, position), 
+			CreateBoomerangSprite(direction, position), CreateBlueBoomerangSprite(direction, position),
+			CreateBombSprite(position), CreateFireballSprite(direction, position)
 		};
 
 		return projectiles[item];
 	}
 
-	public IPlayerProjectile CreateArrowSprite(Direction direction) {
+	public IPlayerProjectile CreateArrowSprite(Direction direction, Vector2 position) {
 		switch (direction) {
 			case Direction.Up:
-				return new ArrowVerticalSprite(playerTexture, Direction.Up);
+				return new ArrowVerticalSprite(playerTexture, Direction.Up, position);
 			case Direction.Left:
-				return new ArrowHorizontalSprite(playerTexture, Direction.Left);
+				return new ArrowHorizontalSprite(playerTexture, Direction.Left, position);
 			case Direction.Down:
-				return new ArrowVerticalSprite(playerTexture, Direction.Down);
+				return new ArrowVerticalSprite(playerTexture, Direction.Down, position);
 			case Direction.Right:
-				return new ArrowHorizontalSprite(playerTexture, Direction.Right);
+				return new ArrowHorizontalSprite(playerTexture, Direction.Right, position);
 		}
 		return null;
 	}
 
-	public IPlayerProjectile CreateBlueArrowSprite(Direction direction) {
+	public IPlayerProjectile CreateBlueArrowSprite(Direction direction, Vector2 position) {
 		switch (direction) {
 			case Direction.Up:
-				return new BlueArrowVerticalSprite(playerTexture, Direction.Up);
+				return new BlueArrowVerticalSprite(playerTexture, Direction.Up, position);
 			case Direction.Left:
-				return new BlueArrowHorizontalSprite(playerTexture, Direction.Left);
+				return new BlueArrowHorizontalSprite(playerTexture, Direction.Left, position);
 			case Direction.Down:
-				return new BlueArrowVerticalSprite(playerTexture, Direction.Down);
+				return new BlueArrowVerticalSprite(playerTexture, Direction.Down, position);
 			case Direction.Right:
-				return new BlueArrowHorizontalSprite(playerTexture, Direction.Right);
+				return new BlueArrowHorizontalSprite(playerTexture, Direction.Right, position);
 		}
 		return null;
 	}
 
-	public IPlayerProjectile CreateBoomerangSprite(Direction direction) {
-		return new BoomerangSprite(playerTexture, direction);
+	public IPlayerProjectile CreateBoomerangSprite(Direction direction, Vector2 position) {
+		return new BoomerangSprite(playerTexture, direction, position);
 	}
 
-	public IPlayerProjectile CreateBlueBoomerangSprite(Direction direction) {
-		return new BlueBoomerangSprite(playerTexture, direction);
+	public IPlayerProjectile CreateBlueBoomerangSprite(Direction direction, Vector2 position) {
+		return new BlueBoomerangSprite(playerTexture, direction, position);
 	}
 
-	public IPlayerProjectile CreateBombSprite(Direction direction) {
-		return new BombSprite(playerTexture, direction);
+	public IPlayerProjectile CreateBombSprite(Vector2 position) {
+		return new BombSprite(playerTexture, position);
 	}
 
-	public IPlayerProjectile CreateFireballSprite(Direction direction) {
-		return new FireballSprite(playerTexture, direction);
+	public IPlayerProjectile CreateFireballSprite(Direction direction, Vector2 position) {
+		return new FireballSprite(playerTexture, direction, position);
 	}
 }

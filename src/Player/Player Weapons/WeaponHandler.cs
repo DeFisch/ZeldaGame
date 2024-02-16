@@ -5,46 +5,43 @@ using ZeldaGame.Player;
 using static ZeldaGame.Player.PlayerStateMachine;
 
 public class WeaponHandler {
-	private Dictionary<IPlayerProjectile, Vector2> activeProjectiles;
-	private Vector2 projectileMovement;
-	private int projectileSpeed = 3;
+	private List<IPlayerProjectile> activeProjectiles;
+	private List<IPlayerProjectile> expiredProjectiles;
+
 	public WeaponHandler() {
-		activeProjectiles = new Dictionary<IPlayerProjectile, Vector2>();
+		activeProjectiles = new List<IPlayerProjectile>();
+		expiredProjectiles = new List<IPlayerProjectile>();
 	}
 
 	public void UseItem(int item, Vector2 location, Direction direction) {
-		IPlayerProjectile weapon = PlayerItemSpriteFactory.Instance.CreateItemSprite(direction, item);
-		activeProjectiles.Add(weapon, location);
+		IPlayerProjectile weapon = PlayerItemSpriteFactory.Instance.CreateItemSprite(direction, item, location);
+		activeProjectiles.Add(weapon);
 	}
 
 	public void ProjectileExpiration(IPlayerProjectile projectile) {
-		activeProjectiles.Remove(projectile);
+		expiredProjectiles.Add(projectile);
 	}
 
 	public void Update() {
-		foreach (IPlayerProjectile weapon in activeProjectiles.Keys) {
-			switch (weapon.GetDirection()) {
-				case Direction.Up:
-					projectileMovement = new Vector2(0, -projectileSpeed);
-					break;
-				case Direction.Down:
-					projectileMovement = new Vector2(0, projectileSpeed);
-					break;
-				case Direction.Left:
-					projectileMovement = new Vector2(-projectileSpeed, 0);
-					break;
-				case Direction.Right:
-					projectileMovement = new Vector2(projectileSpeed, 0);
-					break;
+		foreach (IPlayerProjectile projectile in activeProjectiles) {
+            projectile.Update();
+			if (!projectile.IsActive())
+			{
+				ProjectileExpiration(projectile);
 			}
-			activeProjectiles[weapon] = activeProjectiles[weapon] + projectileMovement;
-			weapon.Update();
 		}
+		
+		foreach (IPlayerProjectile projectile in expiredProjectiles)
+		{
+			activeProjectiles.Remove(projectile);
+		}
+		expiredProjectiles.Clear();
 	}
 
 	public void Draw(SpriteBatch spriteBatch) {
-		foreach (IPlayerProjectile weapon in activeProjectiles.Keys) {
-			weapon.Draw(spriteBatch, activeProjectiles[weapon]);
+		foreach (IPlayerProjectile projectile in activeProjectiles)
+		{
+			projectile.Draw(spriteBatch);
 		}
 	}
 }

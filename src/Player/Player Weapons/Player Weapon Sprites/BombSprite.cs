@@ -5,17 +5,20 @@ using static ZeldaGame.Player.PlayerStateMachine;
 public class BombSprite : IPlayerProjectile {
 	SpriteEffects effect;
 	private Texture2D Sprite;
-	private Direction direction;
+	private bool isActive;
 
-	private int currentFrame;
+    private Vector2 position;
+
+    private int currentFrame;
 	private int totalFrames;
 	private int frameRate;
 	private int frameID;
 
-	public BombSprite(Texture2D sprite, Direction direction) {
+	public BombSprite(Texture2D sprite, Vector2 position) {
+		isActive = true;
 		Sprite = sprite;
 		effect = SpriteEffects.None;
-		this.direction = direction;
+		this.position = position;
 
 		currentFrame = 0;
 		totalFrames = 4;
@@ -24,12 +27,18 @@ public class BombSprite : IPlayerProjectile {
 	}
 
 	public Direction GetDirection() {
-		return direction;
+		// No implementation, filler?
+		return Direction.Right;
 	}
 
-	public void Draw(SpriteBatch spriteBatch, Vector2 location) {
+    public bool IsActive()
+    {
+        return isActive;
+    }
+
+    public void Draw(SpriteBatch spriteBatch) {
 		Rectangle sourceRectangle = new Rectangle(129, 185, 8, 16);
-		Rectangle destinationRectangle = new Rectangle((int)location.X, (int)location.Y, sourceRectangle.Width * 2, sourceRectangle.Height * 2);
+		Rectangle destinationRectangle = new Rectangle((int)position.X, (int)position.Y, sourceRectangle.Width * 2, sourceRectangle.Height * 2);
 		spriteBatch.Draw(Sprite, destinationRectangle, sourceRectangle, Color.White, rotation: 0, new Vector2(0, 0), effects: effect, 1);
 	}
 
@@ -42,6 +51,7 @@ public class BombSprite : IPlayerProjectile {
 
 		if (currentFrame == totalFrames) {
 			currentFrame = 0;
+			isActive = false;
 		}
 	}
 
