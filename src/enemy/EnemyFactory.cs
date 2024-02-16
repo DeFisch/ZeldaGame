@@ -8,13 +8,13 @@ public class EnemyFactory {
 	private List<IEnemy> enemies;
 	private Texture2D[] textures;
 	private Vector2 window_size;
-	public string[] enemy_types = new string[] { "Stalfos", "Gibdo", "Keese", "WizzRobe", "DarkNut" };
+	public string[] enemy_types = new string[] { "Stalfos", "Gibdo", "Keese", "WizzRobe", "DarkNut", "Goriya" };
 	public EnemyProjectileFactory enemyProjectileFactory;
 	public EnemyFactory(Texture2D[] textures, Vector2 window_size) {
 		enemies = new List<IEnemy>();
 		this.textures = textures;
 		this.window_size = window_size;
-		enemyProjectileFactory = new EnemyProjectileFactory(textures[1]);
+		enemyProjectileFactory = new EnemyProjectileFactory(textures);
 	}
 
 	public void AddEnemy(string enemy_name, string color_variation = null) {
@@ -34,6 +34,9 @@ public class EnemyFactory {
 				break;
 			case "DarkNut":
 				enemy = new DarkNut(textures[0], window_size, color_variation);
+				break;
+			case "Goriya":
+				enemy = new Goriya(textures[0], window_size, enemyProjectileFactory, color_variation);
 				break;
 			default:
 				break;

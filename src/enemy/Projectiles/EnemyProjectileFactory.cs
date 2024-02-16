@@ -12,9 +12,9 @@ namespace Enemy
             Boomerang
         }
         private List<IEnemyProjectile> projectiles;
-        private Texture2D texture;
+        private Texture2D[] texture;
 
-        public EnemyProjectileFactory(Texture2D texture)
+        public EnemyProjectileFactory(Texture2D[] texture)
         {
             this.texture = texture;
             projectiles = new List<IEnemyProjectile>();
@@ -25,9 +25,10 @@ namespace Enemy
             switch (projectile)
             {
                 case ProjectileType.Fireball:
-                    projectiles.Add(new FireBall(texture, location, direction));
+                    projectiles.Add(new FireBall(texture[1], location, direction));
                     break;
                 case ProjectileType.Boomerang:
+                    projectiles.Add(new Boomerang(texture[0], location, direction));
                     break;
             }
         }
