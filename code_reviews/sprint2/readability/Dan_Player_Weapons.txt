@@ -1,2 +1,10 @@
 Author: Daniel Feng
 Date: Feb. 16, 2024
+Sprint: 2
+.cs files reviewed: All .cs files under src/Player/Player Weapons
+Author of the .cs files: Dan Perry
+Number of Minutes to complete the review: 20
+Specific Comments:
+Generally the player weapon sprites classes follow a consistent design pattern of having short and simple classes/functions and a good naming strategy. Thanks to that, the code in the Player Weapons folder is very intuitive.
+In the WeaponHandler class however, the choice of not immediately removing the projectile upon calling ProjectileExpiration is quite puzzling, rather it's saved in a list called expiredProjectiles where the usage of having such a list is not immediately obvious. 
+
