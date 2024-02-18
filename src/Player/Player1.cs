@@ -1,7 +1,8 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using System.Diagnostics;
 using static ZeldaGame.Player.PlayerStateMachine;
-
+using static ZeldaGame.Player.WeaponHandler;
 
 namespace ZeldaGame.Player {
 	public class Player1 : IPlayer
@@ -16,14 +17,17 @@ namespace ZeldaGame.Player {
 
 		private int speed;
 		private Direction direction;
+		private Swords currSword;
 		private int animTimer;
 
 		public Player1(Vector2 window_size)
 		{
-			sprite = PlayerSpriteFactory.Instance.CreateWalkSprite(Direction.Down);
+			direction = Direction.Down;
+			sprite = PlayerSpriteFactory.Instance.CreateWalkSprite(direction);
 			stateMachine = new PlayerStateMachine(sprite);
 			weaponHandler = new WeaponHandler();
 
+			currSword = weaponHandler.currSword;
 			position = new Vector2(window_size.X / 2, window_size.Y / 2);
 			resetPosition = position;
 			movement = new Vector2(0, 0);
@@ -41,6 +45,13 @@ namespace ZeldaGame.Player {
 			this.sprite = sprite;
 		}
 
+		public Swords GetSword() {
+			return currSword;
+		}
+		public void SetSword(Swords sword) {
+			currSword = sword;
+		}
+
 		public void TakeDamage() {
 			stateMachine.BeHurt();
 		}
@@ -56,16 +67,19 @@ namespace ZeldaGame.Player {
 
 		public void Walk()
 		{
-			UpdateMovementVector();
-            sprite = stateMachine.Walk();
-			isMoving = true;
+			if (animTimer < 0) {
+				UpdateMovementVector();
+				sprite = stateMachine.Walk();
+				isMoving = true;
+			}
 		}
 
 		public void Attack()
 		{
-			if (animTimer == -1) {
+			if (animTimer < 0 && currSword != Swords.None) {
+				animTimer = 16;
 				sprite = stateMachine.Attack();
-				animTimer = 12;
+				weaponHandler.UseSword((int)currSword, position, stateMachine.GetDirection());
 			}
 		}
 		public void PickUp()
@@ -75,10 +89,10 @@ namespace ZeldaGame.Player {
 
 		public void UseItem(int item)
 		{
-			if (animTimer == -1) {
+			if (animTimer < 0) {
+				animTimer = 20;
 				sprite = stateMachine.UseItem();
 				weaponHandler.UseItem(item, position, stateMachine.GetDirection());
-				animTimer = 20;
 			}
 		}
 
@@ -96,6 +110,7 @@ namespace ZeldaGame.Player {
             if (isMoving)
 			{
 				position += movement;
+				//animTimer = 0;
 				isMoving = false; // Set to false, will make Link idle if Walk() does not get called again
 			} else
 			{

@@ -3,7 +3,7 @@ using Microsoft.Xna.Framework.Graphics;
 using System.Diagnostics;
 using static ZeldaGame.Player.PlayerStateMachine;
 
-public class WoodSwordVerticalSprite : IPlayerProjectile {
+public class WhiteSwordVerticalSprite : IPlayerProjectile {
 	SpriteEffects effect;
 	private Texture2D Sprite;
 	private Direction direction;
@@ -15,12 +15,12 @@ public class WoodSwordVerticalSprite : IPlayerProjectile {
 	private Vector2 position;
 	private Vector2 offset;
 
-	public WoodSwordVerticalSprite(Texture2D sprite, Direction direction, Vector2 position) {
+	public WhiteSwordVerticalSprite(Texture2D sprite, Direction direction, Vector2 position) {
 		isActive = true;
 		Sprite = sprite;
 		effect = SpriteEffects.None;
 		this.direction = direction;
-		offset = new Vector2(5, 12);
+		offset = new Vector2(5, 0);
 		this.position = position;
 	}
 
@@ -47,7 +47,7 @@ public class WoodSwordVerticalSprite : IPlayerProjectile {
 				break;
 		}
 
-		Rectangle sourceRectangle = new Rectangle(1, 154, 8, 16);
+		Rectangle sourceRectangle = new Rectangle(36, 154, 8, 16);
 		Rectangle destinationRectangle;
 		if (direction == Direction.Down) {
 			effect = SpriteEffects.FlipVertically;

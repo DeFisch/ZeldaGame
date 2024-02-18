@@ -12,7 +12,7 @@ namespace ZeldaGame.Player {
 	public class PlayerStateMachine {
 		public enum Direction { Up, Left, Down, Right };
 		public enum State { Idle, Walk, Attack, PickUp, UseItem, Block };
-		public enum Health { Normal, Hurt };
+		public enum Health { Full, Normal, Hurt };
 
 		public Direction direction;
 		public Direction prevDirection;
@@ -26,7 +26,7 @@ namespace ZeldaGame.Player {
 			direction = Direction.Down;
 			state = State.Idle;
 			prevState = state;
-			health = Health.Normal;
+			health = Health.Full;
 			this.sprite = sprite;
 			animTimer = -1;
 		}

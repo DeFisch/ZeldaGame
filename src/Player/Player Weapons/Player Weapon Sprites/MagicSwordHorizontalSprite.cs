@@ -1,9 +1,8 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using System.Diagnostics;
 using static ZeldaGame.Player.PlayerStateMachine;
 
-public class WoodSwordVerticalSprite : IPlayerProjectile {
+public class MagicSwordHorizontalSprite : IPlayerProjectile {
 	SpriteEffects effect;
 	private Texture2D Sprite;
 	private Direction direction;
@@ -14,13 +13,12 @@ public class WoodSwordVerticalSprite : IPlayerProjectile {
 
 	private Vector2 position;
 	private Vector2 offset;
-
-	public WoodSwordVerticalSprite(Texture2D sprite, Direction direction, Vector2 position) {
+	public MagicSwordHorizontalSprite(Texture2D sprite, Direction direction, Vector2 position) {
 		isActive = true;
 		Sprite = sprite;
 		effect = SpriteEffects.None;
 		this.direction = direction;
-		offset = new Vector2(5, 12);
+		offset = new Vector2(12, 1);
 		this.position = position;
 	}
 
@@ -34,28 +32,27 @@ public class WoodSwordVerticalSprite : IPlayerProjectile {
     }
 
     public void Draw(SpriteBatch spriteBatch) {
-
 		switch (currFrames) {
 			case 0:
-				offset.Y = 12;
+				offset.X = 12;
 				break;
 			case 8:
-				offset.Y = 8;
+				offset.X = 8;
 				break;
 			case 9:
-				offset.Y = 4;
+				offset.X = 4;
 				break;
 		}
 
-		Rectangle sourceRectangle = new Rectangle(1, 154, 8, 16);
+		Rectangle sourceRectangle = new Rectangle(80, 154, 16, 16);
 		Rectangle destinationRectangle;
-		if (direction == Direction.Down) {
-			effect = SpriteEffects.FlipVertically;
+		if (direction == Direction.Right) {
+			effect = SpriteEffects.None;
 			destinationRectangle = new Rectangle((int)(position.X + offset.X), (int)(position.Y + offset.Y), sourceRectangle.Width * 2, sourceRectangle.Height * 2);
 		}
 		else {
-			effect = SpriteEffects.None;
-			destinationRectangle = new Rectangle((int)(position.X + offset.X), (int)(position.Y - offset.Y), sourceRectangle.Width * 2, sourceRectangle.Height * 2);
+			effect = SpriteEffects.FlipHorizontally;
+			destinationRectangle = new Rectangle((int)(position.X - offset.X), (int)(position.Y + offset.Y), sourceRectangle.Width * 2, sourceRectangle.Height * 2);
 		}
 		spriteBatch.Draw(Sprite, destinationRectangle, sourceRectangle, Color.White, rotation: 0, new Vector2(0, 0), effects: effect, 1);
 	}
