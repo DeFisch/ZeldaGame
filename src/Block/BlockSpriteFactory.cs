@@ -40,7 +40,15 @@ namespace Sprint0.Block {
 					block = new Obstacle(texture, position);
 					break;
 
-				default:
+                case "Water":
+                    block = new Water(texture, position);
+                    break;
+
+                case "Sand":
+                    block = new Sand(texture, position);
+                    break;
+
+                default:
 					break;
 			}
 			blockList.Add(block);
@@ -52,6 +60,8 @@ namespace Sprint0.Block {
 			AddToList("Walls");
 			AddToList("Ground");
 			AddToList("Obstacle");
+			AddToList("Water");
+			AddToList("Sand");
 		}
 		
 
