@@ -1,3 +1,8 @@
 Author: Daniel Feng
 Date: Feb. 16, 2024
-
+Sprint number: 2
+Name of the .cs file being reviewed: all .cs files in src/Player/Player Sprites and PlayerSpriteFactory.cs
+Author of the .cs files being reviewed: Olu
+Number of minutes taken for the review: 20 mins
+Comments:
+One problem with the Player Sprites are the lack of use of the dictionary in PlayerSpriteFactory.cs. In the hypothetic scenario where we in the future need to pass in additional parameters (like obstacles information) into WalkUpSprite(),WalkDownSprite(), etc. for collision handling, in order to change the design pattern, we need to go through each of the ISprite and add a new parameter for each function, at the same time the cyclomatic complexity increases for the use of the switch statement, the inefficiency becomes especially prominent when the sprite factory is called every frame (very frequently) according to Amadhl's Law.
