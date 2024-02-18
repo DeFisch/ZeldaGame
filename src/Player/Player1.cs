@@ -22,7 +22,6 @@ namespace ZeldaGame.Player {
 		{
 			sprite = PlayerSpriteFactory.Instance.CreateWalkSprite(Direction.Down);
 			stateMachine = new PlayerStateMachine(sprite);
-			//this.weaponHandler = weaponHandler;
 			weaponHandler = new WeaponHandler();
 
 			position = new Vector2(window_size.X / 2, window_size.Y / 2);
@@ -93,7 +92,7 @@ namespace ZeldaGame.Player {
 				Idle();
 			}
 
-			// Updates position if Walk() is active AKA if player is moving, otherwise idle
+			// if player is moving, Walk() updates, otherwise Idle()
             if (isMoving)
 			{
 				position += movement;

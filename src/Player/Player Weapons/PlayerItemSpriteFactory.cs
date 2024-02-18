@@ -29,7 +29,7 @@ public class PlayerItemSpriteFactory {
 		{
 			CreateArrowSprite(direction, position), CreateBlueArrowSprite(direction, position), 
 			CreateBoomerangSprite(direction, position), CreateBlueBoomerangSprite(direction, position),
-			CreateBombSprite(position), CreateFireballSprite(direction, position)
+			CreateBombSprite(direction, position), CreateFireballSprite(direction, position)
 		};
 
 		return projectiles[item];
@@ -71,8 +71,8 @@ public class PlayerItemSpriteFactory {
 		return new BlueBoomerangSprite(playerTexture, direction, position);
 	}
 
-	public IPlayerProjectile CreateBombSprite(Vector2 position) {
-		return new BombSprite(playerTexture, position);
+	public IPlayerProjectile CreateBombSprite(Direction direction, Vector2 position) {
+		return new BombSprite(playerTexture, direction, position);
 	}
 
 	public IPlayerProjectile CreateFireballSprite(Direction direction, Vector2 position) {

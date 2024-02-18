@@ -11,16 +11,16 @@ public class BoomerangSprite : IPlayerProjectile {
 
     private Vector2 position;
     private Vector2 projectileMovement;
-    private double projectileSpeed = 3;
+    private readonly double projectileSpeed = 1.75;
 
 	private int existanceCounter;
-	private int existanceDuration;
+	private readonly int existanceDuration = 100;
     private int currentFrame;
-	private int totalFrames;
-	private int frameRate;
+	private readonly int totalFrames = 3;
 	private int frameID;
+    private readonly int frameRate = 6;
 
-	public BoomerangSprite(Texture2D sprite, Direction direction, Vector2 position) {
+    public BoomerangSprite(Texture2D sprite, Direction direction, Vector2 position) {
 		isActive = true;
 		Sprite = sprite;
 		effect = SpriteEffects.None;
@@ -28,11 +28,8 @@ public class BoomerangSprite : IPlayerProjectile {
 		this.position = position;
 
 		existanceCounter = 0;
-		existanceDuration = 100;
 		currentFrame = 0;
-		totalFrames = 3;
 		frameID = 0;
-		frameRate = 8;
 	}
 
 	public Direction GetDirection() {
@@ -46,7 +43,7 @@ public class BoomerangSprite : IPlayerProjectile {
 
 	public void Draw(SpriteBatch spriteBatch) {
 		Rectangle sourceRectangle = new Rectangle(64 + (currentFrame * 9), 185, 8, 16);
-		Rectangle destinationRectangle = new Rectangle((int)position.X, (int)position.Y, sourceRectangle.Width * 2, sourceRectangle.Height * 2);
+		Rectangle destinationRectangle = new Rectangle((int)position.X + 8, (int)position.Y, sourceRectangle.Width * 2, sourceRectangle.Height * 2);
 		spriteBatch.Draw(Sprite, destinationRectangle, sourceRectangle, Color.White, rotation: 0, new Vector2(0, 0), effects: effect, 1);
 	}
 
@@ -63,39 +60,32 @@ public class BoomerangSprite : IPlayerProjectile {
 			currentFrame = 0;
 		}
 
-		// Determines direction at which is travels
+        double scale = -4 * (1 / (1 + Math.Exp(-(10.0 / existanceDuration) * (existanceCounter - 0.6 * existanceDuration)))) + 2; // logistic function to smooth out animation
+        // Determines direction at which is travels
         switch (this.GetDirection())
         {
             case Direction.Up:
-                projectileMovement = new Vector2(0, -(float)projectileSpeed);
+                projectileMovement = new Vector2(0, -(float)projectileSpeed) * (float)scale;
                 break;
             case Direction.Down:
-                projectileMovement = new Vector2(0, (float)projectileSpeed);
+                projectileMovement = new Vector2(0, (float)projectileSpeed) * (float)scale;
                 break;
             case Direction.Left:
-                projectileMovement = new Vector2(-(float)projectileSpeed, 0);
+                projectileMovement = new Vector2(-(float)projectileSpeed, 0) * (float)scale;
                 break;
             case Direction.Right:
-                projectileMovement = new Vector2((float)projectileSpeed, 0);
+                projectileMovement = new Vector2((float)projectileSpeed, 0) * (float)scale;
                 break;
         }
 
 		// Indicates when it is time to remove or come back to player
-        if (existanceCounter < existanceDuration)
-        {
-            existanceCounter++;
-        }
-
-        if (existanceCounter <= existanceDuration/2)
+		existanceCounter++;
+        if (existanceCounter <= existanceDuration + 20)
 		{
 			position += projectileMovement;
-        } else if (existanceCounter < existanceDuration)
-		{
-			position -= projectileMovement;
 		} else
 		{
 			isActive = false;
 		}
     }
-
 }
