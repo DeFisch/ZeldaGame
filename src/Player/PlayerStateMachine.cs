@@ -1,14 +1,4 @@
-﻿using Microsoft.Xna.Framework.Graphics;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using Microsoft.Xna.Framework;
-using System.Text;
-using System.Threading.Tasks;
-using Sprint0;
-using System.Diagnostics;
-
-namespace ZeldaGame.Player {
+﻿namespace ZeldaGame.Player {
 	public class PlayerStateMachine {
 		public enum Direction { Up, Left, Down, Right };
 		public enum State { Idle, Walk, Attack, PickUp, UseItem, Block };
@@ -17,18 +7,14 @@ namespace ZeldaGame.Player {
 		public Direction direction;
 		public Direction prevDirection;
 		private State state;
-		private State prevState;
 		private Health health;
 		private ISprite sprite;
-		private int animTimer;
 
 		public PlayerStateMachine(ISprite sprite) {
 			direction = Direction.Down;
 			state = State.Idle;
-			prevState = state;
 			health = Health.Full;
 			this.sprite = sprite;
-			animTimer = -1;
 		}
 
 		public void BeHurt() {
@@ -71,33 +57,24 @@ namespace ZeldaGame.Player {
 		}
 
 		public ISprite Attack() {
-			prevState = state;
 			state = State.Attack;
 			sprite = PlayerSpriteFactory.Instance.CreateAttackSprite(direction);
-			animTimer = 12; //actual time
 
 			return sprite;
 		}
 
 		public void PickUp() {
-			prevState = state;
 			state = State.PickUp;
-			// change sprite to pick up item
 		}
 
 		public ISprite UseItem() {
-			//prevState = state;
 			state = State.UseItem;
 			sprite = PlayerSpriteFactory.Instance.CreateUseItemSprite(direction);
-			//animTimer = 12; //random number, will change l8r
 			return sprite;
 		}
 
 		public void Block() {
-			prevState = state;
 			state = State.Block;
-			animTimer = 5; //idk actual anim timer
-			// change sprite to block
 		}
 	}
 }

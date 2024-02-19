@@ -41,6 +41,7 @@ public class BlueArrowVerticalSprite : IPlayerProjectile {
 	}
 
 	public void Update() {
+        // Moves in direction player is facing
         switch (this.GetDirection())
         {
             case Direction.Up:

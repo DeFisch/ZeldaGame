@@ -2,12 +2,9 @@
 using System.Collections.Generic;
 using ZeldaGame;
 
-/*
- * Controller class for the Keyboard
- */
 public class KeyboardController : IController
 {
-	private KeyboardHandler keyboardHandler;
+	private readonly KeyboardHandler keyboardHandler;
 	private Dictionary<Keys, ICommand> holdKeys;
 	private Dictionary<Keys, ICommand> pressKeys;
 

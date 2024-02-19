@@ -1,7 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System.Collections.Generic;
-using ZeldaGame.Player;
 using static ZeldaGame.Player.PlayerStateMachine;
 namespace ZeldaGame.Player;
 
@@ -10,8 +9,6 @@ public class WeaponHandler {
 	private List<IPlayerProjectile> activeProjectiles;
 	private List<IPlayerProjectile> expiredProjectiles;
 
-	private Vector2 projectileMovement;
-	private int projectileSpeed = 3;
 	public Swords currSword;
 	public WeaponHandler() {
 		activeProjectiles = new List<IPlayerProjectile>();

@@ -14,11 +14,11 @@ public class FireballSprite : IPlayerProjectile {
     private int projectileSpeed = 3;
 
     private int currentFrame;
-	private int totalFrames;
-	private int frameRate;
+	private readonly int totalFrames = 4;
 	private int frameID;
+    private readonly int frameRate = 8;
 
-	public FireballSprite(Texture2D sprite, Direction direction, Vector2 position) {
+    public FireballSprite(Texture2D sprite, Direction direction, Vector2 position) {
 		isActive = true;
 		Sprite = sprite;
 		effect = SpriteEffects.None;
@@ -26,9 +26,7 @@ public class FireballSprite : IPlayerProjectile {
 		this.position = position;
 
 		currentFrame = 0;
-		totalFrames = 4;
 		frameID = 0;
-		frameRate = 8;
 	}
 
 	public Direction GetDirection() {
@@ -48,6 +46,7 @@ public class FireballSprite : IPlayerProjectile {
 	}
 
 	public void Update() {
+		// Updates frame of fireball
 		frameID++;
 		if (frameID % frameRate == 0) {
 			currentFrame++;
@@ -58,6 +57,7 @@ public class FireballSprite : IPlayerProjectile {
 			currentFrame = 0;
 		}
 
+		// Updates fireball effect
 		switch (currentFrame) {
 			case 0:
 				effect = SpriteEffects.None;
@@ -67,6 +67,7 @@ public class FireballSprite : IPlayerProjectile {
 				break;
 		}
 
+		// Travels in direction of player
         switch (this.GetDirection())
         {
             case Direction.Up:

@@ -3,7 +3,7 @@ using Microsoft.Xna.Framework.Graphics;
 using static ZeldaGame.Player.PlayerStateMachine;
 
 public class BombSprite : IPlayerProjectile {
-	SpriteEffects effect;
+	private SpriteEffects effect;
 	private Texture2D Sprite;
 	private bool isActive;
 
@@ -11,11 +11,11 @@ public class BombSprite : IPlayerProjectile {
 	private Direction direction;
 
     private int currentFrame;
-	private int totalFrames;
-	private int frameRate;
+	private readonly int totalFrames = 4;
 	private int frameID;
-	private int bombCounter;
-	private int bombTimer;
+    private readonly int frameRate = 8;
+    private int bombCounter;
+	private readonly int bombTimer = 48;
 
 	private int XOffSet;
 	private int YOffSet;
@@ -28,11 +28,8 @@ public class BombSprite : IPlayerProjectile {
 		this.direction = direction;
 
 		currentFrame = 0;
-		totalFrames = 4;
 		frameID = 0;
-		frameRate = 8;
 		bombCounter = 0;
-		bombTimer = 48;
 
 		SetOffSet();
 	}
@@ -62,6 +59,7 @@ public class BombSprite : IPlayerProjectile {
 	}
 
 	public void Update() {
+		// Lets first frame of bomb exist for the counter duration before it animates the explosion
 		frameID++;
 		bombCounter++;
 		if (frameID % frameRate == 0) {
@@ -73,12 +71,14 @@ public class BombSprite : IPlayerProjectile {
 			}
 		}
 
+		// Once exploded, it expires
 		if (currentFrame == totalFrames) {
 			currentFrame = 0;
 			isActive = false;
 		}
 	}
 
+	// Sets bomb in front of player
 	private void SetOffSet()
 	{
         switch (direction)

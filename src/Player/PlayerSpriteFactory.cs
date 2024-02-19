@@ -1,13 +1,10 @@
-﻿using System.Collections.Generic;
-using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Content;
+﻿using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using static ZeldaGame.Player.PlayerStateMachine;
 namespace ZeldaGame.Player;
 
 public class PlayerSpriteFactory {
 	private Texture2D playerTexture;
-	//private Vector2 window_size;
 
 	private static PlayerSpriteFactory instance = new PlayerSpriteFactory();
 
@@ -63,8 +60,4 @@ public class PlayerSpriteFactory {
 		}
 		return null;
 	}
-	/*
-        Add additional methods for attack, use item, etc.
-     */
-
 }

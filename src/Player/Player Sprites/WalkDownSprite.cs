@@ -1,7 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using System.Collections;
-using System.Diagnostics;
 
 public class WalkDownSprite : ISprite {
 	private readonly Texture2D sprite;
