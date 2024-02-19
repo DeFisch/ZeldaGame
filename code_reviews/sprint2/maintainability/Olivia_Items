@@ -1,0 +1,10 @@
+Author: Dan Perry
+Date: Feb. 19, 2024
+Sprint number: 2
+Name of the .cs file being reviewed: ItemSpriteFactory.cs and one item file
+Author of the .cs files being reviewed: Olivia
+Number of minutes taken for the review: 15 mins
+Comments: The items looked tedious to make, and in some cases the IsPlaying variable was never used, which makes me question if it was necessary for all the files.
+          For the ItemSpriteFactory, I would have declared the list as a list of ISprites, as you did, but you could've had it initialized with all your items, for
+          example List<ISprite> { new x(), new y()... }. This way if you are to add a new sprite, you only have to add one additional piece, rather than declaring it,
+          then setting it equal to an object, then adding it. That is just a preference, though, and it is otherwise maintainable for the switching of items.
