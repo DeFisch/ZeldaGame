@@ -7,7 +7,6 @@ namespace Sprint0.Block {
 		private List<IBlock> blockList;
 		private Texture2D texture;
 		private Vector2 position;
-		private IBlock block;
 		private int cycleIndex;
 		private int listLength;
 		private Vector2 resetPosition;

@@ -1,0 +1,11 @@
+Maintainability Code Review
+Reviewer: Olivia Maynard
+Reviewee: Leslie Cobbold
+Class reviewing: NPCFactory.cs
+Date: 2/19/24
+
+-	Naming conventions looks mostly consistent, I saw only one instance where CamelCase wasn’t used (using underscores instead of capital letters for distinction.)
+-	The AddNPCs() function is a readable/clean way to add all of the different NPCs in.
+-	No comments, but I think it’s fine because all of your code is easy to understand. 
+The only thing that I might explain is some of the variables in cycleList() and how you're cycling through the List.
+-	Overall, nicely readable code. 
