@@ -1,6 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using System.Runtime.CompilerServices;
 using static ZeldaGame.Player.PlayerStateMachine;
 
 public class FireballSprite : IPlayerProjectile {
@@ -11,7 +10,7 @@ public class FireballSprite : IPlayerProjectile {
 
     private Vector2 position;
     private Vector2 projectileMovement;
-    private int projectileSpeed = 3;
+    private readonly float projectileSpeed = 3.5f;
 
     private int currentFrame;
 	private readonly int totalFrames = 4;

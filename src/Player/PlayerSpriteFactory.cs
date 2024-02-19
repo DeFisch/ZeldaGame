@@ -20,7 +20,7 @@ public class PlayerSpriteFactory {
 		playerTexture = content.Load<Texture2D>("Link");
 	}
 
-	public ISprite CreateWalkSprite(Direction direction) {
+	public IPlayerSprite CreateWalkSprite(Direction direction) {
 		switch (direction) {
 			case Direction.Up:
 				return new WalkUpSprite(playerTexture);
@@ -30,24 +30,12 @@ public class PlayerSpriteFactory {
 				return new WalkDownSprite(playerTexture);
 			case Direction.Right:
 				return new WalkRightSprite(playerTexture);
+			default:
+				return null;
 		}
-		return null;
 	}
 
-	public ISprite CreateAttackSprite(Direction direction) {
-		switch (direction) {
-			case Direction.Up:
-				return new AttackUpSprite(playerTexture);
-			case Direction.Left:
-				return new AttackLeftSprite(playerTexture);
-			case Direction.Down:
-				return new AttackDownSprite(playerTexture);
-			case Direction.Right:
-				return new AttackRightSprite(playerTexture);
-		}
-		return null;
-	}
-	public ISprite CreateUseItemSprite(Direction direction) {
+	public IPlayerSprite CreateUseItemSprite(Direction direction) {
 		switch (direction) {
 			case Direction.Up:
 				return new UseItemUpSprite(playerTexture);
@@ -57,7 +45,8 @@ public class PlayerSpriteFactory {
 				return new UseItemDownSprite(playerTexture);
 			case Direction.Right:
 				return new UseItemRightSprite(playerTexture);
+			default:
+				return null;
 		}
-		return null;
 	}
 }

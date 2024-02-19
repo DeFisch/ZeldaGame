@@ -1,7 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-public class WalkDownSprite : ISprite {
+public class WalkDownSprite : IPlayerSprite {
 	private readonly Texture2D sprite;
 	private Rectangle srcRectangle;
 	private Rectangle destRectangle;

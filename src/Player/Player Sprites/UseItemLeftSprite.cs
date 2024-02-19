@@ -1,12 +1,21 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-public class UseItemLeftSprite : ISprite {
+public class UseItemLeftSprite : IPlayerSprite {
 	private Texture2D Sprite;
-	private bool isPlaying;
 
+	public bool isPlaying;
+	public int currentFrame;
+	public int totalFrames;
+	public int timesLooped;
+
+	// Constructor
 	public UseItemLeftSprite(Texture2D sprite) {
+		isPlaying = true;
 		Sprite = sprite;
+		currentFrame = 0;
+		totalFrames = 12;
+		timesLooped = 0;
 	}
 
 	public void Draw(SpriteBatch spriteBatch, Vector2 location) {
@@ -17,6 +26,16 @@ public class UseItemLeftSprite : ISprite {
 		spriteBatch.Draw(Sprite, destinationRectangle, sourceRectangle, Color.White, rotation: 0, new Vector2(0, 0), effects: effect, 1);
 	}
 
+	public void Update() {
+		if (isPlaying) {
+			currentFrame++;
+			if (currentFrame == totalFrames) {
+				currentFrame = 0;
+				timesLooped++;
+			}
+		}
+	}
+
 	public void Play() {
 		isPlaying = true;
 	}
@@ -24,9 +43,4 @@ public class UseItemLeftSprite : ISprite {
 	public void Pause() {
 		isPlaying = false;
 	}
-
-	public void Update() {
-
-	}
-
 }

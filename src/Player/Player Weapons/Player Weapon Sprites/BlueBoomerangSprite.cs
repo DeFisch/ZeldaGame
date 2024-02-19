@@ -11,7 +11,7 @@ public class BlueBoomerangSprite : IPlayerProjectile {
 
     private Vector2 position;
     private Vector2 projectileMovement;
-    private readonly double projectileSpeed = 1.75;
+    private readonly double projectileSpeed = 2;
 
     private int existanceCounter;
     private readonly int existanceDuration = 100;

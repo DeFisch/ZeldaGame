@@ -8,9 +8,9 @@
 		public Direction prevDirection;
 		private State state;
 		private Health health;
-		private ISprite sprite;
+		private IPlayerSprite sprite;
 
-		public PlayerStateMachine(ISprite sprite) {
+		public PlayerStateMachine(IPlayerSprite sprite) {
 			direction = Direction.Down;
 			state = State.Idle;
 			health = Health.Full;
@@ -45,10 +45,10 @@
 		public void Idle()
 		{
             state = State.Idle;
-            sprite.Pause();	
+            sprite.Pause();
 		}
 
-		public ISprite Walk()
+		public IPlayerSprite Walk()
 		{
 			state = State.Walk;
 			sprite = PlayerSpriteFactory.Instance.CreateWalkSprite(direction);
@@ -56,9 +56,9 @@
 			return sprite;
 		}
 
-		public ISprite Attack() {
+		public IPlayerSprite Attack() {
 			state = State.Attack;
-			sprite = PlayerSpriteFactory.Instance.CreateAttackSprite(direction);
+			sprite = PlayerSpriteFactory.Instance.CreateUseItemSprite(direction);
 
 			return sprite;
 		}
@@ -67,7 +67,7 @@
 			state = State.PickUp;
 		}
 
-		public ISprite UseItem() {
+		public IPlayerSprite UseItem() {
 			state = State.UseItem;
 			sprite = PlayerSpriteFactory.Instance.CreateUseItemSprite(direction);
 			return sprite;

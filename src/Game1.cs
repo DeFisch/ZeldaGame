@@ -133,7 +133,7 @@ namespace ZeldaGame {
 			keyboardController.RegisterPressKey(Keys.R, new ResetCommand(this));
 		}
 
-        public void setSprite(ISprite sprite) {
+        public void setSprite(IPlayerSprite sprite) {
 			this.Link.SetSprite(sprite);
 		}
 

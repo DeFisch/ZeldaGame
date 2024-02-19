@@ -2,7 +2,7 @@
 using Microsoft.Xna.Framework.Graphics;
 using System.Diagnostics;
 
-public class WalkLeftSprite : ISprite {
+public class WalkLeftSprite : IPlayerSprite {
 	private Texture2D sprite;
 	private Rectangle srcRectangle;
 	private Rectangle destRectangle;

@@ -10,7 +10,7 @@ public class BlueArrowHorizontalSprite : IPlayerProjectile {
 
     private Vector2 position;
     private Vector2 projectileMovement;
-    private int projectileSpeed = 3;
+    private readonly int projectileSpeed = 4;
 
     public BlueArrowHorizontalSprite(Texture2D sprite, Direction direction, Vector2 position) {
         isActive = true;

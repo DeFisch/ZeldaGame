@@ -10,7 +10,6 @@ namespace ZeldaGame.Items {
 	public class Key : ISprite {
 		private Texture2D texture;
 		private Vector2 pos;
-		private bool isPlaying;
 		public Key(Texture2D texture, Vector2 pos) {
 			this.texture = texture;
 			this.pos = pos;
@@ -21,14 +20,6 @@ namespace ZeldaGame.Items {
 			Rectangle sourceRectangle = new Rectangle(240, 0, 7, 16);
 			Rectangle destinationRectangle = new Rectangle((int)pos.X, (int)pos.Y, 14, 42);
 			spriteBatch.Draw(texture, destinationRectangle, sourceRectangle, Color.White);
-		}
-
-		public void Play() {
-			isPlaying = true;
-		}
-
-		public void Pause() {
-			isPlaying = false;
 		}
 
 		public void PlayToggle() {

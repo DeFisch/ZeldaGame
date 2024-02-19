@@ -10,7 +10,7 @@ namespace ZeldaGame.Items {
 	public class Clock : ISprite {
 		private Texture2D texture;
 		private Vector2 pos;
-		private bool isPlaying;
+
 		public Clock(Texture2D texture, Vector2 pos) {
 			this.texture = texture;
 			this.pos = pos;
@@ -21,14 +21,6 @@ namespace ZeldaGame.Items {
 			Rectangle sourceRectangle = new Rectangle(58, 0, 11, 16);
 			Rectangle destinationRectangle = new Rectangle((int)pos.X, (int)pos.Y, 22, 38);
 			spriteBatch.Draw(texture, destinationRectangle, sourceRectangle, Color.White);
-		}
-
-		public void Play() {
-			isPlaying = true;
-		}
-
-		public void Pause() {
-			isPlaying = false;
 		}
 
 		public void Update() {

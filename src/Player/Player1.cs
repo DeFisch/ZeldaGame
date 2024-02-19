@@ -8,7 +8,7 @@ namespace ZeldaGame.Player {
 	{
 		private PlayerStateMachine stateMachine;
 		private WeaponHandler weaponHandler;
-		private ISprite sprite;
+		private IPlayerSprite sprite;
 		private Vector2 position;
 		private Vector2 movement;
 		private Vector2 resetPosition;
@@ -36,11 +36,11 @@ namespace ZeldaGame.Player {
 			isMoving = false;
 		}
 
-		public ISprite GetSprite() {
+		public IPlayerSprite GetSprite() {
 			return sprite;
 		}
 
-		public void SetSprite(ISprite sprite) {
+		public void SetSprite(IPlayerSprite sprite) {
 			this.sprite = sprite;
 		}
 
@@ -89,7 +89,7 @@ namespace ZeldaGame.Player {
 		public void UseItem(int item)
 		{
 			if (animTimer < 0) {
-				animTimer = 20;
+				animTimer = 15;
 				sprite = stateMachine.UseItem();
 				weaponHandler.UseItem(item, position, stateMachine.GetDirection());
 			}

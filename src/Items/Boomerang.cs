@@ -10,7 +10,7 @@ namespace ZeldaGame.Items {
 	public class Boomerang : ISprite {
 		private Texture2D texture;
 		private Vector2 pos;
-		private bool isPlaying;
+
 		public Boomerang(Texture2D texture, Vector2 pos) {
 			this.texture = texture;
 			this.pos = pos;
@@ -21,14 +21,6 @@ namespace ZeldaGame.Items {
 			Rectangle sourceRectangle = new Rectangle(128, 2, 5, 10);
 			Rectangle destinationRectangle = new Rectangle((int)pos.X, (int)pos.Y, 15, 30);
 			spriteBatch.Draw(texture, destinationRectangle, sourceRectangle, Color.White);
-		}
-
-		public void Play() {
-			isPlaying = true;
-		}
-
-		public void Pause() {
-			isPlaying = false;
 		}
 
 		public void Update() {

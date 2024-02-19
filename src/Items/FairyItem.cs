@@ -11,7 +11,6 @@ namespace ZeldaGame.Items {
 		private int counter = 0;
 		private Texture2D texture;
 		private Vector2 pos;
-		private bool isPlaying;
 		public FairyItem(Texture2D texture, Vector2 pos) {
 			this.texture = texture;
 			this.pos = pos;
@@ -37,14 +36,6 @@ namespace ZeldaGame.Items {
 			if (counter > 20) {
 				counter = 0;
 			}
-		}
-
-		public void Play() {
-			isPlaying = true;
-		}
-
-		public void Pause() {
-			isPlaying = false;
 		}
 
 		public void Update() {
