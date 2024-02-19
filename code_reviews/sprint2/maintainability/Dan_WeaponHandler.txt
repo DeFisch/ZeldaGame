@@ -1,0 +1,11 @@
+Maintainability Code Review
+Reviewer: Olivia Maynard
+Reviewee: Dan Perry
+Class reviewing: WeaponHandler.cs
+Date: 2/19/24
+
+- Very low coupling. Everything utilizes objects in different, separate classes and the methods that are part of those classes. 
+- High cohesion as well. All related objects and methods are tightly cohesive within the Player folder and even more specifically the Player Weapons folder.
+- I initially wasn’t favoring the foreach groups, as they allow for less flexibility if you want to directly modify an object in the collection, 
+but they work really well here since you utilize methods from other classes to change the objects. 
+- Overall great maintainability: this class is well-written and easy to modify for future refactoring.
