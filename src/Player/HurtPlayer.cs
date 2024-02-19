@@ -1,11 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
 using static ZeldaGame.Player.PlayerStateMachine;
 
 namespace ZeldaGame.Player {
@@ -20,9 +14,6 @@ namespace ZeldaGame.Player {
 			this.game = game;
 		}
 
-		public void TakeDamage() {
-			// doesn't take damage
-		}
 		public void Attack() {
 			decoratedPlayer.Attack();
 		}
