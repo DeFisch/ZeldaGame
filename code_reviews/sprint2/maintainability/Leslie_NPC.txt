@@ -1,0 +1,8 @@
+Author: Zhiyang Xu
+Date: Feb. 18, 2024
+Sprint number: 2
+Name of the .cs file being reviewed: all .cs files in src/NPCs
+Author of the .cs files being reviewed: Leslie
+Number of minutes taken for the review: 15 mins
+Comments:
+Have a NPCFactory class to regulate all the NPCs. New methods can be added in each NPC class for new requirements and use NPCFactory to pass parameters. Easy for future maintenance.

@@ -16,52 +16,19 @@ namespace Sprint0.Block {
 			blockList = new List<IBlock>();
 			this.texture = texture;
 			position = new Vector2(200, 150);
-			block = null;
 			cycleIndex = 0;
 			listLength = 0;
 			resetPosition = position;
 		}
 
-		public void AddToList(string blockType) {
-			switch (blockType) {
-				case "Stair":
-					block = new Stair(texture, position);
-					break;
-
-				case "Walls":
-					block = new Walls(texture, position);
-					break;
-
-				case "Ground":
-					block = new Ground(texture, position);
-					break;
-
-				case "Obstacle":
-					block = new Obstacle(texture, position);
-					break;
-
-                case "Water":
-                    block = new Water(texture, position);
-                    break;
-
-                case "Sand":
-                    block = new Sand(texture, position);
-                    break;
-
-                default:
-					break;
-			}
-			blockList.Add(block);
-		}
-
 		public void AddBlock () 
 		{
-			AddToList("Stair");
-			AddToList("Walls");
-			AddToList("Ground");
-			AddToList("Obstacle");
-			AddToList("Water");
-			AddToList("Sand");
+            blockList.Add(new Stair(texture, position));
+            blockList.Add(new Walls(texture, position));
+            blockList.Add(new Ground(texture, position));
+            blockList.Add(new Obstacle(texture, position));
+            blockList.Add(new Water(texture, position));
+            blockList.Add(new Sand(texture, position));
 		}
 		
 
@@ -76,8 +43,7 @@ namespace Sprint0.Block {
 		}
 
 		public void Draw(SpriteBatch spriteBatch) {
-			block = blockList[cycleIndex];
-			block.Draw(spriteBatch);
+            blockList[cycleIndex].Draw(spriteBatch);
 		}
 
 		public void Reset()
