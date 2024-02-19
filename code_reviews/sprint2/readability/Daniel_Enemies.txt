@@ -1,0 +1,11 @@
+Author: Dan Perry
+Date: Feb. 19, 2024
+Sprint number: 2
+Name of the .cs file being reviewed: EnemyProjectileFactory.cs, EnemyFactory.cs, a few projectile sprite files
+Author of the .cs files being reviewed: Daniel Feng
+Number of minutes taken for the review: 20 mins
+Comments: You do a great job of splitting up your Update() function as apposed to mine when it comes to updating the projectile animation / duration in your enemy projectile sprite files,
+          as well as had incredible abstraction in your factories. I did find, however, that it made a couple files have a lot of methods, switch case statements, and several method parameters.
+          An example would be in the Goriya sprite file, there was a lot of information to take in and had 100+ lines of compact code. Possibly breaking up into more classes to avoid 
+          bulky code in one file, possibly even have it be reusable somewhere else. Other than those couple cases, it looks great, maintanable too, and inspired me to use a couple strategies
+          you used for future sprints.
