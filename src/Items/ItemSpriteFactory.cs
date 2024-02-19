@@ -9,21 +9,6 @@ using System.Threading.Tasks;
 namespace ZeldaGame.Items {
 	public class ItemSpriteFactory {
 		List<ISprite> objectList;
-		YellowRuby yellowRuby;
-		BlueRuby blueRuby;
-		Heart heart;
-		HeartContainer heartContainer;
-		Triforce triforce;
-		Compass compass;
-		Map map;
-		Key key;
-		Clock clock;
-		Boomerang boomerang;
-		Bow bow;
-		Bomb bomb;
-		FairyItem fairy;
-		FireItem fire;
-
 		Texture2D texture;
 		Texture2D texture2;
 		Vector2 pos;
@@ -35,39 +20,23 @@ namespace ZeldaGame.Items {
 			this.texture = texture;
 			this.texture2 = texture2;
 			pos = new Vector2(300, 150);
-			
-			yellowRuby = new YellowRuby(this.texture, pos);
-			blueRuby = new BlueRuby(this.texture, pos);
-			heart = new Heart(this.texture, pos);
-			triforce = new Triforce(this.texture, pos);
-			heartContainer = new HeartContainer(this.texture, pos);
-			compass = new Compass(this.texture, pos);
-			map = new Map(this.texture, pos);
-			key = new Key(this.texture, pos);
-			clock = new Clock(this.texture, pos);
-			boomerang = new Boomerang(this.texture, pos);
-			bow = new Bow(this.texture, pos);
-			bomb = new Bomb(this.texture, pos);
-			fairy = new FairyItem(this.texture, pos);
-			fire = new FireItem(this.texture2, pos);
-
 		}
 
 		public void ObjectList() {
-			objectList.Add(blueRuby);
-			objectList.Add(yellowRuby);
-			objectList.Add(heart);
-			objectList.Add(triforce);
-			objectList.Add(heartContainer);
-			objectList.Add(compass);
-			objectList.Add(map);
-			objectList.Add(key);
-			objectList.Add(clock);
-			objectList.Add(boomerang);
-			objectList.Add(bow);
-			objectList.Add(bomb);
-			objectList.Add(fairy);
-			objectList.Add(fire);
+			objectList.Add(new BlueRuby(this.texture, pos));
+			objectList.Add(new YellowRuby(this.texture, pos));
+			objectList.Add(new Heart(this.texture, pos));
+			objectList.Add(new Triforce(this.texture, pos));
+			objectList.Add(new HeartContainer(this.texture, pos));
+			objectList.Add(new Compass(this.texture, pos));
+			objectList.Add(new Map(this.texture, pos));
+			objectList.Add(new Key(this.texture, pos));
+			objectList.Add(new Clock(this.texture, pos));
+			objectList.Add(new Boomerang(this.texture, pos));
+			objectList.Add(new Bow(this.texture, pos));
+			objectList.Add(new Bomb(this.texture, pos));
+			objectList.Add(new FairyItem(this.texture, pos));
+			objectList.Add(new FireItem(this.texture2, pos));
 		}
 
 		public void Cycle(int lastOrNext) {
