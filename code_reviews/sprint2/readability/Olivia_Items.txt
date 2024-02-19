@@ -1,0 +1,7 @@
+Author: Leslie Cobbold
+Date: Feb. 19, 2024
+Sprint number: 2
+Name of the .cs file being reviewed: all .cs in src/Items
+Author of the .cs files being reviewed: Olivia
+Number of minutes taken for the review: 15 mins
+Comments: The different types of items class are clearly defined in the ItemSpriteFactory. To simplify this, I would recommend initializing the item classes while adding to the object list instead of creating a field for every item class. It looks like your item animation is being done in the draw method. I would recommend using your update method to handle the animation to make it easy to read. Overall, nice and easy to follow code. Nice work!

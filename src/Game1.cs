@@ -121,8 +121,8 @@ namespace ZeldaGame {
 			keyboardController.RegisterPressKey(Keys.I, new NextItemCommand(this));
 			keyboardController.RegisterPressKey(Keys.U, new LastItemCommand(this));
 
-
-			keyboardController.RegisterPressKey(Keys.O, new NextNPCCommand(this));
+            //Register commands with keys for npcs
+            keyboardController.RegisterPressKey(Keys.O, new NextNPCCommand(this));
 			keyboardController.RegisterPressKey(Keys.P, new PreviousNPCCommand(this));
 
 			//Registers commands with Keys for enemies

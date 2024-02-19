@@ -1,0 +1,8 @@
+Author: Leslie Cobbold
+Date: Feb. 19, 2024
+Sprint number: 2
+Name of the .cs file being reviewed: all .cs files in src/Block
+Author of the .cs files being reviewed: Zhiyang
+Number of minutes taken for the review: 15 mins
+Comments:
+Code is easily maintainable as it uses a factory design pattern which is easily noticeable. Each block type is initialized in the addBlock method which can be scaled easily for the addition of new block types. All the block classes follow the same pattern so it can be followed easily. Nice work!
