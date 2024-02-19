@@ -14,7 +14,6 @@ namespace ZeldaGame.Items {
 		public FireItem(Texture2D texture, Vector2 pos) {
 			this.texture = texture;
 			this.pos = pos;
-
 		}
 
 		public void Draw(SpriteBatch spriteBatch, Vector2 location) {

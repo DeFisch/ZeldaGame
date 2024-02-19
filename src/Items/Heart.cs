@@ -28,13 +28,10 @@ namespace ZeldaGame.Items {
 			if (counter <= 10) {
 				counter++;
 				spriteBatch.Draw(texture, destinationRectangle_1, sourceRectangle_1, Color.White);
-				Console.WriteLine("Red");
 			}
 			if (counter > 10 && counter <= 20) {
 				counter++;
 				spriteBatch.Draw(texture, destinationRectangle_2, sourceRectangle_2, Color.White);
-
-				Console.WriteLine("Blue");
 			}
 			if (counter > 20) {
 				counter = 0;
