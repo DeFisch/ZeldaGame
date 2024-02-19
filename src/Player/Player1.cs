@@ -120,10 +120,10 @@ namespace ZeldaGame.Player {
 			weaponHandler.Update();
             sprite.Update();
 		}
-		public void Draw(SpriteBatch spriteBatch)
+		public void Draw(SpriteBatch spriteBatch, Color color)
 		{
 			weaponHandler.Draw(spriteBatch);
-			sprite.Draw(spriteBatch, position);
+			sprite.Draw(spriteBatch, position, color);
 		}
 
         public void Reset()

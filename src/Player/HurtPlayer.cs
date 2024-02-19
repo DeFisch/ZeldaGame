@@ -3,35 +3,40 @@ using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using static ZeldaGame.Player.PlayerStateMachine;
 
 namespace ZeldaGame.Player {
 	public class HurtPlayer : IPlayer {
-		PlayerStateMachine stateMachine;
-		ISprite sprite;
-
-		Vector2 position;
-		int direction;
-		int speed = 2;
+		private IPlayer decoratedPlayer;
 
 		Game1 game;
-		IPlayer decoratedPlayer;
-		int timer = 1000;
+		int timer = 100;
 
 		public HurtPlayer(IPlayer decoratedPlayer, Game1 game) {
 			this.decoratedPlayer = decoratedPlayer;
-			sprite = PlayerSpriteFactory.Instance.CreateWalkSprite(Direction.Down);
 			this.game = game;
 		}
 
 		public void TakeDamage() {
 			// doesn't take damage
 		}
-
-		public void SetDirection(int direction) {// 0 = up, 1 = left, 2 = down, 3 = right
-			stateMachine.SetDirection((Direction)direction);
+		public void Attack() {
+			decoratedPlayer.Attack();
+		}
+		public void Idle() {
+			decoratedPlayer.Idle();
+		}
+		public void Walk() {
+			decoratedPlayer.Walk();
+		}
+		public void UseItem(int item) {
+			decoratedPlayer.UseItem(item);
+		}
+		public void SetDirection(Direction direction) {
+			decoratedPlayer.SetDirection(direction);
 		}
 
 		public void Update() {
@@ -42,9 +47,13 @@ namespace ZeldaGame.Player {
 
 			decoratedPlayer.Update();
 		}
+		public void Reset() {
+			decoratedPlayer.Reset();
+			RemoveDecorator();
+		}
 
-		public void Draw(SpriteBatch spriteBatch) {
-			sprite.Draw(spriteBatch, position);
+		public void Draw(SpriteBatch spriteBatch, Color color) {
+			decoratedPlayer.Draw(spriteBatch, Color.Red);
 		}
 
 		void RemoveDecorator() {
