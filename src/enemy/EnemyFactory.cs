@@ -71,9 +71,6 @@ public class EnemyFactory {
 	public void Reset()
 	{
 		ClearEnemies();
-        for (int i = 0; i < 5; i++) 
-        {
-            AddEnemy("Stalfos");
-        }
+		AddEnemy("Stalfos");
     }
 }

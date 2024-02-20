@@ -76,10 +76,7 @@ namespace ZeldaGame {
 			blockSpriteFactory = new BlockSpriteFactory(Content.Load<Texture2D>("Level1_Map"));
 			enemyFactory = new EnemyFactory(enemies, window_size: new Vector2(window_width, window_height));
 			Random random = new Random();
-			for (int i = 0; i < 5; i++) // spawn 5 enemies of each type
-			{
-				enemyFactory.AddEnemy("Stalfos");
-			}
+			enemyFactory.AddEnemy("Stalfos");
 
 			//Add NPCs
 			NPCFactory.AddNPCs();

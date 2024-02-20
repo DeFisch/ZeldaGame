@@ -4,7 +4,7 @@ namespace ZeldaGame.Enemy.Commands {
 	public class previousEnemyCommand : ICommand {
 		private Game1 MyGame;
 		private string[] enemy_types;
-		private int max_enemies = 5;
+		private int max_enemies = 1;
 		// Constructor
 		public previousEnemyCommand(Game1 myGame) {
 			MyGame = myGame;
