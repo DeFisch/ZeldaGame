@@ -51,10 +51,6 @@ namespace ZeldaGame.Player {
 			currSword = sword;
 		}
 
-		public void TakeDamage() {
-			stateMachine.BeHurt();
-		}
-
 		public void SetDirection(Direction direction) {// 0 = up, 1 = left, 2 = down, 3 = right
 			stateMachine.SetDirection(direction);
 			this.direction = direction;
@@ -120,10 +116,10 @@ namespace ZeldaGame.Player {
 			weaponHandler.Update();
             sprite.Update();
 		}
-		public void Draw(SpriteBatch spriteBatch)
+		public void Draw(SpriteBatch spriteBatch, Color color)
 		{
 			weaponHandler.Draw(spriteBatch);
-			sprite.Draw(spriteBatch, position);
+			sprite.Draw(spriteBatch, position, color);
 		}
 
         public void Reset()

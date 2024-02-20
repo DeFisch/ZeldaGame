@@ -19,13 +19,13 @@ public class WalkLeftSprite : IPlayerSprite {
 		this.sprite = sprite;
     }
 
-	public void Draw(SpriteBatch spriteBatch, Vector2 location)
+	public void Draw(SpriteBatch spriteBatch, Vector2 location, Color color)
 	{
         srcRectangle = new Rectangle(35 + (17 * currentFrame), 11, 16, 16);
         destRectangle = new Rectangle((int)location.X, (int)location.Y, srcRectangle.Width * 2, srcRectangle.Height * 2);
 		SpriteEffects effect = SpriteEffects.FlipHorizontally;
 
-		spriteBatch.Draw(sprite, destRectangle, srcRectangle, Color.White, rotation: 0, new Vector2(0, 0), effects: effect, 1);
+		spriteBatch.Draw(sprite, destRectangle, srcRectangle, color, rotation: 0, new Vector2(0, 0), effects: effect, 1);
 	}
 
 	public void Update() {

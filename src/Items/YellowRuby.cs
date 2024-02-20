@@ -17,7 +17,7 @@ namespace ZeldaGame.Items {
 
 		}
 
-		public void Draw(SpriteBatch spriteBatch, Vector2 location) {
+		public void Draw(SpriteBatch spriteBatch, Vector2 location, Color color) {
 
 			Rectangle sourceRectangle_1 = new Rectangle(72, 16, 8, 16);
 			Rectangle destinationRectangle_1 = new Rectangle((int)pos.X, (int)pos.Y, 16, 42);
@@ -27,11 +27,11 @@ namespace ZeldaGame.Items {
 
 			if (counter <= 10) {
 				counter++;
-				spriteBatch.Draw(texture, destinationRectangle_1, sourceRectangle_1, Color.White);
+				spriteBatch.Draw(texture, destinationRectangle_1, sourceRectangle_1, color);
 			}
 			if (counter > 10 && counter <= 20) {
 				counter++;
-				spriteBatch.Draw(texture, destinationRectangle_2, sourceRectangle_2, Color.White);
+				spriteBatch.Draw(texture, destinationRectangle_2, sourceRectangle_2, color);
 			}
 			if (counter > 20) {
 				counter = 0;

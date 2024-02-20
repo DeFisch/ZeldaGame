@@ -2,30 +2,19 @@
 	public class PlayerStateMachine {
 		public enum Direction { Up, Left, Down, Right };
 		public enum State { Idle, Walk, Attack, PickUp, UseItem, Block };
-		public enum Health { Full, Normal, Hurt };
 
 		public Direction direction;
 		public Direction prevDirection;
 		private State state;
-		private Health health;
 		private IPlayerSprite sprite;
 
 		public PlayerStateMachine(IPlayerSprite sprite) {
 			direction = Direction.Down;
 			state = State.Idle;
-			health = Health.Full;
 			this.sprite = sprite;
 		}
 
-		public void BeHurt() {
-			if (health != Health.Hurt) // Note: the if is needed so we only do the transition once
-			{
-				health = Health.Hurt;
-				// Compute and construct player sprite - probably going to use decorator
-			}
-		}
-
-		public Direction GetDirection() { // may be unneccessary, possible delete
+		public Direction GetDirection() {
 			return direction;
 		}
 
@@ -33,7 +22,7 @@
 			return state;
 		}
 
-		public void SetDirection(Direction direction) { // 0 = up, 1 = left, 2 = down, 3 = right
+		public void SetDirection(Direction direction) {
 			prevDirection = this.direction;
 			this.direction = direction;
 		}

@@ -1,8 +1,8 @@
-﻿using Microsoft.Xna.Framework.Graphics;
+﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -55,7 +55,7 @@ namespace ZeldaGame.Items {
 		}
 		public void Draw(SpriteBatch spriteBatch) {
 
-			objectList[index].Draw(spriteBatch, pos);
+			objectList[index].Draw(spriteBatch, pos, Color.White);
 		}
 
 		public void Reset()

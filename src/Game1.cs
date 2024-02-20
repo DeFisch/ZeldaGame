@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -10,7 +9,6 @@ using ZeldaGame.Items;
 using ZeldaGame.NPCs;
 using ZeldaGame.Player;
 using ZeldaGame.Player.Commands;
-using System.Data;
 using ZeldaGame.Enemy.Commands;
 
 namespace ZeldaGame {
@@ -20,7 +18,7 @@ namespace ZeldaGame {
 		private GraphicsDeviceManager _graphics;
 		private SpriteBatch _spriteBatch;
 
-		public Player1 Link;
+		public IPlayer Link;
 		public PlayerSpriteFactory playerFactory;
 
 		public Texture2D npcs;
@@ -131,10 +129,9 @@ namespace ZeldaGame {
 
 			//Registers commands with Keys for Reset
 			keyboardController.RegisterPressKey(Keys.R, new ResetCommand(this));
-		}
 
-        public void setSprite(IPlayerSprite sprite) {
-			this.Link.SetSprite(sprite);
+			//Registers commands with Keys for taking damage
+			keyboardController.RegisterPressKey(Keys.E, new TakeDamageCommand(this));
 		}
 
 		protected override void Update(GameTime gameTime) {
@@ -171,7 +168,7 @@ namespace ZeldaGame {
 			//Draws objects
 			itemFactory.Draw(_spriteBatch);
 			// Draws player
-			Link.Draw(_spriteBatch);;
+			Link.Draw(_spriteBatch, Color.White);
 
 			_spriteBatch.End();
 
