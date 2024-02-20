@@ -16,7 +16,7 @@ namespace ZeldaGame
         public void Execute()
         {
             MyGame.blockSpriteFactory.Reset();
-            MyGame.objectFactory.Reset();
+            MyGame.itemFactory.Reset();
             MyGame.NPCFactory.Reset();
             MyGame.Link.Reset();
             MyGame.enemyFactory.Reset();

@@ -26,8 +26,8 @@ namespace ZeldaGame {
 		public Texture2D npcs;
 		public NPCFactory NPCFactory;
 
-		public Texture2D Objects;
-		public ItemSpriteFactory objectFactory;
+		public Texture2D Items;
+		public ItemSpriteFactory itemFactory;
 
 		public EnemyFactory enemyFactory;
 
@@ -63,16 +63,16 @@ namespace ZeldaGame {
 
 			// Load content
 			npcs = Content.Load<Texture2D>("NPCs");
-			Objects = Content.Load<Texture2D>("Objects");
+			Items = Content.Load<Texture2D>("Objects");
 
 
-			// Initializes object classes
+			// Initializes item classes
 			PlayerSpriteFactory.Instance.LoadAllTextures(Content);
 			PlayerItemSpriteFactory.Instance.LoadAllTextures(Content);
             Link = new Player1(new Vector2(window_width, window_height));
 
             NPCFactory = new NPCFactory(npcs, new Vector2(window_width, window_height));
-			objectFactory = new ItemSpriteFactory(Objects, npcs);
+			itemFactory = new ItemSpriteFactory(Items, npcs);
 
 			Texture2D[] enemies = {Content.Load<Texture2D>("enemies"),Content.Load<Texture2D>("enemies_1")};
 			blockSpriteFactory = new BlockSpriteFactory(Content.Load<Texture2D>("Level1_Map"));
@@ -88,7 +88,7 @@ namespace ZeldaGame {
 			//Add Blocks
 			blockSpriteFactory.AddBlock();
 			//Add items
-			objectFactory.ObjectList();
+			itemFactory.ObjectList();
 
 			// Registers commands with Keys as the identifier
 			keyboardController.RegisterHoldKey(Keys.W, new SetWalkSpriteCommand(this, 0));
@@ -169,7 +169,7 @@ namespace ZeldaGame {
 			//Draws NPCs
 			NPCFactory.Draw(_spriteBatch);
 			//Draws objects
-			objectFactory.Draw(_spriteBatch);
+			itemFactory.Draw(_spriteBatch);
 			// Draws player
 			Link.Draw(_spriteBatch);;
 

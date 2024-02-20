@@ -12,7 +12,7 @@ namespace ZeldaGame.Items {
 			MyGame = myGame;
 		}
 		public void Execute() {
-			MyGame.objectFactory.Cycle(lastOrNext);
+			MyGame.itemFactory.Cycle(lastOrNext);
 		}
 	}
 }
