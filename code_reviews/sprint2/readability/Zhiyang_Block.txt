@@ -1,0 +1,10 @@
+Author: Olu Fasoro
+Date: Feb. 19, 2024
+Sprint number: 2
+Name of the .cs file being reviewed: all .cs files in src/Block
+Author of the .cs files being reviewed: Zhiyang
+Number of minutes taken for the review: 10
+Comments:
+
+The code in "Block" is all good to me. Most of the variables seem to go used and have proper naming conventions, and while the Update() method goes unused in all blocks, it will definitely be useful in the future once hitboxes are being implemented.
+However, I would change the Title case "MyGame" to a camelcase "myGame" in Next/Previous Block command, since it is used for a variable.

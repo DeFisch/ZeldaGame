@@ -1,0 +1,13 @@
+Author: Olu Fasoro
+Date: Feb. 19, 2024
+Sprint number: 2
+Name of the .cs file being reviewed: EnemyProjectileFactory.cs, EnemyFactory.cs, a few projectile sprite files
+Author of the .cs files being reviewed: Daniel
+Number of minutes taken for the review: 10
+Comments:
+
+Looks good overall, for the most part. While the code in the Enemy sprites do function for what we need it to right now, we may need to rework or scrap parts of the Idle and Walk methods once we continue working with hitboxes.
+
+In EnemyFactory, we may need to summon more or fewer than 5 enemies in the future, as well as determine where the enemies spawn, instead of spawning them in random locations upon creation using the Enemy classes.
+
+EnemyProjectileFactory looks good.
