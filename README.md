@@ -19,20 +19,20 @@ OSU CSE 3902 Zelda Game Project
 
 ## Key Mappings:
 - Player Controls
--   "wasd" for movements
--   "z" or "n" for sword attack
--   "1,2,3,4,5,6" for different weapons
--   "e" to hurt player
+  - "wasd" for movements
+  - "z" or "n" for sword attack
+  - "1,2,3,4,5,6" for different weapons
+  - "e" to hurt player
 - Block Controls
--   "t","y" to switch blocks
-- Item Controls
--   "u","i" to switch items
+  - "t","y" to switch blocks
+  - Item Controls
+  - "u","i" to switch items
 - NPC Controls
--   "o","p" to switch NPCs
+  - "o","p" to switch NPCs
 - Enemy Controls
--   "k","l" to switch enemies
+  - "k","l" to switch enemies
 - Other
--   "q" to quit, "r" to reset the game
+  - "q" to quit, "r" to reset the game
 
 ## GitHub basic commands:
 a. Download the repository to your local machine
