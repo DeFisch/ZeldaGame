@@ -10,6 +10,7 @@ using ZeldaGame.NPCs;
 using ZeldaGame.Player;
 using ZeldaGame.Player.Commands;
 using ZeldaGame.Enemy.Commands;
+using ZeldaGame.Map;
 
 namespace ZeldaGame {
 	public class Game1 : Game {
@@ -63,6 +64,8 @@ namespace ZeldaGame {
 			npcs = Content.Load<Texture2D>("NPCs");
 			Items = Content.Load<Texture2D>("Objects");
 
+			// Load map info
+			MapLoader mapLoader = new MapLoader();
 
 			// Initializes item classes
 			PlayerSpriteFactory.Instance.LoadAllTextures(Content);

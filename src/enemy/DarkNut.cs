@@ -16,6 +16,7 @@ public class DarkNut : IEnemy {
 	private int scale = 2;
 	private int speed = 2;
     private int sprite_id = 0;
+	private int health = 3;
 	public DarkNut(Texture2D texture, Vector2 window_size, string color) {
 		this.texture = texture;
 		position = new Vector2(new Random().Next(0, (int)window_size.X - character_sprites[0,2] * scale), new Random().Next(0, (int)window_size.Y - character_sprites[0,3] * scale));
@@ -98,4 +99,9 @@ public class DarkNut : IEnemy {
 				break;
 		}
 	}
+
+    public void TakeDamage(int damage)
+    {
+        this.health -= damage;
+    }
 }

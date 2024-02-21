@@ -15,6 +15,7 @@ public class Stalfos : IEnemy {
 	private static int[] character_sprites = new int[] { 1, 59, 16, 16 }; // x, y, width, height
 	private int scale = 2;
 	private int speed = 2;
+	private int health = 3;
 	public Stalfos(Texture2D texture, Vector2 window_size) {
 		this.texture = texture;
 		this.position = new Vector2(new Random().Next(0, (int)window_size.X - character_sprites[2] * scale), new Random().Next(0, (int)window_size.Y - character_sprites[3] * scale));
@@ -78,4 +79,9 @@ public class Stalfos : IEnemy {
 				break;
 		}
 	}
+
+	public void TakeDamage(int damage)
+    {
+		this.health -= damage;
+    }
 }

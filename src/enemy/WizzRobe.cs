@@ -19,6 +19,7 @@ public class WizzRobe : IEnemy {
 	private int projectile_speed = 5;
     private int sprite_id = 0;
 	private int rand_seed;
+	private int health = 3;
 
 	private EnemyProjectileFactory enemyProjectileFactory;
 	public WizzRobe(Texture2D texture, Vector2 window_size, EnemyProjectileFactory enemyProjectileFactory, string color) {
@@ -133,4 +134,9 @@ public class WizzRobe : IEnemy {
 				break;
 		}
 	}
+
+	public void TakeDamage(int damage)
+    {
+		this.health -= damage;
+    }
 }

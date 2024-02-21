@@ -8,5 +8,7 @@ public interface IEnemy {
 	public abstract void Update();
 
 	public void Draw(SpriteBatch spriteBatch);
+
+	public void TakeDamage(int damage);
 }
 

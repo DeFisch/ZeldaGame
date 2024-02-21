@@ -20,6 +20,7 @@ public class Goriya : IEnemy {
     private int projectile_speed = 2;
     private int sprite_id = 0;
     private int rand_seed;
+	private int health = 3;
 	public Goriya(Texture2D texture, Vector2 window_size, EnemyProjectileFactory enemyProjectileFactory, string color) {
 		this.texture = texture;
 		position = new Vector2(new Random().Next(0, (int)window_size.X - character_sprites[0,2] * scale), new Random().Next(0, (int)window_size.Y - character_sprites[0,3] * scale));
@@ -132,4 +133,9 @@ public class Goriya : IEnemy {
 				break;
 		}
 	}
+
+	public void TakeDamage(int damage)
+    {
+		this.health -= damage;
+    }
 }

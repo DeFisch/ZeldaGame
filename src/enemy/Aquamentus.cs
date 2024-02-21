@@ -15,6 +15,7 @@ public class Aquamentus : IEnemy {
     private int scale = 2;
 	private int speed = 2;
     private int projectile_speed = 4;
+	private int health = 10;
     private EnemyProjectileFactory enemyProjectileFactory;
 	public Aquamentus(Texture2D texture, Vector2 window_size, EnemyProjectileFactory enemyProjectileFactory) {
 		this.texture = texture;
@@ -51,4 +52,9 @@ public class Aquamentus : IEnemy {
         else
             position.X -= speed;
 	}
+
+    public void TakeDamage(int damage)
+    {
+        this.health -= damage;
+    }
 }

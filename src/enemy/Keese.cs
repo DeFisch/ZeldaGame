@@ -14,6 +14,7 @@ public class Keese : IEnemy {
 	private int scale = 2;
 	private double speedX = 0;
 	private double speedY = 0;
+	private int health = 1;
 	private double general_speed = 4;
 	public Keese(Texture2D texture, Vector2 window_size, string color) {
 		this.texture = texture;
@@ -64,4 +65,9 @@ public class Keese : IEnemy {
 			position.Y += (float)speedY;
 		}
 	}
+	
+	public void TakeDamage(int damage)
+    {
+		this.health -= damage;
+    }
 }
