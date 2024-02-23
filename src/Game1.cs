@@ -11,6 +11,7 @@ using ZeldaGame.Player;
 using ZeldaGame.Player.Commands;
 using ZeldaGame.Enemy.Commands;
 using ZeldaGame.Map;
+using ZeldaGame.Map.Commands;
 
 namespace ZeldaGame {
 	public class Game1 : Game {
@@ -68,7 +69,6 @@ namespace ZeldaGame {
 			// Load default map
 			Texture2D map_texture = Content.Load<Texture2D>("Level1_Map");
 			map = new MapHandler(map_texture, new Vector2(window_width, window_height));
-			map.switch_map(5,2); // example of switching map
 
 			// Initializes item classes
 			PlayerSpriteFactory.Instance.LoadAllTextures(Content);
@@ -135,6 +135,12 @@ namespace ZeldaGame {
 
 			//Registers commands with Keys for taking damage
 			keyboardController.RegisterPressKey(Keys.E, new TakeDamageCommand(this));
+
+			//Registers commands with Keys for switching maps
+			keyboardController.RegisterPressKey(Keys.X, new MoveUpCommand(map));
+			keyboardController.RegisterPressKey(Keys.C, new MoveDownCommand(map));
+			keyboardController.RegisterPressKey(Keys.V, new MoveLeftCommand(map));
+			keyboardController.RegisterPressKey(Keys.B, new MoveRightCommand(map));
 		}
 
 		protected override void Update(GameTime gameTime) {

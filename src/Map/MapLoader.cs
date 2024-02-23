@@ -30,7 +30,7 @@ public class MapLoader {
             }
             return true;
         }
-        throw new FileNotFoundException("Map file not found");
+        return false;
     }
 
     public string[,] get_map_info() {

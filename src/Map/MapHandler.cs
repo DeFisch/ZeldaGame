@@ -22,7 +22,27 @@ public class MapHandler {
     public Rectangle get_map_location(int x, int y) {
         return new Rectangle(1 + x * 257, 1 + y * 177, 256, 176);
     }
-    public bool switch_map(int y, int x) {
+    public bool move_up() {
+        if(switch_map(y - 1, x))
+            return true;
+        return false;
+    }
+    public bool move_down() {
+        if(switch_map(y + 1, x))
+            return true;
+        return false;
+    }
+    public bool move_left() {
+        if(switch_map(y, x - 1))
+            return true;
+        return false;
+    }
+    public bool move_right() {
+        if(switch_map(y, x + 1))
+            return true;
+        return false;
+    }
+    private bool switch_map(int y, int x) {
         if (mapLoader.load_map(x, y)) {
             this.x = x;
             this.y = y;
