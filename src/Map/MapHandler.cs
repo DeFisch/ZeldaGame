@@ -17,19 +17,21 @@ public class MapHandler {
         this.map_texture = map_texture;
         this.window_size = window_size;
         mapLoader.load_map(x, y); // load default map
-        map = mapLoader.get_map(); // get default map info
+        map = mapLoader.get_map_info(); // get default map info
     }
     public Rectangle get_map_location(int x, int y) {
         return new Rectangle(1 + x * 257, 1 + y * 177, 256, 176);
     }
-    public bool switch_map(int x, int y) {
+    public bool switch_map(int y, int x) {
         if (mapLoader.load_map(x, y)) {
-            map = mapLoader.get_map();
+            this.x = x;
+            this.y = y;
+            map = mapLoader.get_map_info();
             return true;
         }
         return false;
     }
-    public string[,] get_map() {
+    public string[,] get_map_info() {
         return map;
     }
 

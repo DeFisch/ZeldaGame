@@ -68,6 +68,7 @@ namespace ZeldaGame {
 			// Load default map
 			Texture2D map_texture = Content.Load<Texture2D>("Level1_Map");
 			map = new MapHandler(map_texture, new Vector2(window_width, window_height));
+			map.switch_map(5,2); // example of switching map
 
 			// Initializes item classes
 			PlayerSpriteFactory.Instance.LoadAllTextures(Content);
