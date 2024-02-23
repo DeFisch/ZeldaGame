@@ -73,4 +73,8 @@ public class EnemyFactory {
 		ClearEnemies();
 		AddEnemy("Stalfos");
     }
+
+	public List<IEnemy> GetAllEnemies() {
+		return enemies;
+	}
 }

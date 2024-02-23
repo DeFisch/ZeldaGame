@@ -70,4 +70,10 @@ public class Keese : IEnemy {
     {
 		this.health -= damage;
     }
+
+	public Rectangle GetRectangle()
+	{
+		int sprite_id = (frameID / 18) % 2;
+		return new Rectangle((int)position.X, (int)position.Y, character_sprites[sprite_id, 2] * scale, character_sprites[sprite_id, 3] * scale);
+	}
 }

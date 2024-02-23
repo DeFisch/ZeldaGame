@@ -84,4 +84,9 @@ public class Stalfos : IEnemy {
     {
 		this.health -= damage;
     }
+
+	public Rectangle GetRectangle()
+	{
+		return new Rectangle((int)position.X, (int)position.Y, character_sprites[2] * scale, character_sprites[3] * scale);
+	}
 }
