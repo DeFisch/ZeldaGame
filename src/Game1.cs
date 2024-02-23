@@ -35,6 +35,7 @@ namespace ZeldaGame {
 		private KeyboardController keyboardController;
 		private MouseController mouseController;
 		private List<IController> controllers;
+		public MapHandler map;
 
 		public Game1() {
 			_graphics = new GraphicsDeviceManager(this);
@@ -64,8 +65,9 @@ namespace ZeldaGame {
 			npcs = Content.Load<Texture2D>("NPCs");
 			Items = Content.Load<Texture2D>("Objects");
 
-			// Load map info
-			MapLoader mapLoader = new MapLoader();
+			// Load default map
+			Texture2D map_texture = Content.Load<Texture2D>("Level1_Map");
+			map = new MapHandler(map_texture, new Vector2(window_width, window_height));
 
 			// Initializes item classes
 			PlayerSpriteFactory.Instance.LoadAllTextures(Content);
@@ -75,9 +77,9 @@ namespace ZeldaGame {
             NPCFactory = new NPCFactory(npcs, new Vector2(window_width, window_height));
 			itemFactory = new ItemSpriteFactory(Items, npcs);
 
-			Texture2D[] enemies = {Content.Load<Texture2D>("enemies"),Content.Load<Texture2D>("enemies_1")};
+			Texture2D[] enemy_texture = {Content.Load<Texture2D>("enemies"),Content.Load<Texture2D>("enemies_1")};
 			blockSpriteFactory = new BlockSpriteFactory(Content.Load<Texture2D>("Level1_Map"));
-			enemyFactory = new EnemyFactory(enemies, window_size: new Vector2(window_width, window_height));
+			enemyFactory = new EnemyFactory(enemy_texture, window_size: new Vector2(window_width, window_height));
 			Random random = new Random();
 			enemyFactory.AddEnemy("Stalfos");
 
@@ -158,7 +160,8 @@ namespace ZeldaGame {
 			GraphicsDevice.Clear(Color.CornflowerBlue);
 
 			_spriteBatch.Begin();
-
+			// Draws map
+			map.Draw(_spriteBatch);
             //Draws Blocks
             blockSpriteFactory.Draw(_spriteBatch);
             // Draws enemies
