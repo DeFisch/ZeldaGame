@@ -2,14 +2,14 @@
 
 namespace ZeldaGame.NPCs;
 public class PreviousNPCCommand : ICommand {
-	private Game1 MyGame;
+	private Game1 myGame;
 	private int previous = 0;
 
-	public PreviousNPCCommand(Game1 myGame) {
-		MyGame = myGame;
+	public PreviousNPCCommand(Game1 game) {
+		this.myGame = game;
 	}
 
 	public void Execute() {
-		MyGame.NPCFactory.cycleList(previous);
+		myGame.NPCFactory.cycleList(previous);
 	}
 }

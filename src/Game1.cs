@@ -133,21 +133,25 @@ namespace ZeldaGame {
 			//Registers commands with Keys for Reset
 			keyboardController.RegisterPressKey(Keys.R, new ResetCommand(this));
 
-			//Registers commands with Keys for taking damage
-			keyboardController.RegisterPressKey(Keys.E, new TakeDamageCommand(this));
+            //Registers commands with Keys for Quit
+            keyboardController.RegisterPressKey(Keys.Q, new QuitCommand(this));
+
+            //Registers commands with Keys for taking damage
+            keyboardController.RegisterPressKey(Keys.E, new TakeDamageCommand(this));
 
 			//Registers commands with Keys for switching maps
 			keyboardController.RegisterPressKey(Keys.X, new MoveUpCommand(map));
 			keyboardController.RegisterPressKey(Keys.C, new MoveDownCommand(map));
 			keyboardController.RegisterPressKey(Keys.V, new MoveLeftCommand(map));
 			keyboardController.RegisterPressKey(Keys.B, new MoveRightCommand(map));
-		}
+
+            //Registers commands with MouseButtons for switching maps
+            mouseController.RegisterCommand(MouseButtons.Right, new NextMapCommand(map));
+            mouseController.RegisterCommand(MouseButtons.Left, new PreviousMapCommand(map));
+
+        }
 
 		protected override void Update(GameTime gameTime) {
-			if (Keyboard.GetState().IsKeyDown(Keys.Q) || Mouse.GetState().RightButton == ButtonState.Pressed) {
-				Exit();
-			}
-
 			// Updates controllers
 			foreach (IController controller in controllers) {
 				controller.Update();

@@ -12,6 +12,7 @@ public class MapHandler {
     private Texture2D map_texture;
     private Vector2 window_size;
     private int x = 2, y = 5;
+    private int currentMapIndex = 0;
     public MapHandler(Texture2D map_texture, Vector2 window_size) {
         mapLoader = new MapLoader();
         this.map_texture = map_texture;
@@ -41,6 +42,15 @@ public class MapHandler {
         if(switch_map(y, x + 1))
             return true;
         return false;
+    }
+    public void cycle_next()
+    {
+        //currentMapIndex = (currentMapIndex + 1) % mapLoader.get_maps_count();
+    }
+    public void cycle_previous()
+    {
+        /*currentMapIndex = (currentMapIndex - 1 + mapLoader.get_maps_count()) % mapLoader.get_maps_count();
+        */
     }
     private bool switch_map(int y, int x) {
         if (mapLoader.load_map(x, y)) {
