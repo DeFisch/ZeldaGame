@@ -8,12 +8,14 @@ public class MapHandler {
     /*
         Note here x denotes the row and y denotes the column
     */
+    private bool debug = true;
     private MapLoader mapLoader;
     private string[,] map;
     private Texture2D map_texture;
     private Vector2 window_size;
     private Vector2 map_size;
-    private int x = 2, y = 5;
+    private int x = 2, y = 5; // default map
+
     public MapHandler(Texture2D map_texture, Vector2 window_size) {
         mapLoader = new MapLoader();
         this.map_texture = map_texture;
@@ -66,6 +68,12 @@ public class MapHandler {
         Rectangle sourceRectangle = get_map_location(x, y);
         Rectangle targetRectangle = new Rectangle(0, 0, (int)window_size.X, (int)window_size.Y);
         spriteBatch.Draw(map_texture, targetRectangle, sourceRectangle, Color.White);
+        if (debug){
+            MapStaticRectangles mapRectangles = new MapStaticRectangles(this);
+            foreach (Rectangle rectangle in mapRectangles.RectanglesList(window_size)){
+                spriteBatch.Draw(map_texture, rectangle, new Rectangle(385,48,18,18), Color.White);
+            }
+        }
     }
 
 }
