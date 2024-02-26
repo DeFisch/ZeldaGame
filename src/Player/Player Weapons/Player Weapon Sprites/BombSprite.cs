@@ -43,17 +43,17 @@ public class BombSprite : IPlayerProjectile {
         return isActive;
     }
 
-    public void Draw(SpriteBatch spriteBatch) {
+    public void Draw(SpriteBatch spriteBatch, Vector2 scale) {
 		Rectangle sourceRectangle;
 		Rectangle destinationRectangle;
 		if (currentFrame == 0)
 		{
             sourceRectangle = new Rectangle(129, 185, 8, 16);
-            destinationRectangle = new Rectangle((int)position.X + XOffSet + 8, (int)position.Y + YOffSet, sourceRectangle.Width * 2, sourceRectangle.Height * 2);
+            destinationRectangle = new Rectangle((int)position.X + XOffSet + 8, (int)position.Y + YOffSet, (int)(sourceRectangle.Width * scale.X), (int)(sourceRectangle.Height * scale.Y));
         } else
 		{
 			sourceRectangle = new Rectangle(121 + (17* currentFrame), 185, 16, 16);
-            destinationRectangle = new Rectangle((int)position.X + XOffSet, (int)position.Y + YOffSet, sourceRectangle.Width * 2, sourceRectangle.Height * 2);
+            destinationRectangle = new Rectangle((int)position.X + XOffSet, (int)position.Y + YOffSet, (int)(sourceRectangle.Width * scale.X), (int)(sourceRectangle.Height * scale.Y));
         }
 		spriteBatch.Draw(Sprite, destinationRectangle, sourceRectangle, Color.White, rotation: 0, new Vector2(0, 0), effects: effect, 1);
 	}

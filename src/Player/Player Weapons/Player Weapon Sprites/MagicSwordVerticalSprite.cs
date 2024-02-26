@@ -33,7 +33,7 @@ public class MagicSwordVerticalSprite : IPlayerProjectile {
         return isActive;
     }
 
-    public void Draw(SpriteBatch spriteBatch) {
+    public void Draw(SpriteBatch spriteBatch, Vector2 scale) {
 
 		switch (currFrames) {
 			case 0:
@@ -51,11 +51,11 @@ public class MagicSwordVerticalSprite : IPlayerProjectile {
 		Rectangle destinationRectangle;
 		if (direction == Direction.Down) {
 			effect = SpriteEffects.FlipVertically;
-			destinationRectangle = new Rectangle((int)(position.X + offset.X), (int)(position.Y + offset.Y), sourceRectangle.Width * 2, sourceRectangle.Height * 2);
+			destinationRectangle = new Rectangle((int)(position.X + offset.X * scale.X), (int)(position.Y + offset.Y * scale.Y), (int)(sourceRectangle.Width * scale.X), (int)(sourceRectangle.Height * scale.Y));
 		}
 		else {
 			effect = SpriteEffects.None;
-			destinationRectangle = new Rectangle((int)(position.X + offset.X), (int)(position.Y - offset.Y), sourceRectangle.Width * 2, sourceRectangle.Height * 2);
+			destinationRectangle = new Rectangle((int)(position.X + offset.X * scale.X), (int)(position.Y - offset.Y * scale.Y), (int)(sourceRectangle.Width * scale.X), (int)(sourceRectangle.Height * scale.Y));
 		}
 		spriteBatch.Draw(Sprite, destinationRectangle, sourceRectangle, Color.White, rotation: 0, new Vector2(0, 0), effects: effect, 1);
 	}

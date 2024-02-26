@@ -37,6 +37,7 @@ namespace ZeldaGame {
 		private MouseController mouseController;
 		private List<IController> controllers;
 		public MapHandler map;
+		public Vector2 windowScale;
 
 		public Game1() {
 			_graphics = new GraphicsDeviceManager(this);
@@ -69,20 +70,21 @@ namespace ZeldaGame {
 			// Load default map
 			Texture2D map_texture = Content.Load<Texture2D>("Level1_Map");
 			map = new MapHandler(map_texture, new Vector2(window_width, window_height));
+			windowScale = map.GetWindowScale(window_width, window_height);
 
 			// Initializes item classes
 			PlayerSpriteFactory.Instance.LoadAllTextures(Content);
 			PlayerItemSpriteFactory.Instance.LoadAllTextures(Content);
-            Link = new Player1(new Vector2(window_width, window_height));
+            Link = new Player1(new Vector2(window_width / 2, window_height / 2), windowScale);
 
-            NPCFactory = new NPCFactory(npcs, new Vector2(window_width, window_height));
-			itemFactory = new ItemSpriteFactory(Items, npcs);
+            NPCFactory = new NPCFactory(npcs, new Vector2(window_width / 3, window_height / 3), windowScale);
+			itemFactory = new ItemSpriteFactory(Items, npcs, windowScale);
 
 			Texture2D[] enemy_texture = {Content.Load<Texture2D>("enemies"),Content.Load<Texture2D>("enemies_1")};
-			blockSpriteFactory = new BlockSpriteFactory(Content.Load<Texture2D>("Level1_Map"));
-			enemyFactory = new EnemyFactory(enemy_texture, window_size: new Vector2(window_width, window_height));
+			blockSpriteFactory = new BlockSpriteFactory(Content.Load<Texture2D>("Level1_Map"), windowScale);
+			enemyFactory = new EnemyFactory(enemy_texture, windowScale);
 			Random random = new Random();
-			enemyFactory.AddEnemy("Stalfos");
+			enemyFactory.AddEnemy("Stalfos", new Vector2(120, 120));
 
 			//Add NPCs
 			NPCFactory.AddNPCs();

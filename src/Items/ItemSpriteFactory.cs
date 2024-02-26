@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static ZeldaGame.Game1;
 
 namespace ZeldaGame.Items {
 	public class ItemSpriteFactory {
@@ -12,14 +13,16 @@ namespace ZeldaGame.Items {
 		Texture2D texture;
 		Texture2D texture2;
 		Vector2 pos;
+		Vector2 scale;
 		private int cycler = 0;
 		private int index = 0;
 
-		public ItemSpriteFactory(Texture2D texture, Texture2D texture2) {
+		public ItemSpriteFactory(Texture2D texture, Texture2D texture2, Vector2 scale) {
 			objectList = new List<ISprite>();
 			this.texture = texture;
 			this.texture2 = texture2;
 			pos = new Vector2(300, 150);
+			this.scale = scale;
 		}
 
 		public void ObjectList() {
@@ -55,7 +58,7 @@ namespace ZeldaGame.Items {
 		}
 		public void Draw(SpriteBatch spriteBatch) {
 
-			objectList[index].Draw(spriteBatch, pos, Color.White);
+			objectList[index].Draw(spriteBatch, pos, Color.White, scale);
 		}
 
 		public void Reset()

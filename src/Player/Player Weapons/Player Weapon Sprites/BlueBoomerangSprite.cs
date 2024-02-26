@@ -41,9 +41,9 @@ public class BlueBoomerangSprite : IPlayerProjectile {
         return isActive;
     }
 
-    public void Draw(SpriteBatch spriteBatch) {
+    public void Draw(SpriteBatch spriteBatch, Vector2 scale) {
 		Rectangle sourceRectangle = new Rectangle(91 + (currentFrame * 9), 185, 8, 16);
-		Rectangle destinationRectangle = new Rectangle((int)position.X + 8, (int)position.Y, sourceRectangle.Width * 2, sourceRectangle.Height * 2);
+		Rectangle destinationRectangle = new Rectangle((int)position.X + 8, (int)position.Y, (int)(sourceRectangle.Width * scale.X), (int)(sourceRectangle.Height * scale.Y));
 		spriteBatch.Draw(Sprite, destinationRectangle, sourceRectangle, Color.White, rotation: 0, new Vector2(0, 0), effects: effect, 1);
 	}
 

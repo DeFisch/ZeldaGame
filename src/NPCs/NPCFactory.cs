@@ -8,16 +8,18 @@ public class NPCFactory {
 	private List<INPC> npcList;
 	private Texture2D texture;
 	private Vector2 position;
+	private Vector2 scale;
 	private int cycleIndex;
 	private int listLength;
 
-	public NPCFactory(Texture2D texture, Vector2 window_size) {
+	public NPCFactory(Texture2D texture, Vector2 position, Vector2 scale) {
 		npcList = new List<INPC>();
 		this.texture = texture;
-		this.position = new Vector2(window_size.X / 3, window_size.Y / 3);
+		this.position = position;
 		cycleIndex = 0;
 		listLength = 0;
 		AddNPCs();
+		this.scale = scale;
 	}
 
 	public void AddNPCs() {
@@ -38,7 +40,7 @@ public class NPCFactory {
 		}
 	}
 	public void Draw(SpriteBatch spriteBatch) {
-		npcList[cycleIndex].Draw(spriteBatch);
+		npcList[cycleIndex].Draw(spriteBatch, scale);
 	}
 	public void Update() {
 		npcList[cycleIndex].Update();

@@ -18,10 +18,10 @@ public class Zelda : INPC {
 		this.position = position;
 	}
 
-	public void Draw(SpriteBatch spriteBatch) {
+	public void Draw(SpriteBatch spriteBatch, Vector2 scale) {
 		int sprite_id = currentFrame % 2;
 		Rectangle sourceRectangle = new Rectangle(character_sprites[sprite_id, 0], character_sprites[sprite_id, 1], character_sprites[sprite_id, 2], character_sprites[sprite_id, 3]);
-		Rectangle destinationRectangle = new Rectangle((int)position.X, (int)position.Y, sourceRectangle.Width * 3, sourceRectangle.Height * 3);
+		Rectangle destinationRectangle = new Rectangle((int)position.X, (int)position.Y, (int)(sourceRectangle.Width * scale.X), (int)(sourceRectangle.Height * scale.Y));
 		spriteBatch.Draw(texture, destinationRectangle, sourceRectangle, Color.White);
 	}
 

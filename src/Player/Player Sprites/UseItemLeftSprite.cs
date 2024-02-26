@@ -18,10 +18,10 @@ public class UseItemLeftSprite : IPlayerSprite {
 		timesLooped = 0;
 	}
 
-	public void Draw(SpriteBatch spriteBatch, Vector2 location, Color color) {
+	public void Draw(SpriteBatch spriteBatch, Vector2 location, Color color, Vector2 scale) {
 
 		Rectangle sourceRectangle = new Rectangle(124, 11, 16, 16);
-		Rectangle destinationRectangle = new Rectangle((int)location.X, (int)location.Y, sourceRectangle.Width * 2, sourceRectangle.Height * 2);
+		Rectangle destinationRectangle = new Rectangle((int)location.X, (int)location.Y, (int)(sourceRectangle.Width * scale.X), (int)(sourceRectangle.Height * scale.Y));
 		SpriteEffects effect = SpriteEffects.FlipHorizontally;
 		spriteBatch.Draw(Sprite, destinationRectangle, sourceRectangle, color, rotation: 0, new Vector2(0, 0), effects: effect, 1);
 	}

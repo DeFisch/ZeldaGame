@@ -29,9 +29,9 @@ public class BlueArrowHorizontalSprite : IPlayerProjectile {
         return isActive;
     }
 
-    public void Draw(SpriteBatch spriteBatch) {
+    public void Draw(SpriteBatch spriteBatch, Vector2 scale) {
 		Rectangle sourceRectangle = new Rectangle(36, 185, 16, 16);
-		Rectangle destinationRectangle = new Rectangle((int)position.X, (int)position.Y, sourceRectangle.Width * 2, sourceRectangle.Height * 2);
+		Rectangle destinationRectangle = new Rectangle((int)position.X, (int)position.Y, (int)(sourceRectangle.Width * scale.X), (int)(sourceRectangle.Height * scale.Y));
 		if (direction == Direction.Left) {
 			effect = SpriteEffects.FlipHorizontally;
 		}

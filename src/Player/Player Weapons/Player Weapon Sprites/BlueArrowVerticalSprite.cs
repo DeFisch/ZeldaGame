@@ -29,10 +29,10 @@ public class BlueArrowVerticalSprite : IPlayerProjectile {
         return isActive;
     }
 
-    public void Draw(SpriteBatch spriteBatch) {
+    public void Draw(SpriteBatch spriteBatch, Vector2 scale) {
 
 		Rectangle sourceRectangle = new Rectangle(27, 185, 8, 16);
-		Rectangle destinationRectangle = new Rectangle((int)position.X + 8, (int)position.Y, sourceRectangle.Width * 2, sourceRectangle.Height * 2);
+		Rectangle destinationRectangle = new Rectangle((int)position.X + 8, (int)position.Y, (int)(sourceRectangle.Width * scale.X), (int)(sourceRectangle.Height * scale.Y));
 		if (direction == Direction.Down) // 1 indicates down
 		{
 			effect = SpriteEffects.FlipVertically;

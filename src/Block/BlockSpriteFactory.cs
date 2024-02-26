@@ -7,17 +7,19 @@ namespace Sprint0.Block {
 		private List<IBlock> blockList;
 		private Texture2D texture;
 		private Vector2 position;
+		private Vector2 scale;
 		private int cycleIndex;
 		private int listLength;
 		private Vector2 resetPosition;
 
-		public BlockSpriteFactory(Texture2D texture) {
+		public BlockSpriteFactory(Texture2D texture, Vector2 scale) {
 			blockList = new List<IBlock>();
 			this.texture = texture;
 			position = new Vector2(200, 150);
 			cycleIndex = 0;
 			listLength = 0;
 			resetPosition = position;
+			this.scale = scale;
 		}
 
 		public void AddBlock () 
@@ -42,7 +44,7 @@ namespace Sprint0.Block {
 		}
 
 		public void Draw(SpriteBatch spriteBatch) {
-            blockList[cycleIndex].Draw(spriteBatch);
+            blockList[cycleIndex].Draw(spriteBatch, scale);
 		}
 
 		public void Reset()

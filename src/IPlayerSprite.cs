@@ -5,7 +5,7 @@ public interface IPlayerSprite : ISprite
 {
     new void Update();
 
-    new void Draw(SpriteBatch spriteBatch, Vector2 location, Color color);
+    new void Draw(SpriteBatch spriteBatch, Vector2 location, Color color, Vector2 scale);
 
     public void Pause();
 

@@ -14,8 +14,8 @@ public class MapLoader {
     private static string map_path = "Content/map_data/";
     private string[,] map = new string[7, 12];
     public MapLoader() {
-        if (!load_map(2, 5)) // default map
-            throw new FileNotFoundException("Map file not found");
+        //if (!load_map(2, 5)) // default map
+        //    throw new FileNotFoundException("Map file not found");
     }
 
     public bool load_map(int x, int y) {
