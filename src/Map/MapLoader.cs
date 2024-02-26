@@ -12,7 +12,7 @@ using System.IO;
 namespace ZeldaGame.Map;
 
 public class MapLoader {
-    private static string map_path = "Content/map_data/";
+    private static string map_path = "../../../Content/map_data/";
     private string[,] map = new string[7, 12];
     string[] mapFiles; 
     public MapLoader() {

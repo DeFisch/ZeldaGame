@@ -77,7 +77,7 @@ public class MapHandler {
         spriteBatch.Draw(map_texture, targetRectangle, sourceRectangle, Color.White);
         if (debug){
             MapStaticRectangles mapRectangles = new MapStaticRectangles(this);
-            foreach (Rectangle rectangle in mapRectangles.RectanglesList()){
+            foreach (Rectangle rectangle in mapRectangles.RectanglesList(window_size)){
                 spriteBatch.Draw(map_texture, rectangle, new Rectangle(385,48,18,18), Color.White);
             }
         }
