@@ -11,17 +11,22 @@ public class MapHandler {
     private string[,] map;
     private Texture2D map_texture;
     private Vector2 window_size;
+    private Vector2 map_size;
     private int x = 2, y = 5;
     private int currentMapIndex = 0;
     public MapHandler(Texture2D map_texture, Vector2 window_size) {
         mapLoader = new MapLoader();
         this.map_texture = map_texture;
         this.window_size = window_size;
+        map_size = new Vector2(256, 176);
         mapLoader.load_map(x, y); // load default map
         map = mapLoader.get_map_info(); // get default map info
     }
+    public Vector2 GetWindowScale(int x, int y) {
+		return new Vector2(x / map_size.X, y / map_size.Y);
+	}
     public Rectangle get_map_location(int x, int y) {
-        return new Rectangle(1 + x * 257, 1 + y * 177, 256, 176);
+        return new Rectangle(1 + x * 257, 1 + y * 177, (int)map_size.X, (int)map_size.Y);
     }
     public bool move_up() {
         if(switch_map(y - 1, x))

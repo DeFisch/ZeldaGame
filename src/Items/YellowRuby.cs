@@ -17,13 +17,13 @@ namespace ZeldaGame.Items {
 
 		}
 
-		public void Draw(SpriteBatch spriteBatch, Vector2 location, Color color) {
+		public void Draw(SpriteBatch spriteBatch, Vector2 location, Color color, Vector2 scale) {
 
 			Rectangle sourceRectangle_1 = new Rectangle(72, 16, 8, 16);
-			Rectangle destinationRectangle_1 = new Rectangle((int)pos.X, (int)pos.Y, 16, 42);
+			Rectangle destinationRectangle_1 = new Rectangle((int)pos.X, (int)pos.Y, (int)(sourceRectangle_1.Width * scale.X), (int)(sourceRectangle_1.Height * scale.Y));
 
 			Rectangle sourceRectangle_2 = new Rectangle(72, 0, 8, 16);
-			Rectangle destinationRectangle_2 = new Rectangle((int)pos.X, (int)pos.Y, 16, 42);
+			Rectangle destinationRectangle_2 = new Rectangle((int)pos.X, (int)pos.Y, (int)(sourceRectangle_2.Width * scale.X), (int)(sourceRectangle_2.Height * scale.Y));
 
 			if (counter <= 10) {
 				counter++;

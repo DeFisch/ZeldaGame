@@ -19,10 +19,10 @@ public class WalkUpSprite : IPlayerSprite {
 		this.sprite = sprite;
     }
 
-	public void Draw(SpriteBatch spriteBatch, Vector2 location, Color color)
+	public void Draw(SpriteBatch spriteBatch, Vector2 location, Color color, Vector2 scale)
     {
         srcRectangle = new Rectangle(69 + (17 * currentFrame), 11, 16, 16);
-        destRectangle = new Rectangle((int)location.X, (int)location.Y, srcRectangle.Width * 2, srcRectangle.Height * 2);
+        destRectangle = new Rectangle((int)location.X, (int)location.Y, (int)(srcRectangle.Width * scale.X), (int)(srcRectangle.Height * scale.Y));
 		SpriteEffects effect = SpriteEffects.None;
 
 		spriteBatch.Draw(sprite, destRectangle, srcRectangle, color, rotation: 0, new Vector2(0, 0), effects: effect, 1);

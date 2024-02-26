@@ -13,9 +13,9 @@ public class OldWoman : INPC {
 		this.position = position;
 	}
 
-	public void Draw(SpriteBatch spriteBatch) {
+	public void Draw(SpriteBatch spriteBatch, Vector2 scale) {
 		Rectangle sourceRectangle = new Rectangle(35, 11, 16, 16);
-		Rectangle destinationRectangle = new Rectangle((int)position.X, (int)position.Y, sourceRectangle.Width * 3, sourceRectangle.Height * 3);
+		Rectangle destinationRectangle = new Rectangle((int)position.X, (int)position.Y, (int)(sourceRectangle.Width * scale.X), (int)(sourceRectangle.Height * scale.Y));
 		spriteBatch.Draw(texture, destinationRectangle, sourceRectangle, Color.White);
 	}
 

@@ -10,23 +10,24 @@ public class Aquamentus : IEnemy {
 	private Texture2D texture;
 	private Vector2 position;
 	private State state;
+	private Vector2 scale;
 	private static int[,] character_sprites = new int[,] { { 1, 11, 24, 32 }, { 26, 11, 24, 32 }, { 51, 11, 24, 32 }, { 76, 11, 24, 32 } }; // x, y, width, height
 	private int currentFrame = 0;
-    private int scale = 2;
 	private int speed = 2;
     private int projectile_speed = 4;
 	private int health = 10;
     private EnemyProjectileFactory enemyProjectileFactory;
-	public Aquamentus(Texture2D texture, Vector2 window_size, EnemyProjectileFactory enemyProjectileFactory) {
+	public Aquamentus(Texture2D texture, Vector2 position, EnemyProjectileFactory enemyProjectileFactory, Vector2 scale) {
 		this.texture = texture;
-		position = new Vector2( window_size.X*3/4 - character_sprites[0,2] * scale/2, window_size.Y/2 - character_sprites[0,3] * scale / 2);
+		this.position = position;
 		state = State.Walking;
         this.enemyProjectileFactory = enemyProjectileFactory;
+		this.scale = scale;
 	}
 
 	public void Draw(SpriteBatch spriteBatch) {
 		Rectangle sourceRectangle = new Rectangle(character_sprites[currentFrame, 0], character_sprites[currentFrame, 1], character_sprites[currentFrame, 2], character_sprites[currentFrame, 3]);
-		Rectangle destinationRectangle = new Rectangle((int)position.X, (int)position.Y, character_sprites[currentFrame, 2] * scale, character_sprites[currentFrame, 3] * scale);
+		Rectangle destinationRectangle = new Rectangle((int)position.X, (int)position.Y, (int)(character_sprites[currentFrame, 2] * scale.X), (int)(character_sprites[currentFrame, 3] * scale.Y));
 		spriteBatch.Draw(texture, destinationRectangle, sourceRectangle, Color.White);
 	}
 
@@ -60,6 +61,6 @@ public class Aquamentus : IEnemy {
 
 	public Rectangle GetRectangle()
 	{
-		return new Rectangle((int)position.X, (int)position.Y, character_sprites[currentFrame, 2] * scale, character_sprites[currentFrame, 3] * scale);
+		return new Rectangle((int)position.X, (int)position.Y, (int)(character_sprites[currentFrame, 2] * scale.X), (int)(character_sprites[currentFrame, 3] * scale.Y));
 	}
 }

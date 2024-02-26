@@ -7,41 +7,41 @@ namespace ZeldaGame.Enemy;
 public class EnemyFactory {
 	private List<IEnemy> enemies;
 	private Texture2D[] textures;
-	private Vector2 window_size;
+	private Vector2 scale;
 	public int current_enemy = 0;
 	public string[] enemy_types = new string[] { "Stalfos", "Gibdo", "Keese", "WizzRobe", "DarkNut", "Goriya", "Aquamentus" };
 	public EnemyProjectileFactory enemyProjectileFactory;
-	public EnemyFactory(Texture2D[] textures, Vector2 window_size) {
+	public EnemyFactory(Texture2D[] textures, Vector2 scale) {
 		enemies = new List<IEnemy>();
 		this.textures = textures;
-		this.window_size = window_size;
 		enemyProjectileFactory = new EnemyProjectileFactory(textures);
+		this.scale = scale;
 	}
 
-	public void AddEnemy(string enemy_name, string color_variation = null) {
+	public void AddEnemy(string enemy_name, Vector2 position, string color_variation = null) {
 		IEnemy enemy = null;
 		switch (enemy_name) {
 			case "Stalfos":
-				enemy = new Stalfos(textures[0], window_size);
+				enemy = new Stalfos(textures[0], position, scale);
 				break;
 			case "Gibdo":
-				enemy = new Gibdo(textures[0], window_size);
+				enemy = new Gibdo(textures[0], position, scale);
 				break;
 			case "Keese":
-				enemy = new Keese(textures[0], window_size, color_variation);
+				enemy = new Keese(textures[0], position, color_variation, scale);
 				break;
 			case "WizzRobe":
-				enemy = new WizzRobe(textures[0], window_size, enemyProjectileFactory, color_variation);
+				enemy = new WizzRobe(textures[0], position, enemyProjectileFactory, color_variation, scale);
 				break;
 			case "DarkNut":
-				enemy = new DarkNut(textures[0], window_size, color_variation);
+				enemy = new DarkNut(textures[0], position, color_variation, scale);
 				break;
 			case "Goriya":
-				enemy = new Goriya(textures[0], window_size, enemyProjectileFactory, color_variation);
+				enemy = new Goriya(textures[0], position, enemyProjectileFactory, color_variation, scale);
 				break;
 			case "Aquamentus":
 				if (enemies.Count == 0) // Only one Aquamentus allowed
-					enemy = new Aquamentus(textures[1], window_size, enemyProjectileFactory);
+					enemy = new Aquamentus(textures[1], position, enemyProjectileFactory, scale);
 				break; 
 			default:
 				break;
@@ -71,7 +71,7 @@ public class EnemyFactory {
 	public void Reset()
 	{
 		ClearEnemies();
-		AddEnemy("Stalfos");
+		AddEnemy("Stalfos", new Vector2(120, 120));
     }
 
 	public List<IEnemy> GetAllEnemies() {

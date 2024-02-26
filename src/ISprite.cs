@@ -13,6 +13,6 @@ public interface ISprite {
 	/*
      *  Draws the location of the sprite in the location passed, given a color to recolor the sprite
      */
-	void Draw(SpriteBatch spriteBatch, Vector2 location, Color color);
+	void Draw(SpriteBatch spriteBatch, Vector2 location, Color color, Vector2 scale);
 
 }

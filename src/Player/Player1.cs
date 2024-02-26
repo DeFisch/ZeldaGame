@@ -11,6 +11,7 @@ namespace ZeldaGame.Player {
 		private IPlayerSprite sprite;
 		private Vector2 position;
 		private Vector2 movement;
+		public Vector2 scale;
 		private Vector2 resetPosition;
 		private static bool isMoving;
 
@@ -19,7 +20,7 @@ namespace ZeldaGame.Player {
 		private Swords currSword;
 		private int animTimer;
 
-		public Player1(Vector2 window_size)
+		public Player1(Vector2 position, Vector2 scale)
 		{
 			direction = Direction.Down;
 			sprite = PlayerSpriteFactory.Instance.CreateWalkSprite(direction);
@@ -27,10 +28,11 @@ namespace ZeldaGame.Player {
 			weaponHandler = new WeaponHandler();
 
 			currSword = weaponHandler.currSword;
-			position = new Vector2(window_size.X / 2, window_size.Y / 2);
+			this.position = position;
 			resetPosition = position;
 			movement = new Vector2(0, 0);
-			speed = 2;
+			this.scale = scale;
+			speed = 1;
 			animTimer = -1;
 
 			isMoving = false;
@@ -118,8 +120,8 @@ namespace ZeldaGame.Player {
 		}
 		public void Draw(SpriteBatch spriteBatch, Color color)
 		{
-			weaponHandler.Draw(spriteBatch);
-			sprite.Draw(spriteBatch, position, color);
+			weaponHandler.Draw(spriteBatch, scale);
+			sprite.Draw(spriteBatch, position, color, scale);
 		}
 
         public void Reset()
@@ -153,6 +155,7 @@ namespace ZeldaGame.Player {
                 default:
                     break;
             }
+			movement *= scale;
         }
 	}
 }

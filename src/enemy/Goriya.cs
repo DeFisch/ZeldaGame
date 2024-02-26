@@ -14,16 +14,16 @@ public class Goriya : IEnemy {
 	private State state;
 	private Direction direction;
     private EnemyProjectileFactory enemyProjectileFactory;
+	private Vector2 scale;
 	private int[,] character_sprites = new int[,] { {222, 11, 16, 16 } , { 239, 11, 16, 16 } , { 256, 11, 16, 16 } , { 273, 11, 16, 16 } }; // x, y, width, height
-	private int scale = 2;
 	private int speed = 2;
     private int projectile_speed = 2;
     private int sprite_id = 0;
     private int rand_seed;
 	private int health = 3;
-	public Goriya(Texture2D texture, Vector2 window_size, EnemyProjectileFactory enemyProjectileFactory, string color) {
+	public Goriya(Texture2D texture, Vector2 position, EnemyProjectileFactory enemyProjectileFactory, string color, Vector2 scale) {
 		this.texture = texture;
-		position = new Vector2(new Random().Next(0, (int)window_size.X - character_sprites[0,2] * scale), new Random().Next(0, (int)window_size.Y - character_sprites[0,3] * scale));
+		this.position = position;
 		state = State.Walking;
 		direction = Direction.Down;
         this.enemyProjectileFactory = enemyProjectileFactory;
@@ -34,11 +34,12 @@ public class Goriya : IEnemy {
             character_sprites[2, 1] = 28;
             character_sprites[3, 1] = 28;
         }
+		this.scale = scale;
 	}
 
 	public void Draw(SpriteBatch spriteBatch) {
 		Rectangle sourceRectangle = new Rectangle(character_sprites[sprite_id, 0], character_sprites[sprite_id, 1], character_sprites[sprite_id, 2], character_sprites[sprite_id, 3]);
-		Rectangle destinationRectangle = new Rectangle((int)position.X, (int)position.Y, character_sprites[sprite_id, 2] * scale, character_sprites[sprite_id, 3] * scale);
+		Rectangle destinationRectangle = new Rectangle((int)position.X, (int)position.Y, (int)(character_sprites[sprite_id, 2] * scale.X), (int)(character_sprites[sprite_id, 3] * scale.Y));
 		SpriteEffects sprite_effect = SpriteEffects.None;
 		if (direction == Direction.Left)
 			sprite_effect = SpriteEffects.FlipHorizontally;
@@ -114,7 +115,7 @@ public class Goriya : IEnemy {
 					direction = Direction.Down;
 				break;
 			case Direction.Down:
-				if (position.Y < 600 - character_sprites[0,3] * scale)
+				if (position.Y < 600 - character_sprites[0,3] * scale.Y)
 					position.Y += speed;
 				else
 					direction = Direction.Up;
@@ -126,7 +127,7 @@ public class Goriya : IEnemy {
 					direction = Direction.Right;
 				break;
 			case Direction.Right:
-				if (position.X < 800 - character_sprites[0,2] * scale)
+				if (position.X < 800 - character_sprites[0,2] * scale.X)
 					position.X += speed;
 				else
 					direction = Direction.Left;
@@ -140,6 +141,6 @@ public class Goriya : IEnemy {
     }
 
 	public Rectangle GetRectangle(){
-		return new Rectangle((int)position.X, (int)position.Y, character_sprites[0, 2] * scale, character_sprites[0, 3] * scale);
+		return new Rectangle((int)position.X, (int)position.Y, (int)(character_sprites[0, 2] * scale.X), (int)(character_sprites[0, 3] * scale.Y));
 	}
 }

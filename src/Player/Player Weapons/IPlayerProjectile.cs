@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework.Graphics;
+﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using static ZeldaGame.Player.PlayerStateMachine;
 
 public interface IPlayerProjectile {
@@ -8,5 +9,5 @@ public interface IPlayerProjectile {
 
 	public void Update();
 
-	public void Draw(SpriteBatch spriteBatch);
+	public void Draw(SpriteBatch spriteBatch, Vector2 scale);
 }

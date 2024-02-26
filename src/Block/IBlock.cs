@@ -5,6 +5,6 @@ namespace Sprint0.Block {
 	public interface IBlock {
 		public void Update();
 
-		public void Draw(SpriteBatch spriteBatch);
+		public void Draw(SpriteBatch spriteBatc, Vector2 scale);
 	}
 }
