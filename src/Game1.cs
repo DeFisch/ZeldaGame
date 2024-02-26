@@ -86,8 +86,14 @@ namespace ZeldaGame {
 			Random random = new Random();
 			enemyFactory.AddEnemy("Stalfos", new Vector2(120, 120));
 
-			//Add NPCs
-			NPCFactory.AddNPCs();
+            // Define the quadrants based on the window size
+            Rectangle leftDoorQuadrant = new Rectangle(0, 0, window_width / 2, window_height / 2);
+            Rectangle rightDoorQuadrant = new Rectangle((int)window_width / 2, 0, window_width / 2, window_height / 2);
+            Rectangle topDoorQuadrant = new Rectangle(0, 0, window_width, window_height / 2);
+            Rectangle bottomDoorQuadrant = new Rectangle(0, (int)window_height / 2, window_width, window_height / 2);
+
+            //Add NPCs
+            NPCFactory.AddNPCs();
 			//Add Blocks
 			blockSpriteFactory.AddBlock();
 			//Add items
@@ -135,8 +141,9 @@ namespace ZeldaGame {
 			//Registers commands with Keys for Reset
 			keyboardController.RegisterPressKey(Keys.R, new ResetCommand(this));
 
-            //Registers commands with Keys for Quit
+            //Registers commands with Keys and MouseButton for Quit
             keyboardController.RegisterPressKey(Keys.Q, new QuitCommand(this));
+            mouseController.RegisterRightMouseButtonCommand(MouseButtons.Right, new QuitCommand(this));
 
             //Registers commands with Keys for taking damage
             keyboardController.RegisterPressKey(Keys.E, new TakeDamageCommand(this));
@@ -148,8 +155,10 @@ namespace ZeldaGame {
 			keyboardController.RegisterPressKey(Keys.B, new MoveRightCommand(map));
 
             //Registers commands with MouseButtons for switching maps
-            mouseController.RegisterCommand(MouseButtons.Right, new NextMapCommand(map));
-            mouseController.RegisterCommand(MouseButtons.Left, new PreviousMapCommand(map));
+            mouseController.RegisterQuadrant(leftDoorQuadrant, new MoveLeftCommand(map));
+            mouseController.RegisterQuadrant(rightDoorQuadrant, new MoveRightCommand(map));
+            mouseController.RegisterQuadrant(topDoorQuadrant, new MoveUpCommand(map));
+            mouseController.RegisterQuadrant(bottomDoorQuadrant, new MoveDownCommand(map));
 
         }
 

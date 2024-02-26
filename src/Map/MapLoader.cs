@@ -12,11 +12,9 @@ using System.IO;
 namespace ZeldaGame.Map;
 
 public class MapLoader {
-    private static string map_path = "../../../Content/map_data/";
+    private static string map_path = "Content/map_data/";
     private string[,] map = new string[7, 12];
-    string[] mapFiles; 
     public MapLoader() {
-        mapFiles = Directory.GetFiles(map_path, "map_*.csv");
         if (!load_map(2, 5))   // default map
             throw new FileNotFoundException("Map file not found");
 
@@ -39,9 +37,5 @@ public class MapLoader {
 
     public string[,] get_map_info() {
         return map;
-    }
-    public int get_maps_count()
-    {
-        return mapFiles.Length;
     }
 }

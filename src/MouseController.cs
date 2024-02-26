@@ -9,23 +9,33 @@ public enum MouseButtons { Left, Right };
  */
 public class MouseController : IController {
     private Dictionary<MouseButtons, ICommand> buttonCommands;
+    private Dictionary<Rectangle, ICommand> quadrants;
 
-	// Constructor: Initializes the Dictionary with commands based off mouse buttons
-	public MouseController() {
+    // Constructor: Initializes the Dictionary with commands based off mouse buttons and quadrants
+    public MouseController() {
 		buttonCommands = new Dictionary<MouseButtons, ICommand>();
-	}
+        quadrants = new Dictionary<Rectangle, ICommand>();
+    }
 
-	public void RegisterCommand(MouseButtons button, ICommand command) {
+	public void RegisterRightMouseButtonCommand(MouseButtons button, ICommand command) {
 		buttonCommands.Add(button, command);
 	}
+    public void RegisterQuadrant(Rectangle quadrant, ICommand command)
+    {
+        quadrants.Add(quadrant, command);
+    }
 
     public void Update()
     {
         MouseState mouseState = Mouse.GetState();
 
-        if (mouseState.LeftButton == ButtonState.Pressed && buttonCommands.ContainsKey(MouseButtons.Left))
+        foreach (var quadrant in quadrants.Keys)
         {
-            buttonCommands[MouseButtons.Left].Execute();
+            // Checks if the mouse is in the quadrant and the left button is pressed
+            if (quadrant.Contains(mouseState.X, mouseState.Y) && mouseState.LeftButton == ButtonState.Pressed)
+            {
+                quadrants[quadrant].Execute();
+            }
         }
 
         if (mouseState.RightButton == ButtonState.Pressed && buttonCommands.ContainsKey(MouseButtons.Right))
