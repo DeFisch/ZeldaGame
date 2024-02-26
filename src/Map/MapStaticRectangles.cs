@@ -8,15 +8,16 @@ namespace ZeldaGame.Map
 {
     public class MapStaticRectangles
     {
-        private String[,] mapLsit;
+        private String[,] mapList;
         private MapHandler map;
         private List<Rectangle> rectangles;
         private int x = 0, y = 0;
 
-        public MapStaticRectangles (Game1 game)
+        public MapStaticRectangles (MapHandler map)
         {
-            this.map = game.map;
-            this.mapLsit = game.map.get_map_info();
+            this.map = map;
+            mapList = map.get_map_info();
+            rectangles = new List<Rectangle>();
         }
 
         public List<Rectangle> RectanglesList()
@@ -24,7 +25,7 @@ namespace ZeldaGame.Map
             
             for (int i = 0; i < 12; i++) {
                 for (int j = 0; j < 7; j++) {
-                    if(!mapLsit.Equals('_'))
+                    if(!mapList[j,i].Equals("-"))
                     {
                         x = i * 50;
                         y = j * 50;
