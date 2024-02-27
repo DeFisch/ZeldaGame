@@ -9,6 +9,7 @@ public class BombSprite : IPlayerProjectile {
 
     private Vector2 position;
 	private Direction direction;
+    private readonly int damage = 2;
 
     private int currentFrame;
 	private readonly int totalFrames = 4;
@@ -39,6 +40,11 @@ public class BombSprite : IPlayerProjectile {
     public Rectangle GetHitBox()
     {
         return destinationRectangle;
+    }
+
+    public int ProjectileDamage()
+    {
+        return damage;
     }
 
     public Direction GetDirection() {

@@ -5,7 +5,6 @@ namespace ZeldaGame.Player.Commands {
 		private Game1 MyGame;
 		private Direction direction;
 
-		// Constructor
 		public SetWalkSpriteCommand(Game1 myGame, int direction) {
 			MyGame = myGame;
 			this.direction = (Direction)direction;

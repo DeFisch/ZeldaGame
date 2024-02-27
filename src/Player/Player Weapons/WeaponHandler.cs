@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System.Collections.Generic;
+using System.Diagnostics;
 using static ZeldaGame.Player.PlayerStateMachine;
 namespace ZeldaGame.Player;
 
@@ -28,6 +29,16 @@ public class WeaponHandler {
 
 	public void ProjectileExpiration(IPlayerProjectile projectile) {
 		expiredProjectiles.Add(projectile);
+	}
+
+	public List<Rectangle> GetActiveHitBoxes()
+	{
+		List<Rectangle> activeHitBoxes = new List<Rectangle>();
+		foreach (IPlayerProjectile projectile in activeProjectiles)
+		{
+            activeHitBoxes.Add(projectile.GetHitBox());
+		}
+		return activeHitBoxes;
 	}
 
 	public void Update() {

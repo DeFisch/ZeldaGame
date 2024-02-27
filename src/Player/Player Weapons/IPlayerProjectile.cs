@@ -7,6 +7,8 @@ public interface IPlayerProjectile {
 
 	public Direction GetDirection();
 
+	public int ProjectileDamage();
+
 	public bool IsActive();
 
 	public void Update();

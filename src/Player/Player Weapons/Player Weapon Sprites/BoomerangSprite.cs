@@ -12,8 +12,9 @@ public class BoomerangSprite : IPlayerProjectile {
     private Vector2 position;
     private Vector2 projectileMovement;
     private readonly double projectileSpeed = 2;
+    private readonly int damage = 2;
 
-	private int existanceCounter;
+    private int existanceCounter;
 	private readonly int existanceDuration = 100;
     private int currentFrame;
 	private readonly int totalFrames = 3;
@@ -37,6 +38,11 @@ public class BoomerangSprite : IPlayerProjectile {
     public Rectangle GetHitBox()
     {
         return destinationRectangle;
+    }
+
+    public int ProjectileDamage()
+    {
+        return damage;
     }
 
     public Direction GetDirection() {

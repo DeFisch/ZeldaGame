@@ -167,7 +167,6 @@ namespace ZeldaGame {
 			foreach (IController controller in controllers) {
 				controller.Update();
 			}
-
 			// Updates enemies
             enemyFactory.Update();
 			// Updates npc's

@@ -14,8 +14,9 @@ public class MagicSwordVerticalSprite : IPlayerProjectile {
 
 	private Vector2 position;
 	private Vector2 offset;
+    private readonly int damage = 2;
 
-	private Rectangle destinationRectangle;
+    private Rectangle destinationRectangle;
 
 	public MagicSwordVerticalSprite(Texture2D sprite, Direction direction, Vector2 position) {
 		isActive = true;
@@ -29,6 +30,11 @@ public class MagicSwordVerticalSprite : IPlayerProjectile {
     public Rectangle GetHitBox()
     {
         return destinationRectangle;
+    }
+
+    public int ProjectileDamage()
+    {
+        return damage;
     }
 
     public Direction GetDirection() {

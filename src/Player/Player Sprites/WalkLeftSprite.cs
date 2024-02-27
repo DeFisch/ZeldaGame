@@ -4,8 +4,7 @@ using System.Diagnostics;
 
 public class WalkLeftSprite : IPlayerSprite {
 	private Texture2D sprite;
-	private Rectangle srcRectangle;
-	private Rectangle destRectangle;
+	private static Rectangle destRectangle;
 	private bool isPlaying;
 
     private static int currentFrame = 0;
@@ -19,9 +18,14 @@ public class WalkLeftSprite : IPlayerSprite {
 		this.sprite = sprite;
     }
 
-	public void Draw(SpriteBatch spriteBatch, Vector2 location, Color color, Vector2 scale)
+    public Rectangle GetHitBox()
+    {
+        return destRectangle;
+    }
+
+    public void Draw(SpriteBatch spriteBatch, Vector2 location, Color color, Vector2 scale)
 	{
-        srcRectangle = new Rectangle(35 + (17 * currentFrame), 11, 16, 16);
+        Rectangle srcRectangle = new Rectangle(35 + (17 * currentFrame), 11, 16, 16);
         destRectangle = new Rectangle((int)location.X, (int)location.Y, (int)(srcRectangle.Width * scale.X), (int)(srcRectangle.Height * scale.Y));
 		SpriteEffects effect = SpriteEffects.FlipHorizontally;
 

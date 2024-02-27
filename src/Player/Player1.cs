@@ -1,5 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using System.Collections.Generic;
+using System.Diagnostics;
 using static ZeldaGame.Player.PlayerStateMachine;
 using static ZeldaGame.Player.WeaponHandler;
 
@@ -37,6 +39,16 @@ namespace ZeldaGame.Player {
 
 			isMoving = false;
 		}
+
+		public List<Rectangle> GetProjectileHitBoxes()
+		{
+			return weaponHandler.GetActiveHitBoxes();
+		}
+
+		public Rectangle GetPlayerHitBox()
+		{
+			return sprite.GetHitBox();
+        }
 
 		public IPlayerSprite GetSprite() {
 			return sprite;
