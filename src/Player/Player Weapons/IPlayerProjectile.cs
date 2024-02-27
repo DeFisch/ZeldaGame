@@ -3,6 +3,8 @@ using Microsoft.Xna.Framework.Graphics;
 using static ZeldaGame.Player.PlayerStateMachine;
 
 public interface IPlayerProjectile {
+	public Rectangle GetHitBox();
+
 	public Direction GetDirection();
 
 	public bool IsActive();

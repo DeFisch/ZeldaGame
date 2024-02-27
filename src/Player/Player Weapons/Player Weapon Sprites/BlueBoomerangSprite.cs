@@ -20,6 +20,8 @@ public class BlueBoomerangSprite : IPlayerProjectile {
     private int frameID;
     private readonly int frameRate = 6;
 
+    private Rectangle destinationRectangle;
+
     public BlueBoomerangSprite(Texture2D sprite, Direction direction, Vector2 position) {
 		isActive = true;
 		Sprite = sprite;
@@ -32,7 +34,12 @@ public class BlueBoomerangSprite : IPlayerProjectile {
 		frameID = 0;
 	}
 
-	public Direction GetDirection() {
+    public Rectangle GetHitBox()
+    {
+        return destinationRectangle;
+    }
+
+    public Direction GetDirection() {
 		return direction;
 	}
 
@@ -43,7 +50,7 @@ public class BlueBoomerangSprite : IPlayerProjectile {
 
     public void Draw(SpriteBatch spriteBatch, Vector2 scale) {
 		Rectangle sourceRectangle = new Rectangle(91 + (currentFrame * 9), 185, 8, 16);
-		Rectangle destinationRectangle = new Rectangle((int)position.X + 8, (int)position.Y, (int)(sourceRectangle.Width * scale.X), (int)(sourceRectangle.Height * scale.Y));
+	    destinationRectangle = new Rectangle((int)position.X + 8, (int)position.Y, (int)(sourceRectangle.Width * scale.X), (int)(sourceRectangle.Height * scale.Y));
 		spriteBatch.Draw(Sprite, destinationRectangle, sourceRectangle, Color.White, rotation: 0, new Vector2(0, 0), effects: effect, 1);
 	}
 

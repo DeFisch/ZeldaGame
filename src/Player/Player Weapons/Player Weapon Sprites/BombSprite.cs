@@ -20,6 +20,8 @@ public class BombSprite : IPlayerProjectile {
 	private int XOffSet;
 	private int YOffSet;
 
+	private Rectangle destinationRectangle;
+
 	public BombSprite(Texture2D sprite, Direction direction,  Vector2 position) {
 		isActive = true;
 		Sprite = sprite;
@@ -34,7 +36,12 @@ public class BombSprite : IPlayerProjectile {
 		SetOffSet();
 	}
 
-	public Direction GetDirection() {
+    public Rectangle GetHitBox()
+    {
+        return destinationRectangle;
+    }
+
+    public Direction GetDirection() {
 		return direction;
 	}
 
@@ -45,7 +52,6 @@ public class BombSprite : IPlayerProjectile {
 
     public void Draw(SpriteBatch spriteBatch, Vector2 scale) {
 		Rectangle sourceRectangle;
-		Rectangle destinationRectangle;
 		if (currentFrame == 0)
 		{
             sourceRectangle = new Rectangle(129, 185, 8, 16);

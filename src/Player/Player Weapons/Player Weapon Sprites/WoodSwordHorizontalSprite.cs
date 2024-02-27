@@ -13,6 +13,9 @@ public class WoodSwordHorizontalSprite : IPlayerProjectile {
 
 	private Vector2 position;
 	private Vector2 offset;
+
+	private Rectangle destinationRectangle;
+
 	public WoodSwordHorizontalSprite(Texture2D sprite, Direction direction, Vector2 position) {
 		isActive = true;
 		Sprite = sprite;
@@ -22,7 +25,12 @@ public class WoodSwordHorizontalSprite : IPlayerProjectile {
 		this.position = position;
 	}
 
-	public Direction GetDirection() {
+    public Rectangle GetHitBox()
+    {
+        return destinationRectangle;
+    }
+
+    public Direction GetDirection() {
 		return direction;
 	}
 
@@ -45,7 +53,6 @@ public class WoodSwordHorizontalSprite : IPlayerProjectile {
 		}
 
 		Rectangle sourceRectangle = new Rectangle(10, 154, 16, 16);
-		Rectangle destinationRectangle;
 		if (direction == Direction.Right) {
 			effect = SpriteEffects.None;
 			destinationRectangle = new Rectangle((int)(position.X + offset.X * scale.X), (int)(position.Y + offset.Y * scale.Y), (int)(sourceRectangle.Width * scale.X), (int)(sourceRectangle.Height * scale.Y));

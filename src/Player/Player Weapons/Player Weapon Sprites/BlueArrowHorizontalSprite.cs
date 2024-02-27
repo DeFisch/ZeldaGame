@@ -12,6 +12,8 @@ public class BlueArrowHorizontalSprite : IPlayerProjectile {
     private Vector2 projectileMovement;
     private readonly int projectileSpeed = 4;
 
+    private Rectangle destinationRectangle;
+
     public BlueArrowHorizontalSprite(Texture2D sprite, Direction direction, Vector2 position) {
         isActive = true;
 		Sprite = sprite;
@@ -20,7 +22,12 @@ public class BlueArrowHorizontalSprite : IPlayerProjectile {
         this.position = position;
 	}
 
-	public Direction GetDirection() {
+    public Rectangle GetHitBox()
+    {
+        return destinationRectangle;
+    }
+
+    public Direction GetDirection() {
 		return direction;
 	}
 
@@ -31,7 +38,7 @@ public class BlueArrowHorizontalSprite : IPlayerProjectile {
 
     public void Draw(SpriteBatch spriteBatch, Vector2 scale) {
 		Rectangle sourceRectangle = new Rectangle(36, 185, 16, 16);
-		Rectangle destinationRectangle = new Rectangle((int)position.X, (int)position.Y, (int)(sourceRectangle.Width * scale.X), (int)(sourceRectangle.Height * scale.Y));
+		destinationRectangle = new Rectangle((int)position.X, (int)position.Y, (int)(sourceRectangle.Width * scale.X), (int)(sourceRectangle.Height * scale.Y));
 		if (direction == Direction.Left) {
 			effect = SpriteEffects.FlipHorizontally;
 		}

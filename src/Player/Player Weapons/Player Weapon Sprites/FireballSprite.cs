@@ -17,6 +17,8 @@ public class FireballSprite : IPlayerProjectile {
 	private int frameID;
     private readonly int frameRate = 8;
 
+	private Rectangle destinationRectangle;
+
     public FireballSprite(Texture2D sprite, Direction direction, Vector2 position) {
 		isActive = true;
 		Sprite = sprite;
@@ -28,7 +30,12 @@ public class FireballSprite : IPlayerProjectile {
 		frameID = 0;
 	}
 
-	public Direction GetDirection() {
+    public Rectangle GetHitBox()
+    {
+        return destinationRectangle;
+    }
+
+    public Direction GetDirection() {
 		return direction;
 	}
 
@@ -40,7 +47,7 @@ public class FireballSprite : IPlayerProjectile {
     public void Draw(SpriteBatch spriteBatch, Vector2 scale) {
 
 		Rectangle sourceRectangle = new Rectangle(191, 185, 16, 16);
-		Rectangle destinationRectangle = new Rectangle((int)position.X, (int)position.Y, (int)(sourceRectangle.Width * scale.X), (int)(sourceRectangle.Height * scale.Y));
+		destinationRectangle = new Rectangle((int)position.X, (int)position.Y, (int)(sourceRectangle.Width * scale.X), (int)(sourceRectangle.Height * scale.Y));
 		spriteBatch.Draw(Sprite, destinationRectangle, sourceRectangle, Color.White, rotation: 0, new Vector2(0, 0), effect, 1);
 	}
 

@@ -15,6 +15,8 @@ public class WhiteSwordVerticalSprite : IPlayerProjectile {
 	private Vector2 position;
 	private Vector2 offset;
 
+	private Rectangle destinationRectangle;
+
 	public WhiteSwordVerticalSprite(Texture2D sprite, Direction direction, Vector2 position) {
 		isActive = true;
 		Sprite = sprite;
@@ -24,7 +26,12 @@ public class WhiteSwordVerticalSprite : IPlayerProjectile {
 		this.position = position;
 	}
 
-	public Direction GetDirection() {
+    public Rectangle GetHitBox()
+    {
+        return destinationRectangle;
+    }
+
+    public Direction GetDirection() {
 		return direction;
 	}
 
@@ -48,7 +55,6 @@ public class WhiteSwordVerticalSprite : IPlayerProjectile {
 		}
 
 		Rectangle sourceRectangle = new Rectangle(36, 154, 8, 16);
-		Rectangle destinationRectangle;
 		if (direction == Direction.Down) {
 			effect = SpriteEffects.FlipVertically;
 			destinationRectangle = new Rectangle((int)(position.X + offset.X * scale.X), (int)(position.Y + offset.Y * scale.Y), (int)(sourceRectangle.Width * scale.X), (int)(sourceRectangle.Height * scale.Y));
