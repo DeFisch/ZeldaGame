@@ -39,11 +39,10 @@ namespace Enemy.Projectiles
             spriteBatch.Draw(texture, destinationRectangle, sourceRectangle, Color.White);
         }
 
-        public Vector2 GetLocation()
+        public Rectangle GetRectangle()
         {
-            return location;
+            return new Rectangle((int)location.X, (int)location.Y, fireball_sprites[currentFrame].Width * scale, fireball_sprites[currentFrame].Height * scale);
         }
-
         public void Update()
         {
             frameID++;

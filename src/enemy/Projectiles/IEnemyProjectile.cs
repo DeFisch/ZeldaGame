@@ -5,5 +5,5 @@ public interface IEnemyProjectile
     bool Completed();
     void Update();
     void Draw(SpriteBatch spriteBatch);
-    Vector2 GetLocation();
+    Rectangle GetRectangle();
 }

@@ -41,9 +41,9 @@ namespace Enemy.Projectiles
             spriteBatch.Draw(texture, destinationRectangle, sourceRectangle, Color.White, rotation: 0, new Vector2(0, 0), effects: sprite_effect, 1);
         }
 
-        public Vector2 GetLocation()
+        public Rectangle GetRectangle()
         {
-            return location;
+            return new Rectangle((int)location.X, (int)location.Y, Boomerang_sprites[currentFrame].Width * scale, Boomerang_sprites[currentFrame].Height * scale);
         }
 
         public void Update()

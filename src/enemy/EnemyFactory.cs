@@ -77,4 +77,8 @@ public class EnemyFactory {
 	public List<IEnemy> GetAllEnemies() {
 		return enemies;
 	}
+
+	public List<IEnemyProjectile> GetAllProjectiles() {
+		return enemyProjectileFactory.GetProjectiles();
+	}
 }

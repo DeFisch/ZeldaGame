@@ -58,6 +58,11 @@ namespace Enemy
             }
         }
 
+        public List<IEnemyProjectile> GetProjectiles()
+        {
+            return projectiles;
+        }
+
         public void ClearAllProjectiles()
         {
             projectiles.Clear();
