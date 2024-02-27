@@ -87,10 +87,10 @@ namespace ZeldaGame {
 			enemyFactory.AddEnemy("Stalfos", new Vector2(120, 120));
 
             // Define the quadrants based on the window size
-            Rectangle leftDoorQuadrant = new Rectangle(0, 0, window_width / 2, window_height / 2);
-            Rectangle rightDoorQuadrant = new Rectangle((int)window_width / 2, 0, window_width / 2, window_height / 2);
-            Rectangle topDoorQuadrant = new Rectangle(0, 0, window_width, window_height / 2);
-            Rectangle bottomDoorQuadrant = new Rectangle(0, (int)window_height / 2, window_width, window_height / 2);
+            Rectangle leftDoorQuadrant = new Rectangle(0, 0, window_width / 4, window_height);
+            Rectangle rightDoorQuadrant = new Rectangle((int)(window_width*0.75), 0, window_width / 4, window_height);
+            Rectangle topDoorQuadrant = new Rectangle(0, 0, window_width, window_height / 4);
+            Rectangle bottomDoorQuadrant = new Rectangle(0, (int)(window_height * 0.75), window_width, window_height / 4);
 
             //Add NPCs
             NPCFactory.AddNPCs();

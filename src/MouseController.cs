@@ -1,5 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using System;
 using System.Collections.Generic;
 using static MouseController;
 public enum MouseButtons { Left, Right };
@@ -10,6 +12,7 @@ public enum MouseButtons { Left, Right };
 public class MouseController : IController {
     private Dictionary<MouseButtons, ICommand> buttonCommands;
     private Dictionary<Rectangle, ICommand> quadrants;
+    private ButtonState previousLeftButtonState = ButtonState.Released;
 
     // Constructor: Initializes the Dictionary with commands based off mouse buttons and quadrants
     public MouseController() {
@@ -28,11 +31,12 @@ public class MouseController : IController {
     public void Update()
     {
         MouseState mouseState = Mouse.GetState();
-
         foreach (var quadrant in quadrants.Keys)
         {
             // Checks if the mouse is in the quadrant and the left button is pressed
-            if (quadrant.Contains(mouseState.X, mouseState.Y) && mouseState.LeftButton == ButtonState.Pressed)
+            if (quadrant.Contains(mouseState.X, mouseState.Y) && 
+            mouseState.LeftButton == ButtonState.Pressed && 
+            previousLeftButtonState == ButtonState.Released)
             {
                 quadrants[quadrant].Execute();
             }
@@ -42,5 +46,7 @@ public class MouseController : IController {
         {
             buttonCommands[MouseButtons.Right].Execute();
         }
+
+        previousLeftButtonState = mouseState.LeftButton;
     }
 }
