@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -15,6 +16,7 @@ public class MapHandler {
     private Vector2 window_size;
     private Vector2 map_size;
     private int x = 2, y = 5; // default map
+    private MapStaticRectangles mapRectangles;
 
     public MapHandler(Texture2D map_texture, Vector2 window_size) {
         mapLoader = new MapLoader();
@@ -23,6 +25,7 @@ public class MapHandler {
         map_size = new Vector2(256, 176);
         mapLoader.load_map(x, y); // load default map
         map = mapLoader.get_map_info(); // get default map info
+        mapRectangles = new MapStaticRectangles(this);
     }
     public Vector2 GetWindowScale(int x, int y) {
 		return new Vector2(x / map_size.X, y / map_size.Y);
@@ -56,6 +59,7 @@ public class MapHandler {
             this.x = x;
             this.y = y;
             map = mapLoader.get_map_info();
+            mapRectangles = new MapStaticRectangles(this); // update map rectangles
             return true;
         }
         return false;
@@ -69,11 +73,14 @@ public class MapHandler {
         Rectangle targetRectangle = new Rectangle(0, 0, (int)window_size.X, (int)window_size.Y);
         spriteBatch.Draw(map_texture, targetRectangle, sourceRectangle, Color.White);
         if (debug){
-            MapStaticRectangles mapRectangles = new MapStaticRectangles(this);
             foreach (Rectangle rectangle in mapRectangles.RectanglesList(window_size)){
                 spriteBatch.Draw(map_texture, rectangle, new Rectangle(385,48,18,18), Color.White);
             }
         }
+    }
+
+    public List<Rectangle> getAllObjectRectangles(){
+        return mapRectangles.RectanglesList(window_size);
     }
 
 }
