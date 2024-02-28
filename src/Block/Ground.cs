@@ -6,10 +6,10 @@ namespace Sprint0.Block {
 		private Texture2D texture;
 		private Vector2 position;
 
-		public Ground(Texture2D texture, Vector2 position) {
+        public Ground(Texture2D texture, Vector2 position) {
 			this.texture = texture;
 			this.position = position;
-		}
+        }
 
 		public void Update() {
 

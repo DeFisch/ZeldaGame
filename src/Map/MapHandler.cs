@@ -69,18 +69,22 @@ public class MapHandler {
     }
 
     public void Draw(SpriteBatch spriteBatch){
-        Rectangle sourceRectangle = get_map_location(x, y);
-        Rectangle targetRectangle = new Rectangle(0, 0, (int)window_size.X, (int)window_size.Y);
-        spriteBatch.Draw(map_texture, targetRectangle, sourceRectangle, Color.White);
+        Rectangle mapSourceRectangle = get_map_location(x, y);
+        Rectangle mapTargetRectangle = new Rectangle(0, 0, (int)window_size.X, (int)window_size.Y);
+        spriteBatch.Draw(map_texture, mapTargetRectangle, mapSourceRectangle, Color.White);
+        mapRectangles.SetLists(window_size);
+        List<Rectangle> sList = mapRectangles.getSourceRectangleList();
+        List<Rectangle> dlist = mapRectangles.getDestinationRectangleList();
         if (debug){
-            foreach (Rectangle rectangle in mapRectangles.RectanglesList(window_size)){
-                spriteBatch.Draw(map_texture, rectangle, new Rectangle(385,48,18,18), Color.White);
+            for (int i = 0; i < dlist.Count; i++)
+            {
+                spriteBatch.Draw(map_texture, dlist[i], sList[i], Color.White);
             }
         }
     }
 
-    public List<Rectangle> getAllObjectRectangles(){
-        return mapRectangles.RectanglesList(window_size);
-    }
+    /*public List<Rectangle> getAllObjectRectangles(){
+        return mapRectangles.getDestinationRectangleList(window_size);
+    }*/
 
 }

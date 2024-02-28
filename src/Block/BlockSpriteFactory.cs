@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
+using Enemy;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using ZeldaGame.Enemy;
 
 namespace Sprint0.Block {
 	public class BlockSpriteFactory {
@@ -31,9 +33,8 @@ namespace Sprint0.Block {
             blockList.Add(new Water(texture, position));
             blockList.Add(new Sand(texture, position));
 		}
-		
 
-		public void cycleList(int cycleDirection) {
+        public void cycleList(int cycleDirection) {
 			listLength = blockList.Count;
 			if (cycleDirection == 1 ) {
 				cycleIndex = (cycleIndex + 1) % listLength;
