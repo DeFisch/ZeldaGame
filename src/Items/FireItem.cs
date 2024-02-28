@@ -11,6 +11,10 @@ namespace ZeldaGame.Items {
 		private int counter = 0;
 		private Texture2D texture;
 		private Vector2 pos;
+		private Rectangle sourceRectangle_1;
+		private Rectangle sourceRectangle_2;
+		private Rectangle destinationRectangle_1;
+		private Rectangle destinationRectangle_2;
 		public FireItem(Texture2D texture, Vector2 pos) {
 			this.texture = texture;
 			this.pos = pos;
@@ -18,11 +22,11 @@ namespace ZeldaGame.Items {
 
 		public void Draw(SpriteBatch spriteBatch, Vector2 location, Color color, Vector2 scale) {
 
-			Rectangle sourceRectangle_1 = new Rectangle(52, 11, 16, 16);
-			Rectangle destinationRectangle_1 = new Rectangle((int)pos.X, (int)pos.Y, (int)(sourceRectangle_1.Width * scale.X), (int)(sourceRectangle_1.Height * scale.Y));
+			sourceRectangle_1 = new Rectangle(52, 11, 16, 16);
+			destinationRectangle_1 = new Rectangle((int)pos.X, (int)pos.Y, (int)(sourceRectangle_1.Width * scale.X), (int)(sourceRectangle_1.Height * scale.Y));
 
-			Rectangle sourceRectangle_2 = new Rectangle(69, 11, 16, 16);
-			Rectangle destinationRectangle_2 = new Rectangle((int)pos.X, (int)pos.Y, (int)(sourceRectangle_2.Width * scale.X), (int)(sourceRectangle_2.Height * scale.Y));
+			sourceRectangle_2 = new Rectangle(69, 11, 16, 16);
+			destinationRectangle_2 = new Rectangle((int)pos.X, (int)pos.Y, (int)(sourceRectangle_2.Width * scale.X), (int)(sourceRectangle_2.Height * scale.Y));
 
 			if (counter <= 10) {
 				counter++;
@@ -36,8 +40,17 @@ namespace ZeldaGame.Items {
 				counter = 0;
 			}
 		}
+        public Rectangle GetHitBox()
+        {
+            return destinationRectangle_1;
+        }
 
-		public void Update() {
+        public void ItemAction()
+        {
+
+        }
+
+        public void Update() {
 
 		}
 	}
