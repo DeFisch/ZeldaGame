@@ -100,4 +100,10 @@ public class MapHandler {
         set { debug = value; }
     }
 
+    public void Reset()
+    {
+        x = 2;
+        y = 5;
+    }
+
 }

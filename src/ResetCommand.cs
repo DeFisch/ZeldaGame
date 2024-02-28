@@ -20,6 +20,7 @@ namespace ZeldaGame
             MyGame.NPCFactory.Reset();
             MyGame.Link.Reset();
             MyGame.enemyFactory.Reset();
+            MyGame.map.Reset();
         }
     }
 }

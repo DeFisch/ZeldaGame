@@ -15,7 +15,6 @@ namespace ZeldaGame.Map
         private List<Rectangle> dRectangleList;
         private List<Rectangle> sRectangleList;
         private Rectangle sourceRectangle;
-        private Rectangle destinationRectangle;
         private float xPosition = 0, yPosition = 0;
         private float width = 0, height = 0;
 
