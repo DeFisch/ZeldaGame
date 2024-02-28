@@ -148,17 +148,14 @@ namespace ZeldaGame {
             //Registers commands with Keys for taking damage
             keyboardController.RegisterPressKey(Keys.E, new TakeDamageCommand(this));
 
-			//Registers commands with Keys for switching maps
-			keyboardController.RegisterPressKey(Keys.X, new MoveUpCommand(map));
-			keyboardController.RegisterPressKey(Keys.C, new MoveDownCommand(map));
-			keyboardController.RegisterPressKey(Keys.V, new MoveLeftCommand(map));
-			keyboardController.RegisterPressKey(Keys.B, new MoveRightCommand(map));
-
             //Registers commands with MouseButtons for switching maps
             mouseController.RegisterQuadrant(leftDoorQuadrant, new MoveLeftCommand(map));
             mouseController.RegisterQuadrant(rightDoorQuadrant, new MoveRightCommand(map));
             mouseController.RegisterQuadrant(topDoorQuadrant, new MoveUpCommand(map));
             mouseController.RegisterQuadrant(bottomDoorQuadrant, new MoveDownCommand(map));
+
+			//Registers commands with Keys for turning debug mode on and off
+			keyboardController.RegisterPressKey(Keys.F, new DebugCommand(map));
 
         }
 

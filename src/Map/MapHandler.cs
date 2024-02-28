@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -26,6 +27,7 @@ public class MapHandler {
         mapLoader.load_map(x, y); // load default map
         map = mapLoader.get_map_info(); // get default map info
         mapRectangles = new MapStaticRectangles(this);
+        mapRectangles.SetLists(window_size);
     }
     public Vector2 GetWindowScale(int x, int y) {
 		return new Vector2(x / map_size.X, y / map_size.Y);
@@ -59,7 +61,7 @@ public class MapHandler {
             this.x = x;
             this.y = y;
             map = mapLoader.get_map_info();
-            mapRectangles = new MapStaticRectangles(this); // update map rectangles
+            mapRectangles.SetLists(window_size); // update map rectangles
             return true;
         }
         return false;
@@ -72,7 +74,6 @@ public class MapHandler {
         Rectangle mapSourceRectangle = get_map_location(x, y);
         Rectangle mapTargetRectangle = new Rectangle(0, 0, (int)window_size.X, (int)window_size.Y);
         spriteBatch.Draw(map_texture, mapTargetRectangle, mapSourceRectangle, Color.White);
-        mapRectangles.SetLists(window_size);
         List<Rectangle> sList = mapRectangles.getSourceRectangleList();
         List<Rectangle> dlist = mapRectangles.getDestinationRectangleList();
         if (debug){
@@ -92,6 +93,11 @@ public class MapHandler {
 
     public bool is_map_available(int x, int y) {
         return mapLoader.is_map_available(x, y);
+    }
+
+    public bool Debug {
+        get { return debug; }
+        set { debug = value; }
     }
 
 }

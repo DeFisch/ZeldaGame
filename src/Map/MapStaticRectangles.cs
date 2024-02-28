@@ -39,6 +39,9 @@ namespace ZeldaGame.Map
 
         public void SetLists(Vector2 window_size)
         {
+            dRectangleList.Clear();
+            sRectangleList.Clear();
+
             string[,] mapList = map.get_map_info();
             addBoundaryRectangles(dRectangleList, sRectangleList, window_size); // add boundary rectangles
             
