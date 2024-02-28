@@ -11,6 +11,6 @@ public class CollisionHandler{
 
     public void Update() {
         game.map.PlayerDoorCollision(new Vector2(game.window_width, game.window_height), game.Link);
-        game.NPCFactory.PlayerNPCCollision(game._spriteBatch, game.Link);
+        game.NPCFactory.PlayerNPCCollision(game.Link);
     }
 }

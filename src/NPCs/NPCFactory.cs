@@ -70,7 +70,7 @@ public class NPCFactory
 		cycleIndex = 0;
 		listLength = 0;
 	}
-	public void PlayerNPCCollision(SpriteBatch spriteBatch, IPlayer player)
+	public void PlayerNPCCollision(IPlayer player)
 	{
 		Rectangle playerHitBox = player.GetPlayerHitBox();
 		if (npcList[cycleIndex].GetNPCHitBox().Intersects(playerHitBox))
