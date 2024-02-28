@@ -83,8 +83,8 @@ public class MapHandler {
         }
     }
 
-    /*public List<Rectangle> getAllObjectRectangles(){
-        return mapRectangles.getDestinationRectangleList(window_size);
-    }*/
+    public List<Rectangle> getAllObjectRectangles(){
+        return mapRectangles.getDestinationRectangleList();
+    }
 
 }
