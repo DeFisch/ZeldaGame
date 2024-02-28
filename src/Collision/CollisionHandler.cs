@@ -1,4 +1,5 @@
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace ZeldaGame;
 
@@ -10,5 +11,6 @@ public class CollisionHandler{
 
     public void Update() {
         game.map.PlayerDoorCollision(new Vector2(game.window_width, game.window_height), game.Link);
+        game.NPCFactory.PlayerNPCCollision(game._spriteBatch, game.Link);
     }
 }

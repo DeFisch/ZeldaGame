@@ -18,7 +18,7 @@ namespace ZeldaGame {
 		public int window_width = 800;
 		public int window_height = 600;
 		private GraphicsDeviceManager _graphics;
-		private SpriteBatch _spriteBatch;
+		public SpriteBatch _spriteBatch;
 
 		public IPlayer Link;
 		public PlayerSpriteFactory playerFactory;
@@ -39,6 +39,8 @@ namespace ZeldaGame {
 		private List<IController> controllers;
 		public MapHandler map;
 		public Vector2 windowScale;
+		public SpriteFont font;
+
 
 		public Game1() {
 			_graphics = new GraphicsDeviceManager(this);
@@ -70,9 +72,10 @@ namespace ZeldaGame {
 			// Load content
 			npcs = Content.Load<Texture2D>("NPCs");
 			Items = Content.Load<Texture2D>("Objects");
+            font = Content.Load<SpriteFont>("Font");
 
-			// Load default map
-			Texture2D map_texture = Content.Load<Texture2D>("Level1_Map");
+            // Load default map
+            Texture2D map_texture = Content.Load<Texture2D>("Level1_Map");
 			map = new MapHandler(map_texture, new Vector2(window_width, window_height));
 			windowScale = map.GetWindowScale(window_width, window_height);
 
@@ -81,7 +84,7 @@ namespace ZeldaGame {
 			PlayerItemSpriteFactory.Instance.LoadAllTextures(Content);
             Link = new Player1(new Vector2(window_width / 2, window_height / 2), windowScale);
 
-            NPCFactory = new NPCFactory(npcs, new Vector2(window_width / 3, window_height / 3), windowScale);
+            NPCFactory = new NPCFactory(npcs, new Vector2(window_width / 3, window_height / 3), windowScale, font);
 			itemFactory = new ItemSpriteFactory(Items, npcs, windowScale);
 
 			Texture2D[] enemy_texture = {Content.Load<Texture2D>("enemies"),Content.Load<Texture2D>("enemies_1")};
@@ -195,6 +198,7 @@ namespace ZeldaGame {
 			itemFactory.Draw(_spriteBatch);
 			// Draws player
 			Link.Draw(_spriteBatch, Color.White);
+
 
 			_spriteBatch.End();
 

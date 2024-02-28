@@ -11,6 +11,9 @@ namespace ZeldaGame.NPCs {
 		void Update();
 
 		void Draw(SpriteBatch spriteBatch, Vector2 scale);
+        public Rectangle GetNPCHitBox();
 
-	}
+		string GetCollisionMessage();
+
+    }
 }
