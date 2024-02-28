@@ -30,7 +30,7 @@ public class MapHandler {
     public Vector2 GetWindowScale(int x, int y) {
 		return new Vector2(x / map_size.X, y / map_size.Y);
 	}
-    public Rectangle get_map_location(int x, int y) {
+    private Rectangle get_map_location(int x, int y) {
         return new Rectangle(1 + x * 257, 1 + y * 177, (int)map_size.X, (int)map_size.Y);
     }
     public bool move_up() {
@@ -78,13 +78,20 @@ public class MapHandler {
         if (debug){
             for (int i = 0; i < dlist.Count; i++)
             {
-                spriteBatch.Draw(map_texture, dlist[i], sList[i], Color.White);
+                spriteBatch.Draw(map_texture, dlist[i], sList[i], Color.Green);
             }
         }
     }
-
     public List<Rectangle> getAllObjectRectangles(){
         return mapRectangles.getDestinationRectangleList();
+    }
+
+    public Vector2 getMapXY(){
+        return new Vector2(x, y);
+    }
+
+    public bool is_map_available(int x, int y) {
+        return mapLoader.is_map_available(x, y);
     }
 
 }

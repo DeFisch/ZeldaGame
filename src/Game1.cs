@@ -183,8 +183,6 @@ namespace ZeldaGame {
 			_spriteBatch.Begin();
 			// Draws map
 			map.Draw(_spriteBatch);
-            //Draws Blocks
-            blockSpriteFactory.Draw(_spriteBatch);
             // Draws enemies
             enemyFactory.Draw(_spriteBatch);
 			//Draws NPCs

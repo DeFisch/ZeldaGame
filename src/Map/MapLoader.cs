@@ -12,7 +12,7 @@ using System.IO;
 namespace ZeldaGame.Map;
 
 public class MapLoader {
-    private static string map_path = "../../../Content/map_data/";
+    private static string map_path = "Content/map_data/";
     private string[,] map = new string[7, 12];
     public MapLoader() {
         if (!load_map(2, 5))   // default map
@@ -33,6 +33,11 @@ public class MapLoader {
             return true;
         }
         return false;
+    }
+
+    public bool is_map_available(int x, int y) {
+        string file_path = map_path + "map_" + y + "_" + x + ".csv";
+        return File.Exists(file_path);
     }
 
     public string[,] get_map_info() {
