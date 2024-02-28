@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using ZeldaGame.Player;
 
 namespace ZeldaGame.Map;
 
@@ -106,4 +107,25 @@ public class MapHandler {
         y = 5;
     }
 
+    public void PlayerDoorCollision(Vector2 window_size, IPlayer player){
+        Rectangle playerHitBox = player.GetPlayerHitBox();
+        Vector2 playerCenterpoint = new Vector2(playerHitBox.X + playerHitBox.Width/2, playerHitBox.Y + playerHitBox.Height/2);
+        Rectangle up_door = new Rectangle((int)(0.46875*window_size.X), 0, (int)(0.0625*window_size.X), (int)(0.18*window_size.Y));
+        Rectangle down_door = new Rectangle((int)(0.46875*window_size.X), (int)(0.82*window_size.Y), (int)(0.0625*window_size.X), (int)(0.18*window_size.Y));
+        Rectangle left_door = new Rectangle(0, (int)(0.45*window_size.Y), (int)(0.125*window_size.X), (int)(0.1*window_size.Y));
+        Rectangle right_door = new Rectangle((int)(0.875*window_size.X), (int)(0.45*window_size.Y), (int)(0.125*window_size.X), (int)(0.1*window_size.Y));
+        if (up_door.Contains(playerCenterpoint)){
+            move_up();
+            player.SetPlayerPosition(new Vector2((int)(window_size.X/2), (int)(0.8*window_size.Y)));
+        }else if (down_door.Contains(playerCenterpoint)){
+            move_down();
+            player.SetPlayerPosition(new Vector2((int)(window_size.X/2), (int)(0.2*window_size.Y)));
+        }else if (left_door.Intersects(playerHitBox)){
+            move_left();
+            player.SetPlayerPosition(new Vector2((int)(0.8*window_size.X), (int)(window_size.Y/2)));
+        }else if (right_door.Intersects(playerHitBox)){
+            move_right();
+            player.SetPlayerPosition(new Vector2((int)(0.2*window_size.X), (int)(window_size.Y/2)));
+        }
+    }
 }

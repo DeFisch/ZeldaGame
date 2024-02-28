@@ -169,5 +169,12 @@ namespace ZeldaGame.Player {
             }
 			movement *= scale;
         }
+
+		public void SetPlayerPosition(Vector2 position)
+		{
+			Rectangle sprite_hitbox = sprite.GetHitBox();
+			Vector2 sprite_size = new Vector2(sprite_hitbox.Width, sprite_hitbox.Height);
+			this.position = position - sprite_size / 2;
+		}
 	}
 }

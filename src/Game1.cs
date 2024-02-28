@@ -15,8 +15,8 @@ using ZeldaGame.Map.Commands;
 
 namespace ZeldaGame {
 	public class Game1 : Game {
-		private int window_width = 800;
-		private int window_height = 600;
+		public int window_width = 800;
+		public int window_height = 600;
 		private GraphicsDeviceManager _graphics;
 		private SpriteBatch _spriteBatch;
 
@@ -32,6 +32,7 @@ namespace ZeldaGame {
 		public EnemyFactory enemyFactory;
 
 		public BlockSpriteFactory blockSpriteFactory;
+		public CollisionHandler collisionHandler;
 
 		private KeyboardController keyboardController;
 		private MouseController mouseController;
@@ -56,6 +57,9 @@ namespace ZeldaGame {
             _graphics.PreferredBackBufferWidth = this.window_width;
 			_graphics.PreferredBackBufferHeight = this.window_height;
 			_graphics.ApplyChanges();
+
+			// Initialize collition handler
+			collisionHandler = new CollisionHandler(this);
 
 			base.Initialize();
 		}
@@ -170,6 +174,9 @@ namespace ZeldaGame {
             NPCFactory.Update();
 			// Updates Link
             Link.Update();
+
+			// Handles collisions
+			collisionHandler.Update();
 
 			base.Update(gameTime);
 		}

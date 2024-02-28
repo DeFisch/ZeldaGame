@@ -50,5 +50,15 @@ namespace ZeldaGame.Player {
 		void RemoveDecorator() {
 			game.Link = (Player1)decoratedPlayer;
 		}
-	}
+
+        public void SetPlayerPosition(Vector2 position)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public Rectangle GetPlayerHitBox()
+        {
+            throw new System.NotImplementedException();
+        }
+    }
 }
