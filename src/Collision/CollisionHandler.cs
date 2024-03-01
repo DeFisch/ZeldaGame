@@ -13,6 +13,7 @@ public class CollisionHandler {
     EnemyCollisionHandler enemyCollisionHandler;
     public CollisionHandler(Game1 game) {
         this.game = game;
+        enemyCollisionHandler = new EnemyCollisionHandler(game);
     }
 
     public void UpdatePlayerCollision()

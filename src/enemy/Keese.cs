@@ -80,6 +80,6 @@ public class Keese : IEnemy {
 
 	public void Collide(Rectangle rectangle)
 	{
-		// Empty
+		// Intentionally left empty
 	}
 }
