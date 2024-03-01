@@ -17,6 +17,11 @@ namespace ZeldaGame.Player {
 		public void Attack() {
 			decoratedPlayer.Attack();
 		}
+
+		public void Colliding()
+		{
+
+		}
 		public void Idle() {
 			decoratedPlayer.Idle();
 		}

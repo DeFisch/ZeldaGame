@@ -74,6 +74,11 @@ namespace ZeldaGame.Player {
 			stateMachine.Idle();
 		}
 
+		public void Colliding()
+		{
+			stateMachine.Colliding();
+		}
+
 		public void Walk()
 		{
 			if (animTimer < 0) {
