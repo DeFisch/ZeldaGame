@@ -20,20 +20,12 @@ public class MapLoader {
         var pid = Environment.OSVersion.Platform;
         switch (pid) {
             case PlatformID.Win32NT:
-				map_path = "../../../Content/map_data/";
-				break;
 			case PlatformID.Win32S:
-				map_path = "../../../Content/map_data/";
-				break;
 			case PlatformID.Win32Windows:
-				map_path = "../../../Content/map_data/";
-				break;
 			case PlatformID.WinCE:
                 map_path = "../../../Content/map_data/";
                 break;
             case PlatformID.MacOSX:
-				map_path = "Content/map_data/";
-				break;
 			case PlatformID.Unix:
                 map_path = "Content/map_data/";
                 break;
