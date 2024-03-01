@@ -1,9 +1,7 @@
 ﻿using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using ZeldaGame.Enemy;
 using ZeldaGame.Player;
-using static System.Net.Mime.MediaTypeNames;
 namespace ZeldaGame.NPCs;
 
 public class NPCFactory
@@ -63,6 +61,7 @@ public class NPCFactory
 	public void Update()
 	{
 		npcList[cycleIndex].Update();
+
 	}
 
 	public void Reset()
@@ -73,7 +72,7 @@ public class NPCFactory
 	public void PlayerNPCCollision(IPlayer player)
 	{
 		Rectangle playerHitBox = player.GetPlayerHitBox();
-		if (npcList[cycleIndex].GetNPCHitBox().Intersects(playerHitBox))
+        if (npcList[cycleIndex].GetNPCHitBox().Intersects(playerHitBox))
 		{
             isCollision = true;
         }

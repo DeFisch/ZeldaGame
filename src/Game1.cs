@@ -18,7 +18,7 @@ namespace ZeldaGame {
 		public int window_width = 800;
 		public int window_height = 600;
 		private GraphicsDeviceManager _graphics;
-		public SpriteBatch _spriteBatch;
+		private SpriteBatch _spriteBatch;
 
 		public IPlayer Link;
 		public PlayerSpriteFactory playerFactory;
@@ -39,7 +39,7 @@ namespace ZeldaGame {
 		private List<IController> controllers;
 		public MapHandler map;
 		public Vector2 windowScale;
-		public SpriteFont font;
+		private SpriteFont font;
 
 
 		public Game1() {
