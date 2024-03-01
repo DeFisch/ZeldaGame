@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using static ZeldaGame.Player.PlayerStateMachine;
 
 namespace ZeldaGame.Player;
 public interface IPlayerSprite : ISprite

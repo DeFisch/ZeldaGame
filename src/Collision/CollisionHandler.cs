@@ -22,10 +22,10 @@ public class CollisionHandler {
         {
             if (game.Link.GetPlayerHitBox().Intersects(box))
             {
-                game.Link.Colliding();
+                Debug.WriteLine("Colliding");
+                game.Link.Colliding(box);
             }
         }
-        
     }
 
     public void Update() {

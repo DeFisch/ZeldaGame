@@ -18,7 +18,7 @@ namespace ZeldaGame.Player {
 			decoratedPlayer.Attack();
 		}
 
-		public void Colliding()
+		public void Colliding(Rectangle c)
 		{
 
 		}
