@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace ZeldaGame.Items
 {
-	public class YellowRuby : ISprite
+	public class YellowRuby : IItemSprite
 	{
 		private int counter = 0;
 		private Texture2D texture;
@@ -26,12 +26,14 @@ namespace ZeldaGame.Items
 
 		public void Draw(SpriteBatch spriteBatch, Vector2 location, Color color, Vector2 scale)
 		{
+            int scaled_x = 113 + ((int)pos.X * 51);
+            int scaled_y = 113 + ((int)pos.Y * 51);
 
-			sourceRectangle_1 = new Rectangle(72, 16, 8, 16);
-			destinationRectangle_1 = new Rectangle((int)pos.X, (int)pos.Y, (int)(sourceRectangle_1.Width * scale.X), (int)(sourceRectangle_1.Height * scale.Y));
+            sourceRectangle_1 = new Rectangle(72, 16, 8, 16);
+			destinationRectangle_1 = new Rectangle(scaled_x, scaled_y, (int)(sourceRectangle_1.Width * scale.X), (int)(sourceRectangle_1.Height * scale.Y));
 
 			sourceRectangle_2 = new Rectangle(72, 0, 8, 16);
-			destinationRectangle_2 = new Rectangle((int)pos.X, (int)pos.Y, (int)(sourceRectangle_2.Width * scale.X), (int)(sourceRectangle_2.Height * scale.Y));
+			destinationRectangle_2 = new Rectangle(scaled_x, scaled_y, (int)(sourceRectangle_2.Width * scale.X), (int)(sourceRectangle_2.Height * scale.Y));
 
 			if (counter <= 10)
 			{

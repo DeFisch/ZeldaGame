@@ -9,7 +9,7 @@ public class MapHandler {
     /*
         Note here x denotes the row and y denotes the column
     */
-    private bool debug = true;
+    private bool debug = false;
     private MapLoader mapLoader;
     private string[,] map;
     private Texture2D map_texture;

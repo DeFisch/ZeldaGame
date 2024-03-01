@@ -78,7 +78,8 @@ namespace ZeldaGame {
             Link = new Player1(new Vector2(window_width / 2, window_height / 2), windowScale);
 
             NPCFactory = new NPCFactory(npcs, new Vector2(window_width / 3, window_height / 3), windowScale);
-			itemFactory = new ItemSpriteFactory(Items, npcs, windowScale);
+			itemFactory = new ItemSpriteFactory(Items, npcs, windowScale, Link, map);
+		
 
 			Texture2D[] enemy_texture = {Content.Load<Texture2D>("enemies"),Content.Load<Texture2D>("enemies_1")};
 			blockSpriteFactory = new BlockSpriteFactory(Content.Load<Texture2D>("Level1_Map"), windowScale);
@@ -97,7 +98,8 @@ namespace ZeldaGame {
 			//Add Blocks
 			blockSpriteFactory.AddBlock();
 			//Add items
-			itemFactory.ObjectList();
+			//itemFactory.ObjectList();
+			itemFactory.GetMapItems();
 
 			// Registers commands with Keys as the identifier
 			keyboardController.RegisterHoldKey(Keys.W, new SetWalkSpriteCommand(this, 0));
