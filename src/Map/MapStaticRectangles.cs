@@ -54,8 +54,11 @@ namespace ZeldaGame.Map
                         height = window_size.Y / 11;
                         xPosition = (i * width) + (2 * width);
                         yPosition = (j * height) + (2 * height);
-                        dRectangleList.Add(new Rectangle((int)xPosition, (int)yPosition, (int)width, (int)height));
-                        sRectangleList.Add(getSourceRectangle(mapList[j, i]));
+                        if (!getSourceRectangle(mapList[j, i]).Equals(new Rectangle(0, 0, 0, 0)))
+                        {
+                            dRectangleList.Add(new Rectangle((int)xPosition, (int)yPosition, (int)width, (int)height));
+                            sRectangleList.Add(getSourceRectangle(mapList[j, i]));
+                        }
                     }
                 }
             }
@@ -137,6 +140,7 @@ namespace ZeldaGame.Map
                     sourceRectangle = new Rectangle(659, 934, 16, 16);
                     break;
                 default:
+                    sourceRectangle = new Rectangle(0,0,0,0);
                     break;
             }
             return sourceRectangle;
