@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-using Sprint0.Block;
+using ZeldaGame.Block;
 using ZeldaGame.Enemy;
 using ZeldaGame.Items;
 using ZeldaGame.NPCs;

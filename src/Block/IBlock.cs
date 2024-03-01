@@ -1,7 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace Sprint0.Block {
+namespace ZeldaGame.Block {
 	public interface IBlock {
 		public void Update();
 
