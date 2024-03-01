@@ -24,7 +24,6 @@ public class MapHandler {
         this.map_texture = map_texture;
         this.window_size = window_size;
         map_size = new Vector2(256, 176);
-        mapLoader.load_map(x, y); // load default map
         map = mapLoader.get_map_info(); // get default map info
         mapRectangles = new MapStaticRectangles(this);
         mapRectangles.SetLists(window_size);
@@ -36,24 +35,36 @@ public class MapHandler {
         return new Rectangle(1 + x * 257, 1 + y * 177, (int)map_size.X, (int)map_size.Y);
     }
     public bool move_up() {
-        if(switch_map(y - 1, x))
+        if(mapLoader.isRoomAvailable("up")){
+            switch_map(y - 1, x);
             return true;
+        }
         return false;
     }
     public bool move_down() {
-        if(switch_map(y + 1, x))
+        if(mapLoader.isRoomAvailable("down")){
+            switch_map(y + 1, x);
             return true;
+        }
         return false;
     }
     public bool move_left() {
-        if(switch_map(y, x - 1))
+        if(mapLoader.isRoomAvailable("left")){
+            switch_map(y, x - 1);
             return true;
+        }
         return false;
     }
     public bool move_right() {
-        if(switch_map(y, x + 1))
+        if(mapLoader.isRoomAvailable("right")){
+            switch_map(y, x + 1);
             return true;
+        }
         return false;
+    }
+
+    public bool isRoomAvailable(string direction){
+        return mapLoader.isRoomAvailable(direction);
     }
 
     private bool switch_map(int y, int x) {
@@ -89,10 +100,6 @@ public class MapHandler {
 
     public Vector2 getMapXY(){
         return new Vector2(x, y);
-    }
-
-    public bool is_map_available(int x, int y) {
-        return mapLoader.is_map_available(x, y);
     }
 
     public bool Debug {

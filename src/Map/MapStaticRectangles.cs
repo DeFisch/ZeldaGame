@@ -67,7 +67,7 @@ namespace ZeldaGame.Map
         public void addBoundaryRectangles(List<Rectangle> dRectangleList, List<Rectangle> sRectangleList, Vector2 window_size)
         {
             Vector2 roomLocation = map.getMapXY();
-            if(map.is_map_available((int)roomLocation.X, (int)roomLocation.Y - 1)) {
+            if(map.isRoomAvailable("up")) {
                 // if there is a room above
                 dRectangleList.Add(new Rectangle(0, 0, (int)(window_size.X*0.46875), (int)(0.18*window_size.Y)));
                 dRectangleList.Add(new Rectangle((int)(window_size.X*0.53125), 0, (int)(window_size.X*0.46875), (int)(0.18*window_size.Y)));
@@ -78,7 +78,7 @@ namespace ZeldaGame.Map
                 dRectangleList.Add(new Rectangle(0, 0, (int)window_size.X, (int)(0.18*window_size.Y)));
                 sRectangleList.Add(getSourceRectangle("w"));
             }
-            if(map.is_map_available((int)roomLocation.X, (int)roomLocation.Y + 1)) {
+            if(map.isRoomAvailable("down")) {
                 // if there is a room below
                 dRectangleList.Add(new Rectangle(0, (int)(window_size.Y*0.82), (int)(window_size.X*0.46875), (int)(0.18*window_size.Y)));
                 dRectangleList.Add(new Rectangle((int)(window_size.X*0.53125), (int)(window_size.Y*0.82), (int)(window_size.X*0.46875), (int)(0.18*window_size.Y)));
@@ -89,7 +89,7 @@ namespace ZeldaGame.Map
                 dRectangleList.Add(new Rectangle(0, (int)(window_size.Y*0.82), (int)window_size.X, (int)(0.18*window_size.Y)));
                 sRectangleList.Add(getSourceRectangle("w"));
             }
-            if(map.is_map_available((int)roomLocation.X - 1, (int)roomLocation.Y)) {
+            if(map.isRoomAvailable("left")) {
                 // if there is a room to the left
                 dRectangleList.Add(new Rectangle(0, 0, (int)(0.125*window_size.X), (int)(window_size.Y*0.45)));
                 dRectangleList.Add(new Rectangle(0, (int)(window_size.Y*0.55), (int)(0.125*window_size.X), (int)(window_size.Y*0.45)));
@@ -100,7 +100,7 @@ namespace ZeldaGame.Map
                 dRectangleList.Add(new Rectangle(0, 0, (int)(0.125*window_size.X), (int)window_size.Y));
                 sRectangleList.Add(getSourceRectangle("w"));
             }
-            if(map.is_map_available((int)roomLocation.X + 1, (int)roomLocation.Y)) {
+            if(map.isRoomAvailable("right")) {
                 // if there is a room to the right
                 dRectangleList.Add(new Rectangle((int)(window_size.X*0.875), 0, (int)(0.125*window_size.X), (int)(window_size.Y*0.45)));
                 dRectangleList.Add(new Rectangle((int)(window_size.X*0.875), (int)(window_size.Y*0.55), (int)(0.125*window_size.X), (int)(window_size.Y*0.45)));
