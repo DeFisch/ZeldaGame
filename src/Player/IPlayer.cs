@@ -14,7 +14,7 @@ namespace ZeldaGame.Player {
 		public void Draw(SpriteBatch spriteBatch, Color color);
 		public void Update();
 		public void Reset();
-		public void SetPlayerPosition(Vector2 position);
+		public void SetPlayerPosition(Vector2 position, bool offset = true);
 		public Rectangle GetPlayerHitBox();
 	}
 }

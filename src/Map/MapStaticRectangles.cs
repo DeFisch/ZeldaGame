@@ -66,7 +66,6 @@ namespace ZeldaGame.Map
 
         public void addBoundaryRectangles(List<Rectangle> dRectangleList, List<Rectangle> sRectangleList, Vector2 window_size)
         {
-            Vector2 roomLocation = map.getMapXY();
             if(map.isRoomAvailable("up")) {
                 // if there is a room above
                 dRectangleList.Add(new Rectangle(0, 0, (int)(window_size.X*0.46875), (int)(0.18*window_size.Y)));

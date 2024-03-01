@@ -59,11 +59,11 @@ namespace ZeldaGame.Player {
 			this.sprite = sprite;
 		}
 
-        public void SetPlayerPosition(Vector2 position)
+        public void SetPlayerPosition(Vector2 position, bool offset = true)
         {
             Rectangle sprite_hitbox = sprite.GetHitBox();
             Vector2 sprite_size = new Vector2(sprite_hitbox.Width, sprite_hitbox.Height);
-            this.position = position - sprite_size / 2;
+            if(offset) this.position = position - sprite_size / 2;
         }
 
         public Swords GetSword() {

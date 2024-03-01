@@ -46,6 +46,8 @@ public class MapLoader {
     }
 
     public bool load_map(int x, int y) {
+        foreach (var key in door_type.Keys)
+            door_type[key] = 0;
         string file_path = map_path + "map_" + y + "_" + x + ".csv";
         if (File.Exists(file_path)) {
             string[] lines = File.ReadAllLines(file_path);

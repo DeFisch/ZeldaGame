@@ -1,4 +1,5 @@
 
+using System;
 using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -62,6 +63,7 @@ public class MapHandler {
         }
         return false;
     }
+
 
     public bool isRoomAvailable(string direction){
         return mapLoader.isRoomAvailable(direction);
@@ -142,17 +144,21 @@ public class MapHandler {
             {
                 x = 0;
                 y = 0;
+                switch_map(0, 0);
+                player.SetPlayerPosition(new Vector2(175, 172));
             }
         }
 
         //Room_0_0 back to room_0_1
-        Rectangle invisibleDoor = new Rectangle((int)(window_size.X / 16 * 3), 0, (int)(window_size.X / 16), (int)(window_size.Y / 44));
+        Rectangle invisibleDoor = new Rectangle((int)(window_size.X / 16 * 3), 0, (int)(window_size.X / 16), (int)(window_size.Y / 5));
         if (getMapXY().Equals(new Vector2(0, 0)))
         {
             if (invisibleDoor.Contains(playerCenterpoint))
             {
                 x = 1;
                 y = 0;
+                switch_map(0, 1);
+                player.SetPlayerPosition(new Vector2(425,345));
             }
         }
     }
