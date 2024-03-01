@@ -1,8 +1,8 @@
 ﻿using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using static ZeldaGame.Player.PlayerStateMachine;
-namespace ZeldaGame.Player;
 
+namespace ZeldaGame.Player;
 public class PlayerSpriteFactory {
 	private Texture2D playerTexture;
 

@@ -7,17 +7,43 @@
     st : stairs
 */
 using System;
+using System.Diagnostics;
 using System.IO;
 
 namespace ZeldaGame.Map;
 
 public class MapLoader {
-    private static string map_path = "../../../Content/map_data/";
+    private string map_path;
     private string[,] map = new string[7, 12];
     public MapLoader() {
-        if (!load_map(2, 5))   // default map
+        // set map path based on OS platform
+        var pid = Environment.OSVersion.Platform;
+        switch (pid) {
+            case PlatformID.Win32NT:
+				map_path = "../../../Content/map_data/";
+				break;
+			case PlatformID.Win32S:
+				map_path = "../../../Content/map_data/";
+				break;
+			case PlatformID.Win32Windows:
+				map_path = "../../../Content/map_data/";
+				break;
+			case PlatformID.WinCE:
+                map_path = "../../../Content/map_data/";
+                break;
+            case PlatformID.MacOSX:
+				map_path = "Content/map_data/";
+				break;
+			case PlatformID.Unix:
+                map_path = "Content/map_data/";
+                break;
+            default:
+                map_path = "../../../Content/map_data/";
+                break;
+        }
+        if (!load_map(2, 5)) { // default map
             throw new FileNotFoundException("Map file not found");
-
+        }
     }
 
     public bool load_map(int x, int y) {

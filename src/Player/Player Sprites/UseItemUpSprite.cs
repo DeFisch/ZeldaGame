@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using ZeldaGame.Player;
+
+namespace ZeldaGame.Player;
 
 public class UseItemUpSprite : IPlayerSprite {
 	private Texture2D Sprite;

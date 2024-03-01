@@ -17,6 +17,11 @@ namespace ZeldaGame.Player {
 		public void Attack() {
 			decoratedPlayer.Attack();
 		}
+
+		public void Colliding()
+		{
+
+		}
 		public void Idle() {
 			decoratedPlayer.Idle();
 		}
@@ -53,12 +58,12 @@ namespace ZeldaGame.Player {
 
         public void SetPlayerPosition(Vector2 position)
         {
-            throw new System.NotImplementedException();
+			 decoratedPlayer.SetPlayerPosition(position);
         }
 
         public Rectangle GetPlayerHitBox()
         {
-            throw new System.NotImplementedException();
+			return decoratedPlayer.GetPlayerHitBox();
         }
     }
 }

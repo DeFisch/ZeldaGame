@@ -1,7 +1,7 @@
 ﻿using Microsoft.Xna.Framework.Input;
 using System.Collections.Generic;
-using ZeldaGame;
 
+namespace ZeldaGame.Controllers;
 public class KeyboardController : IController
 {
 	private readonly KeyboardHandler keyboardHandler;

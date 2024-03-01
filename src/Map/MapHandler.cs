@@ -30,8 +30,8 @@ public class MapHandler {
         mapRectangles = new MapStaticRectangles(this);
         mapRectangles.SetLists(window_size);
     }
-    public Vector2 GetWindowScale(int x, int y) {
-		return new Vector2(x / map_size.X, y / map_size.Y);
+    public Vector2 GetWindowScale(Vector2 windowSize) {
+		return new Vector2(windowSize.X / map_size.X, windowSize.Y / map_size.Y);
 	}
     private Rectangle get_map_location(int x, int y) {
         return new Rectangle(1 + x * 257, 1 + y * 177, (int)map_size.X, (int)map_size.Y);

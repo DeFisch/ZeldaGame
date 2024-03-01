@@ -1,7 +1,9 @@
-﻿namespace ZeldaGame.Player {
+﻿using System.Diagnostics;
+
+namespace ZeldaGame.Player {
 	public class PlayerStateMachine {
 		public enum Direction { Up, Left, Down, Right };
-		public enum State { Idle, Walk, Attack, PickUp, UseItem, Block };
+		public enum State { Idle, Walk, Attack, PickUp, UseItem, Block, Colliding };
 
 		public Direction direction;
 		public Direction prevDirection;
@@ -31,7 +33,13 @@
 			return (int)state;
 		}
 
-		public void Idle()
+		public void Colliding()
+		{
+			Debug.WriteLine("Colliding");
+			state = State.Colliding;
+        }
+
+        public void Idle()
 		{
             state = State.Idle;
             sprite.Pause();

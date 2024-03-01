@@ -3,6 +3,7 @@ using Microsoft.Xna.Framework.Graphics;
 using System.Diagnostics;
 using static ZeldaGame.Player.PlayerStateMachine;
 
+namespace ZeldaGame.Player;
 public class MagicSwordVerticalSprite : IPlayerProjectile {
 	SpriteEffects effect;
 	private Texture2D Sprite;

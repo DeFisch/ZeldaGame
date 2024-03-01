@@ -3,8 +3,8 @@ using Microsoft.Xna.Framework.Graphics;
 using System.Collections.Generic;
 using System.Diagnostics;
 using static ZeldaGame.Player.PlayerStateMachine;
-namespace ZeldaGame.Player;
 
+namespace ZeldaGame.Player;
 public class WeaponHandler {
 	public enum Swords {Wood, White, Magic, None};
 	private List<IPlayerProjectile> activeProjectiles;
@@ -18,13 +18,17 @@ public class WeaponHandler {
 	}
 
 	public void UseItem(int item, Vector2 location, Direction direction) {
-		IPlayerProjectile weapon = PlayerItemSpriteFactory.Instance.CreateItemSprite(direction, item, location);
-		activeProjectiles.Add(weapon);
+		//if (activeProjectiles.Count == 0) {
+			IPlayerProjectile weapon = PlayerItemSpriteFactory.Instance.CreateItemSprite(direction, item, location);
+			activeProjectiles.Add(weapon);
+		//}
 	}
 
 	public void UseSword(int sword, Vector2 location, Direction direction) {
-		IPlayerProjectile weapon = PlayerItemSpriteFactory.Instance.CreateSwordSprite(direction, sword, location);
-		activeProjectiles.Add(weapon);
+		//if (activeProjectiles.Count == 0) {
+			IPlayerProjectile weapon = PlayerItemSpriteFactory.Instance.CreateSwordSprite(direction, sword, location);
+			activeProjectiles.Add(weapon);
+		//}
 	}
 
 	public void ProjectileExpiration(IPlayerProjectile projectile) {

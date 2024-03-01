@@ -3,50 +3,52 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System;
 using System.Collections.Generic;
-using static MouseController;
-public enum MouseButtons { Left, Right };
 
+namespace ZeldaGame.Controllers;
+public enum MouseButtons { Left, Right };
 /*
  * Controller class for the Mouse
  */
 public class MouseController : IController {
-    private Dictionary<MouseButtons, ICommand> buttonCommands;
+	private readonly MouseHandler mouseHandler;
+	private Dictionary<MouseButtons, ICommand> holdButtons;
+	private Dictionary<MouseButtons, ICommand> pressButtons;
     private Dictionary<Rectangle, ICommand> quadrants;
-    private ButtonState previousLeftButtonState = ButtonState.Released;
 
     // Constructor: Initializes the Dictionary with commands based off mouse buttons and quadrants
     public MouseController() {
-		buttonCommands = new Dictionary<MouseButtons, ICommand>();
-        quadrants = new Dictionary<Rectangle, ICommand>();
+		mouseHandler = new MouseHandler();
+        holdButtons = new Dictionary<MouseButtons, ICommand>();
+		pressButtons = new Dictionary<MouseButtons, ICommand>();
+		quadrants = new Dictionary<Rectangle, ICommand>();
     }
 
-	public void RegisterRightMouseButtonCommand(MouseButtons button, ICommand command) {
-		buttonCommands.Add(button, command);
+	public void RegisterHoldButton(MouseButtons button, ICommand command) {
+		holdButtons.Add(button, command);
 	}
-    public void RegisterQuadrant(Rectangle quadrant, ICommand command)
+	public void RegisterPressButton(MouseButtons button, ICommand command) {
+		pressButtons.Add(button, command);
+	}
+	public void RegisterQuadrant(Rectangle quadrant, ICommand command)
     {
         quadrants.Add(quadrant, command);
     }
 
     public void Update()
     {
-        MouseState mouseState = Mouse.GetState();
-        foreach (var quadrant in quadrants.Keys)
+		mouseHandler.Update();
+		foreach (var quadrant in quadrants.Keys)
         {
             // Checks if the mouse is in the quadrant and the left button is pressed
-            if (quadrant.Contains(mouseState.X, mouseState.Y) && 
-            mouseState.LeftButton == ButtonState.Pressed && 
-            previousLeftButtonState == ButtonState.Released)
+            if (quadrant.Contains(Mouse.GetState().Position) && mouseHandler.IsPressed(MouseButtons.Left))
             {
                 quadrants[quadrant].Execute();
             }
         }
 
-        if (mouseState.RightButton == ButtonState.Pressed && buttonCommands.ContainsKey(MouseButtons.Right))
+        if (pressButtons.ContainsKey(MouseButtons.Right) && mouseHandler.IsPressed(MouseButtons.Right))
         {
-            buttonCommands[MouseButtons.Right].Execute();
+            pressButtons[MouseButtons.Right].Execute();
         }
-
-        previousLeftButtonState = mouseState.LeftButton;
     }
 }

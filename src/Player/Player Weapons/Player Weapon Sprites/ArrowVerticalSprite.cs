@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework.Graphics;
 using static ZeldaGame.Player.PlayerStateMachine;
 
+namespace ZeldaGame.Player;
 public class ArrowVerticalSprite : IPlayerProjectile {
 	SpriteEffects effect;
 	private Texture2D Sprite;

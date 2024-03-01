@@ -1,6 +1,6 @@
 ﻿using ZeldaGame;
 
-namespace Sprint0.Block {
+namespace ZeldaGame.Block {
 	public class PreviousBlockCommand : ICommand {
 		private Game1 MyGame;
 		private int previous = 0;

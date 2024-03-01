@@ -3,8 +3,8 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using static ZeldaGame.Player.PlayerStateMachine;
-namespace ZeldaGame.Player;
 
+namespace ZeldaGame.Player;
 public class PlayerItemSpriteFactory {
 	private Texture2D playerTexture;
 	private List<IPlayerProjectile> projectiles;

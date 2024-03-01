@@ -1,4 +1,5 @@
-﻿/*
+﻿namespace ZeldaGame.Controllers;
+/*
  *	Interface for IController
  */
 public interface IController {

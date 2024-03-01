@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework.Graphics;
 using System.Diagnostics;
 
+namespace ZeldaGame.Player;
 public class WalkLeftSprite : IPlayerSprite {
 	private Texture2D sprite;
 	private static Rectangle destRectangle;

@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
+namespace ZeldaGame.Player;
 public interface IPlayerSprite : ISprite
 {
     public Rectangle GetHitBox();
