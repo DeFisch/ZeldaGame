@@ -13,5 +13,7 @@ public interface IEnemy {
 	public void Draw(SpriteBatch spriteBatch);
 
 	public void TakeDamage(int damage);
+
+	public void Collide(Rectangle intersect);
 }
 

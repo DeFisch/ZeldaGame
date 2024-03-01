@@ -63,4 +63,9 @@ public class Aquamentus : IEnemy {
 	{
 		return new Rectangle((int)position.X, (int)position.Y, (int)(character_sprites[currentFrame, 2] * scale.X), (int)(character_sprites[currentFrame, 3] * scale.Y));
 	}
+
+	public void Collide(Rectangle rectangle)
+	{
+		// Empty
+	}
 }
