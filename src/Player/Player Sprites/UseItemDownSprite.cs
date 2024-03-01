@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework.Graphics;
 using static ZeldaGame.Game1;
 
+namespace ZeldaGame.Player;
 public class UseItemDownSprite : IPlayerSprite {
 	private Texture2D Sprite;
 	private bool isPlaying;

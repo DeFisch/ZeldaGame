@@ -4,19 +4,18 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using ZeldaGame.Block;
+using ZeldaGame.Controllers;
 using ZeldaGame.Enemy;
+using ZeldaGame.Enemy.Commands;
 using ZeldaGame.Items;
+using ZeldaGame.Map;
+using ZeldaGame.Map.Commands;
 using ZeldaGame.NPCs;
 using ZeldaGame.Player;
 using ZeldaGame.Player.Commands;
-using ZeldaGame.Enemy.Commands;
-using ZeldaGame.Map;
-using ZeldaGame.Map.Commands;
 
 namespace ZeldaGame {
 	public class Game1 : Game {
-		public int window_width = 800;
-		public int window_height = 600;
 		private GraphicsDeviceManager _graphics;
 		public SpriteBatch _spriteBatch;
 
@@ -38,6 +37,7 @@ namespace ZeldaGame {
 		private MouseController mouseController;
 		private List<IController> controllers;
 		public MapHandler map;
+		public Vector2 windowSize;
 		public Vector2 windowScale;
 		public SpriteFont font;
 
@@ -55,9 +55,10 @@ namespace ZeldaGame {
             mouseController = new MouseController();
 			controllers = new List<IController> { keyboardController, mouseController };
 
-            // set fixed window size
-            _graphics.PreferredBackBufferWidth = this.window_width;
-			_graphics.PreferredBackBufferHeight = this.window_height;
+			// set fixed window size
+			windowSize = new Vector2(800, 600);
+            _graphics.PreferredBackBufferWidth = (int)windowSize.X;
+			_graphics.PreferredBackBufferHeight = (int)windowSize.Y;
 			_graphics.ApplyChanges();
 
 			// Initialize collition handler
@@ -74,30 +75,30 @@ namespace ZeldaGame {
 			Items = Content.Load<Texture2D>("Objects");
             font = Content.Load<SpriteFont>("Font");
 
-            // Load default map
-            Texture2D map_texture = Content.Load<Texture2D>("Level1_Map");
-			map = new MapHandler(map_texture, new Vector2(window_width, window_height));
-			windowScale = map.GetWindowScale(window_width, window_height);
+			// Load default map
+			Texture2D map_texture = Content.Load<Texture2D>("Level1_Map");
+			map = new MapHandler(map_texture, windowSize);
+			windowScale = map.GetWindowScale(windowSize);
 
 			// Initializes item classes
 			PlayerSpriteFactory.Instance.LoadAllTextures(Content);
 			PlayerItemSpriteFactory.Instance.LoadAllTextures(Content);
-            Link = new Player1(new Vector2(window_width / 2, window_height / 2), windowScale);
+            Link = new Player1(new Vector2(windowSize.X / 2, windowSize.X / 2), windowScale);
 
-            NPCFactory = new NPCFactory(npcs, new Vector2(window_width / 3, window_height / 3), windowScale, font);
+            NPCFactory = new NPCFactory(npcs, new Vector2(windowSize.X / 3, windowSize.Y / 3), windowScale, font);
 			itemFactory = new ItemSpriteFactory(Items, npcs, windowScale);
 
 			Texture2D[] enemy_texture = {Content.Load<Texture2D>("enemies"),Content.Load<Texture2D>("enemies_1")};
 			blockSpriteFactory = new BlockSpriteFactory(Content.Load<Texture2D>("Level1_Map"), windowScale);
 			enemyFactory = new EnemyFactory(enemy_texture, windowScale);
 			Random random = new Random();
-			enemyFactory.AddEnemy("Stalfos", new Vector2(120, 120));
+			enemyFactory.AddEnemy("Stalfos", new Vector2(random.Next((int)windowSize.X), random.Next((int)windowSize.Y)));
 
             // Define the quadrants based on the window size
-            Rectangle leftDoorQuadrant = new Rectangle(0, 0, window_width / 4, window_height);
-            Rectangle rightDoorQuadrant = new Rectangle((int)(window_width*0.75), 0, window_width / 4, window_height);
-            Rectangle topDoorQuadrant = new Rectangle(0, 0, window_width, window_height / 4);
-            Rectangle bottomDoorQuadrant = new Rectangle(0, (int)(window_height * 0.75), window_width, window_height / 4);
+            Rectangle leftDoorQuadrant = new Rectangle(0, (int)(windowSize.Y / 4), (int)(windowSize.X / 4), (int)(windowSize.Y / 2));
+            Rectangle rightDoorQuadrant = new Rectangle((int)(3 * windowSize.X / 4), (int)(windowSize.Y / 4), (int)(windowSize.X / 4), (int)(windowSize.Y / 2));
+            Rectangle topDoorQuadrant = new Rectangle((int)(windowSize.X / 4), 0, (int)(windowSize.X / 2), (int)(windowSize.Y / 4));
+            Rectangle bottomDoorQuadrant = new Rectangle((int)(windowSize.X / 4), (int)(3 * windowSize.Y / 4), (int)(windowSize.X / 2), (int)(windowSize.Y / 4));
 
             //Add NPCs
             NPCFactory.AddNPCs();
@@ -150,10 +151,16 @@ namespace ZeldaGame {
 
             //Registers commands with Keys and MouseButton for Quit
             keyboardController.RegisterPressKey(Keys.Q, new QuitCommand(this));
-            mouseController.RegisterRightMouseButtonCommand(MouseButtons.Right, new QuitCommand(this));
+            mouseController.RegisterPressButton(MouseButtons.Right, new QuitCommand(this));
 
             //Registers commands with Keys for taking damage
             keyboardController.RegisterPressKey(Keys.E, new TakeDamageCommand(this));
+
+			//Registers commands with Keys for switching maps
+			keyboardController.RegisterPressKey(Keys.X, new MoveUpCommand(map));
+			keyboardController.RegisterPressKey(Keys.C, new MoveDownCommand(map));
+			keyboardController.RegisterPressKey(Keys.V, new MoveLeftCommand(map));
+			keyboardController.RegisterPressKey(Keys.B, new MoveRightCommand(map));
 
             //Registers commands with MouseButtons for switching maps
             mouseController.RegisterQuadrant(leftDoorQuadrant, new MoveLeftCommand(map));

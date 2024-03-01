@@ -58,12 +58,12 @@ namespace ZeldaGame.Player {
 
         public void SetPlayerPosition(Vector2 position)
         {
-            throw new System.NotImplementedException();
+			 decoratedPlayer.SetPlayerPosition(position);
         }
 
         public Rectangle GetPlayerHitBox()
         {
-            throw new System.NotImplementedException();
+			return decoratedPlayer.GetPlayerHitBox();
         }
     }
 }

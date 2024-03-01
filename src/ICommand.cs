@@ -1,4 +1,5 @@
-﻿/*
+﻿namespace ZeldaGame;
+/*
  * Interface for ICommand
  */
 public interface ICommand {

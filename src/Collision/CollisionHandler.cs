@@ -30,7 +30,7 @@ public class CollisionHandler {
 
     public void Update() {
         UpdatePlayerCollision();
-        game.map.PlayerDoorCollision(new Vector2(game.window_width, game.window_height), game.Link);
+        game.map.PlayerDoorCollision(new Vector2(game.windowSize.X, game.windowSize.Y), game.Link);
         game.NPCFactory.PlayerNPCCollision(game.Link);
         enemyCollisionHandler.Update();
     }

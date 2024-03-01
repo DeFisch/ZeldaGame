@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework.Graphics;
 using System.Diagnostics;
 
+namespace ZeldaGame.Player;
 public class WalkDownSprite : IPlayerSprite {
 	private readonly Texture2D sprite;
 	private bool isPlaying;
