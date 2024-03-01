@@ -20,7 +20,7 @@ namespace ZeldaGame.Items {
 		private int cycler = 0;
 		private int index = 0;
 		BlueRuby blueRuby;
-		private int collCheck = 0;
+		private int[]collCheck;
         private string [,] map;
 		private MapHandler mapHandler;
 
@@ -53,11 +53,30 @@ namespace ZeldaGame.Items {
 						case "yr":
 							objectList.Add(new YellowRuby(this.texture, pos));
 							break;
+						case "k":
+							objectList.Add(new Key(this.texture, pos));
+							break;
+						case "cl":
+                            objectList.Add(new Clock(this.texture, pos));
+                            break;
+						case "co":
+							objectList.Add(new Compass(this.texture, pos));
+                            break;
+						case "h":
+							objectList.Add(new Heart(this.texture, pos));
+                            break;
+                        case "hc":
+                            objectList.Add(new HeartContainer(this.texture, pos));
+                            break;
+                        case "tr":
+                            objectList.Add(new Triforce(this.texture, pos));
+                            break;
                         default:
 							break;
 					}
                 }
             }
+			collCheck = new int[objectList.Count];
         }
 		public void ObjectList() {
 			//objectList.Add(new BlueRuby(this.texture, pos));
@@ -80,7 +99,7 @@ namespace ZeldaGame.Items {
 		public void Cycle(int lastOrNext) {
 			if (lastOrNext == 0) //Cycling backwards
 			{
-				collCheck = 0;
+				collCheck[index] = 0;
 				cycler--;
 				if (cycler < 0) {
 					cycler = objectList.Count - 1;
@@ -88,7 +107,7 @@ namespace ZeldaGame.Items {
 				index = cycler % objectList.Count;
 			}
 			if (lastOrNext == 1) {
-                collCheck = 0;
+				collCheck[index] = 0;
                 cycler++;
 				index = cycler % objectList.Count;
 			}
@@ -98,9 +117,9 @@ namespace ZeldaGame.Items {
 			{
 				Rectangle itemdest = objectList[k].GetHitBox();
 				Rectangle playrect = player.GetPlayerHitBox();
-				if (itemdest.Intersects(playrect) || collCheck == 1)
+				if (itemdest.Intersects(playrect) || collCheck[k] == 1)
 				{
-					collCheck = 1;
+					collCheck[k] = 1;
 				}
 				else
 				{
