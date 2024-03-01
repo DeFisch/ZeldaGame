@@ -124,9 +124,6 @@ namespace ZeldaGame.Map
                 case "w":
                     sourceRectangle = new Rectangle(563, 49, 16, 16);
                     break;
-                case "st":
-                    sourceRectangle = new Rectangle(386, 81, 16, 16);
-                    break;
                 case "f1":
                     sourceRectangle = new Rectangle(1366, 258, 16, 16);
                     break;

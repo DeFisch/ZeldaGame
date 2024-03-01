@@ -126,5 +126,27 @@ public class MapHandler {
             move_right();
             player.SetPlayerPosition(new Vector2((int)(0.2*window_size.X), (int)(window_size.Y/2)));
         }
+
+        //Room_0_1 Stair collision
+        Rectangle stair = new Rectangle((int)(window_size.X / 2), (int)(window_size.Y / 11 * 5), (int)(window_size.X / 16), (int)(window_size.Y / 11));
+        if (getMapXY().Equals(new Vector2(1, 0)))
+        {
+            if (stair.Contains(playerCenterpoint))
+            {
+                x = 0;
+                y = 0;
+            }
+        }
+
+        //Room_0_0 back to room_0_1
+        Rectangle invisibleDoor = new Rectangle((int)(window_size.X / 16 * 3), 0, (int)(window_size.X / 16), (int)(window_size.Y / 44));
+        if (getMapXY().Equals(new Vector2(0, 0)))
+        {
+            if (invisibleDoor.Contains(playerCenterpoint))
+            {
+                x = 1;
+                y = 0;
+            }
+        }
     }
 }
