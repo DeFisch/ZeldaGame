@@ -17,6 +17,11 @@ namespace ZeldaGame.Player {
 		public void Attack() {
 			decoratedPlayer.Attack();
 		}
+
+		public void Colliding(Rectangle c)
+		{
+
+		}
 		public void Idle() {
 			decoratedPlayer.Idle();
 		}
@@ -50,5 +55,15 @@ namespace ZeldaGame.Player {
 		void RemoveDecorator() {
 			game.Link = (Player1)decoratedPlayer;
 		}
-	}
+
+        public void SetPlayerPosition(Vector2 position)
+        {
+			 decoratedPlayer.SetPlayerPosition(position);
+        }
+
+        public Rectangle GetPlayerHitBox()
+        {
+			return decoratedPlayer.GetPlayerHitBox();
+        }
+    }
 }

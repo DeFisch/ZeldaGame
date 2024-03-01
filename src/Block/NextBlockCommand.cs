@@ -1,6 +1,4 @@
-﻿using ZeldaGame;
-
-namespace Sprint0.Block {
+﻿namespace ZeldaGame.Block {
 	public class NextBlockCommand : ICommand {
 		private Game1 MyGame;
 		private int next = 1;

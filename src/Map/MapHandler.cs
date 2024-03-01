@@ -1,7 +1,9 @@
+using System;
 using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using ZeldaGame.Player;
 
 namespace ZeldaGame.Map;
 
@@ -26,9 +28,10 @@ public class MapHandler {
         mapLoader.load_map(x, y); // load default map
         map = mapLoader.get_map_info(); // get default map info
         mapRectangles = new MapStaticRectangles(this);
+        mapRectangles.SetLists(window_size);
     }
-    public Vector2 GetWindowScale(int x, int y) {
-		return new Vector2(x / map_size.X, y / map_size.Y);
+    public Vector2 GetWindowScale(Vector2 windowSize) {
+		return new Vector2(windowSize.X / map_size.X, windowSize.Y / map_size.Y);
 	}
     private Rectangle get_map_location(int x, int y) {
         return new Rectangle(1 + x * 257, 1 + y * 177, (int)map_size.X, (int)map_size.Y);
@@ -59,7 +62,7 @@ public class MapHandler {
             this.x = x;
             this.y = y;
             map = mapLoader.get_map_info();
-            mapRectangles = new MapStaticRectangles(this); // update map rectangles
+            mapRectangles.SetLists(window_size); // update map rectangles
             return true;
         }
         return false;
@@ -72,7 +75,6 @@ public class MapHandler {
         Rectangle mapSourceRectangle = get_map_location(x, y);
         Rectangle mapTargetRectangle = new Rectangle(0, 0, (int)window_size.X, (int)window_size.Y);
         spriteBatch.Draw(map_texture, mapTargetRectangle, mapSourceRectangle, Color.White);
-        mapRectangles.SetLists(window_size);
         List<Rectangle> sList = mapRectangles.getSourceRectangleList();
         List<Rectangle> dlist = mapRectangles.getDestinationRectangleList();
         if (debug){
@@ -94,4 +96,36 @@ public class MapHandler {
         return mapLoader.is_map_available(x, y);
     }
 
+    public bool Debug {
+        get { return debug; }
+        set { debug = value; }
+    }
+
+    public void Reset()
+    {
+        x = 2;
+        y = 5;
+    }
+
+    public void PlayerDoorCollision(Vector2 window_size, IPlayer player){
+        Rectangle playerHitBox = player.GetPlayerHitBox();
+        Vector2 playerCenterpoint = new Vector2(playerHitBox.X + playerHitBox.Width/2, playerHitBox.Y + playerHitBox.Height/2);
+        Rectangle up_door = new Rectangle((int)(0.46875*window_size.X), 0, (int)(0.0625*window_size.X), (int)(0.18*window_size.Y));
+        Rectangle down_door = new Rectangle((int)(0.46875*window_size.X), (int)(0.82*window_size.Y), (int)(0.0625*window_size.X), (int)(0.18*window_size.Y));
+        Rectangle left_door = new Rectangle(0, (int)(0.45*window_size.Y), (int)(0.125*window_size.X), (int)(0.1*window_size.Y));
+        Rectangle right_door = new Rectangle((int)(0.875*window_size.X), (int)(0.45*window_size.Y), (int)(0.125*window_size.X), (int)(0.1*window_size.Y));
+        if (up_door.Contains(playerCenterpoint)){
+            move_up();
+            player.SetPlayerPosition(new Vector2((int)(window_size.X/2), (int)(0.8*window_size.Y)));
+        }else if (down_door.Contains(playerCenterpoint)){
+            move_down();
+            player.SetPlayerPosition(new Vector2((int)(window_size.X/2), (int)(0.2*window_size.Y)));
+        }else if (left_door.Intersects(playerHitBox)){
+            move_left();
+            player.SetPlayerPosition(new Vector2((int)(0.8*window_size.X), (int)(window_size.Y/2)));
+        }else if (right_door.Intersects(playerHitBox)){
+            move_right();
+            player.SetPlayerPosition(new Vector2((int)(0.2*window_size.X), (int)(window_size.Y/2)));
+        }
+    }
 }

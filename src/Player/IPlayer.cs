@@ -7,11 +7,14 @@ namespace ZeldaGame.Player {
 
 		public void Attack();
 		public void Idle();
+		public void Colliding(Rectangle collision);
 		public void Walk();
 		public void UseItem(int item);
 		public void SetDirection(Direction direction); 
 		public void Draw(SpriteBatch spriteBatch, Color color);
 		public void Update();
 		public void Reset();
+		public void SetPlayerPosition(Vector2 position);
+		public Rectangle GetPlayerHitBox();
 	}
 }

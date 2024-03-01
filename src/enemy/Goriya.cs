@@ -143,4 +143,27 @@ public class Goriya : IEnemy {
 	public Rectangle GetRectangle(){
 		return new Rectangle((int)position.X, (int)position.Y, (int)(character_sprites[0, 2] * scale.X), (int)(character_sprites[0, 3] * scale.Y));
 	}
+
+	public void Collide(Rectangle rectangle)
+	{
+		int dx = rectangle.Width;
+		int dy = rectangle.Height;
+		switch(direction){
+			case Direction.Up:
+				position.Y += dy;
+				break;
+			case Direction.Down:
+				position.Y -= dy;
+				break;
+			case Direction.Left:
+				position.X += dx;
+				break;
+			case Direction.Right:
+				position.X -= dx;
+				break;
+		}
+		Direction old_direction = direction;
+		while (direction == old_direction)
+			direction = (Direction)(new Random().Next(0, 4));
+	}
 }

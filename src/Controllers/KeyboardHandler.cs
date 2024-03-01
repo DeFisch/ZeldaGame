@@ -1,6 +1,6 @@
 ﻿using Microsoft.Xna.Framework.Input;
 
-namespace ZeldaGame {
+namespace ZeldaGame.Controllers {
 	public class KeyboardHandler {
 		KeyboardState oldState;
 		KeyboardState newState;

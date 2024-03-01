@@ -2,27 +2,21 @@
 using Microsoft.Xna.Framework.Graphics;
 using System.Diagnostics;
 
-public class WalkRightSprite : IPlayerSprite {
+namespace ZeldaGame.Player;
+public class WalkRightSprite : PlayerSprite {
 	private Texture2D sprite;
-	private static Rectangle destRectangle;
-	private bool isPlaying;
 
     private static int currentFrame = 0;
     private readonly int totalFrames = 2;
     private static int frameID = 0;
     private readonly int frameRate = 8;
 
-    public WalkRightSprite(Texture2D sprite) {
+    public WalkRightSprite(Texture2D sprite) : base() {
 		isPlaying = false;
 		this.sprite = sprite;
     }
 
-    public Rectangle GetHitBox()
-    {
-        return destRectangle;
-    }
-
-    public void Draw(SpriteBatch spriteBatch, Vector2 location, Color color, Vector2 scale)
+    public override void Draw(SpriteBatch spriteBatch, Vector2 location, Color color, Vector2 scale)
     {
         Rectangle srcRectangle = new Rectangle(35 + (17 * currentFrame), 11, 16, 16);
         destRectangle = new Rectangle((int)location.X, (int)location.Y, (int)(srcRectangle.Width * scale.X), (int)(srcRectangle.Height * scale.Y));
@@ -31,7 +25,7 @@ public class WalkRightSprite : IPlayerSprite {
 		spriteBatch.Draw(sprite, destRectangle, srcRectangle, color, rotation: 0, new Vector2(0, 0), effects: effect, 1);
 	}
 
-	public void Update() {
+	public override void Update() {
         if (isPlaying)
         {
             frameID++;
@@ -47,12 +41,4 @@ public class WalkRightSprite : IPlayerSprite {
             }
         }
     }
-
-	public void Play() {
-		isPlaying = true;
-	}
-
-	public void Pause() {
-		isPlaying = false;
-	}
 }

@@ -1,6 +1,6 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Sprint0.Block;
+using ZeldaGame.Block;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -15,7 +15,6 @@ namespace ZeldaGame.Map
         private List<Rectangle> dRectangleList;
         private List<Rectangle> sRectangleList;
         private Rectangle sourceRectangle;
-        private Rectangle destinationRectangle;
         private float xPosition = 0, yPosition = 0;
         private float width = 0, height = 0;
 
@@ -39,6 +38,9 @@ namespace ZeldaGame.Map
 
         public void SetLists(Vector2 window_size)
         {
+            dRectangleList.Clear();
+            sRectangleList.Clear();
+
             string[,] mapList = map.get_map_info();
             addBoundaryRectangles(dRectangleList, sRectangleList, window_size); // add boundary rectangles
             

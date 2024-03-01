@@ -1,5 +1,4 @@
-﻿using System;
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace ZeldaGame.NPCs;
@@ -13,16 +12,19 @@ public class Flame : INPC {
 	private static int[,] character_sprites = new int[,] { { 52, 11, 16, 16 }, { 69, 11, 16, 16 } };
 	private int switchFrameDelay = 15;
 	private int frameCounter = 0;
+	private Rectangle sourceRectangle;
+	private Rectangle destinationRectangle;
+	private string collisionMessage = "Flame";
 
-	public Flame(Texture2D texture, Vector2 position) {
+    public Flame(Texture2D texture, Vector2 position) {
 		this.texture = texture;
 		this.position = position;
 	}
 
 	public void Draw(SpriteBatch spriteBatch, Vector2 scale) {
 		int sprite_id = currentFrame % 2;
-		Rectangle sourceRectangle = new Rectangle(character_sprites[sprite_id, 0], character_sprites[sprite_id, 1], character_sprites[sprite_id, 2], character_sprites[sprite_id, 3]);
-		Rectangle destinationRectangle = new Rectangle((int)position.X, (int)position.Y, (int)(sourceRectangle.Width * scale.X), (int)(sourceRectangle.Height * scale.Y));
+		sourceRectangle = new Rectangle(character_sprites[sprite_id, 0], character_sprites[sprite_id, 1], character_sprites[sprite_id, 2], character_sprites[sprite_id, 3]);
+		destinationRectangle = new Rectangle((int)position.X, (int)position.Y, (int)(sourceRectangle.Width * scale.X), (int)(sourceRectangle.Height * scale.Y));
 		spriteBatch.Draw(texture, destinationRectangle, sourceRectangle, Color.White);
 	}
 
@@ -36,4 +38,13 @@ public class Flame : INPC {
 			frameCounter = 0;
 		}
 	}
+    public Rectangle GetNPCHitBox()
+    {
+        return destinationRectangle;
+    }
+
+    public string GetCollisionMessage()
+    {
+        return collisionMessage;
+    }
 }

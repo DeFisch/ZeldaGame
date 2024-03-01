@@ -1,7 +1,7 @@
 ﻿using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
 
-namespace Sprint0.Block {
+namespace ZeldaGame.Block {
 	public class Obstacle : IBlock {
 		private Texture2D texture;
 		private Vector2 position;

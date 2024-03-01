@@ -4,7 +4,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using ZeldaGame.Enemy;
 
-namespace Sprint0.Block {
+namespace ZeldaGame.Block {
 	public class BlockSpriteFactory {
 		private List<IBlock> blockList;
 		private Texture2D texture;

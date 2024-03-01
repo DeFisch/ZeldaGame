@@ -1,6 +1,4 @@
-﻿using ZeldaGame;
-
-namespace ZeldaGame.NPCs;
+﻿namespace ZeldaGame.NPCs;
 
 public class NextNPCCommand : ICommand {
 	private Game1 myGame;

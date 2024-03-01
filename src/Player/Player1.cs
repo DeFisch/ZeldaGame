@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
 using System.Collections.Generic;
 using System.Diagnostics;
 using static ZeldaGame.Player.PlayerStateMachine;
@@ -15,7 +16,7 @@ namespace ZeldaGame.Player {
 		private Vector2 movement;
 		public Vector2 scale;
 		private Vector2 resetPosition;
-		private static bool isMoving;
+		private bool isMoving;
 
 		private int speed;
 		private Direction direction;
@@ -58,7 +59,14 @@ namespace ZeldaGame.Player {
 			this.sprite = sprite;
 		}
 
-		public Swords GetSword() {
+        public void SetPlayerPosition(Vector2 position)
+        {
+            Rectangle sprite_hitbox = sprite.GetHitBox();
+            Vector2 sprite_size = new Vector2(sprite_hitbox.Width, sprite_hitbox.Height);
+            this.position = position - sprite_size / 2;
+        }
+
+        public Swords GetSword() {
 			return currSword;
 		}
 		public void SetSword(Swords sword) {
@@ -72,6 +80,21 @@ namespace ZeldaGame.Player {
 
 		public void Idle() {
 			stateMachine.Idle();
+		}
+
+		public void Colliding(Rectangle collision)
+		{
+			Rectangle collisionOverlap = Rectangle.Intersect(GetPlayerHitBox(), collision);
+
+				switch (direction)
+				{
+					case Direction.Right: position -= new Vector2(collisionOverlap.Width, 0); break;
+					case Direction.Left: position += new Vector2(collisionOverlap.Width, 0); break;
+					case Direction.Up: position += new Vector2(0, collisionOverlap.Height); break;
+					case Direction.Down: position -= new Vector2(0, collisionOverlap.Height); break;
+				}
+	
+            
 		}
 
 		public void Walk()
@@ -90,10 +113,6 @@ namespace ZeldaGame.Player {
 				sprite = stateMachine.Attack();
 				weaponHandler.UseSword((int)currSword, position, stateMachine.GetDirection());
 			}
-		}
-		public void PickUp()
-		{
-			// change sprite to pick up item
 		}
 
 		public void UseItem(int item)
@@ -130,6 +149,7 @@ namespace ZeldaGame.Player {
 			weaponHandler.Update();
             sprite.Update();
 		}
+
 		public void Draw(SpriteBatch spriteBatch, Color color)
 		{
 			weaponHandler.Draw(spriteBatch, scale);
@@ -145,27 +165,15 @@ namespace ZeldaGame.Player {
             animTimer = -1;
         }
 
-        /*
-		 * Class methods
-		 */
         private void UpdateMovementVector()
 		{
             switch (direction)
             {
-                case Direction.Up:
-                    movement = new Vector2(0, -speed);
-                    break;
-                case Direction.Left:
-                    movement = new Vector2(-speed, 0);
-                    break;
-                case Direction.Down:
-                    movement = new Vector2(0, speed);
-                    break;
-                case Direction.Right:
-                    movement = new Vector2(speed, 0);
-                    break;
-                default:
-                    break;
+                case Direction.Up: movement = new Vector2(0, -speed); break;
+				case Direction.Left: movement = new Vector2(-speed, 0); break;
+                case Direction.Down: movement = new Vector2(0, speed); break;
+                case Direction.Right: movement = new Vector2(speed, 0); break;
+                default: break;
             }
 			movement *= scale;
         }
