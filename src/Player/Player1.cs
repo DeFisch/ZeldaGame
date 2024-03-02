@@ -95,20 +95,16 @@ namespace ZeldaGame.Player {
 			if (!isColliding)
 				collisionDirection = direction;
 
-			switch (direction)
-			{
-				case Direction.Right:
-					if (collisionDirection == Direction.Right)
-						position.X -= collisionOverlap.Width; break;
-				case Direction.Left:
-                    if (collisionDirection == Direction.Left) 
-						position.X += collisionOverlap.Width; break;
-				case Direction.Up:
-                    if (collisionDirection == Direction.Up)
-                        position.Y += collisionOverlap.Height; break;
-				case Direction.Down:
-                    if (collisionDirection == Direction.Down) 
-						position.Y -= collisionOverlap.Height; break;
+			if (collisionOverlap.Width > collisionOverlap.Height){
+				if (collisionOverlap.Center.Y < GetPlayerHitBox().Center.Y)
+					position.Y += collisionOverlap.Height;
+				else
+					position.Y -= collisionOverlap.Height;
+			} else {
+				if (collisionOverlap.Center.X < GetPlayerHitBox().Center.X)
+					position.X += collisionOverlap.Width;
+				else
+					position.X -= collisionOverlap.Width;
 			}
 			isColliding = true;
 			
