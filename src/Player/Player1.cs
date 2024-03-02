@@ -52,7 +52,9 @@ namespace ZeldaGame.Player {
 
 		public Rectangle GetPlayerHitBox()
 		{
-			return sprite.GetHitBox();
+			Rectangle hitbox =  sprite.GetHitBox();
+			hitbox.Inflate(-6, -8);
+			return hitbox;
         }
 
 		public IPlayerSprite GetSprite() {
