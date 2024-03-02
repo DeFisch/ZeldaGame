@@ -22,7 +22,6 @@ public class CollisionHandler {
         {
             if (game.Link.GetPlayerHitBox().Intersects(box))
             {
-                Debug.WriteLine("Colliding");
                 game.Link.Colliding(box);
             }
         }

@@ -17,6 +17,9 @@ namespace ZeldaGame.Player {
 		public Vector2 scale;
 		private Vector2 resetPosition;
 		private bool isMoving;
+		private bool isColliding;
+		private Direction collisionDirection;
+		private Rectangle collision;
 
 		private int speed;
 		private Direction direction;
@@ -38,6 +41,7 @@ namespace ZeldaGame.Player {
 			speed = 1;
 			animTimer = -1;
 
+			isColliding = false;
 			isMoving = false;
 		}
 
@@ -80,29 +84,47 @@ namespace ZeldaGame.Player {
 
 		public void Idle() {
 			stateMachine.Idle();
+			isColliding = false;
 		}
 
 		public void Colliding(Rectangle collision)
 		{
-			Rectangle collisionOverlap = Rectangle.Intersect(GetPlayerHitBox(), collision);
+            Rectangle collisionOverlap = Rectangle.Intersect(GetPlayerHitBox(), collision);
+			this.collision = collision;
 
-				switch (direction)
-				{
-					case Direction.Right: position -= new Vector2(collisionOverlap.Width, 0); break;
-					case Direction.Left: position += new Vector2(collisionOverlap.Width, 0); break;
-					case Direction.Up: position += new Vector2(0, collisionOverlap.Height); break;
-					case Direction.Down: position -= new Vector2(0, collisionOverlap.Height); break;
-				}
-	
-            
+			if (!isColliding)
+				collisionDirection = direction;
+
+			switch (direction)
+			{
+				case Direction.Right:
+					if (collisionDirection == Direction.Right)
+						position.X -= collisionOverlap.Width; break;
+				case Direction.Left:
+                    if (collisionDirection == Direction.Left) 
+						position.X += collisionOverlap.Width; break;
+				case Direction.Up:
+                    if (collisionDirection == Direction.Up)
+                        position.Y += collisionOverlap.Height; break;
+				case Direction.Down:
+                    if (collisionDirection == Direction.Down) 
+						position.Y -= collisionOverlap.Height; break;
+			}
+			isColliding = true;
+			
 		}
 
 		public void Walk()
 		{
-			if (animTimer < 0) {
+			if (animTimer < 0)
+			{
 				UpdateMovementVector();
 				sprite = stateMachine.Walk();
 				isMoving = true;
+			}
+			if (!GetPlayerHitBox().Intersects(collision))
+			{
+				isColliding = false;
 			}
 		}
 
@@ -126,6 +148,7 @@ namespace ZeldaGame.Player {
 
 		public void Update()
 		{
+			Debug.WriteLine("Colliding: " + isColliding);
 			// Animates attack or item use, then resets to idle
 			if (animTimer >= 0)
 				animTimer--;
