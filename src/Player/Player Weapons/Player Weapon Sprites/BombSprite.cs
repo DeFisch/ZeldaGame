@@ -57,6 +57,11 @@ public class BombSprite : IPlayerProjectile {
         return isActive;
     }
 
+    public void Collided()
+    {
+        //isActive = false;
+    }
+
     public void Draw(SpriteBatch spriteBatch, Vector2 scale) {
 		Rectangle sourceRectangle;
 		if (currentFrame == 0)

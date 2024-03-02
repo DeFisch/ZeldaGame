@@ -35,12 +35,12 @@ public class WeaponHandler {
 		expiredProjectiles.Add(projectile);
 	}
 
-	public List<Rectangle> GetActiveHitBoxes()
+	public Dictionary<IPlayerProjectile, Rectangle> GetActiveHitBoxes()
 	{
-		List<Rectangle> activeHitBoxes = new List<Rectangle>();
+        Dictionary<IPlayerProjectile, Rectangle> activeHitBoxes = new Dictionary<IPlayerProjectile, Rectangle>();
 		foreach (IPlayerProjectile projectile in activeProjectiles)
 		{
-            activeHitBoxes.Add(projectile.GetHitBox());
+            activeHitBoxes.Add(projectile, projectile.GetHitBox());
 		}
 		return activeHitBoxes;
 	}

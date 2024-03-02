@@ -5,6 +5,7 @@ using System.Diagnostics;
 using ZeldaGame.Map;
 using ZeldaGame.Player;
 using ZeldaGame.Enemy;
+using System.Collections.Generic;
 
 namespace ZeldaGame;
 
@@ -27,7 +28,23 @@ public class CollisionHandler {
         }
     }
 
+    public void UpdateProjectileCollision()
+    {
+        Dictionary<IPlayerProjectile, Rectangle> activeProjectiles = game.Link.GetProjectileHitBoxes();
+        foreach (Rectangle box in game.map.getAllObjectRectangles())
+        {
+            foreach (IPlayerProjectile projectile in activeProjectiles.Keys)
+            {
+                if (activeProjectiles[projectile].Intersects(box))
+                {
+                    projectile.Collided();
+                }
+            }
+        }
+    }
+
     public void Update() {
+        UpdateProjectileCollision();
         UpdatePlayerCollision();
         game.map.PlayerDoorCollision(new Vector2(game.windowSize.X, game.windowSize.Y), game.Link);
         game.NPCFactory.PlayerNPCCollision(game.Link);

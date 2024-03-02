@@ -17,9 +17,6 @@ namespace ZeldaGame.Player {
 		public Vector2 scale;
 		private Vector2 resetPosition;
 		private bool isMoving;
-		private bool isColliding;
-		private Direction collisionDirection;
-		private Rectangle collision;
 
 		private int speed;
 		private Direction direction;
@@ -41,11 +38,10 @@ namespace ZeldaGame.Player {
 			speed = 1;
 			animTimer = -1;
 
-			isColliding = false;
 			isMoving = false;
 		}
 
-		public List<Rectangle> GetProjectileHitBoxes()
+		public Dictionary<IPlayerProjectile, Rectangle> GetProjectileHitBoxes()
 		{
 			return weaponHandler.GetActiveHitBoxes();
 		}
@@ -86,16 +82,11 @@ namespace ZeldaGame.Player {
 
 		public void Idle() {
 			stateMachine.Idle();
-			isColliding = false;
 		}
 
 		public void Colliding(Rectangle collision)
 		{
             Rectangle collisionOverlap = Rectangle.Intersect(GetPlayerHitBox(), collision);
-			this.collision = collision;
-
-			if (!isColliding)
-				collisionDirection = direction;
 
 			if (collisionOverlap.Width > collisionOverlap.Height){
 				if (collisionOverlap.Center.Y < GetPlayerHitBox().Center.Y)
@@ -108,7 +99,6 @@ namespace ZeldaGame.Player {
 				else
 					position.X -= collisionOverlap.Width;
 			}
-			isColliding = true;
 			
 		}
 
@@ -119,10 +109,6 @@ namespace ZeldaGame.Player {
 				UpdateMovementVector();
 				sprite = stateMachine.Walk();
 				isMoving = true;
-			}
-			if (!GetPlayerHitBox().Intersects(collision))
-			{
-				isColliding = false;
 			}
 		}
 
@@ -146,7 +132,6 @@ namespace ZeldaGame.Player {
 
 		public void Update()
 		{
-			Debug.WriteLine("Colliding: " + isColliding);
 			// Animates attack or item use, then resets to idle
 			if (animTimer >= 0)
 				animTimer--;

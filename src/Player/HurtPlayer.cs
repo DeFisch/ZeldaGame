@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using System.Collections.Generic;
 using static ZeldaGame.Player.PlayerStateMachine;
 
 namespace ZeldaGame.Player {
@@ -64,6 +65,11 @@ namespace ZeldaGame.Player {
         public Rectangle GetPlayerHitBox()
         {
 			return decoratedPlayer.GetPlayerHitBox();
+        }
+
+        public Dictionary<IPlayerProjectile, Rectangle> GetProjectileHitBoxes()
+        {
+            throw new System.NotImplementedException();
         }
     }
 }

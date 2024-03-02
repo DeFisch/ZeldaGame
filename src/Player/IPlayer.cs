@@ -1,5 +1,6 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using System.Collections.Generic;
 using static ZeldaGame.Player.PlayerStateMachine;
 
 namespace ZeldaGame.Player {
@@ -16,5 +17,6 @@ namespace ZeldaGame.Player {
 		public void Reset();
 		public void SetPlayerPosition(Vector2 position, bool offset = true);
 		public Rectangle GetPlayerHitBox();
+		public Dictionary<IPlayerProjectile, Rectangle> GetProjectileHitBoxes();
 	}
 }

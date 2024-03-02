@@ -43,6 +43,11 @@ public class ArrowHorizontalSprite : IPlayerProjectile {
         return isActive;
     }
 
+    public void Collided()
+    {
+        isActive = false;
+    }
+
     public void Draw(SpriteBatch spriteBatch, Vector2 scale) {
 		Rectangle sourceRectangle = new Rectangle(10, 185, 16, 16);
 		destinationRectangle = new Rectangle((int)position.X, (int)position.Y, (int)(sourceRectangle.Width * scale.X), (int)(sourceRectangle.Height * scale.Y));

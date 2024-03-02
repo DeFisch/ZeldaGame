@@ -12,6 +12,8 @@ public interface IPlayerProjectile {
 
 	public bool IsActive();
 
+	public void Collided();
+
 	public void Update();
 
 	public void Draw(SpriteBatch spriteBatch, Vector2 scale);

@@ -55,7 +55,12 @@ public class BoomerangSprite : IPlayerProjectile {
 		return isActive;
 	}
 
-	public void Draw(SpriteBatch spriteBatch, Vector2 scale) {
+    public void Collided()
+    {
+        isActive = false;
+    }
+
+    public void Draw(SpriteBatch spriteBatch, Vector2 scale) {
 		Rectangle sourceRectangle = new Rectangle(64 + (currentFrame * 9), 185, 8, 16);
 		destinationRectangle = new Rectangle((int)position.X + 8, (int)position.Y, (int)(sourceRectangle.Width * scale.X), (int)(sourceRectangle.Height * scale.Y));
 		spriteBatch.Draw(Sprite, destinationRectangle, sourceRectangle, Color.White, rotation: 0, new Vector2(0, 0), effects: effect, 1);

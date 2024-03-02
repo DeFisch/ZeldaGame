@@ -43,6 +43,11 @@ public class BlueArrowVerticalSprite : IPlayerProjectile {
         return isActive;
     }
 
+    public void Collided()
+    {
+        isActive = false;
+    }
+
     public void Draw(SpriteBatch spriteBatch, Vector2 scale) {
 
 		Rectangle sourceRectangle = new Rectangle(27, 185, 8, 16);

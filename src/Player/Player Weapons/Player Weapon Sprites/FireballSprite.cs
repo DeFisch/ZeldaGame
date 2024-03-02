@@ -51,6 +51,11 @@ public class FireballSprite : IPlayerProjectile {
         return isActive;
     }
 
+    public void Collided()
+    {
+        isActive = false;
+    }
+
     public void Draw(SpriteBatch spriteBatch, Vector2 scale) {
 
 		Rectangle sourceRectangle = new Rectangle(191, 185, 16, 16);
