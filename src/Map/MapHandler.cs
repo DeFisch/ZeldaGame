@@ -75,9 +75,7 @@ public class MapHandler {
         if (mapLoader.load_map(x, y)) {
             game.enemyFactory.ClearEnemies();
             foreach (string enemy in mapLoader.get_enemies()) {
-                Random random = new Random();
-                Vector2 position = new Vector2(random.Next((int)(window_size.X*0.125), (int)(window_size.X*0.875)), random.Next((int)(window_size.Y*0.18), (int)(window_size.Y*0.82)));
-                game.enemyFactory.AddEnemy(enemy, position);
+                game.enemyFactory.AddEnemy(enemy, map, game.windowSize);
             }
             this.x = x;
             this.y = y;

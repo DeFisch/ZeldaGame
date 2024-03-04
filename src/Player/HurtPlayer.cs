@@ -64,12 +64,12 @@ namespace ZeldaGame.Player {
 
         public Rectangle GetPlayerHitBox()
         {
-			return decoratedPlayer.GetPlayerHitBox();
+			return new Rectangle(0, 0, 0, 0);
         }
 
         public Dictionary<IPlayerProjectile, Rectangle> GetProjectileHitBoxes()
         {
-            throw new System.NotImplementedException();
+            return new Dictionary<IPlayerProjectile, Rectangle>();
         }
     }
 }
