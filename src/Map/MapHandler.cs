@@ -136,10 +136,10 @@ public class MapHandler {
         }else if (down_door.Contains(playerCenterpoint)){
             move_down();
             player.SetPlayerPosition(new Vector2((int)(window_size.X/2), (int)(0.2*window_size.Y)));
-        }else if (left_door.Intersects(playerHitBox)){
+        }else if (left_door.Contains(playerCenterpoint)){
             move_left();
             player.SetPlayerPosition(new Vector2((int)(0.8*window_size.X), (int)(window_size.Y/2)));
-        }else if (right_door.Intersects(playerHitBox)){
+        }else if (right_door.Contains(playerCenterpoint)){
             move_right();
             player.SetPlayerPosition(new Vector2((int)(0.2*window_size.X), (int)(window_size.Y/2)));
         }
