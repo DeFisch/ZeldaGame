@@ -17,7 +17,7 @@ public class MapHandler {
     private Texture2D map_texture;
     private Vector2 window_size;
     private Vector2 map_size;
-    private int x = 2, y = 5; // default map
+    public int x = 2, y = 5; // default map //I modified this 
     private MapStaticRectangles mapRectangles;
 
     public MapHandler(Texture2D map_texture, Vector2 window_size) {

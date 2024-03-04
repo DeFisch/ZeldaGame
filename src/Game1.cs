@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Runtime.InteropServices;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -202,7 +203,10 @@ namespace ZeldaGame {
 			//Draws NPCs
 			NPCFactory.Draw(_spriteBatch);
 			//Draws objects
-			itemFactory.Draw(_spriteBatch);
+			if (!itemFactory.IsMapChanged())
+			{
+				itemFactory.Draw(_spriteBatch);
+			}
 			// Draws player
 			Link.Draw(_spriteBatch, Color.White);
 
