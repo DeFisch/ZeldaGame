@@ -44,7 +44,7 @@ public class EnemyFactory {
 					enemy = new Aquamentus(textures[1], position, enemyProjectileFactory, scale);
 				break; 
 			default:
-				break;
+				return;
 		}
 		enemies.Add(enemy);
 	}

@@ -8,7 +8,7 @@ namespace ZeldaGame.Player {
 		private IPlayer decoratedPlayer;
 
 		Game1 game;
-		int timer = 100;
+		int timer = 20;
 
 		public HurtPlayer(IPlayer decoratedPlayer, Game1 game) {
 			this.decoratedPlayer = decoratedPlayer;
