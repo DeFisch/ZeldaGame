@@ -43,7 +43,7 @@ public class Aquamentus : IEnemy {
     private void Attack() {
         Vector2[] directions = new Vector2[] { new Vector2(-0.894f, 0.447f), new Vector2(-0.894f, -0.447f), new Vector2(-1, 0) };
         foreach (Vector2 direction in directions) {
-            enemyProjectileFactory.CreateProjectile(EnemyProjectileFactory.ProjectileType.Fireball, position, direction * projectile_speed);
+            enemyProjectileFactory.CreateProjectile(EnemyProjectileFactory.ProjectileType.Fireball, new Vector2(GetRectangle().Center.X, GetRectangle().Center.Y), direction * projectile_speed);
         }
     }
 

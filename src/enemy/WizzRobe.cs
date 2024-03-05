@@ -98,7 +98,7 @@ public class WizzRobe : IEnemy {
 				projectile_direction = new Vector2(this.projectile_speed, 0);
 				break;
 		}
-		enemyProjectileFactory.CreateProjectile(EnemyProjectileFactory.ProjectileType.Fireball, position, projectile_direction);
+		enemyProjectileFactory.CreateProjectile(EnemyProjectileFactory.ProjectileType.Fireball, new Vector2(GetRectangle().Center.X, GetRectangle().Center.Y), projectile_direction);
 	}
 
 	private void Idle() {
