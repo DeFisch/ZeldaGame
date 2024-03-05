@@ -17,13 +17,15 @@ public class MapHandler {
     private Texture2D map_texture;
     private Vector2 window_size;
     private Vector2 map_size;
-    private int x = 2, y = 5; // default map
+    public int x = 2, y = 5; // default map //I modified this 
     private MapStaticRectangles mapRectangles;
+    private Game1 game;
 
-    public MapHandler(Texture2D map_texture, Vector2 window_size) {
+    public MapHandler(Texture2D map_texture, Game1 game) {
         mapLoader = new MapLoader();
+        this.game = game;
         this.map_texture = map_texture;
-        this.window_size = window_size;
+        window_size = game.windowSize;
         map_size = new Vector2(256, 176);
         map = mapLoader.get_map_info(); // get default map info
         mapRectangles = new MapStaticRectangles(this);
@@ -71,6 +73,10 @@ public class MapHandler {
 
     private bool switch_map(int y, int x) {
         if (mapLoader.load_map(x, y)) {
+            game.enemyFactory.ClearEnemies();
+            foreach (string enemy in mapLoader.get_enemies()) {
+                game.enemyFactory.AddEnemy(enemy, map, game.windowSize);
+            }
             this.x = x;
             this.y = y;
             map = mapLoader.get_map_info();
@@ -128,10 +134,10 @@ public class MapHandler {
         }else if (down_door.Contains(playerCenterpoint)){
             move_down();
             player.SetPlayerPosition(new Vector2((int)(window_size.X/2), (int)(0.2*window_size.Y)));
-        }else if (left_door.Intersects(playerHitBox)){
+        }else if (left_door.Contains(playerCenterpoint)){
             move_left();
             player.SetPlayerPosition(new Vector2((int)(0.8*window_size.X), (int)(window_size.Y/2)));
-        }else if (right_door.Intersects(playerHitBox)){
+        }else if (right_door.Contains(playerCenterpoint)){
             move_right();
             player.SetPlayerPosition(new Vector2((int)(0.2*window_size.X), (int)(window_size.Y/2)));
         }

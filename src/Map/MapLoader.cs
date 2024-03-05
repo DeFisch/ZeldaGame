@@ -16,6 +16,7 @@ namespace ZeldaGame.Map;
 public class MapLoader {
     private string map_path;
     private string[,] map = new string[7, 12];
+    private List<string> enemies = new List<string>();
     private Dictionary<string, int> door_type = new Dictionary<string, int>(){
         {"up", 0},
         {"down", 0},
@@ -45,12 +46,19 @@ public class MapLoader {
         }
     }
 
+    public void reset(){
+        foreach (var key in door_type.Keys)
+            door_type[key] = 0;
+        enemies.Clear();
+    }
+
     public bool load_map(int x, int y) {
         foreach (var key in door_type.Keys)
             door_type[key] = 0;
         string file_path = map_path + "map_" + y + "_" + x + ".csv";
         if (File.Exists(file_path)) {
             string[] lines = File.ReadAllLines(file_path);
+            reset(); // reset door_type and enemies
             for (int i = 0; i < lines.Length; i++) {
                 string[] line_data = lines[i].Split(',');
                 if (i < 7){ // read tile data
@@ -69,12 +77,21 @@ public class MapLoader {
                                 if(door_type.ContainsKey(line_data[j]))door_type[line_data[j]] = 2;
                             }
                             break;
+                        case "enemy":
+                            for (int j = 1; j < line_data.Length; j++) {
+                                enemies.Add(line_data[j]);
+                            }
+                            break;
                     }
                 }
             }
             return true;
         }
         return false;
+    }
+
+    public List<string> get_enemies() {
+        return enemies;
     }
 
     public string[,] get_map_info() {

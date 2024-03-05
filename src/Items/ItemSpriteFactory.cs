@@ -21,8 +21,12 @@ namespace ZeldaGame.Items {
 		private int index = 0;
 		BlueRuby blueRuby;
 		private int[]collCheck;
+		private int switchCheck = 0;
         private string [,] map;
 		private MapHandler mapHandler;
+        private string item_char;
+		private int initx;
+		private int inity;
 
         public ItemSpriteFactory(Texture2D texture, Texture2D texture2, Vector2 scale, IPlayer player, MapHandler mapHandler) {
 			objectList = new List<IItemSprite>();
@@ -38,7 +42,10 @@ namespace ZeldaGame.Items {
 		public void GetMapItems()
 		{
 			map = mapHandler.get_map_info();
-			string item_char;
+			initx = mapHandler.x;
+			inity = mapHandler.y;
+
+			//string item_char;
             for (int i = 0; i < map.GetLength(0); i++) //Rows
             {
                 for (int j = 0; j < map.GetLength(1); j++) //Columns
@@ -77,6 +84,7 @@ namespace ZeldaGame.Items {
                 }
             }
 			collCheck = new int[objectList.Count];
+			switchCheck = 0;
         }
 		public void ObjectList() {
 			//objectList.Add(new BlueRuby(this.texture, pos));
@@ -113,20 +121,23 @@ namespace ZeldaGame.Items {
 			}
 		}
 		public void Draw(SpriteBatch spriteBatch) {
-			for (int k = 0; k < objectList.Count; k++)
+			if (switchCheck == 0)
 			{
-				Rectangle itemdest = objectList[k].GetHitBox();
-				Rectangle playrect = player.GetPlayerHitBox();
-				if (itemdest.Intersects(playrect) || collCheck[k] == 1)
+				for (int k = 0; k < objectList.Count; k++)
 				{
-					collCheck[k] = 1;
-				}
-				else
-				{
-					objectList[k].Draw(spriteBatch, pos, Color.White, scale);
+					Rectangle itemdest = objectList[k].GetHitBox();
+					Rectangle playrect = player.GetPlayerHitBox();
+					if (itemdest.Intersects(playrect) || collCheck[k] == 1)
+					{
+						collCheck[k] = 1;
+					}
+					else
+					{
+						objectList[k].Draw(spriteBatch, pos, Color.White, scale);
+					}
 				}
 			}
-        }//GetPlayerHitBox
+        }
 
 		public void Reset()
 		{
@@ -134,5 +145,22 @@ namespace ZeldaGame.Items {
             cycler = 0;
             index = 0;
         }
+
+		public bool IsMapChanged()
+		{
+			//if (rowLength != map.GetLength(0) || colLength != map.GetLength(1))
+			//if (Enumerable.SequenceEqual<string[,]>(map, mapHandler.get_map_info()))
+			if (mapHandler.x != initx || mapHandler.y != inity)
+			{
+				switchCheck = 1;
+				objectList.Clear();
+				GetMapItems();
+				return true;
+            }
+			else
+			{
+				return false;
+            }
+		}
 	}
 }

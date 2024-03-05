@@ -8,7 +8,7 @@ namespace ZeldaGame.Player {
 		private IPlayer decoratedPlayer;
 
 		Game1 game;
-		int timer = 100;
+		int timer = 20;
 
 		public HurtPlayer(IPlayer decoratedPlayer, Game1 game) {
 			this.decoratedPlayer = decoratedPlayer;
@@ -64,12 +64,12 @@ namespace ZeldaGame.Player {
 
         public Rectangle GetPlayerHitBox()
         {
-			return decoratedPlayer.GetPlayerHitBox();
+			return new Rectangle(0, 0, 0, 0);
         }
 
         public Dictionary<IPlayerProjectile, Rectangle> GetProjectileHitBoxes()
         {
-            throw new System.NotImplementedException();
+            return new Dictionary<IPlayerProjectile, Rectangle>();
         }
     }
 }

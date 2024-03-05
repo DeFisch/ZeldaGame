@@ -7,3 +7,4 @@
 -,-,-,-,-,-,-,-,-,-,-,-
 door,left,right,down,,,,,,,,
 breakable,up,,,,,,,,,,
+enemy,Stalfos,Stalfos,Stalfos,Gibdo,Gibdo,,,,,,

@@ -1,8 +1,10 @@
+using System;
 using System.Collections.Generic;
 using Enemy;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 namespace ZeldaGame.Enemy;
+
 
 public class EnemyFactory {
 	private List<IEnemy> enemies;
@@ -18,8 +20,26 @@ public class EnemyFactory {
 		this.scale = scale;
 	}
 
-	public void AddEnemy(string enemy_name, Vector2 position, string color_variation = null) {
+	public void AddEnemy(string enemy_name, string[,] map, Vector2 window_size) {
 		IEnemy enemy = null;
+		List<Vector2> available_locations = new List<Vector2>();
+		float width = window_size.X / 16;
+		float height = window_size.Y / 11;
+		for (int i = 0; i < map.GetLength(0); i++) {
+			for (int j = 0; j < map.GetLength(1); j++) {
+				if (map[i, j] == "-") {
+					available_locations.Add(new Vector2(j, i));
+				}
+			}
+		}
+		Vector2 position = available_locations[new Random().Next(0, available_locations.Count)];
+		if (enemy_name == "Aquamentus") {
+			position.X = 7;
+			position.Y = 2.5f;
+		}
+		position.X = position.X * width + width * 2;
+		position.Y = position.Y * height + height * 2;
+		string color_variation = new Random().Next(0, 2) == 0 ? "blue" : "red";
 		switch (enemy_name) {
 			case "Stalfos":
 				enemy = new Stalfos(textures[0], position, scale);
@@ -44,7 +64,7 @@ public class EnemyFactory {
 					enemy = new Aquamentus(textures[1], position, enemyProjectileFactory, scale);
 				break; 
 			default:
-				break;
+				return;
 		}
 		enemies.Add(enemy);
 	}
@@ -71,7 +91,6 @@ public class EnemyFactory {
 	public void Reset()
 	{
 		ClearEnemies();
-		AddEnemy("Stalfos", new Vector2(120, 120));
     }
 
 	public List<IEnemy> GetAllEnemies() {

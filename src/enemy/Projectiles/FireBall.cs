@@ -11,7 +11,7 @@ namespace Enemy.Projectiles
         private Vector2 direction;
         private Vector2 location;
         private Texture2D texture;
-        private int scale = 2;
+        private int scale = 4;
         private int currentFrame = 0;
         private int frameID = 0;
         private Rectangle sourceRectangle;
@@ -20,6 +20,8 @@ namespace Enemy.Projectiles
         {
             this.direction = direction;
             this.location = location;
+            sourceRectangle = fireball_sprites[currentFrame];
+            this.location -= sourceRectangle.Size.ToVector2() * scale / 2;
             this.texture = texture;
         }
 

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Runtime.InteropServices;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -75,9 +76,10 @@ namespace ZeldaGame {
 			Items = Content.Load<Texture2D>("Objects");
             font = Content.Load<SpriteFont>("Font");
 
+			// Initialize map
 			// Load default map
 			Texture2D map_texture = Content.Load<Texture2D>("Level1_Map");
-			map = new MapHandler(map_texture, windowSize);
+			map = new MapHandler(map_texture, this);
 			windowScale = map.GetWindowScale(windowSize);
 
 			// Initializes item classes
@@ -85,13 +87,13 @@ namespace ZeldaGame {
 			PlayerItemSpriteFactory.Instance.LoadAllTextures(Content);
             Link = new Player1(new Vector2(windowSize.X / 2, windowSize.X / 2), windowScale);
 
-            NPCFactory = new NPCFactory(npcs, windowScale, font, map);
-			itemFactory = new ItemSpriteFactory(Items, npcs, windowScale, Link, map);
-
+			
 			Texture2D[] enemy_texture = {Content.Load<Texture2D>("enemies"),Content.Load<Texture2D>("enemies_1")};
 			blockSpriteFactory = new BlockSpriteFactory(Content.Load<Texture2D>("Level1_Map"), windowScale);
 			enemyFactory = new EnemyFactory(enemy_texture, windowScale);
-			enemyFactory.AddEnemy("Stalfos", new Vector2(120, 120));
+		
+            NPCFactory = new NPCFactory(npcs, new Vector2(windowSize.X / 3, windowSize.Y / 3), windowScale, font);
+			itemFactory = new ItemSpriteFactory(Items, npcs, windowScale, Link, map);
 
             // Define the quadrants based on the window size
             Rectangle leftDoorQuadrant = new Rectangle(0, (int)(windowSize.Y / 4), (int)(windowSize.X / 4), (int)(windowSize.Y / 2));
@@ -159,12 +161,6 @@ namespace ZeldaGame {
             //Registers commands with Keys for taking damage
             keyboardController.RegisterPressKey(Keys.E, new TakeDamageCommand(this));
 
-			//Registers commands with Keys for switching maps
-			keyboardController.RegisterPressKey(Keys.X, new MoveUpCommand(map));
-			keyboardController.RegisterPressKey(Keys.C, new MoveDownCommand(map));
-			keyboardController.RegisterPressKey(Keys.V, new MoveLeftCommand(map));
-			keyboardController.RegisterPressKey(Keys.B, new MoveRightCommand(map));
-
             //Registers commands with MouseButtons for switching maps
             mouseController.RegisterQuadrant(leftDoorQuadrant, new MoveLeftCommand(map));
             mouseController.RegisterQuadrant(rightDoorQuadrant, new MoveRightCommand(map));
@@ -210,7 +206,10 @@ namespace ZeldaGame {
 				NPCFactory.Draw(_spriteBatch);
 			}
 			//Draws objects
-			itemFactory.Draw(_spriteBatch);
+			if (!itemFactory.IsMapChanged())
+			{
+				itemFactory.Draw(_spriteBatch);
+			}
 			// Draws player
 			Link.Draw(_spriteBatch, Color.White);
 

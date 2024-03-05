@@ -43,9 +43,21 @@ public class CollisionHandler {
         }
     }
 
+    public void EnemyProjectilePlayerCollision()
+    {
+        foreach (IEnemyProjectile projectile in game.enemyFactory.GetAllProjectiles())
+        {
+            if (projectile.GetRectangle().Intersects(game.Link.GetPlayerHitBox()))
+            {
+                game.Link = new HurtPlayer(game.Link, game);
+            }
+        }
+    }
+
     public void Update() {
         UpdateProjectileCollision();
         UpdatePlayerCollision();
+        EnemyProjectilePlayerCollision();
         game.map.PlayerDoorCollision(new Vector2(game.windowSize.X, game.windowSize.Y), game.Link);
         game.NPCFactory.PlayerNPCCollision(game.Link);
         enemyCollisionHandler.Update();
