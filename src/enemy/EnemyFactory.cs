@@ -28,13 +28,17 @@ public class EnemyFactory {
 		for (int i = 0; i < map.GetLength(0); i++) {
 			for (int j = 0; j < map.GetLength(1); j++) {
 				if (map[i, j] == "-") {
-					int xPosition = (int)((j * width) + (2 * width));
-					int yPosition = (int)((i * height) + (2 * height));
-					available_locations.Add(new Vector2(xPosition, yPosition));
+					available_locations.Add(new Vector2(j, i));
 				}
 			}
 		}
 		Vector2 position = available_locations[new Random().Next(0, available_locations.Count)];
+		if (enemy_name == "Aquamentus") {
+			position.X = 7;
+			position.Y = 2.5f;
+		}
+		position.X = position.X * width + width * 2;
+		position.Y = position.Y * height + height * 2;
 		string color_variation = new Random().Next(0, 2) == 0 ? "blue" : "red";
 		switch (enemy_name) {
 			case "Stalfos":
