@@ -16,7 +16,7 @@ namespace ZeldaGame.Block {
 		}
 
 		public void Draw(SpriteBatch spriteBatch, Vector2 scale) {
-			Rectangle sourceRectangle = new Rectangle(354, 81, 16, 16);
+			Rectangle sourceRectangle = new Rectangle(370, 65, 16, 16);
 			Rectangle destinationRectangle = new Rectangle((int)position.X, (int)position.Y, (int)(sourceRectangle.Width * scale.X), (int)(sourceRectangle.Height * scale.Y));
 			spriteBatch.Draw(texture, destinationRectangle, sourceRectangle, Color.White);
 		}

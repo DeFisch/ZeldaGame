@@ -21,6 +21,7 @@ namespace ZeldaGame
             MyGame.Link.Reset();
             MyGame.enemyFactory.Reset();
             MyGame.map.Reset();
+            MyGame.pushableBlock.Reset();
         }
     }
 }

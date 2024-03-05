@@ -30,7 +30,7 @@ namespace ZeldaGame {
 		public ItemSpriteFactory itemFactory;
 
 		public EnemyFactory enemyFactory;
-
+		public PushableBlock pushableBlock;
 		public BlockSpriteFactory blockSpriteFactory;
 		public CollisionHandler collisionHandler;
 
@@ -89,7 +89,8 @@ namespace ZeldaGame {
 
 			
 			Texture2D[] enemy_texture = {Content.Load<Texture2D>("enemies"),Content.Load<Texture2D>("enemies_1")};
-			blockSpriteFactory = new BlockSpriteFactory(Content.Load<Texture2D>("Level1_Map"), windowScale);
+			blockSpriteFactory = new BlockSpriteFactory(map_texture, windowScale);
+			pushableBlock = new PushableBlock(map_texture,windowSize,map,Link,windowScale);
 			enemyFactory = new EnemyFactory(enemy_texture, windowScale);
 		
             NPCFactory = new NPCFactory(npcs, windowScale, font, map);
@@ -198,6 +199,8 @@ namespace ZeldaGame {
 			_spriteBatch.Begin();
 			// Draws map
 			map.Draw(_spriteBatch);
+			//Draws pushable block
+			pushableBlock.Draw(_spriteBatch);
             // Draws enemies
             enemyFactory.Draw(_spriteBatch);
 			//Draws NPCs
@@ -212,7 +215,6 @@ namespace ZeldaGame {
 			}
 			// Draws player
 			Link.Draw(_spriteBatch, Color.White);
-
 
 			_spriteBatch.End();
 
