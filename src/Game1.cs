@@ -85,7 +85,7 @@ namespace ZeldaGame {
 			PlayerItemSpriteFactory.Instance.LoadAllTextures(Content);
             Link = new Player1(new Vector2(windowSize.X / 2, windowSize.X / 2), windowScale);
 
-            NPCFactory = new NPCFactory(npcs, new Vector2(windowSize.X / 3, windowSize.Y / 3), windowScale, font);
+            NPCFactory = new NPCFactory(npcs, windowScale, font, map);
 			itemFactory = new ItemSpriteFactory(Items, npcs, windowScale, Link, map);
 
 			Texture2D[] enemy_texture = {Content.Load<Texture2D>("enemies"),Content.Load<Texture2D>("enemies_1")};
@@ -99,10 +99,13 @@ namespace ZeldaGame {
             Rectangle topDoorQuadrant = new Rectangle((int)(windowSize.X / 4), 0, (int)(windowSize.X / 2), (int)(windowSize.Y / 4));
             Rectangle bottomDoorQuadrant = new Rectangle((int)(windowSize.X / 4), (int)(3 * windowSize.Y / 4), (int)(windowSize.X / 2), (int)(windowSize.Y / 4));
 
-            //Add NPCs
-            NPCFactory.AddNPCs();
-			//Add Blocks
-			blockSpriteFactory.AddBlock();
+			//Add NPCs
+			if (NPCFactory.isInDungeon())
+			{
+				NPCFactory.AddNPCs();
+			}
+            //Add Blocks
+            blockSpriteFactory.AddBlock();
 			//Add items
 			//itemFactory.ObjectList();
 			itemFactory.GetMapItems();
@@ -179,9 +182,11 @@ namespace ZeldaGame {
 				controller.Update();
 			}
 			// Updates enemies
-            enemyFactory.Update();
+			enemyFactory.Update();
 			// Updates npc's
-            NPCFactory.Update();
+			if (NPCFactory.isInDungeon()) { 
+				NPCFactory.Update();
+			}
 			// Updates Link
             Link.Update();
 
@@ -200,7 +205,10 @@ namespace ZeldaGame {
             // Draws enemies
             enemyFactory.Draw(_spriteBatch);
 			//Draws NPCs
-			NPCFactory.Draw(_spriteBatch);
+			if (NPCFactory.isInDungeon())
+			{
+				NPCFactory.Draw(_spriteBatch);
+			}
 			//Draws objects
 			itemFactory.Draw(_spriteBatch);
 			// Draws player
