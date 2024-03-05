@@ -92,7 +92,7 @@ namespace ZeldaGame {
 			blockSpriteFactory = new BlockSpriteFactory(Content.Load<Texture2D>("Level1_Map"), windowScale);
 			enemyFactory = new EnemyFactory(enemy_texture, windowScale);
 		
-            NPCFactory = new NPCFactory(npcs, new Vector2(windowSize.X / 3, windowSize.Y / 3), windowScale, font);
+            NPCFactory = new NPCFactory(npcs, windowScale, font, map);
 			itemFactory = new ItemSpriteFactory(Items, npcs, windowScale, Link, map);
 
             // Define the quadrants based on the window size
