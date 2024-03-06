@@ -164,9 +164,9 @@ public class MapHandler {
         {
             if (stair.Contains(playerCenterpoint))
             {
+                switch_map(0, 0);
                 x = 0;
                 y = 0;
-                switch_map(0, 0);
                 player.SetPlayerPosition(new Vector2(175, 240));
             }
         }
@@ -177,9 +177,9 @@ public class MapHandler {
         {
             if (invisibleDoor.Contains(playerCenterpoint))
             {
+                switch_map(0, 1);
                 x = 1;
                 y = 0;
-                switch_map(0, 1);
                 player.SetPlayerPosition(new Vector2(375,305));
             }
         }
