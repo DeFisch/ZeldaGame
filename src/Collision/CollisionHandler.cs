@@ -82,6 +82,6 @@ public class CollisionHandler {
         game.map.PlayerDoorCollision(new Vector2(game.windowSize.X, game.windowSize.Y), game.Link);
         game.NPCFactory.PlayerNPCCollision(game.Link);
         enemyCollisionHandler.Update();
-        game.pushableBlock.Update();
+        game.blockSpriteFactory.Update();
     }
 }
