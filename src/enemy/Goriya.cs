@@ -140,7 +140,12 @@ public class Goriya : IEnemy {
 		this.health -= damage;
     }
 
-	public Rectangle GetRectangle(){
+    public int GetHealth()
+    {
+        return health;
+    }
+
+    public Rectangle GetRectangle(){
 		return new Rectangle((int)position.X, (int)position.Y, (int)(character_sprites[0, 2] * scale.X), (int)(character_sprites[0, 3] * scale.Y));
 	}
 

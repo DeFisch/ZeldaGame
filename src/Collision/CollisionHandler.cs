@@ -17,7 +17,7 @@ public class CollisionHandler {
         enemyCollisionHandler = new EnemyCollisionHandler(game);
     }
 
-    public void UpdatePlayerCollision()
+    public void PlayerMapCollision()
     {
         foreach (Rectangle box in game.map.getAllObjectRectangles())
         {
@@ -28,7 +28,7 @@ public class CollisionHandler {
         }
     }
 
-    public void UpdateProjectileCollision()
+    public void PlayerProjectileMapCollision()
     {
         Dictionary<IPlayerProjectile, Rectangle> activeProjectiles = game.Link.GetProjectileHitBoxes();
         foreach (Rectangle box in game.map.getAllObjectRectangles())
@@ -40,6 +40,31 @@ public class CollisionHandler {
                     projectile.Collided();
                 }
             }
+        }
+    }
+
+    public void PlayerProjectileEnemyCollision()
+    {
+        Dictionary<IPlayerProjectile, Rectangle> activeProjectiles = game.Link.GetProjectileHitBoxes();
+        List<IEnemy> enemies = game.enemyFactory.GetAllEnemies();
+        List<IEnemy> shotEnemies = new List<IEnemy>();
+
+        foreach (IEnemy enemy in enemies)
+        {
+            foreach (IPlayerProjectile projectile in activeProjectiles.Keys)
+            {
+                if (activeProjectiles[projectile].Intersects(enemy.GetRectangle()))
+                {
+                    projectile.Collided();
+                    enemy.TakeDamage(projectile.ProjectileDamage());
+                    shotEnemies.Add(enemy);
+                }
+            }
+        }
+
+        foreach (IEnemy enemy in shotEnemies)
+        {
+            game.enemyFactory.CheckRemoveEnemy(enemy);
         }
     }
 
@@ -55,8 +80,9 @@ public class CollisionHandler {
     }
 
     public void Update() {
-        UpdateProjectileCollision();
-        UpdatePlayerCollision();
+        PlayerProjectileEnemyCollision();
+        PlayerProjectileMapCollision();
+        PlayerMapCollision();
         EnemyProjectilePlayerCollision();
         game.map.PlayerDoorCollision(new Vector2(game.windowSize.X, game.windowSize.Y), game.Link);
         game.NPCFactory.PlayerNPCCollision(game.Link);

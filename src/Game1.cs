@@ -159,9 +159,6 @@ namespace ZeldaGame {
             keyboardController.RegisterPressKey(Keys.Q, new QuitCommand(this));
             mouseController.RegisterPressButton(MouseButtons.Right, new QuitCommand(this));
 
-            //Registers commands with Keys for taking damage
-            keyboardController.RegisterPressKey(Keys.E, new TakeDamageCommand(this));
-
             //Registers commands with MouseButtons for switching maps
             mouseController.RegisterQuadrant(leftDoorQuadrant, new MoveLeftCommand(map));
             mouseController.RegisterQuadrant(rightDoorQuadrant, new MoveRightCommand(map));

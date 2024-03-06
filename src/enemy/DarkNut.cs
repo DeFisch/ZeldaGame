@@ -106,7 +106,12 @@ public class DarkNut : IEnemy {
         this.health -= damage;
     }
 
-	public Rectangle GetRectangle()
+    public int GetHealth()
+    {
+        return health;
+    }
+
+    public Rectangle GetRectangle()
 	{
 		return new Rectangle((int)position.X, (int)position.Y, (int)(character_sprites[sprite_id, 2] * scale.X), (int)(character_sprites[sprite_id, 3] * scale.Y));
 	}

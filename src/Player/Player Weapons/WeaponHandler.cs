@@ -18,17 +18,13 @@ public class WeaponHandler {
 	}
 
 	public void UseItem(int item, Vector2 location, Direction direction) {
-		//if (activeProjectiles.Count == 0) {
-			IPlayerProjectile weapon = PlayerItemSpriteFactory.Instance.CreateItemSprite(direction, item, location);
-			activeProjectiles.Add(weapon);
-		//}
+		IPlayerProjectile weapon = PlayerItemSpriteFactory.Instance.CreateItemSprite(direction, item, location);
+		activeProjectiles.Add(weapon);
 	}
 
 	public void UseSword(int sword, Vector2 location, Direction direction) {
-		//if (activeProjectiles.Count == 0) {
-			IPlayerProjectile weapon = PlayerItemSpriteFactory.Instance.CreateSwordSprite(direction, sword, location);
-			activeProjectiles.Add(weapon);
-		//}
+		IPlayerProjectile weapon = PlayerItemSpriteFactory.Instance.CreateSwordSprite(direction, sword, location);
+		activeProjectiles.Add(weapon);
 	}
 
 	public void ProjectileExpiration(IPlayerProjectile projectile) {

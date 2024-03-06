@@ -38,7 +38,9 @@ public class BoomerangSprite : IPlayerProjectile {
 
     public Rectangle GetHitBox()
     {
-        return destinationRectangle;
+        Rectangle hitBox = destinationRectangle;
+        hitBox.Inflate(-8, -8);
+        return hitBox;
     }
 
     public int ProjectileDamage()

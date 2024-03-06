@@ -11,8 +11,8 @@ public class BlueArrowVerticalSprite : IPlayerProjectile {
 
     private Vector2 position;
     private Vector2 projectileMovement;
-    private readonly int projectileSpeed = 4;
-    private readonly int damage = 2;
+    private readonly int projectileSpeed = 6;
+    private readonly int damage = 3;
 
     private Rectangle destinationRectangle;
 
@@ -26,7 +26,9 @@ public class BlueArrowVerticalSprite : IPlayerProjectile {
 
     public Rectangle GetHitBox()
     {
-        return destinationRectangle;
+        Rectangle hitBox = destinationRectangle;
+        hitBox.Inflate(-8, -8);
+        return hitBox;
     }
 
     public int ProjectileDamage()

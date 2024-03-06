@@ -59,6 +59,11 @@ public class Aquamentus : IEnemy {
         this.health -= damage;
     }
 
+	public int GetHealth()
+	{
+		return health;
+	}
+
 	public Rectangle GetRectangle()
 	{
 		return new Rectangle((int)position.X, (int)position.Y, (int)(character_sprites[currentFrame, 2] * scale.X), (int)(character_sprites[currentFrame, 3] * scale.Y));

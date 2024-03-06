@@ -69,6 +69,12 @@ public class EnemyFactory {
 		enemies.Add(enemy);
 	}
 
+	public void CheckRemoveEnemy(IEnemy enemy)
+	{
+		if (enemy.GetHealth() <= 0)
+			enemies.Remove(enemy);
+	}
+
 	public void ClearEnemies() {
 		enemies.Clear();
 		enemyProjectileFactory.ClearAllProjectiles();

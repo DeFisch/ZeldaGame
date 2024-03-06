@@ -13,7 +13,7 @@ public class BlueBoomerangSprite : IPlayerProjectile {
     private Vector2 position;
     private Vector2 projectileMovement;
     private readonly double projectileSpeed = 2;
-    private readonly int damage = 2;
+    private readonly int damage = 3;
 
     private int existanceCounter;
     private readonly int existanceDuration = 100;
@@ -38,7 +38,9 @@ public class BlueBoomerangSprite : IPlayerProjectile {
 
     public Rectangle GetHitBox()
     {
-        return destinationRectangle;
+        Rectangle hitBox = destinationRectangle;
+        hitBox.Inflate(-8, -8);
+        return hitBox;
     }
 
     public int ProjectileDamage()

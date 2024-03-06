@@ -14,6 +14,8 @@ public interface IEnemy {
 
 	public void TakeDamage(int damage);
 
+	public int GetHealth();
+
 	public void Collide(Rectangle intersect);
 }
 
