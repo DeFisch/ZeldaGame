@@ -8,6 +8,7 @@ namespace ZeldaGame.Enemy;
 
 public class EnemyFactory {
 	private List<IEnemy> enemies;
+	private List<IEnemy> dead_enemies = new List<IEnemy>();
 	private Texture2D[] textures;
 	private Vector2 scale;
 	public int current_enemy = 0;
@@ -81,6 +82,7 @@ public class EnemyFactory {
 		{
 			if (enemies[i].GetHealth() <= 0)
 			{
+				dead_enemies.Add(enemies[i]);
 				enemies.RemoveAt(i);
 			}
 		}
@@ -95,10 +97,21 @@ public class EnemyFactory {
 			if (enemy != null)
 				enemy.Draw(spriteBatch);
 		}
+		for (int i = dead_enemies.Count - 1; i >= 0; i--)
+		{
+			if (dead_enemies[i].IsFinished())
+				dead_enemies.RemoveAt(i);
+			else
+				dead_enemies[i].Draw(spriteBatch);
+		}
 		enemyProjectileFactory.DrawProjectiles(spriteBatch);
 	}
 	public void Update() {
 		foreach (IEnemy enemy in enemies) {
+			if (enemy != null)
+				enemy.Update();
+		} foreach (IEnemy enemy in dead_enemies)
+		{
 			if (enemy != null)
 				enemy.Update();
 		}

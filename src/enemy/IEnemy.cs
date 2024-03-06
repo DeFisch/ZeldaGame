@@ -17,5 +17,7 @@ public interface IEnemy {
 	public int GetHealth();
 
 	public void Collide(Rectangle intersect);
+
+	public bool IsFinished();
 }
 

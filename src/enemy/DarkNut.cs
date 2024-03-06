@@ -17,6 +17,7 @@ public class DarkNut : IEnemy {
 	private int speed = 2;
     private int sprite_id = 0;
 	private int health = 3;
+	private int dead_timer = 0;
 	public DarkNut(Texture2D texture, Vector2 position, string color, Vector2 scale) {
 		this.texture = texture;
 		this.position = position;
@@ -44,7 +45,9 @@ public class DarkNut : IEnemy {
 	}
 
 	public void Update() {
-
+		if (health <= 0){
+			state = State.Dead;
+		}
         // animate sprite
         if (frameID % 20 == 0 && direction != Direction.Up) {
             sprite_id = sprite_id % 3 == 0 ? sprite_id+1 : sprite_id-1;
@@ -61,6 +64,8 @@ public class DarkNut : IEnemy {
 			Walk();
 		if (state == State.Idle)
 			Idle();
+		if (state == State.Dead)
+			Dead();
 		frameID++;
 	}
 
@@ -99,6 +104,17 @@ public class DarkNut : IEnemy {
 					direction = Direction.Left;
 				break;
 		}
+	}
+
+	private void Dead() {
+		float vel = -7.81f;
+		vel += 0.605f * dead_timer;
+		position.Y += vel;
+		dead_timer++;
+	}
+
+	public bool IsFinished() {
+		return dead_timer > 60;
 	}
 
     public void TakeDamage(int damage)

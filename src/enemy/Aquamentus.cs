@@ -16,6 +16,7 @@ public class Aquamentus : IEnemy {
 	private int speed = 2;
     private int projectile_speed = 4;
 	private int health = 10;
+	private int dead_timer = 0;
     private EnemyProjectileFactory enemyProjectileFactory;
 	public Aquamentus(Texture2D texture, Vector2 position, EnemyProjectileFactory enemyProjectileFactory, Vector2 scale) {
 		this.texture = texture;
@@ -32,12 +33,17 @@ public class Aquamentus : IEnemy {
 	}
 
 	public void Update() {
+		if (health <= 0){
+			state = State.Dead;
+		}
         if (frameID % 17 == 0)
             currentFrame = (currentFrame + 1) % 4;
         if (frameID % 37 == 0)
             Attack();
 		if (state == State.Walking)
 			Walk();
+		if (state == State.Dead)
+			Dead();
 		frameID++;
 	}
     private void Attack() {
@@ -52,6 +58,17 @@ public class Aquamentus : IEnemy {
             position.X += speed;
         else
             position.X -= speed;
+	}
+
+	private void Dead() {
+		float vel = -7.81f;
+		vel += 0.605f * dead_timer;
+		position.Y += vel;
+		dead_timer++;
+	}
+
+	public bool IsFinished() {
+		return dead_timer > 60;
 	}
 
     public void TakeDamage(int damage)

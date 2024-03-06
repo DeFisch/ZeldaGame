@@ -20,7 +20,7 @@ public class WizzRobe : IEnemy {
     private int sprite_id = 0;
 	private int rand_seed;
 	private int health = 3;
-
+	private int dead_timer = 0;
 	private EnemyProjectileFactory enemyProjectileFactory;
 	public WizzRobe(Texture2D texture, Vector2 position, EnemyProjectileFactory enemyProjectileFactory, string color, Vector2 scale) {
 		rand_seed = new Random().Next();
@@ -48,7 +48,6 @@ public class WizzRobe : IEnemy {
 	}
 
 	public void Update() {
-
 		if ((frameID + rand_seed) / 60 % 3 == 0) {
 			state = State.Walking;
 		} else if ((frameID + rand_seed) / 60 % 3 == 1) {
@@ -57,6 +56,9 @@ public class WizzRobe : IEnemy {
 			state = State.Attacking;
 		}
 
+		if (health <= 0){
+			state = State.Dead;
+		}
         // animate sprite
         if (frameID % 20 == 0) {
             sprite_id = sprite_id % 2 == 0 ? sprite_id+1 : sprite_id-1;
@@ -73,7 +75,20 @@ public class WizzRobe : IEnemy {
 			Idle();
 		if (state == State.Attacking)
 			Attack();
+		if (state == State.Dead)
+			Dead();
 		frameID++;
+	}
+
+	private void Dead() {
+		float vel = -7.81f;
+		vel += 0.605f * dead_timer;
+		position.Y += vel;
+		dead_timer++;
+	}
+
+	public bool IsFinished() {
+		return dead_timer > 60;
 	}
 
 	private void Attack() {

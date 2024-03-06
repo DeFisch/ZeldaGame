@@ -16,6 +16,7 @@ public class Keese : IEnemy {
 	private double speedY = 0;
 	private int health = 1;
 	private double general_speed = 4;
+	private int dead_timer = 0;
 	public Keese(Texture2D texture, Vector2 position, string color, Vector2 scale) {
 		this.texture = texture;
 		this.position = position;
@@ -37,12 +38,27 @@ public class Keese : IEnemy {
 	}
 
 	public void Update() {
-
+		if (health <= 0) {
+			state = State.Dead;
+		}
 		if (state == State.Walking)
 			Walk();
 		if (state == State.Idle)
 			Idle();
+		if (state == State.Dead)
+			Dead();
 		frameID++;
+	}
+
+	private void Dead() {
+		float vel = -7.81f;
+		vel += 0.605f * dead_timer;
+		position.Y += vel;
+		dead_timer++;
+	}
+
+	public bool IsFinished() {
+		return dead_timer > 60;
 	}
 
 	private void Idle() {

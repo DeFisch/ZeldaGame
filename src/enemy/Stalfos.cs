@@ -16,6 +16,7 @@ public class Stalfos : IEnemy {
 	private static int[] character_sprites = new int[] { 1, 59, 16, 16 }; // x, y, width, height
 	private int speed = 2;
 	private int health = 3;
+	private int dead_timer = 0;
 	public Stalfos(Texture2D texture, Vector2 position, Vector2 scale) {
 		this.texture = texture;
 		this.position = position;
@@ -36,12 +37,27 @@ public class Stalfos : IEnemy {
 	}
 
 	public void Update() {
-
+		if (health <= 0){
+			state = State.Dead;
+		}
 		if (state == State.Walking)
 			Walk();
 		if (state == State.Idle)
 			Idle();
+		if (state == State.Dead)
+			Dead();
 		frameID++;
+	}
+
+	private void Dead() {
+		float vel = -7.81f;
+		vel += 0.605f * dead_timer;
+		position.Y += vel;
+		dead_timer++;
+	}
+
+	public bool IsFinished() {
+		return dead_timer > 60;
 	}
 
 	private void Idle() {
