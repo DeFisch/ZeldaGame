@@ -61,11 +61,6 @@ public class CollisionHandler {
                 }
             }
         }
-
-        foreach (IEnemy enemy in shotEnemies)
-        {
-            game.enemyFactory.CheckRemoveEnemy(enemy);
-        }
     }
 
     public void EnemyProjectilePlayerCollision()

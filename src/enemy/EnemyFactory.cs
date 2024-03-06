@@ -20,6 +20,7 @@ public class EnemyFactory {
 		this.scale = scale;
 	}
 
+	// create new enemy based on enemy name
 	public void AddEnemy(string enemy_name, string[,] map, Vector2 window_size) {
 		IEnemy enemy = null;
 		List<Vector2> available_locations = new List<Vector2>();
@@ -69,14 +70,24 @@ public class EnemyFactory {
 		enemies.Add(enemy);
 	}
 
-	public void CheckRemoveEnemy(IEnemy enemy)
+	// overloaded method to add pre-defined enemies
+	public void AddEnemy(IEnemy enemy) {
+		enemies.Add(enemy);
+	}
+
+	public void RemoveDeadEnemies()
 	{
-		if (enemy.GetHealth() <= 0)
-			enemies.Remove(enemy);
+		for (int i = enemies.Count - 1; i >= 0; i--)
+		{
+			if (enemies[i].GetHealth() <= 0)
+			{
+				enemies.RemoveAt(i);
+			}
+		}
 	}
 
 	public void ClearEnemies() {
-		enemies.Clear();
+		enemies = new List<IEnemy>();
 		enemyProjectileFactory.ClearAllProjectiles();
 	}
 	public void Draw(SpriteBatch spriteBatch) {
@@ -92,6 +103,7 @@ public class EnemyFactory {
 				enemy.Update();
 		}
 		enemyProjectileFactory.UpdateProjectiles();
+		RemoveDeadEnemies();
 	}
 
 	public void Reset()

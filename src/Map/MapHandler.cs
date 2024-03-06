@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using ZeldaGame.Player;
+using ZeldaGame.Enemy;
 
 namespace ZeldaGame.Map;
 
@@ -20,6 +21,7 @@ public class MapHandler {
     public int x = 2, y = 5; // default map //Olivia modified this 
     private MapStaticRectangles mapRectangles;
     private Game1 game;
+    private (bool, List<IEnemy>)[,] enemy_record = new (bool, List<IEnemy>)[7,12];
 
     public MapHandler(Texture2D map_texture, Game1 game) {
         mapLoader = new MapLoader();
@@ -30,6 +32,12 @@ public class MapHandler {
         map = mapLoader.get_map_info(); // get default map info
         mapRectangles = new MapStaticRectangles(this);
         mapRectangles.SetLists(window_size);
+        // initialize enemy record
+		for (int i = 0; i < 7; i++) {
+			for (int j = 0; j < 12; j++) {
+				enemy_record[i, j] = (false, null);
+			}
+		}
     }
     public Vector2 GetWindowScale(Vector2 windowSize) {
 		return new Vector2(windowSize.X / map_size.X, windowSize.Y / map_size.Y);
@@ -73,9 +81,17 @@ public class MapHandler {
 
     private bool switch_map(int y, int x) {
         if (mapLoader.load_map(x, y)) {
+            // save the enemies in the current room
+            enemy_record[this.y, this.x] = (true, game.enemyFactory.GetAllEnemies());
             game.enemyFactory.ClearEnemies();
-            foreach (string enemy in mapLoader.get_enemies()) {
-                game.enemyFactory.AddEnemy(enemy, map, game.windowSize);
+            if (!enemy_record[y, x].Item1) { // if player haven't been to this room
+                foreach (string enemy in mapLoader.get_enemies()) {
+                    game.enemyFactory.AddEnemy(enemy, map, game.windowSize);
+                }
+            } else {
+                foreach (IEnemy enemy in enemy_record[y, x].Item2) {
+                    game.enemyFactory.AddEnemy(enemy);
+                }
             }
             this.x = x;
             this.y = y;
