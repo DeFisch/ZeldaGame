@@ -19,7 +19,6 @@ namespace ZeldaGame.Items {
 		Vector2 scale;
 		private int cycler = 0;
 		private int index = 0;
-		BlueRuby blueRuby;
 		private int[]collCheck;
 		private int switchCheck = 0;
         private string [,] map;
@@ -27,6 +26,7 @@ namespace ZeldaGame.Items {
         private string item_char;
 		private int initx;
 		private int inity;
+		List<IItemSprite>[,] arrayOfLists;
 
         public ItemSpriteFactory(Texture2D texture, Texture2D texture2, Vector2 scale, IPlayer player, MapHandler mapHandler) {
 			objectList = new List<IItemSprite>();
@@ -36,73 +36,72 @@ namespace ZeldaGame.Items {
 			pos = new Vector2(300, 150);
 			this.scale = scale;
 			this.mapHandler = mapHandler;
-			blueRuby = new BlueRuby(this.texture, pos);
-		}
+            arrayOfLists = new List<IItemSprite>[7, 6];
+
+            for (int l = 0; l < 7; l++)
+            {
+                for (int m = 0; m < 6; m++)
+                {
+                    arrayOfLists[l, m] = new List<IItemSprite>();
+                }
+            }
+        }
 
 		public void GetMapItems()
 		{
 			map = mapHandler.get_map_info();
 			initx = mapHandler.x;
 			inity = mapHandler.y;
+			if (arrayOfLists[initx, inity].Count() != 0)
+			{
+				objectList = arrayOfLists[initx, inity];
 
-			//string item_char;
-            for (int i = 0; i < map.GetLength(0); i++) //Rows
-            {
-                for (int j = 0; j < map.GetLength(1); j++) //Columns
-                {
-					item_char = map[i, j];
-					pos = new Vector2(j, i);
-					switch (item_char)
+			}
+			else
+			{
+				//string item_char;
+				for (int i = 0; i < map.GetLength(0); i++) //Rows
+				{
+					for (int j = 0; j < map.GetLength(1); j++) //Columns
 					{
-						case "br":
-                            objectList.Add(new BlueRuby(this.texture, pos));
-							break;
-						case "yr":
-							objectList.Add(new YellowRuby(this.texture, pos));
-							break;
-						case "k":
-							objectList.Add(new Key(this.texture, pos));
-							break;
-						case "cl":
-                            objectList.Add(new Clock(this.texture, pos));
-                            break;
-						case "co":
-							objectList.Add(new Compass(this.texture, pos));
-                            break;
-						case "h":
-							objectList.Add(new Heart(this.texture, pos));
-                            break;
-                        case "hc":
-                            objectList.Add(new HeartContainer(this.texture, pos));
-                            break;
-                        case "tr":
-                            objectList.Add(new Triforce(this.texture, pos));
-                            break;
-                        default:
-							break;
+						item_char = map[i, j];
+						pos = new Vector2(j, i);
+						switch (item_char)
+						{
+							case "br":
+								objectList.Add(new BlueRuby(this.texture, pos));
+								break;
+							case "yr":
+								objectList.Add(new YellowRuby(this.texture, pos));
+								break;
+							case "k":
+								objectList.Add(new Key(this.texture, pos));
+								break;
+							case "cl":
+								objectList.Add(new Clock(this.texture, pos));
+								break;
+							case "co":
+								objectList.Add(new Compass(this.texture, pos));
+								break;
+							case "h":
+								objectList.Add(new Heart(this.texture, pos));
+								break;
+							case "hc":
+								objectList.Add(new HeartContainer(this.texture, pos));
+								break;
+							case "tr":
+								objectList.Add(new Triforce(this.texture, pos));
+								break;
+							default:
+								break;
+						}
 					}
-                }
+				}
+				arrayOfLists[initx, inity] = objectList;
             }
 			collCheck = new int[objectList.Count];
 			switchCheck = 0;
         }
-		public void ObjectList() {
-			//objectList.Add(new BlueRuby(this.texture, pos));
-			/*objectList.Add(blueRuby);
-			objectList.Add(new YellowRuby(this.texture, pos));
-			objectList.Add(new Heart(this.texture, pos));
-			objectList.Add(new Triforce(this.texture, pos));
-			objectList.Add(new HeartContainer(this.texture, pos));
-			objectList.Add(new Compass(this.texture, pos));
-			objectList.Add(new Map(this.texture, pos));
-			objectList.Add(new Key(this.texture, pos));
-			objectList.Add(new Clock(this.texture, pos));
-			objectList.Add(new Boomerang(this.texture, pos));
-			objectList.Add(new Bow(this.texture, pos));
-			objectList.Add(new Bomb(this.texture, pos));
-			objectList.Add(new FairyItem(this.texture, pos));
-			objectList.Add(new FireItem(this.texture2, pos));*/
-		}
 
 		public void Cycle(int lastOrNext) {
 			if (lastOrNext == 0) //Cycling backwards
@@ -121,15 +120,18 @@ namespace ZeldaGame.Items {
 			}
 		}
 		public void Draw(SpriteBatch spriteBatch) {
+			int count = objectList.Count;
 			if (switchCheck == 0)
 			{
-				for (int k = 0; k < objectList.Count; k++)
+				for (int k = 0; k < count; k++)
 				{
 					Rectangle itemdest = objectList[k].GetHitBox();
 					Rectangle playrect = player.GetPlayerHitBox();
 					if (itemdest.Intersects(playrect) || collCheck[k] == 1)
 					{
 						collCheck[k] = 1;
+						objectList.RemoveAt(k);
+						objectList.Insert(k, new BlankItem(this.texture, this.pos));
 					}
 					else
 					{
@@ -148,18 +150,18 @@ namespace ZeldaGame.Items {
 
 		public bool IsMapChanged()
 		{
-			//if (rowLength != map.GetLength(0) || colLength != map.GetLength(1))
-			//if (Enumerable.SequenceEqual<string[,]>(map, mapHandler.get_map_info()))
 			if (mapHandler.x != initx || mapHandler.y != inity)
 			{
 				switchCheck = 1;
+				arrayOfLists[initx, inity] = new List<IItemSprite>(objectList);
 				objectList.Clear();
 				GetMapItems();
 				return true;
             }
 			else
 			{
-				return false;
+                arrayOfLists[initx, inity] = objectList;
+                return false;
             }
 		}
 	}
