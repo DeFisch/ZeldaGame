@@ -39,7 +39,8 @@ public class PlayerItemSpriteFactory {
 	public IPlayerProjectile CreateSwordSprite(Direction direction, int sword, Vector2 position) {
 		swords = new List<IPlayerProjectile>
 		{
-			CreateWoodSwordSprite(direction, position) , CreateWhiteSwordSprite(direction, position), CreateMagicSwordSprite(direction, position)
+			CreateWoodSwordSprite(direction, position) , CreateWhiteSwordSprite(direction, position), 
+			CreateMagicSwordSprite(direction, position)
 		};
 
 		return swords[sword];

@@ -10,7 +10,7 @@ namespace ZeldaGame.Player {
 	public class Player1 : IPlayer
 	{
 		private PlayerStateMachine stateMachine;
-		private WeaponHandler weaponHandler;
+		private readonly WeaponHandler weaponHandler;
 		private IPlayerSprite sprite;
 		private Vector2 position;
 		private Vector2 movement;
@@ -18,7 +18,7 @@ namespace ZeldaGame.Player {
 		private Vector2 resetPosition;
 		private bool isMoving;
 
-		private int speed;
+		private readonly int speed = 1;
 		private Direction direction;
 		private Swords currSword;
 		private int animTimer;
@@ -35,7 +35,6 @@ namespace ZeldaGame.Player {
 			resetPosition = position;
 			movement = new Vector2(0, 0);
 			this.scale = scale;
-			speed = 1;
 			animTimer = -1;
 
 			isMoving = false;
@@ -53,14 +52,6 @@ namespace ZeldaGame.Player {
 			return hitbox;
         }
 
-		public IPlayerSprite GetSprite() {
-			return sprite;
-		}
-
-		public void SetSprite(IPlayerSprite sprite) {
-			this.sprite = sprite;
-		}
-
         public void SetPlayerPosition(Vector2 position, bool offset = true)
         {
             Rectangle sprite_hitbox = sprite.GetHitBox();
@@ -68,9 +59,6 @@ namespace ZeldaGame.Player {
             if(offset) this.position = position - sprite_size / 2;
         }
 
-        public Swords GetSword() {
-			return currSword;
-		}
 		public void SetSword(Swords sword) {
 			currSword = sword;
 		}
@@ -99,7 +87,6 @@ namespace ZeldaGame.Player {
 				else
 					position.X -= collisionOverlap.Width;
 			}
-			
 		}
 
 		public void Walk()
@@ -144,7 +131,6 @@ namespace ZeldaGame.Player {
             if (isMoving)
 			{
 				position += movement;
-				//animTimer = 0;
 				isMoving = false; // Set to false, will make Link idle if Walk() does not get called again
 			} else
 			{

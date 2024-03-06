@@ -7,8 +7,8 @@ using static ZeldaGame.Player.PlayerStateMachine;
 namespace ZeldaGame.Player;
 public class WeaponHandler {
 	public enum Swords {Wood, White, Magic, None};
-	private List<IPlayerProjectile> activeProjectiles;
-	private List<IPlayerProjectile> expiredProjectiles;
+	private readonly List<IPlayerProjectile> activeProjectiles;
+	private readonly List<IPlayerProjectile> expiredProjectiles;
 
 	public Swords currSword;
 	public WeaponHandler() {

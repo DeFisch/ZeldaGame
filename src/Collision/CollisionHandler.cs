@@ -10,8 +10,8 @@ using System.Collections.Generic;
 namespace ZeldaGame;
 
 public class CollisionHandler {
-    private Game1 game;
-    EnemyCollisionHandler enemyCollisionHandler;
+    private readonly Game1 game;
+    private readonly EnemyCollisionHandler enemyCollisionHandler;
     public CollisionHandler(Game1 game) {
         this.game = game;
         enemyCollisionHandler = new EnemyCollisionHandler(game);
@@ -47,7 +47,7 @@ public class CollisionHandler {
     {
         Dictionary<IPlayerProjectile, Rectangle> activeProjectiles = game.Link.GetProjectileHitBoxes();
         List<IEnemy> enemies = game.enemyFactory.GetAllEnemies();
-        List<IEnemy> shotEnemies = new List<IEnemy>();
+        List<IEnemy> shotEnemies = new();
 
         foreach (IEnemy enemy in enemies)
         {
