@@ -151,13 +151,6 @@ namespace ZeldaGame.Items {
 			}
         }
 
-		public void Reset()
-		{
-            pos = new Vector2(300, 150);
-            cycler = 0;
-            index = 0;
-        }
-
 		public bool IsMapChanged()
 		{
 			if (mapHandler.x != initx || mapHandler.y != inity)
@@ -174,5 +167,18 @@ namespace ZeldaGame.Items {
                 return false;
             }
 		}
-	}
+
+        public void Reset()
+        {
+            pos = new Vector2(300, 150);
+            cycler = 0;
+            index = 0;
+            for (int l = 0; l < 7; l++)
+                for (int m = 0; m < 6; m++)
+                    arrayOfLists[l, m] = new List<IItemSprite>();
+            objectList.Clear();
+            collCheck = new List<int>(objectList.Count);
+            GetMapItems();
+        }
+    }
 }

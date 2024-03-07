@@ -15,12 +15,12 @@ namespace ZeldaGame
 
         public void Execute()
         {
-            MyGame.blockSpriteFactory.Reset();
-            MyGame.itemFactory.Reset();
-            MyGame.NPCFactory.Reset();
-            MyGame.Link.Reset();
-            MyGame.enemyFactory.Reset();
             MyGame.map.Reset();
+            MyGame.Link.Reset();
+            MyGame.NPCFactory.Reset();
+            MyGame.itemFactory.Reset();
+            MyGame.enemyFactory.Reset();
+            MyGame.blockSpriteFactory.Reset();
         }
     }
 }

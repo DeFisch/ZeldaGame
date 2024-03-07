@@ -135,11 +135,6 @@ public class EnemyFactory {
 		RemoveDeadEnemies();
 	}
 
-	public void Reset()
-	{
-		ClearEnemies();
-    }
-
 	public List<IEnemy> GetAllEnemies() {
 		return enemies;
 	}
@@ -147,4 +142,9 @@ public class EnemyFactory {
 	public List<IEnemyProjectile> GetAllProjectiles() {
 		return enemyProjectileFactory.GetProjectiles();
 	}
+
+    public void Reset()
+    {
+        ClearEnemies();
+    }
 }

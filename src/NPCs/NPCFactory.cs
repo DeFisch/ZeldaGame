@@ -112,12 +112,6 @@ public class NPCFactory
             npcList[i].Update();
         }
     }
-
-	public void Reset()
-	{
-		cycleIndex = 0;
-		listLength = 0;
-	}
 	public bool isInDungeon()
 	{
         Vector2 currentMapXY = mapHandler.getMapXY();
@@ -149,5 +143,10 @@ public class NPCFactory
 					isCollision = true;
 				}
 			}
+    }
+    public void Reset()
+    {
+        cycleIndex = 0;
+        listLength = 0;
     }
 }

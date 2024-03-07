@@ -148,15 +148,6 @@ namespace ZeldaGame.Player {
 			sprite.Draw(spriteBatch, position, color, scale);
 		}
 
-        public void Reset()
-        {
-            sprite = PlayerSpriteFactory.Instance.CreateWalkSprite(Direction.Down);
-            stateMachine = new PlayerStateMachine(sprite);
-            position = resetPosition;
-            movement = new Vector2(0, 0);
-            animTimer = -1;
-        }
-
         private void UpdateMovementVector()
 		{
             switch (direction)
@@ -169,5 +160,14 @@ namespace ZeldaGame.Player {
             }
 			movement *= scale;
         }
-	}
+
+        public void Reset()
+        {
+            sprite = PlayerSpriteFactory.Instance.CreateWalkSprite(Direction.Down);
+            stateMachine = new PlayerStateMachine(sprite);
+            position = resetPosition;
+            movement = new Vector2(0, 0);
+            animTimer = -1;
+        }
+    }
 }

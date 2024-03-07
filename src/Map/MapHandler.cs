@@ -74,7 +74,6 @@ public class MapHandler {
         return false;
     }
 
-
     public bool isRoomAvailable(string direction){
         return mapLoader.isRoomAvailable(direction);
     }
@@ -113,9 +112,7 @@ public class MapHandler {
         List<Rectangle> dlist = mapRectangles.getDestinationRectangleList();
         if (debug){
             for (int i = 0; i < dlist.Count; i++)
-            {
                 spriteBatch.Draw(map_texture, dlist[i], sList[i], Color.Green);
-            }
         }
     }
     public List<Rectangle> getAllObjectRectangles(){
@@ -129,12 +126,6 @@ public class MapHandler {
     public bool Debug {
         get { return debug; }
         set { debug = value; }
-    }
-
-    public void Reset()
-    {
-        x = 2;
-        y = 5;
     }
 
     public void PlayerDoorCollision(Vector2 window_size, IPlayer player){
@@ -183,5 +174,16 @@ public class MapHandler {
                 player.SetPlayerPosition(new Vector2(375,305));
             }
         }
+    }
+    public void Reset()
+    {
+        x = 2;
+        y = 5;
+        for (int i = 0; i < 7; i++)
+            for (int j = 0; j < 12; j++)
+                enemy_record[i, j] = (false, null);
+        switch_map(y, x);
+        map = mapLoader.get_map_info();
+        mapRectangles.SetLists(window_size);
     }
 }
