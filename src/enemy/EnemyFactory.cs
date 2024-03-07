@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Enemy;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using ZeldaGame.Items;
 namespace ZeldaGame.Enemy;
 
 
@@ -14,15 +15,19 @@ public class EnemyFactory {
 	public int current_enemy = 0;
 	public string[] enemy_types = new string[] { "Stalfos", "Gibdo", "Keese", "WizzRobe", "DarkNut", "Goriya", "Aquamentus" };
 	public EnemyProjectileFactory enemyProjectileFactory;
-	public EnemyFactory(Texture2D[] textures, Vector2 scale) {
+	ItemSpriteFactory itemSpriteFactory;
+	private Vector2 window_size;
+	public EnemyFactory(Texture2D[] textures, Vector2 scale, Vector2 window_size, ItemSpriteFactory itemSpriteFactory) {
 		enemies = new List<IEnemy>();
+		this.itemSpriteFactory = itemSpriteFactory;
+		this.window_size = window_size;
 		this.textures = textures;
 		enemyProjectileFactory = new EnemyProjectileFactory(textures);
 		this.scale = scale;
 	}
 
 	// create new enemy based on enemy name
-	public void AddEnemy(string enemy_name, string[,] map, Vector2 window_size) {
+	public void AddEnemy(string enemy_name, string[,] map) {
 		IEnemy enemy = null;
 		List<Vector2> available_locations = new List<Vector2>();
 		float width = window_size.X / 16;
@@ -82,6 +87,17 @@ public class EnemyFactory {
 		{
 			if (enemies[i].GetHealth() <= 0)
 			{
+				if (new Random().Next(0, 5) != -1) // 20% chance to drop item
+				{
+					Point position = enemies[i].GetRectangle().Center;
+					//translate pixel coordinate back to map coordinate
+					double tile_width = window_size.X / 16.0;
+					double tile_height = window_size.Y / 11.0;
+					int x = (int)(position.X / tile_width) - 2;
+					int y = (int)(position.Y / tile_height) - 2;
+					string[] available_items = itemSpriteFactory.GetAvailableItems();
+					itemSpriteFactory.AddItem(available_items[new Random().Next(0, available_items.Length)], new Vector2(x, y));
+				}
 				dead_enemies.Add(enemies[i]);
 				enemies.RemoveAt(i);
 			}

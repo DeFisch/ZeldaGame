@@ -19,7 +19,7 @@ namespace ZeldaGame.Items {
 		Vector2 scale;
 		private int cycler = 0;
 		private int index = 0;
-		private int[]collCheck;
+		private List<int> collCheck;
 		private int switchCheck = 0;
         private string [,] map;
 		private MapHandler mapHandler;
@@ -37,6 +37,7 @@ namespace ZeldaGame.Items {
 			this.scale = scale;
 			this.mapHandler = mapHandler;
             arrayOfLists = new List<IItemSprite>[7, 6];
+			collCheck = new List<int>(objectList.Count);
 
             for (int l = 0; l < 7; l++)
             {
@@ -46,6 +47,44 @@ namespace ZeldaGame.Items {
                 }
             }
         }
+
+		public string[] GetAvailableItems()
+		{
+			return new string[] { "br", "yr", "k", "cl", "co", "h", "hc", "tr" };
+		}
+
+		public void AddItem(string item_char, Vector2 pos) {
+			switch (item_char)
+			{
+				case "br":
+					objectList.Add(new BlueRuby(this.texture, pos));
+					break;
+				case "yr":
+					objectList.Add(new YellowRuby(this.texture, pos));
+					break;
+				case "k":
+					objectList.Add(new Key(this.texture, pos));
+					break;
+				case "cl":
+					objectList.Add(new Clock(this.texture, pos));
+					break;
+				case "co":
+					objectList.Add(new Compass(this.texture, pos));
+					break;
+				case "h":
+					objectList.Add(new Heart(this.texture, pos));
+					break;
+				case "hc":
+					objectList.Add(new HeartContainer(this.texture, pos));
+					break;
+				case "tr":
+					objectList.Add(new Triforce(this.texture, pos));
+					break;
+				default:
+					break;
+			}
+			collCheck.Add(0);
+		}
 
 		public void GetMapItems()
 		{
@@ -66,40 +105,11 @@ namespace ZeldaGame.Items {
 					{
 						item_char = map[i, j];
 						pos = new Vector2(j, i);
-						switch (item_char)
-						{
-							case "br":
-								objectList.Add(new BlueRuby(this.texture, pos));
-								break;
-							case "yr":
-								objectList.Add(new YellowRuby(this.texture, pos));
-								break;
-							case "k":
-								objectList.Add(new Key(this.texture, pos));
-								break;
-							case "cl":
-								objectList.Add(new Clock(this.texture, pos));
-								break;
-							case "co":
-								objectList.Add(new Compass(this.texture, pos));
-								break;
-							case "h":
-								objectList.Add(new Heart(this.texture, pos));
-								break;
-							case "hc":
-								objectList.Add(new HeartContainer(this.texture, pos));
-								break;
-							case "tr":
-								objectList.Add(new Triforce(this.texture, pos));
-								break;
-							default:
-								break;
-						}
+						AddItem(item_char, pos);
 					}
 				}
 				arrayOfLists[initx, inity] = objectList;
             }
-			collCheck = new int[objectList.Count];
 			switchCheck = 0;
         }
 
@@ -127,7 +137,7 @@ namespace ZeldaGame.Items {
 				{
 					Rectangle itemdest = objectList[k].GetHitBox();
 					Rectangle playrect = player.GetPlayerHitBox();
-					if (itemdest.Intersects(playrect) || collCheck[k] == 1)
+					if (playrect.Contains(itemdest.Center) || collCheck[k] == 1)
 					{
 						collCheck[k] = 1;
 						objectList.RemoveAt(k);

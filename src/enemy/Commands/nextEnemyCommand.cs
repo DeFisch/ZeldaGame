@@ -15,7 +15,7 @@ namespace ZeldaGame.Enemy.Commands {
 			MyGame.enemyFactory.ClearEnemies();
 			MyGame.enemyFactory.current_enemy = (MyGame.enemyFactory.current_enemy + 1) % enemy_types.Length;
 			for (int i = 0; i < max_enemies; i++) {
-				MyGame.enemyFactory.AddEnemy(enemy_types[MyGame.enemyFactory.current_enemy], MyGame.map.get_map_info(), MyGame.windowSize);
+				MyGame.enemyFactory.AddEnemy(enemy_types[MyGame.enemyFactory.current_enemy], MyGame.map.get_map_info());
 			}
 		}
 	}

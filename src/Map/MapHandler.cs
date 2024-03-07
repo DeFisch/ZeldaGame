@@ -86,7 +86,7 @@ public class MapHandler {
             game.enemyFactory.ClearEnemies();
             if (!enemy_record[y, x].Item1) { // if player haven't been to this room
                 foreach (string enemy in mapLoader.get_enemies()) {
-                    game.enemyFactory.AddEnemy(enemy, map, game.windowSize);
+                    game.enemyFactory.AddEnemy(enemy, map);
                 }
             } else {
                 foreach (IEnemy enemy in enemy_record[y, x].Item2) {

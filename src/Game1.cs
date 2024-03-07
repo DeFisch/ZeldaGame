@@ -89,10 +89,10 @@ namespace ZeldaGame {
 			
 			Texture2D[] enemy_texture = {Content.Load<Texture2D>("enemies"),Content.Load<Texture2D>("enemies_1")};
 			blockSpriteFactory = new BlockSpriteFactory(map_texture, windowScale,windowSize,Link,map);
-			enemyFactory = new EnemyFactory(enemy_texture, windowScale);
-		
             NPCFactory = new NPCFactory(npcs, windowScale, font, map);
 			itemFactory = new ItemSpriteFactory(Items, npcs, windowScale, Link, map);
+			enemyFactory = new EnemyFactory(enemy_texture, windowScale, windowSize, itemFactory);
+		
 
             // Define the quadrants based on the window size
             Rectangle leftDoorQuadrant = new Rectangle(0, (int)(windowSize.Y / 4), (int)(windowSize.X / 4), (int)(windowSize.Y / 2));
