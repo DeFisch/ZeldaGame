@@ -21,6 +21,7 @@ public class MapHandler {
     public int x = 2, y = 5; // default map //Olivia modified this 
     private MapStaticRectangles mapRectangles;
     private Game1 game;
+    private (bool, Dictionary<string, int>)[,] door_record = new (bool, Dictionary<string, int>)[7,12];
     private (bool, List<IEnemy>)[,] enemy_record = new (bool, List<IEnemy>)[7,12];
 
     public MapHandler(Texture2D map_texture, Game1 game) {
@@ -36,6 +37,7 @@ public class MapHandler {
 		for (int i = 0; i < 7; i++) {
 			for (int j = 0; j < 12; j++) {
 				enemy_record[i, j] = (false, null);
+                door_record[i, j] = (false, null);
 			}
 		}
     }
@@ -79,9 +81,11 @@ public class MapHandler {
     }
 
     public bool switch_map(int y, int x) {
+        Dictionary<string, int> door_type_old = mapLoader.door_type;
         if (mapLoader.load_map(x, y)) {
             // save the enemies in the current room
             enemy_record[this.y, this.x] = (true, game.enemyFactory.GetAllEnemies());
+            door_record[this.y, this.x] = (true, door_type_old);
             game.enemyFactory.ClearEnemies();
             if (!enemy_record[y, x].Item1) { // if player haven't been to this room
                 foreach (string enemy in mapLoader.get_enemies()) {
@@ -91,6 +95,9 @@ public class MapHandler {
                 foreach (IEnemy enemy in enemy_record[y, x].Item2) {
                     game.enemyFactory.AddEnemy(enemy);
                 }
+            }
+            if (door_record[y, x].Item1) {
+                mapLoader.door_type = door_record[y, x].Item2;
             }
             this.x = x;
             this.y = y;
@@ -110,10 +117,47 @@ public class MapHandler {
         spriteBatch.Draw(map_texture, mapTargetRectangle, mapSourceRectangle, Color.White);
         List<Rectangle> sList = mapRectangles.getSourceRectangleList();
         List<Rectangle> dlist = mapRectangles.getDestinationRectangleList();
+        foreach(string key in mapLoader.door_type.Keys){
+            if(mapLoader.door_type[key] == 2){
+                DrawWallOnHole(spriteBatch, key, window_size);
+            }
+        }
         if (debug){
             for (int i = 0; i < dlist.Count; i++)
                 spriteBatch.Draw(map_texture, dlist[i], sList[i], Color.Green);
         }
+    }
+
+    public bool BreakWall(string pos){
+        if(mapLoader.door_type[pos] == 2){
+            mapLoader.door_type[pos] = 1;
+            mapRectangles.SetLists(window_size); //refresh the map boundaries
+            return true;
+        }
+        return false;
+    }
+
+    public void DrawWallOnHole(SpriteBatch spriteBatch, string pos, Vector2 window_size){
+        Rectangle srcRect = new Rectangle(1527, 0, 16, 32);
+        Rectangle destRect = new Rectangle(0, 0, 0, 0);
+        switch(pos){
+            case "up":
+                destRect = new Rectangle((int)(window_size.X*0.46875), 0, (int)(window_size.X*0.0625), (int)(window_size.Y*0.18));
+                break;
+            case "down":
+                destRect = new Rectangle((int)(window_size.X*0.46875), (int)(window_size.Y*0.82), (int)(window_size.X*0.0625), (int)(window_size.Y*0.18));
+                break;
+            case "left":
+                destRect = new Rectangle(0, (int)(window_size.Y*0.45), (int)(window_size.X*0.125), (int)(window_size.Y*0.1));
+                break;
+            case "right":
+                destRect = new Rectangle((int)(window_size.X*0.875), (int)(window_size.Y*0.45), (int)(window_size.X*0.125), (int)(window_size.Y*0.1));
+                break;
+        }
+        if (pos == "down")
+            spriteBatch.Draw(map_texture, destRect, srcRect, Color.White, 0, new Vector2(0, 0), SpriteEffects.FlipVertically, 0);
+        else
+            spriteBatch.Draw(map_texture, destRect, srcRect, Color.White);
     }
     public List<Rectangle> getAllObjectRectangles(){
         return mapRectangles.getDestinationRectangleList();

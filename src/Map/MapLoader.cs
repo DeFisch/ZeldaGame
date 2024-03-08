@@ -17,7 +17,7 @@ public class MapLoader {
     private string map_path;
     private string[,] map = new string[7, 12];
     private List<string> enemies = new List<string>();
-    private Dictionary<string, int> door_type = new Dictionary<string, int>(){
+    public Dictionary<string, int> door_type = new Dictionary<string, int>(){
         {"up", 0},
         {"down", 0},
         {"left", 0},
@@ -46,15 +46,26 @@ public class MapLoader {
         }
     }
 
+    public void SetDoorType(Dictionary<string, int> door_type) {
+        this.door_type = door_type;
+    }
     public void reset(){
-        foreach (var key in door_type.Keys)
-            door_type[key] = 0;
+        door_type = new Dictionary<string, int>(){
+            {"up", 0},
+            {"down", 0},
+            {"left", 0},
+            {"right", 0}
+        };
         enemies.Clear();
     }
 
     public bool load_map(int x, int y) {
-        foreach (var key in door_type.Keys)
-            door_type[key] = 0;
+        door_type = new Dictionary<string, int>(){
+            {"up", 0},
+            {"down", 0},
+            {"left", 0},
+            {"right", 0}
+        };
         string file_path = map_path + "map_" + y + "_" + x + ".csv";
         if (File.Exists(file_path)) {
             string[] lines = File.ReadAllLines(file_path);
@@ -99,7 +110,7 @@ public class MapLoader {
     }
 
     public bool isRoomAvailable(string direction) {
-        if(door_type[direction] == 1 || door_type[direction] == 2) {
+        if(door_type[direction] == 1) {
             return true;
         }
         return false;

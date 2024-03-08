@@ -161,12 +161,35 @@ public class CollisionHandler {
         }
     }
 
+    public void BombBreakableWallCollision()
+    {
+        Dictionary<string, Rectangle> door_type = new Dictionary<string, Rectangle>(){
+            {"up", new Rectangle( (int)(game.windowSize.X * 0.46875), (int)(game.windowSize.Y * 0), (int)(game.windowSize.X * 0.0625), (int)(game.windowSize.Y * 0.18))},
+            {"down", new Rectangle( (int)(game.windowSize.X * 0.46875), (int)(game.windowSize.Y * 0.82), (int)(game.windowSize.X * 0.0625), (int)(game.windowSize.Y * 0.18))},
+            {"left", new Rectangle( 0, (int)(game.windowSize.Y * 0.45), (int)(game.windowSize.X * 0.125), (int)(game.windowSize.Y * 0.1))},
+            {"right", new Rectangle( (int)(game.windowSize.X * 0.875), (int)(game.windowSize.Y * 0.45), (int)(game.windowSize.X * 0.125), (int)(game.windowSize.Y * 0.1))}
+        };
+        foreach (IPlayerProjectile projectile in game.Link.GetProjectileHitBoxes().Keys)
+        {
+           if (projectile.GetType() == typeof(BombSprite)){
+                foreach (string key in door_type.Keys)
+                {
+                    if (door_type[key].Intersects(projectile.GetHitBox()))
+                    {
+                        game.map.BreakWall(key);
+                    }
+                }
+           }
+        }
+    }
+
     public void Update() {
         PlayerProjectileEnemyCollision();
         PlayerProjectileMapCollision();
         PlayerMapCollision();
         EnemyProjectilePlayerCollision();
         PlayerDoorCollision(game.windowSize, game.Link, game.map);
+        BombBreakableWallCollision();
         PlayerNPCCollision();
         EnemyObjectCollision();
         PushableBlockCollision();
