@@ -16,7 +16,9 @@ namespace ZeldaGame.Player.Commands {
 		}
 
 		public void Execute() {
-			myGame.Link = new HurtPlayer(myGame.Link, myGame);
+			if (!myGame.Link.isHurting()) {
+				myGame.Link = new HurtPlayer(myGame.Link, myGame);
+			}
 		}
 	}
 }

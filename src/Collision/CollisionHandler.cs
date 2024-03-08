@@ -67,7 +67,7 @@ public class CollisionHandler {
     {
         foreach (IEnemyProjectile projectile in game.enemyFactory.GetAllProjectiles())
         {
-            if (projectile.GetRectangle().Intersects(game.Link.GetPlayerHitBox()))
+            if (projectile.GetRectangle().Intersects(game.Link.GetPlayerHitBox()) && !game.Link.isHurting())
             {
                 game.Link = new HurtPlayer(game.Link, game);
             }

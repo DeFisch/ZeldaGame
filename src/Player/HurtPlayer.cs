@@ -36,6 +36,10 @@ namespace ZeldaGame.Player {
 			decoratedPlayer.SetDirection(direction);
 		}
 
+		public bool isHurting() {
+			return true;
+		}
+
 		public void Update() {
 			timer--;
 			if (timer == 0) {
@@ -64,12 +68,12 @@ namespace ZeldaGame.Player {
 
         public Rectangle GetPlayerHitBox()
         {
-			return new Rectangle(0, 0, 0, 0);
+			return decoratedPlayer.GetPlayerHitBox();
         }
 
         public Dictionary<IPlayerProjectile, Rectangle> GetProjectileHitBoxes()
         {
-            return new Dictionary<IPlayerProjectile, Rectangle>();
+            return decoratedPlayer.GetProjectileHitBoxes();
         }
     }
 }

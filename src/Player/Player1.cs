@@ -142,6 +142,11 @@ namespace ZeldaGame.Player {
             sprite.Update();
 		}
 
+		public bool isHurting()
+		{
+			return false;
+		}
+
 		public void Draw(SpriteBatch spriteBatch, Color color)
 		{
 			weaponHandler.Draw(spriteBatch, scale);

@@ -18,5 +18,6 @@ namespace ZeldaGame.Player {
 		public void SetPlayerPosition(Vector2 position, bool offset = true);
 		public Rectangle GetPlayerHitBox();
 		public Dictionary<IPlayerProjectile, Rectangle> GetProjectileHitBoxes();
+		public bool isHurting();
 	}
 }
