@@ -141,6 +141,7 @@ namespace ZeldaGame.Items {
 					{
 						collCheck[k] = 1;
 						objectList.RemoveAt(k);
+						collCheck.RemoveAt(k);
 						objectList.Insert(k, new BlankItem(this.texture, this.pos));
 					}
 					else
