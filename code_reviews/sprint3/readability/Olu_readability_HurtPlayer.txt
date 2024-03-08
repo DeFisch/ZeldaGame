@@ -1,0 +1,7 @@
+Author: Olivia Maynard
+Date: March 8, 2024
+Reviewing: HurtPlayer.cs
+Author of reviewed file: Olu Fasoro
+
+Comments: Methods are all very short and concise, and use the Decorator pattern well. This makes the file very easy to read and methods are easy to understand.
+All conventions and variable names are concise and along the same pattern as well. Overall great readability!

@@ -17,7 +17,6 @@ namespace ZeldaGame
         {
             MyGame.map.Reset();
             MyGame.Link.Reset();
-            MyGame.NPCFactory.Reset();
             MyGame.itemFactory.Reset();
             MyGame.enemyFactory.Reset();
             MyGame.blockSpriteFactory.Reset();

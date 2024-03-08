@@ -13,8 +13,6 @@ namespace ZeldaGame.Block {
 		private Vector2 position;
 		private Vector2 scale;
 		private Vector2 window_size;
-		private int cycleIndex;
-		private int listLength;
 		private Vector2 resetPosition;
 		private PushableBlock pushableBlock1;
 		private PushableBlock pushableBlock2;
@@ -30,8 +28,6 @@ namespace ZeldaGame.Block {
 			this.lockedDoor = new LockedDoor(pushableBlock2,map,player, new Vector2(window_size.X/16,window_size.Y/11*5));
 			this.window_size = window_size;
 			position = new Vector2(200, 150);
-			cycleIndex = 0;
-			listLength = 0;
 			resetPosition = position;
 		}
 
@@ -45,16 +41,6 @@ namespace ZeldaGame.Block {
             blockList.Add(new Sand(texture, position));
 			pushableBlockList.Add(pushableBlock1);
 			pushableBlockList.Add(pushableBlock2);
-		}
-
-        public void cycleList(int cycleDirection) {
-			listLength = blockList.Count;
-			if (cycleDirection == 1 ) {
-				cycleIndex = (cycleIndex + 1) % listLength;
-			}
-			else if (cycleDirection == 0) {
-				cycleIndex = (cycleIndex - 1 + listLength) % listLength;
-			}
 		}
 
 		public List<PushableBlock> GetPushableBlocksList() => pushableBlockList;
@@ -76,8 +62,6 @@ namespace ZeldaGame.Block {
 		public void Reset()
 		{
 			position = resetPosition;
-			cycleIndex = 0;
-			listLength = 0;
 			pushableBlock1.Reset();
 			pushableBlock2.Reset();
 		}

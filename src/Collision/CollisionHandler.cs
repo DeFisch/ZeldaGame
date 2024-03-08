@@ -6,12 +6,15 @@ using ZeldaGame.Map;
 using ZeldaGame.Player;
 using ZeldaGame.Enemy;
 using System.Collections.Generic;
+using ZeldaGame.Items;
+using ZeldaGame.NPCs;
 
 namespace ZeldaGame;
 
 public class CollisionHandler {
     private readonly Game1 game;
     private readonly EnemyCollisionHandler enemyCollisionHandler;
+    private readonly ItemSpriteFactory itemCollisionHandler;
     public CollisionHandler(Game1 game) {
         this.game = game;
         enemyCollisionHandler = new EnemyCollisionHandler(game);
@@ -145,13 +148,32 @@ public class CollisionHandler {
         }
     }
 
+    public void PlayerItemCollision()
+    {
+        itemCollisionHandler.ItemCollisionHandler();
+
+    }
+
+    private void PlayerNPCCollision()
+    {
+        List<INPC> npcList = game.NPCFactory.GetNPCList();
+        Rectangle playerHitBox = game.Link.GetPlayerHitBox();
+        for (int i = 0; i < npcList.Count; i++)
+        {
+            if (npcList[i].GetNPCHitBox().Intersects(playerHitBox))
+            {
+                game.Link.Colliding(npcList[i].GetNPCHitBox());
+            }
+        }
+    }
+
     public void Update() {
         PlayerProjectileEnemyCollision();
         PlayerProjectileMapCollision();
         PlayerMapCollision();
         EnemyProjectilePlayerCollision();
         PlayerDoorCollision(game.windowSize, game.Link, game.map);
-        // game.NPCFactory.PlayerNPCCollision(game.Link);
+        PlayerNPCCollision();
         EnemyObjectCollision();
         PushableBlockCollision();
     }
