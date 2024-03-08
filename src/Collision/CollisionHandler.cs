@@ -147,11 +147,6 @@ public class CollisionHandler {
         }
     }
 
-    public void PlayerItemCollision()
-    {
-        itemCollisionHandler.ItemCollisionHandler();
-
-    }
 
     public void Update() {
         PlayerProjectileEnemyCollision();
