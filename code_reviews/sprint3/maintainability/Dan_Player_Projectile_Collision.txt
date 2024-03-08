@@ -1,0 +1,11 @@
+Author: Daniel Feng
+Date: Mar 8th, 2024
+Sprint: 3
+.cs files reviewed: All .cs files under src/Player/Player Weapons and part of CollisionHandler.cs
+Author of the .cs files: Dan Perry
+Number of Minutes to complete the review: 20
+Specific Comments:
+In terms of maintainability, 2 suggested changes is recommended: 
+One being the design of the function CreateItemSprite() in the PlayerItemSpriteFactory, where an integer is passed into the function to denote the type of projectile being created. This will be unintuitive to the people that uses this function, as they have to dig into the code to check what type of projectile each number represents, also it may causes bug when the other people unintentionally passed in an invalid number that doesn't correspond to any projectile type. Thus, changing it to an enum type would avoid these potential problems altogether.
+Another problem would be the missing functionality of health reduction upon the player is being hit, as currently there's no variable in the Player class recording the health, which would mean more refactoring in the future.
+

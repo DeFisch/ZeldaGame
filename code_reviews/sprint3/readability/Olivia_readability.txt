@@ -1,0 +1,7 @@
+Author: Dan Perry
+Date: March 8, 2024
+Sprint number: 3
+Name of the .cs file being reviewed: ItemSpriteFactory.cs
+Author of the .cs files being reviewed: Olivia Maynard
+Number of minutes taken for the review: 15 mins
+Comments: A big strength in your code is the length of your classes. All the item sprite classes were short and simple. The ItemSpriteFactory class is also short in length for how much functionality it seems to be doing. My only critique for it is that in certain methods, it seems overly complicated and I'm not sure what's going on in it. For example, the draw method I think should encapsulate some of the collision detection, because it seems to do more than what the method name is implying. Having a private method possibly or even handling it in the Collision Handler would make it much more clear what that method is doing. Functionality is great, but encapsulating the complicated and ugly (but necessary) code would benefit the readibility immensely. Other than those couple cases where that happens, it is excellent code and easy to follow.
