@@ -1,0 +1,7 @@
+Author: Dan Perry
+Date: March 8, 2024
+Sprint number: 3
+Name of the .cs file being reviewed: Map classes, collision methods
+Author of the .cs files being reviewed: Daniel Feng
+Number of minutes taken for the review: 15 mins
+Comments: Starting with your collision implementation, I think the agreed upon refactoring for returning hitboxes was smart and worked extremely well. Not to mention your implementation for the player colliding. I struggled on some aspects and you found smart and efficient solutions for making the game more playable. The methods were short, and easy to use when needed for collision. My only thought would be to comment on the player colliding, because it is not easy to go back to and quickly understand like the rest of the refactoring. I believe the same goes for the map classes, where they were smart solutions, but I find it difficult to go back and understand what some of those big blocks are doing. Although I do think it is a necessary evil in the case of loading the maps, it might be something to look out for so someone else could come back and understand what is happening in the code. I know we weren't required to comment, but in situations where a method is long, it could help for clarity. Other than that it has looked amazing and I am impressed by the solutions you found to some of our problems!
