@@ -47,17 +47,17 @@ namespace ZeldaGame.Player {
 
 		public Rectangle GetPlayerHitBox()
 		{
-			Rectangle hitbox =  sprite.GetHitBox();
+			Rectangle hitbox = sprite.GetHitBox();
 			hitbox.Inflate(-6, -8);
 			return hitbox;
-        }
+		}
 
-        public void SetPlayerPosition(Vector2 position, bool offset = true)
-        {
-            Rectangle sprite_hitbox = sprite.GetHitBox();
-            Vector2 sprite_size = new Vector2(sprite_hitbox.Width, sprite_hitbox.Height);
-            if(offset) this.position = position - sprite_size / 2;
-        }
+		public void SetPlayerPosition(Vector2 position, bool offset = true)
+		{
+			Rectangle sprite_hitbox = sprite.GetHitBox();
+			Vector2 sprite_size = new Vector2(sprite_hitbox.Width, sprite_hitbox.Height);
+			if (offset) this.position = position - sprite_size / 2;
+		}
 
 		public void SetSword(Swords sword) {
 			currSword = sword;

@@ -5,13 +5,13 @@ using static ZeldaGame.Player.PlayerStateMachine;
 
 namespace ZeldaGame.Player {
 	public class HurtPlayer : IPlayer {
-		private IPlayer decoratedPlayer;
+		private Player1 decoratedPlayer;
 
 		Game1 game;
 		int timer = 20;
 
 		public HurtPlayer(IPlayer decoratedPlayer, Game1 game) {
-			this.decoratedPlayer = decoratedPlayer;
+			this.decoratedPlayer = (Player1)decoratedPlayer;
 			this.game = game;
 		}
 
@@ -19,10 +19,10 @@ namespace ZeldaGame.Player {
 			decoratedPlayer.Attack();
 		}
 
-		public void Colliding(Rectangle c)
+		public void Colliding(Rectangle collision)
 		{
-
-		}
+            decoratedPlayer.Colliding(collision);
+        }
 		public void Idle() {
 			decoratedPlayer.Idle();
 		}

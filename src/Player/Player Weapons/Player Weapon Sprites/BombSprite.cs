@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using System.Diagnostics;
 using static ZeldaGame.Player.PlayerStateMachine;
 
 namespace ZeldaGame.Player;
@@ -7,6 +8,7 @@ public class BombSprite : IPlayerProjectile {
 	private SpriteEffects effect;
 	private Texture2D Sprite;
 	private bool isActive;
+	private bool exploded;
 
     private Vector2 position;
 	private Direction direction;
@@ -23,6 +25,8 @@ public class BombSprite : IPlayerProjectile {
 	private int YOffSet;
 
 	private Rectangle destinationRectangle;
+	private Rectangle sourceRectangle;
+	private Rectangle hitBox;
 
 	public BombSprite(Texture2D sprite, Direction direction,  Vector2 position) {
 		isActive = true;
@@ -40,8 +44,11 @@ public class BombSprite : IPlayerProjectile {
 
     public Rectangle GetHitBox()
     {
-        Rectangle hitBox = destinationRectangle;
-        hitBox.Inflate(8, 8);
+		if (exploded)
+		{
+            hitBox = destinationRectangle;
+            hitBox.Inflate(50, 50);
+		}
         return hitBox;
     }
 
@@ -65,7 +72,6 @@ public class BombSprite : IPlayerProjectile {
     }
 
     public void Draw(SpriteBatch spriteBatch, Vector2 scale) {
-		Rectangle sourceRectangle;
 		if (currentFrame == 0)
 		{
             sourceRectangle = new Rectangle(129, 185, 8, 16);
@@ -83,10 +89,10 @@ public class BombSprite : IPlayerProjectile {
 		frameID++;
 		bombCounter++;
 		if (frameID % frameRate == 0) {
-			
 			frameID = 0;
 			if (bombCounter >= bombTimer)
 			{
+				exploded = true;
 				currentFrame++;
 			}
 		}
