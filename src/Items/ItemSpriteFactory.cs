@@ -50,7 +50,7 @@ namespace ZeldaGame.Items {
 
 		public string[] GetAvailableItems()
 		{
-			return new string[] { "br", "yr", "k", "cl", "co", "h", "hc", "tr" };
+			return new string[] { "br", "yr", "cl", "h" };
 		}
 
 		public void AddItem(string item_char, Vector2 pos) {
@@ -79,6 +79,9 @@ namespace ZeldaGame.Items {
 					break;
 				case "tr":
 					objectList.Add(new Triforce(this.texture, pos));
+					break;
+				case "bo":
+					objectList.Add(new Bow(this.texture, pos));
 					break;
 				default:
 					break;
@@ -113,22 +116,6 @@ namespace ZeldaGame.Items {
 			switchCheck = 0;
         }
 
-		public void Cycle(int lastOrNext) {
-			if (lastOrNext == 0) //Cycling backwards
-			{
-				collCheck[index] = 0;
-				cycler--;
-				if (cycler < 0) {
-					cycler = objectList.Count - 1;
-				}
-				index = cycler % objectList.Count;
-			}
-			if (lastOrNext == 1) {
-				collCheck[index] = 0;
-                cycler++;
-				index = cycler % objectList.Count;
-			}
-		}
 		public void Draw(SpriteBatch spriteBatch) {
 			int count = objectList.Count;
 			if (switchCheck == 0)
