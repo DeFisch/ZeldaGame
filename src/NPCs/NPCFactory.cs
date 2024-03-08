@@ -15,7 +15,6 @@ public class NPCFactory
 	private int cycleIndex;
 	private int listLength;
 	private SpriteFont font;
-    private bool isCollision;
     private MapHandler mapHandler;
     private Vector2 dungeon;
 	private bool inDungeon;
@@ -140,7 +139,6 @@ public class NPCFactory
 			{
 				if (npcList[i].GetNPCHitBox().Intersects(playerHitBox))
 				{
-					isCollision = true;
 				}
 			}
     }

@@ -8,13 +8,8 @@ using System.Threading.Tasks;
 
 namespace ZeldaGame.Items {
 	public class BlankItem : IItemSprite {
-		private int counter = 0;
 		private Texture2D texture;
 		private Vector2 pos;
-        private Rectangle sourceRectangle_1;
-        private Rectangle sourceRectangle_2;
-        private Rectangle destinationRectangle_1;
-        private Rectangle destinationRectangle_2;
         public BlankItem(Texture2D texture, Vector2 pos) {
 			this.texture = texture;
 			this.pos = pos;
@@ -30,7 +25,7 @@ namespace ZeldaGame.Items {
 		}
         public Rectangle GetHitBox()
         {
-            return destinationRectangle_1;
+            return new Rectangle();
         }
 
         public void ItemAction()

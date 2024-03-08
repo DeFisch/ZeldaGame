@@ -13,7 +13,6 @@ namespace ZeldaGame.Items {
 		private Vector2 pos;
 		private Rectangle sourceRectangle;
 		public Rectangle destinationRectangle;
-		private MapHandler map;
 		
 		public BlueRuby(Texture2D texture, Vector2 pos) {
 			this.texture = texture;
