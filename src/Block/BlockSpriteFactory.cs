@@ -18,9 +18,10 @@ namespace ZeldaGame.Block {
 		private Vector2 resetPosition;
 		private PushableBlock pushableBlock1;
 		private PushableBlock pushableBlock2;
-
+		private List<PushableBlock> pushableBlockList;
 		public BlockSpriteFactory(Texture2D texture, Vector2 scale, Vector2 window_size, IPlayer player, MapHandler map) {
 			blockList = new List<IBlock>();
+			pushableBlockList = new List<PushableBlock>();
 			this.texture = texture;
 			this.scale = scale;
 			this.pushableBlock1 = new PushableBlock(map,player, new Vector2(6,5));
@@ -40,6 +41,8 @@ namespace ZeldaGame.Block {
             blockList.Add(new Obstacle(texture, position));
             blockList.Add(new Water(texture, position));
             blockList.Add(new Sand(texture, position));
+			pushableBlockList.Add(pushableBlock1);
+			pushableBlockList.Add(pushableBlock2);
 		}
 
         public void cycleList(int cycleDirection) {
@@ -51,6 +54,8 @@ namespace ZeldaGame.Block {
 				cycleIndex = (cycleIndex - 1 + listLength) % listLength;
 			}
 		}
+
+		public List<PushableBlock> GetPushableBlocksList() => pushableBlockList;
 
 		public void Draw(SpriteBatch spriteBatch) 
 		{

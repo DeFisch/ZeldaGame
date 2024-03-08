@@ -56,6 +56,7 @@ namespace ZeldaGame.Block {
                 isDrawn = true;
             }
 		}
+
         public void PlayerIsPushing()
         {
             Rectangle playerHitBox = player.GetPlayerHitBox();
@@ -66,6 +67,7 @@ namespace ZeldaGame.Block {
             else
                 isPushing = false;
         }
+
         public void pushDirection()
         {
             if(Math.Abs(dx) > Math.Abs(dy))//check for left/right push
@@ -84,15 +86,6 @@ namespace ZeldaGame.Block {
             }
         }
 
-        public int roomCheck()
-        {
-            if(initialPosition.Equals(new Vector2(6,5)) && room.Equals(new Vector2(1,0)))
-                return 1;
-            else if(initialPosition.Equals(new Vector2(7,5)) && room.Equals(new Vector2(1,2)))
-                return 2;
-            return 3;
-        }
-
         public void CollisionAfterPush()
         {
             if(pushed && !roomCheck().Equals(3))
@@ -101,10 +94,21 @@ namespace ZeldaGame.Block {
                     player.Colliding(destinationRectangle);
             }
         }
+
+        public int roomCheck()
+        {
+            if(initialPosition.Equals(new Vector2(6,5)) && room.Equals(new Vector2(1,0)))
+                return 1;
+            else if(initialPosition.Equals(new Vector2(7,5)) && room.Equals(new Vector2(1,2)))
+                return 2;
+            return 3;
+        }
+        
         public void Push_Up() => yPosition -= 1;
         public void Push_Down() => yPosition += 1;
         public void Push_Left() => xPosition -= 1;
         public void Push_Right() => xPosition += 1;
+        public Rectangle GetRectangle() => destinationRectangle;
         public void Reset()
         {
             isPushing = false;
