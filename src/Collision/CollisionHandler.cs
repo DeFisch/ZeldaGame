@@ -6,12 +6,14 @@ using ZeldaGame.Map;
 using ZeldaGame.Player;
 using ZeldaGame.Enemy;
 using System.Collections.Generic;
+using ZeldaGame.Items;
 
 namespace ZeldaGame;
 
 public class CollisionHandler {
     private readonly Game1 game;
     private readonly EnemyCollisionHandler enemyCollisionHandler;
+    private readonly ItemSpriteFactory itemCollisionHandler;
     public CollisionHandler(Game1 game) {
         this.game = game;
         enemyCollisionHandler = new EnemyCollisionHandler(game);
@@ -143,6 +145,12 @@ public class CollisionHandler {
                 if (activeProjectiles[projectile].Intersects(block.GetRectangle()))
                     projectile.Collided();
         }
+    }
+
+    public void PlayerItemCollision()
+    {
+        itemCollisionHandler.ItemCollisionHandler();
+
     }
 
     public void Update() {
