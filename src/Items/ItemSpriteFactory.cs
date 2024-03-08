@@ -139,7 +139,7 @@ namespace ZeldaGame.Items {
 				{
 					Rectangle itemdest = objectList[k].GetHitBox();
 					Rectangle playrect = player.GetPlayerHitBox();
-					bool check = ItemCollider();
+					bool check = ItemCollisionHandler();
 					if (check == false) { 
 						objectList[k].Draw(spriteBatch, pos, Color.White, scale);
 					}
