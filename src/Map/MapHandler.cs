@@ -176,11 +176,17 @@ public class MapHandler {
     {
         x = 2;
         y = 5;
-        for (int i = 0; i < 7; i++)
-            for (int j = 0; j < 12; j++)
-                enemy_record[i, j] = (false, null);
-        switch_map(y, x);
         map = mapLoader.get_map_info();
         mapRectangles.SetLists(window_size);
+        mapLoader.load_map(x,y);
+        for (int i = 0; i < 7; i++)
+            for (int j = 0; j < 12; j++)
+            {
+                enemy_record[i, j] = (false, null);
+                door_record[i,j] = (false, null);
+            }    
+        switch_map(y, x);
+
+
     }
 }

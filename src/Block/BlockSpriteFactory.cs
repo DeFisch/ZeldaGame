@@ -8,7 +8,6 @@ using ZeldaGame.Player;
 
 namespace ZeldaGame.Block {
 	public class BlockSpriteFactory {
-		private List<IBlock> blockList;
 		private Texture2D texture;
 		private Vector2 position;
 		private Vector2 scale;
@@ -19,7 +18,6 @@ namespace ZeldaGame.Block {
 		private List<PushableBlock> pushableBlockList;
 		private LockedDoor lockedDoor;
 		public BlockSpriteFactory(Texture2D texture, Vector2 scale, Vector2 window_size, IPlayer player, MapHandler map) {
-			blockList = new List<IBlock>();
 			pushableBlockList = new List<PushableBlock>();
 			this.texture = texture;
 			this.scale = scale;
@@ -33,12 +31,6 @@ namespace ZeldaGame.Block {
 
 		public void AddBlock () 
 		{
-            blockList.Add(new Stair(texture, position));
-            blockList.Add(new Walls(texture, position));
-            blockList.Add(new Ground(texture, position));
-            blockList.Add(new Obstacle(texture, position));
-            blockList.Add(new Water(texture, position));
-            blockList.Add(new Sand(texture, position));
 			pushableBlockList.Add(pushableBlock1);
 			pushableBlockList.Add(pushableBlock2);
 		}
