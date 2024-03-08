@@ -19,7 +19,7 @@ namespace ZeldaGame.Block {
             this.pushableBlock = pushableBlock;
             this.map = map;
             this.player = player;
-            sourceRectangle = new Rectangle(274, 435, 16, 16);
+            sourceRectangle = new Rectangle(258, 339, 16, 16);
         }
 
 		public void Update() {
