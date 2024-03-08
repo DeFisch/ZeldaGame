@@ -127,6 +127,24 @@ public class CollisionHandler {
         enemyCollisionHandler.Update();
     }
 
+    public void PushableBlockCollision(BlockSpriteFactory blockSpriteFactory) 
+    {
+        Dictionary<IPlayerProjectile, Rectangle> activeProjectiles = game.Link.GetProjectileHitBoxes();
+        List<IEnemy> enemies = game.enemyFactory.GetAllEnemies();
+        List<PushableBlock> pushableBlock = blockSpriteFactory.GetPushableBlocksList();
+
+        foreach (PushableBlock block in pushableBlock)
+        {
+            foreach (IEnemy enemy in enemies)
+                if(enemy.GetRectangle().Intersects(block.GetRectangle()))
+                    enemy.Collide(Rectangle.Intersect(enemy.GetRectangle(), block.GetRectangle()));
+            
+            foreach (IPlayerProjectile projectile in activeProjectiles.Keys)
+                if (activeProjectiles[projectile].Intersects(block.GetRectangle()))
+                    projectile.Collided();
+        }
+    }
+
     public void Update() {
         PlayerProjectileEnemyCollision();
         PlayerProjectileMapCollision();
@@ -135,5 +153,6 @@ public class CollisionHandler {
         PlayerDoorCollision(game.windowSize, game.Link, game.map);
         // game.NPCFactory.PlayerNPCCollision(game.Link);
         EnemyObjectCollision();
+        PushableBlockCollision(game.blockSpriteFactory);
     }
 }
