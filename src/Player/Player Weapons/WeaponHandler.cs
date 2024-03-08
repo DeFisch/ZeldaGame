@@ -51,17 +51,17 @@ public class WeaponHandler {
 		}
 		
 		foreach (IPlayerProjectile projectile in expiredProjectiles)
-		{
+		{ 
 			activeProjectiles.Remove(projectile);
 		}
-		expiredProjectiles.Clear();
-	}
+        expiredProjectiles.Clear();
+    }
 
-	public void Draw(SpriteBatch spriteBatch, Vector2 scale) {
+    public void Draw(SpriteBatch spriteBatch, Vector2 scale) {
 		foreach (IPlayerProjectile projectile in activeProjectiles)
 		{
 			projectile.Draw(spriteBatch, scale);
 		}
-	}
+    }
 }
 

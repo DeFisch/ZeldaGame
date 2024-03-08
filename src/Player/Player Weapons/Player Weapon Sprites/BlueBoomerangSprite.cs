@@ -9,6 +9,7 @@ public class BlueBoomerangSprite : IPlayerProjectile {
 	private Texture2D Sprite;
 	private Direction direction;
 	private bool isActive;
+    private bool collided;
 
     private Vector2 position;
     private Vector2 projectileMovement;
@@ -21,8 +22,11 @@ public class BlueBoomerangSprite : IPlayerProjectile {
     private readonly int totalFrames = 3;
     private int frameID;
     private readonly int frameRate = 6;
+    private readonly int expirationTimer = 10;
+    private int expirationCounter;
 
     private Rectangle destinationRectangle;
+    private Rectangle sourceRectangle;
 
     public BlueBoomerangSprite(Texture2D sprite, Direction direction, Vector2 position) {
 		isActive = true;
@@ -34,6 +38,7 @@ public class BlueBoomerangSprite : IPlayerProjectile {
         existanceCounter = 0;
 		currentFrame = 0;
 		frameID = 0;
+        expirationCounter = 0;
 	}
 
     public Rectangle GetHitBox()
@@ -59,11 +64,13 @@ public class BlueBoomerangSprite : IPlayerProjectile {
 
     public void Collided()
     {
-        isActive = false;
+        sourceRectangle = new Rectangle(53, 185, 8, 15);
+        collided = true;
     }
 
     public void Draw(SpriteBatch spriteBatch, Vector2 scale) {
-		Rectangle sourceRectangle = new Rectangle(91 + (currentFrame * 9), 185, 8, 16);
+        if (!collided) 
+		    sourceRectangle = new Rectangle(91 + (currentFrame * 9), 185, 8, 16);
 	    destinationRectangle = new Rectangle((int)position.X + 8, (int)position.Y, (int)(sourceRectangle.Width * scale.X), (int)(sourceRectangle.Height * scale.Y));
 		spriteBatch.Draw(Sprite, destinationRectangle, sourceRectangle, Color.White, rotation: 0, new Vector2(0, 0), effects: effect, 1);
 	}
@@ -82,33 +89,47 @@ public class BlueBoomerangSprite : IPlayerProjectile {
 		}
 
 
-        double scale = -4 * (1 / (1 + Math.Exp(-(10.0 / existanceDuration) * (existanceCounter - 0.6 * existanceDuration)))) + 2; // logistic function to smooth out animation
-        // Determines direction at which is travels
-        switch (this.GetDirection())
+        if (!collided)
         {
-            case Direction.Up:
-                projectileMovement = new Vector2(0, -(float)projectileSpeed) * (float)scale;
-                break;
-            case Direction.Down:
-                projectileMovement = new Vector2(0, (float)projectileSpeed) * (float)scale;
-                break;
-            case Direction.Left:
-                projectileMovement = new Vector2(-(float)projectileSpeed, 0) * (float)scale;
-                break;
-            case Direction.Right:
-                projectileMovement = new Vector2((float)projectileSpeed, 0) * (float)scale;
-                break;
+            double scale = -4 * (1 / (1 + Math.Exp(-(10.0 / existanceDuration) * (existanceCounter - 0.6 * existanceDuration)))) + 2; // logistic function to smooth out animation
+                                                                                                                                      // Determines direction at which is travels
+            switch (this.GetDirection())
+            {
+                case Direction.Up:
+                    projectileMovement = new Vector2(0, -(float)projectileSpeed) * (float)scale;
+                    break;
+                case Direction.Down:
+                    projectileMovement = new Vector2(0, (float)projectileSpeed) * (float)scale;
+                    break;
+                case Direction.Left:
+                    projectileMovement = new Vector2(-(float)projectileSpeed, 0) * (float)scale;
+                    break;
+                case Direction.Right:
+                    projectileMovement = new Vector2((float)projectileSpeed, 0) * (float)scale;
+                    break;
+            }
+
+            // Indicates when it is time to remove or come back to player
+            existanceCounter++;
+            if (existanceCounter <= existanceDuration + 20)
+            {
+                position += projectileMovement;
+            }
+            else
+            {
+                isActive = false;
+            }
+
+        // Draws explosion if boomerang collided, stops movement
+        } else
+        {
+            expirationCounter++;
+            if (expirationCounter == expirationTimer)
+            {
+                isActive = false;
+            }
         }
 
-        // Indicates when it is time to remove or come back to player
-        existanceCounter++;
-        if (existanceCounter <= existanceDuration + 20)
-        {
-            position += projectileMovement;
-        }
-        else
-        {
-            isActive = false;
-        }
+        
     }
 }
