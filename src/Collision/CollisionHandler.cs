@@ -148,7 +148,6 @@ public class CollisionHandler {
         }
     }
 
-
     private void PlayerNPCCollision()
     {
         List<INPC> npcList = game.NPCFactory.GetNPCList();

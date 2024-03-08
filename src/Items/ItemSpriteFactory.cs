@@ -17,8 +17,6 @@ namespace ZeldaGame.Items {
 		Player1 player;
 		Vector2 pos;
 		Vector2 scale;
-		private int cycler = 0;
-		private int index = 0;
 		private int k = 0;
 		private List<int> collCheck;
 		private int switchCheck = 0;
@@ -165,8 +163,6 @@ namespace ZeldaGame.Items {
         public void Reset()
         {
             pos = new Vector2(300, 150);
-            cycler = 0;
-            index = 0;
             for (int l = 0; l < 7; l++)
                 for (int m = 0; m < 6; m++)
                     arrayOfLists[l, m] = new List<IItemSprite>();
