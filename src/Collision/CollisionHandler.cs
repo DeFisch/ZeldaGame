@@ -127,11 +127,11 @@ public class CollisionHandler {
         enemyCollisionHandler.Update();
     }
 
-    public void PushableBlockCollision(BlockSpriteFactory blockSpriteFactory) 
+    public void PushableBlockCollision() 
     {
         Dictionary<IPlayerProjectile, Rectangle> activeProjectiles = game.Link.GetProjectileHitBoxes();
         List<IEnemy> enemies = game.enemyFactory.GetAllEnemies();
-        List<PushableBlock> pushableBlock = blockSpriteFactory.GetPushableBlocksList();
+        List<PushableBlock> pushableBlock = game.blockSpriteFactory.GetPushableBlocksList();
 
         foreach (PushableBlock block in pushableBlock)
         {
@@ -153,6 +153,6 @@ public class CollisionHandler {
         PlayerDoorCollision(game.windowSize, game.Link, game.map);
         // game.NPCFactory.PlayerNPCCollision(game.Link);
         EnemyObjectCollision();
-        PushableBlockCollision(game.blockSpriteFactory);
+        PushableBlockCollision();
     }
 }
