@@ -1,0 +1,9 @@
+Author: Daniel Feng
+Date: Mar 8th, 2024
+Sprint: 3
+.cs files reviewed: All .cs files under src/Player/Player Weapons and part of CollisionHandler.cs
+Author of the .cs files: Dan Perry
+Number of Minutes to complete the review: 20
+Specific Comments:
+The collision detection and handling codes are very well organized and split into small concise functions, thus making it really easy to read and understand even without the comments. The coding style is also pretty consistent with the other collision handling function, as long as you understand one collision handling logic, you will understand most of the rest. 
+
