@@ -19,6 +19,7 @@ namespace ZeldaGame.Items {
 		Vector2 scale;
 		private int cycler = 0;
 		private int index = 0;
+		private int k = 0;
 		private List<int> collCheck;
 		private int switchCheck = 0;
         private string [,] map;
@@ -116,23 +117,30 @@ namespace ZeldaGame.Items {
 			switchCheck = 0;
         }
 
+		public bool ItemCollisionHandler()
+		{
+			Rectangle itemdest = objectList[k].GetHitBox();
+            Rectangle playrect = player.GetPlayerHitBox();
+            if (playrect.Contains(itemdest.Center) || collCheck[k] == 1)
+            {
+                collCheck[k] = 1;
+                objectList.RemoveAt(k);
+                collCheck.RemoveAt(k);
+                objectList.Insert(k, new BlankItem(this.texture, this.pos));
+				return true;
+            }
+			return false;
+        }
 		public void Draw(SpriteBatch spriteBatch) {
 			int count = objectList.Count;
 			if (switchCheck == 0)
 			{
-				for (int k = 0; k < count; k++)
+				for (k = 0; k < count; k++)
 				{
 					Rectangle itemdest = objectList[k].GetHitBox();
 					Rectangle playrect = player.GetPlayerHitBox();
-					if (playrect.Contains(itemdest.Center) || collCheck[k] == 1)
-					{
-						collCheck[k] = 1;
-						objectList.RemoveAt(k);
-						collCheck.RemoveAt(k);
-						objectList.Insert(k, new BlankItem(this.texture, this.pos));
-					}
-					else
-					{
+					bool check = ItemCollider();
+					if (check == false) { 
 						objectList[k].Draw(spriteBatch, pos, Color.White, scale);
 					}
 				}
