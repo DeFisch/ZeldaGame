@@ -12,7 +12,6 @@ public class NPCFactory
 	private Texture2D texture;
 	private Vector2 position;
 	private Vector2 scale;
-	private int cycleIndex;
 	private int listLength;
 	private SpriteFont font;
     private MapHandler mapHandler;
@@ -22,7 +21,6 @@ public class NPCFactory
 	{
 		npcList = new List<INPC>();
 		this.texture = texture;
-		cycleIndex = 0;
 		listLength = 0;
 		this.scale = scale;
 		this.font = font;
@@ -78,31 +76,13 @@ public class NPCFactory
         }
         listLength = npcList.Count;
     }
-	public void cycleList(int cycleDirection)
-	{
-		listLength = npcList.Count;
-		if (cycleDirection == 1)
-		{
-			cycleIndex = (cycleIndex + 1) % listLength;
-		}
-		else if (cycleDirection == 0)
-		{
-			cycleIndex = (cycleIndex - 1 + listLength) % listLength;
-		}
-	}
+
 	public void Draw(SpriteBatch spriteBatch)
 	{
         for (int i = 0; i < listLength; i++)
         {
             npcList[i].Draw(spriteBatch, scale);
         }
-
-        /*if (isCollision)
-        {
-            string collisionMessage = npcList[cycleIndex].GetCollisionMessage();
-            spriteBatch.DrawString(font, collisionMessage, new Vector2(position.X, position.Y), Color.White);
-        }
-        isCollision = false;*/
     }
 	public void Update()
 	{
@@ -144,7 +124,6 @@ public class NPCFactory
     }
     public void Reset()
     {
-        cycleIndex = 0;
         listLength = 0;
     }
 }
