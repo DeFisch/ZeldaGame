@@ -7,6 +7,7 @@ using ZeldaGame.Player;
 using ZeldaGame.Enemy;
 using System.Collections.Generic;
 using ZeldaGame.Items;
+using ZeldaGame.NPCs;
 
 namespace ZeldaGame;
 
@@ -153,13 +154,26 @@ public class CollisionHandler {
 
     }
 
+    private void PlayerNPCCollision()
+    {
+        List<INPC> npcList = game.NPCFactory.GetNPCList();
+        Rectangle playerHitBox = game.Link.GetPlayerHitBox();
+        for (int i = 0; i < npcList.Count; i++)
+        {
+            if (npcList[i].GetNPCHitBox().Intersects(playerHitBox))
+            {
+                game.Link.Colliding(npcList[i].GetNPCHitBox());
+            }
+        }
+    }
+
     public void Update() {
         PlayerProjectileEnemyCollision();
         PlayerProjectileMapCollision();
         PlayerMapCollision();
         EnemyProjectilePlayerCollision();
         PlayerDoorCollision(game.windowSize, game.Link, game.map);
-        // game.NPCFactory.PlayerNPCCollision(game.Link);
+        PlayerNPCCollision();
         EnemyObjectCollision();
         PushableBlockCollision(game.blockSpriteFactory);
     }
