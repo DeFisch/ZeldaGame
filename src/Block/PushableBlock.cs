@@ -109,6 +109,7 @@ namespace ZeldaGame.Block {
         public void Push_Left() => xPosition -= 1;
         public void Push_Right() => xPosition += 1;
         public Rectangle GetRectangle() => destinationRectangle;
+        public bool isOpen() => pushed;
         public void Reset()
         {
             isPushing = false;

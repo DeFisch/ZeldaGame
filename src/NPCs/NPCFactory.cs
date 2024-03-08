@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Runtime.InteropServices;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using ZeldaGame.Map;
@@ -112,18 +113,9 @@ public class NPCFactory
         float height = scale.Y/2;
         return new Vector2(width + (x * 70), height + (y * 70));
     }
-    public void PlayerNPCCollision(IPlayer player)
-	{
-			Rectangle playerHitBox = player.GetPlayerHitBox();
-			for (int i = 0; i < listLength; i++)
-			{
-				if (npcList[i].GetNPCHitBox().Intersects(playerHitBox))
-				{
-				}
-			}
-    }
-    public void Reset()
+
+    public List<INPC> GetNPCList()
     {
-        listLength = 0;
+        return npcList;
     }
 }
