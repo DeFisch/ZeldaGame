@@ -58,8 +58,6 @@ namespace ZeldaGame.Block {
 		public void Reset()
 		{
 			position = resetPosition;
-			cycleIndex = 0;
-			listLength = 0;
 			pushableBlock1.Reset();
 			pushableBlock2.Reset();
 		}
