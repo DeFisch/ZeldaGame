@@ -91,7 +91,7 @@ namespace ZeldaGame.Block {
             if(pushed && !roomCheck().Equals(3))
             {
                 if (player.GetPlayerHitBox().Intersects(destinationRectangle))
-                    player.Colliding(destinationRectangle);
+                    player.OnCollision(destinationRectangle);
             }
         }
 

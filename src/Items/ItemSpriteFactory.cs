@@ -19,7 +19,7 @@ namespace ZeldaGame.Items {
 		Vector2 scale;
 		private int k = 0;
 		private List<int> collCheck;
-		private int switchCheck = 0;
+		private int switchCheck;
         private string [,] map;
 		private MapHandler mapHandler;
         private string item_char;
@@ -37,6 +37,7 @@ namespace ZeldaGame.Items {
 			this.mapHandler = mapHandler;
             arrayOfLists = new List<IItemSprite>[7, 6];
 			collCheck = new List<int>(objectList.Count);
+			switchCheck = 0;
 
             for (int l = 0; l < 7; l++)
             {
@@ -50,6 +51,10 @@ namespace ZeldaGame.Items {
 		public string[] GetAvailableItems()
 		{
 			return new string[] { "br", "yr", "cl", "h" };
+		}
+
+		public List<IItemSprite> GetAllItems() {
+			return objectList;
 		}
 
 		public void AddItem(string item_char, Vector2 pos) {
@@ -86,6 +91,10 @@ namespace ZeldaGame.Items {
 					break;
 			}
 			collCheck.Add(0);
+		}
+
+		public void RemoveItem(IItemSprite item) {
+			objectList.Remove(item);
 		}
 
 		public void GetMapItems()

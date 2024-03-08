@@ -8,7 +8,7 @@ namespace ZeldaGame.Player {
 
 		public void Attack();
 		public void Idle();
-		public void Colliding(Rectangle collision);
+		public void OnCollision(Rectangle collision);
 		public void Walk();
 		public void UseItem(int item);
 		public void SetDirection(Direction direction); 

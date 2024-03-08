@@ -8,7 +8,7 @@ namespace ZeldaGame.Player {
 		private Player1 decoratedPlayer;
 
 		Game1 game;
-		int timer = 20;
+		int timer = 50;
 
 		public HurtPlayer(IPlayer decoratedPlayer, Game1 game) {
 			this.decoratedPlayer = (Player1)decoratedPlayer;
@@ -19,9 +19,9 @@ namespace ZeldaGame.Player {
 			decoratedPlayer.Attack();
 		}
 
-		public void Colliding(Rectangle collision)
+		public void OnCollision(Rectangle collision)
 		{
-            decoratedPlayer.Colliding(collision);
+            decoratedPlayer.OnCollision(collision);
         }
 		public void Idle() {
 			decoratedPlayer.Idle();

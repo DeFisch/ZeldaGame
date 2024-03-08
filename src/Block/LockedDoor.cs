@@ -24,7 +24,7 @@ namespace ZeldaGame.Block {
 
 		public void Update() {
             if (isDrawn && player.GetPlayerHitBox().Intersects(destinationRectangle))
-                player.Colliding(destinationRectangle);
+                player.OnCollision(destinationRectangle);
 		}
 
 		public void Draw(SpriteBatch spriteBatch, Texture2D texture, Vector2 scale) {

@@ -72,7 +72,7 @@ namespace ZeldaGame.Player {
 			stateMachine.Idle();
 		}
 
-		public void Colliding(Rectangle collision)
+		public void OnCollision(Rectangle collision)
 		{
             Rectangle collisionOverlap = Rectangle.Intersect(GetPlayerHitBox(), collision);
 
@@ -89,6 +89,7 @@ namespace ZeldaGame.Player {
 			}
 		}
 
+		
 		public void Walk()
 		{
 			if (animTimer < 0)

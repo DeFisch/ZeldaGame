@@ -8,13 +8,13 @@ using ZeldaGame.Enemy;
 using System.Collections.Generic;
 using ZeldaGame.Items;
 using ZeldaGame.NPCs;
+using System.Linq;
 
 namespace ZeldaGame;
 
 public class CollisionHandler {
     private readonly Game1 game;
     private readonly EnemyCollisionHandler enemyCollisionHandler;
-    private readonly ItemSpriteFactory itemCollisionHandler;
     public CollisionHandler(Game1 game) {
         this.game = game;
         enemyCollisionHandler = new EnemyCollisionHandler(game);
@@ -26,7 +26,8 @@ public class CollisionHandler {
         {
             if (game.Link.GetPlayerHitBox().Intersects(box))
             {
-                game.Link.Colliding(box);
+                game.Link.OnCollision(box);
+                Debug.WriteLine("Player collides with wall."); 
             }
         }
     }
@@ -41,7 +42,8 @@ public class CollisionHandler {
                 if (activeProjectiles[projectile].Intersects(box))
                 {
                     projectile.Collided();
-                }
+					Debug.WriteLine("Projectile collides with wall.");
+				}
             }
         }
     }
@@ -61,19 +63,39 @@ public class CollisionHandler {
                     projectile.Collided();
                     enemy.TakeDamage(projectile.ProjectileDamage());
                     shotEnemies.Add(enemy);
-                }
+					Debug.WriteLine("Player projectile collides with enemy.");
+				}
             }
         }
     }
 
-    public void EnemyProjectilePlayerCollision()
+	public void EnemyPlayerCollision() {
+		foreach (IEnemy enemy in game.enemyFactory.GetAllEnemies()) {
+			if (enemy.GetRectangle().Intersects(game.Link.GetPlayerHitBox()) && !game.Link.isHurting()) {
+				game.Link = new HurtPlayer(game.Link, game);
+				Debug.WriteLine("Enemy collides with player.");
+			}
+		}
+	}
+
+	public void EnemyProjectilePlayerCollision()
     {
         foreach (IEnemyProjectile projectile in game.enemyFactory.GetAllProjectiles())
         {
             if (projectile.GetRectangle().Intersects(game.Link.GetPlayerHitBox()) && !game.Link.isHurting())
             {
                 game.Link = new HurtPlayer(game.Link, game);
-            }
+				Debug.WriteLine("Enemy projectile collides with player.");
+			}
+        }
+    }
+
+    public void ItemPlayerCollision() {
+        foreach (IItemSprite item in game.itemFactory.GetAllItems().ToList()) {
+            if (item.GetHitBox().Intersects(game.Link.GetPlayerHitBox())) {
+                game.itemFactory.RemoveItem(item);
+				Debug.WriteLine("Player picks up item.");
+			}
         }
     }
 
@@ -87,16 +109,23 @@ public class CollisionHandler {
         if (up_door.Contains(playerCenterpoint)){
             map.move_up();
             player.SetPlayerPosition(new Vector2((int)(window_size.X/2), (int)(0.8*window_size.Y)));
-        }else if (down_door.Contains(playerCenterpoint)){
+			Debug.WriteLine("Player enters top door.");
+		}
+		else if (down_door.Contains(playerCenterpoint)){
             map.move_down();
             player.SetPlayerPosition(new Vector2((int)(window_size.X/2), (int)(0.2*window_size.Y)));
-        }else if (left_door.Contains(playerCenterpoint)){
+			Debug.WriteLine("Player enters bottom door.");
+		}
+		else if (left_door.Contains(playerCenterpoint)){
             map.move_left();
             player.SetPlayerPosition(new Vector2((int)(0.8*window_size.X), (int)(window_size.Y/2)));
-        }else if (right_door.Contains(playerCenterpoint)){
+			Debug.WriteLine("Player enters left door.");
+		}
+		else if (right_door.Contains(playerCenterpoint)){
             map.move_right();
             player.SetPlayerPosition(new Vector2((int)(0.2*window_size.X), (int)(window_size.Y/2)));
-        }
+			Debug.WriteLine("Player enters right door.");
+		}
 
         //Room_0_1 Stair collision
         Rectangle stair = new Rectangle((int)(window_size.X / 2), (int)(window_size.Y / 11 * 5), (int)(window_size.X / 16), (int)(window_size.Y / 11));
@@ -108,6 +137,7 @@ public class CollisionHandler {
                 map.x = 0;
                 map.y = 0;
                 player.SetPlayerPosition(new Vector2(175, 240));
+                Debug.WriteLine("Player enters stairs.");
             }
         }
 
@@ -121,7 +151,8 @@ public class CollisionHandler {
                 map.x = 1;
                 map.y = 0;
                 player.SetPlayerPosition(new Vector2(375,305));
-            }
+				Debug.WriteLine("Player enters invisible door.");
+			}
         }
     }
 
@@ -156,8 +187,9 @@ public class CollisionHandler {
         {
             if (npcList[i].GetNPCHitBox().Intersects(playerHitBox))
             {
-                game.Link.Colliding(npcList[i].GetNPCHitBox());
-            }
+                game.Link.OnCollision(npcList[i].GetNPCHitBox());
+				Debug.WriteLine("Player collides with NPC.");
+			}
         }
     }
 
@@ -184,13 +216,15 @@ public class CollisionHandler {
     }
 
     public void Update() {
-        PlayerProjectileEnemyCollision();
+        ItemPlayerCollision();
+		BombBreakableWallCollision();
+		PlayerProjectileEnemyCollision();
         PlayerProjectileMapCollision();
         PlayerMapCollision();
-        EnemyProjectilePlayerCollision();
         PlayerDoorCollision(game.windowSize, game.Link, game.map);
-        BombBreakableWallCollision();
         PlayerNPCCollision();
+		EnemyPlayerCollision();
+        EnemyProjectilePlayerCollision();
         EnemyObjectCollision();
         PushableBlockCollision();
     }

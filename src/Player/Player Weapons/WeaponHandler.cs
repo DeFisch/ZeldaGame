@@ -9,6 +9,7 @@ public class WeaponHandler {
 	public enum Swords {Wood, White, Magic, None};
 	private readonly List<IPlayerProjectile> activeProjectiles;
 	private readonly List<IPlayerProjectile> expiredProjectiles;
+	int cooldown = 0;
 
 	public Swords currSword;
 	public WeaponHandler() {
@@ -18,13 +19,22 @@ public class WeaponHandler {
 	}
 
 	public void UseItem(int item, Vector2 location, Direction direction) {
-		IPlayerProjectile weapon = PlayerItemSpriteFactory.Instance.CreateItemSprite(direction, item, location);
-		activeProjectiles.Add(weapon);
+		if (cooldown == 0) {
+			IPlayerProjectile weapon = PlayerItemSpriteFactory.Instance.CreateItemSprite(direction, item, location);
+			activeProjectiles.Add(weapon);
+			cooldown = 20;
+		}
 	}
 
 	public void UseSword(int sword, Vector2 location, Direction direction) {
 		IPlayerProjectile weapon = PlayerItemSpriteFactory.Instance.CreateSwordSprite(direction, sword, location);
 		activeProjectiles.Add(weapon);
+
+		if (cooldown == 0) {
+			IPlayerProjectile weaponProj = PlayerItemSpriteFactory.Instance.CreateSwordProjectileSprite(direction, sword, location);
+			activeProjectiles.Add(weaponProj);
+		}
+		cooldown = 30;
 	}
 
 	public void ProjectileExpiration(IPlayerProjectile projectile) {
@@ -55,6 +65,10 @@ public class WeaponHandler {
 			activeProjectiles.Remove(projectile);
 		}
         expiredProjectiles.Clear();
+
+		while (cooldown > 0) {
+			cooldown--;
+		}
     }
 
     public void Draw(SpriteBatch spriteBatch, Vector2 scale) {
