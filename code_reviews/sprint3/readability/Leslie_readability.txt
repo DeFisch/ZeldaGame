@@ -1,0 +1,8 @@
+Author: Zhiyang Xu
+Date: March 8, 2024
+Sprint number: 3
+Name of the .cs file being reviewed: NPCs classes
+Author of the .cs files being reviewed: Leslie Cobbold
+Number of minutes taken for the review: 15 mins
+
+All of the parts have concise, meaningful names. All methods are short and concise, and easy to read and understand. Great Job!

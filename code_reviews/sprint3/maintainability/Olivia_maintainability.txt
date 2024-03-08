@@ -1,0 +1,12 @@
+Author: Zhiyang Xu
+Date: March 8, 2024
+Sprint number: 3
+Name of the .cs file being reviewed: Items classes
+Author of the .cs files being reviewed: Olivia Maynard
+Number of minutes taken for the review: 25 mins
+
+Comments: 
+All items return a hitbox for collision checking and have an ItemAction for future use. In the ItemSpriteFactory, methods are kept short and maintainable. The positions of items can be easily modified by editing .csv files. Great job!
+
+Suggestions:
+In the ItemSpriteFactory, you might consider using the getMapXY method in the MapHandler class. This method could return a Vector2 of the current room's Y and X coordinates, allowing the x and y variables in MapHandler to be kept private. Additionally, this method could be used to check for room changes and then reload the items accordingly.
