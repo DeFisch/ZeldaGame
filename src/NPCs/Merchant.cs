@@ -8,7 +8,7 @@ public class Merchant : INPC {
 	private Vector2 position;
 	private Rectangle sourceRectangle;
 	private Rectangle destinationRectangle;
-	private string npcQuote = "Merchant";
+	// private string npcQuote = "Merchant";
 
 
     public Merchant(Texture2D texture, Vector2 position) {

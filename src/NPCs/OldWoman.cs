@@ -8,7 +8,7 @@ public class OldWoman : INPC {
 	private Vector2 position;
 	private Rectangle sourceRectangle;
 	private Rectangle destinationRectangle;
-	private string npcQuote = "Old Woman";
+	// private string npcQuote = "Old Woman";
 
     public OldWoman(Texture2D texture, Vector2 position) {
 		this.texture = texture;

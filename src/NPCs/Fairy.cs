@@ -8,7 +8,7 @@ public class Fairy : INPC {
 	private Vector2 position;
 	private Rectangle sourceRectangle;
 	private Rectangle destinationRectangle;
-	private string npcQuote = "Fairy";
+	// private string npcQuote = "Fairy";
 
     public Fairy(Texture2D texture, Vector2 position) {
 		this.texture = texture;

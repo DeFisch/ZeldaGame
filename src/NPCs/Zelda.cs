@@ -13,7 +13,7 @@ public class Zelda : INPC {
 	private int frameCounter = 0;
 	private Rectangle sourceRectangle;
 	private Rectangle destinationRectangle;
-	private string npcQuote = "Zelda";
+	// private string npcQuote = "Zelda";
 
     public Zelda(Texture2D texture, Vector2 position) {
 		this.texture = texture;
