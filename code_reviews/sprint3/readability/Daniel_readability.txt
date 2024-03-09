@@ -1,0 +1,22 @@
+Author: Olu Fasoro
+Date: March 8, 2024
+Sprint number: 3
+Name of the .cs file being reviewed: Map classes, collision methods
+Author of the .cs files being reviewed: Daniel Feng
+Number of minutes taken for the review: 15 mins
+Comments:
+
+MapHandler:
+The method names are all clear based on what they do. For the "DrawWallOnHole" method, I am not sure how you got the decimal values? Are they exact values based on the screen size? One idea to increase readability is to simplify the fractions into fractional form (eg. 0.25 -> 1 / 4). I am more used to working with camelCase / PascalCase naming convention for method names, but besides this nitpick, it all looks fine.
+
+MapLoader:
+Looks good to me.
+
+MapStaticRectangles:
+Same issue with random-looking decimal values  with MapHandler (i get that this is kinda unavoidable tho =/ )
+
+Content.map_data
+Looks good to me.
+
+CollisionHandler:
+Same as MapStaticRectangles.

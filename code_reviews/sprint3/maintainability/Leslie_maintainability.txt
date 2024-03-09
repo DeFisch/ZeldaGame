@@ -1,0 +1,7 @@
+Author: Olu Fasoro
+Date: March 8, 2024
+Sprint number: 3
+Name of the .cs file being reviewed: NPC classes
+Author of the .cs files being reviewed: Leslie Cobbold
+Number of minutes taken for the review: 10 mins
+Comments: All methods currently added are functional. In the future, may be useful to include a method to draw npcQuote, as well as making npcQuote an instance variable (we may want 2 of the same type of npc to say different things).
