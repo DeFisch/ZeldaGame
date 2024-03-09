@@ -19,9 +19,9 @@ namespace ZeldaGame.Block {
     	private Rectangle sourceRectangle;
         private Rectangle destinationRectangle;
 
-		public PushableBlock(MapHandler map, IPlayer palyer, Vector2 initial_position) {
+		public PushableBlock(MapHandler map, IPlayer player, Vector2 initial_position) {
             this.map = map;
-            this.player = palyer;
+            this.player = player;
             this.room = new Vector2(9,9);
             this.initialPosition = initial_position;
             xPosition = (int)initialPosition.X;

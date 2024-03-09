@@ -8,7 +8,7 @@ namespace ZeldaGame.NPCs {
 		void Draw(SpriteBatch spriteBatch, Vector2 scale);
         public Rectangle GetNPCHitBox();
 
-		string GetCollisionMessage();
+		void DrawNPCQuote(SpriteBatch spriteBatch);
 
     }
 }

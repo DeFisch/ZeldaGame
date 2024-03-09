@@ -8,7 +8,7 @@ public class Merchant : INPC {
 	private Vector2 position;
 	private Rectangle sourceRectangle;
 	private Rectangle destinationRectangle;
-	private string collisionMessage = "Merchant";
+	private string npcQuote = "Merchant";
 
 
     public Merchant(Texture2D texture, Vector2 position) {
@@ -30,8 +30,8 @@ public class Merchant : INPC {
         return destinationRectangle;
     }
 
-    public string GetCollisionMessage()
+    public void DrawNPCQuote(SpriteBatch spriteBatch)
     {
-		return collisionMessage;
+		
     }
 }

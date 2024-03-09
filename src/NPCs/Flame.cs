@@ -14,7 +14,6 @@ public class Flame : INPC {
 	private int frameCounter = 0;
 	private Rectangle sourceRectangle;
 	private Rectangle destinationRectangle;
-	private string collisionMessage = "Flame";
 
     public Flame(Texture2D texture, Vector2 position) {
 		this.texture = texture;
@@ -43,8 +42,8 @@ public class Flame : INPC {
         return destinationRectangle;
     }
 
-    public string GetCollisionMessage()
+    public void DrawNPCQuote(SpriteBatch spriteBatch)
     {
-        return collisionMessage;
+        
     }
 }

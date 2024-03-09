@@ -8,7 +8,7 @@ public class OldMan : INPC {
 	private Vector2 position;
 	private Rectangle sourceRectangle;
 	private Rectangle destinationRectangle;
-	private string collisionMessage = "Old Man";
+	private string npcQuote = "Old Man";
 
 
     public OldMan(Texture2D texture, Vector2 position) {
@@ -30,8 +30,8 @@ public class OldMan : INPC {
 		return destinationRectangle;
     }
 
-    public string GetCollisionMessage()
+    public void DrawNPCQuote(SpriteBatch spriteBatch)
     {
-		return collisionMessage;
+		
     }
 }

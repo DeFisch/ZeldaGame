@@ -1,0 +1,7 @@
+Author: Leslie Cobbold
+Date: March 8, 2024
+Sprint number: 3
+Name of the .cs file being reviewed: IPlayer.cs, HurtPlayer.cs, All .cs files refactored
+Author of the .cs files being reviewed: Olu Fasoro
+Number of minutes taken for the review: 10 mins
+Comments: Code to add and remove a decorated is easy to maintain as its just the player sprite with its color changed for some time after taking a hit from projectiles/enemies. Great approach to adding this functionality. Also great job and thanks for refactoring the majority of the .cs files to be easy to read and maintain and also to have a universal scale.

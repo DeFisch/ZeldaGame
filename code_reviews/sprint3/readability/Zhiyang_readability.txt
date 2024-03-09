@@ -1,0 +1,7 @@
+Author: Leslie Cobbold
+Date: March 8, 2024
+Sprint number: 3
+Name of the .cs file being reviewed: MapStaticRectangles.cs, PushableBlock.cs, LockedDoor.cs
+Author of the .cs files being reviewed: Zhiyang Xu
+Number of minutes taken for the review: 10 mins
+Comments: Great job with the code to make the static blocks and boundaries! Very easy to follow. Would recommend adding a comment to know what type of block is being added so it can be easily referred to. PushableBlock.cs is simple to follow with the method names and equations to push the block. Would recommend instead of returning int for room check, a string or something else might be better so it can be easy to know what room check method does. LockedDoor.cs is simple and easy to follow. Great job overall and thanks for making those features in the game.
