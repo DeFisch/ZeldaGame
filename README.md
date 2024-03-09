@@ -19,14 +19,13 @@ OSU CSE 3902 Zelda Game Project
 
 ## Key and Mouse Mappings:
 - Player Controls
-  - "wasd" for movements
+  - "wasd" or arrow keysfor movements
   - "z" or "n" for sword attack
-  - "1,2,3,4,5,6" for different weapons
-  - "e" to hurt player
+  - "1,2,3,4,5,6" for different weapons (1,2 for arrows, 3,4 for boomerang, 5 for bombs, 6 for flames)
 - Other
   - "q" to quit, "r" to reset the game
 - Mouse
-  - Click on doors to move through all of the rooms
+  - Click on doors to move through the corresponding rooms
 
 ## GitHub basic commands:
 a. Download the repository to your local machine
