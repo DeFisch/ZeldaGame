@@ -82,7 +82,7 @@ public class NPCFactory
 	{
         for (int i = 0; i < listLength; i++)
         {
-            npcList[i].Draw(spriteBatch, scale);
+            npcList[i].Draw(spriteBatch, scale, font);
         }
     }
 	public void Update()
