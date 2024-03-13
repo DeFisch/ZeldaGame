@@ -20,7 +20,7 @@ public class Fairy : INPC {
     public Fairy(Texture2D texture, Vector2 position) {
 		this.texture = texture;
 		this.position = position;
-		npcQuote = "WHEN YOU ARE WEARY OF BATTLE, PLEASE COME BACK TO VISIT ME!";
+		npcQuote = "WHEN YOU ARE WEARY OF BATTLE,\nPLEASE COME BACK TO VISIT ME!";
 
     }
 
