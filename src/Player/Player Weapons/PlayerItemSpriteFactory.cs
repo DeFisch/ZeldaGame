@@ -129,13 +129,13 @@ public class PlayerItemSpriteFactory {
 	public IPlayerProjectile CreateWoodSwordProjectileSprite(Direction direction, Vector2 position) {
 		switch (direction) {
 			case Direction.Up:
-				return new WoodSwordVerticalSprite(playerTexture, Direction.Up, position);
+				return new WoodSwordVerticalProjectileSprite(playerTexture, Direction.Up, position);
 			case Direction.Left:
-				return new WoodSwordHorizontalSprite(playerTexture, Direction.Left, position);
+				return new WoodSwordHorizontalProjectileSprite(playerTexture, Direction.Left, position);
 			case Direction.Down:
-				return new WoodSwordVerticalSprite(playerTexture, Direction.Down, position);
+				return new WoodSwordVerticalProjectileSprite(playerTexture, Direction.Down, position);
 			case Direction.Right:
-				return new WoodSwordHorizontalSprite(playerTexture, Direction.Right, position);
+				return new WoodSwordHorizontalProjectileSprite(playerTexture, Direction.Right, position);
 		}
 		return null;
 	}
@@ -143,13 +143,13 @@ public class PlayerItemSpriteFactory {
 	public IPlayerProjectile CreateWhiteSwordProjectileSprite(Direction direction, Vector2 position) {
 		switch (direction) {
 			case Direction.Up:
-				return new WoodSwordVerticalSprite(playerTexture, Direction.Up, position);
+				return new WhiteSwordVerticalProjectileSprite(playerTexture, Direction.Up, position);
 			case Direction.Left:
-				return new WoodSwordHorizontalSprite(playerTexture, Direction.Left, position);
+				return new WhiteSwordHorizontalProjectileSprite(playerTexture, Direction.Left, position);
 			case Direction.Down:
-				return new WoodSwordVerticalSprite(playerTexture, Direction.Down, position);
+				return new WhiteSwordVerticalProjectileSprite(playerTexture, Direction.Down, position);
 			case Direction.Right:
-				return new WoodSwordHorizontalSprite(playerTexture, Direction.Right, position);
+				return new WhiteSwordHorizontalProjectileSprite(playerTexture, Direction.Right, position);
 		}
 		return null;
 	}
@@ -157,13 +157,13 @@ public class PlayerItemSpriteFactory {
 	public IPlayerProjectile CreateMagicSwordProjectileSprite(Direction direction, Vector2 position) {
 		switch (direction) {
 			case Direction.Up:
-				return new WoodSwordVerticalSprite(playerTexture, Direction.Up, position);
+				return new MagicSwordVerticalProjectileSprite(playerTexture, Direction.Up, position);
 			case Direction.Left:
-				return new WoodSwordHorizontalSprite(playerTexture, Direction.Left, position);
+				return new MagicSwordHorizontalProjectileSprite(playerTexture, Direction.Left, position);
 			case Direction.Down:
-				return new WoodSwordVerticalSprite(playerTexture, Direction.Down, position);
+				return new MagicSwordVerticalProjectileSprite(playerTexture, Direction.Down, position);
 			case Direction.Right:
-				return new WoodSwordHorizontalSprite(playerTexture, Direction.Right, position);
+				return new MagicSwordHorizontalProjectileSprite(playerTexture, Direction.Right, position);
 		}
 		return null;
 	}

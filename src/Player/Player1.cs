@@ -23,6 +23,9 @@ namespace ZeldaGame.Player {
 		private Swords currSword;
 		private int animTimer;
 
+		public int currHealth = 3;
+		public int maxHealth = 3;
+
 		public Player1(Vector2 position, Vector2 scale)
 		{
 			direction = Direction.Down;
@@ -105,7 +108,7 @@ namespace ZeldaGame.Player {
 			if (animTimer < 0 && currSword != Swords.None) {
 				animTimer = 16;
 				sprite = stateMachine.Attack();
-				weaponHandler.UseSword((int)currSword, position, stateMachine.GetDirection());
+				weaponHandler.UseSword((int)currSword, position, stateMachine.GetDirection(), currHealth, maxHealth);
 			}
 		}
 

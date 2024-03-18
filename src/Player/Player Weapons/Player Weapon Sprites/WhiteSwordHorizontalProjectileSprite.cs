@@ -8,80 +8,90 @@ public class WhiteSwordHorizontalProjectileSprite : IPlayerProjectile {
 	private Texture2D Sprite;
 	private Direction direction;
 	private bool isActive;
-
-	private int currFrames = 0;
-	private int totalFrames = 10;
+	private bool collided;
 
 	private Vector2 position;
-	private Vector2 offset;
-    private readonly int damage = 2;
+	private Vector2 projectileMovement;
+	private readonly int projectileSpeed = 6;
+	private readonly int damage = 3;
+	private readonly int expirationTimer = 10;
+	private int expirationCounter;
 
-    private Rectangle destinationRectangle;
+	private Rectangle destinationRectangle;
+	private Rectangle sourceRectangle;
 
 	public WhiteSwordHorizontalProjectileSprite(Texture2D sprite, Direction direction, Vector2 position) {
 		isActive = true;
 		Sprite = sprite;
 		effect = SpriteEffects.None;
 		this.direction = direction;
-		offset = new Vector2(12, 1);
 		this.position = position;
+		expirationCounter = 0;
 	}
 
-    public Rectangle GetHitBox()
-    {
-        return destinationRectangle;
-    }
+	public Rectangle GetHitBox() {
+		return destinationRectangle;
+	}
 
-    public int ProjectileDamage()
-    {
-        return damage;
-    }
+	public int ProjectileDamage() {
+		return damage;
+	}
 
-    public Direction GetDirection() {
+	public Direction GetDirection() {
 		return direction;
 	}
 
-    public bool IsActive()
-    {
-        return isActive;
-    }
+	public bool IsActive() {
+		return isActive;
+	}
 
-    public void Collided()
-    {
-        //isActive = false;
-    }
+	public void Collided() {
+		sourceRectangle = new Rectangle(62, 154, 8, 16);
+		collided = true;
+	}
 
-    public void Draw(SpriteBatch spriteBatch, Vector2 scale) {
-		switch (currFrames) {
-			case 0:
-				offset.X = 12;
-				break;
-			case 8:
-				offset.X = 8;
-				break;
-			case 9:
-				offset.X = 4;
-				break;
-		}
-
-		Rectangle sourceRectangle = new Rectangle(45, 154, 16, 16);
-		if (direction == Direction.Right) {
-			effect = SpriteEffects.None;
-			destinationRectangle = new Rectangle((int)(position.X + offset.X * scale.X), (int)(position.Y + offset.Y * scale.Y), (int)(sourceRectangle.Width * scale.X), (int)(sourceRectangle.Height * scale.Y));
+	public void Draw(SpriteBatch spriteBatch, Vector2 scale) {
+		if (!collided) {
+			sourceRectangle = new Rectangle(45, 154, 16, 16);
+			destinationRectangle = new Rectangle((int)position.X, (int)position.Y, (int)(sourceRectangle.Width * scale.X), (int)(sourceRectangle.Height * scale.Y));
 		}
 		else {
+			// Drawing explosion after arrow collides
+			if (direction == Direction.Right) {
+				destinationRectangle = new Rectangle((int)position.X + 20, (int)position.Y, (int)(sourceRectangle.Width * scale.X), (int)(sourceRectangle.Height * scale.Y));
+			}
+			else {
+				destinationRectangle = new Rectangle((int)position.X, (int)position.Y, (int)(sourceRectangle.Width * scale.X), (int)(sourceRectangle.Height * scale.Y));
+			}
+		}
+		if (direction == Direction.Left) {
 			effect = SpriteEffects.FlipHorizontally;
-			destinationRectangle = new Rectangle((int)(position.X - offset.X * scale.X), (int)(position.Y + offset.Y * scale.Y), (int)(sourceRectangle.Width * scale.X), (int)(sourceRectangle.Height * scale.Y));
 		}
 		spriteBatch.Draw(Sprite, destinationRectangle, sourceRectangle, Color.White, rotation: 0, new Vector2(0, 0), effects: effect, 1);
 	}
 
 	public void Update() {
-		if (isActive) {
-			currFrames++;
-
-			if (currFrames == totalFrames) {
-				currFrames = 0;
+		// Moves in direction player is facing
+		if (!collided) {
+			switch (this.GetDirection()) {
+				case Direction.Up:
+					projectileMovement = new Vector2(0, -projectileSpeed);
+					break;
+				case Direction.Down:
+					projectileMovement = new Vector2(0, projectileSpeed);
+					break;
+				case Direction.Left:
+					projectileMovement = new Vector2(-projectileSpeed, 0);
+					break;
+				case Direction.Right:
+					projectileMovement = new Vector2(projectileSpeed, 0);
+					break;
+			}
+			position += projectileMovement;
+		}
+		else {
+			expirationCounter++;
+			if (expirationCounter == expirationTimer) {
 				isActive = false;
 			}
 		}
