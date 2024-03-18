@@ -181,15 +181,17 @@ public class CollisionHandler {
 
     private void PlayerNPCCollision()
     {
-        List<INPC> npcList = game.NPCFactory.GetNPCList();
-        Rectangle playerHitBox = game.Link.GetPlayerHitBox();
-        for (int i = 0; i < npcList.Count; i++)
-        {
-            if (npcList[i].GetNPCHitBox().Intersects(playerHitBox))
+        if (game.NPCFactory.isInDungeon()) {
+            List<INPC> npcList = game.NPCFactory.GetNPCList();
+            Rectangle playerHitBox = game.Link.GetPlayerHitBox();
+            for (int i = 0; i < npcList.Count; i++)
             {
-                game.Link.OnCollision(npcList[i].GetNPCHitBox());
-				Debug.WriteLine("Player collides with NPC.");
-			}
+                if (npcList[i].GetNPCHitBox().Intersects(playerHitBox))
+                {
+                    game.Link.OnCollision(npcList[i].GetNPCHitBox());
+                    Debug.WriteLine("Player collides with NPC.");
+                }
+            }
         }
     }
 
