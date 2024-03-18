@@ -44,6 +44,18 @@
 /processorParam:TextureFormat=Compressed
 /build:Font.spritefont
 
+#begin HUD.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:HUD.png
+
 #begin Level1_Map.png
 /importer:TextureImporter
 /processor:TextureProcessor
