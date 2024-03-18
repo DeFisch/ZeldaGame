@@ -26,11 +26,11 @@ public class WeaponHandler {
 		}
 	}
 
-	public void UseSword(int sword, Vector2 location, Direction direction) {
+	public void UseSword(int sword, Vector2 location, Direction direction, int currHealth, int maxHealth) {
 		IPlayerProjectile weapon = PlayerItemSpriteFactory.Instance.CreateSwordSprite(direction, sword, location);
 		activeProjectiles.Add(weapon);
 
-		if (cooldown == 0) {
+		if (cooldown == 0 && currHealth == maxHealth) {
 			IPlayerProjectile weaponProj = PlayerItemSpriteFactory.Instance.CreateSwordProjectileSprite(direction, sword, location);
 			activeProjectiles.Add(weaponProj);
 		}
