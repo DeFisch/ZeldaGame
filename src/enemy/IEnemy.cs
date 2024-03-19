@@ -12,7 +12,7 @@ public interface IEnemy {
 
 	public void Draw(SpriteBatch spriteBatch);
 
-	public void TakeDamage(int damage);
+	public bool TakeDamage(int damage);
 
 	public int GetHealth();
 

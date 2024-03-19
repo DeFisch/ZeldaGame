@@ -17,6 +17,7 @@ public class Aquamentus : IEnemy {
     private int projectile_speed = 4;
 	private int health = 10;
 	private int dead_timer = 0;
+	private int iFrame = -100;
     private EnemyProjectileFactory enemyProjectileFactory;
 	public Aquamentus(Texture2D texture, Vector2 position, EnemyProjectileFactory enemyProjectileFactory, Vector2 scale) {
 		this.texture = texture;
@@ -47,6 +48,7 @@ public class Aquamentus : IEnemy {
 		frameID++;
 	}
     private void Attack() {
+		Globals.audioLoader.Play("LOZ_MagicalRod");;
         Vector2[] directions = new Vector2[] { new Vector2(-0.894f, 0.447f), new Vector2(-0.894f, -0.447f), new Vector2(-1, 0) };
         foreach (Vector2 direction in directions) {
             enemyProjectileFactory.CreateProjectile(EnemyProjectileFactory.ProjectileType.Fireball, new Vector2(GetRectangle().Center.X, GetRectangle().Center.Y), direction * projectile_speed);
@@ -71,9 +73,14 @@ public class Aquamentus : IEnemy {
 		return dead_timer > 60;
 	}
 
-    public void TakeDamage(int damage)
+    public bool TakeDamage(int damage)
     {
-        this.health -= damage;
+		Globals.audioLoader.Play("LOZ_Boss_Scream1");
+		if (frameID - iFrame < 60)
+			return false;
+		health -= damage;
+		iFrame = frameID;
+        return true;
     }
 
 	public int GetHealth()

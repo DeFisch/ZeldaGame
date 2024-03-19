@@ -103,6 +103,7 @@ public class NPCFactory
 		}
         else if (!currentMapXY.Equals(dungeon) && inDungeon)
         {
+            Globals.audioLoader.StopSingleton("LOZ_Text");
             inDungeon = false;
         }
         return inDungeon;

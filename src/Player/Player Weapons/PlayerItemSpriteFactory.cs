@@ -26,37 +26,54 @@ public class PlayerItemSpriteFactory {
 	}
 
 	public IPlayerProjectile CreateItemSprite(Direction direction, int item, Vector2 position) {
-		projectiles = new List<IPlayerProjectile>
-		{
-			CreateArrowSprite(direction, position), CreateBlueArrowSprite(direction, position),
-			CreateBoomerangSprite(direction, position), CreateBlueBoomerangSprite(direction, position),
-			CreateBombSprite(direction, position), CreateFireballSprite(direction, position)
-		};
-
-		return projectiles[item];
+		switch (item) {
+			case 0:
+				return CreateArrowSprite(direction, position);
+			case 1:
+				return CreateBlueArrowSprite(direction, position);
+			case 2:
+				return CreateBoomerangSprite(direction, position);
+			case 3:
+				return CreateBlueBoomerangSprite(direction, position);
+			case 4:
+				return CreateBombSprite(direction, position);
+			case 5:
+				return CreateFireballSprite(direction, position);
+			default:
+				return null;
+		}
 	}
 
 	public IPlayerProjectile CreateSwordSprite(Direction direction, int sword, Vector2 position) {
-		swords = new List<IPlayerProjectile>
-		{
-			CreateWoodSwordSprite(direction, position) , CreateWhiteSwordSprite(direction, position), 
-			CreateMagicSwordSprite(direction, position)
-		};
-
-		return swords[sword];
+		Globals.audioLoader.Play("LOZ_Sword_Slash");
+		switch (sword) {
+			case 0:
+				return CreateWoodSwordSprite(direction, position);
+			case 1:
+				return CreateWhiteSwordSprite(direction, position);
+			case 2:
+				return CreateMagicSwordSprite(direction, position);
+			default:
+				return null;
+		}
 	}
 
 	public IPlayerProjectile CreateSwordProjectileSprite(Direction direction, int sword, Vector2 position) {
-		swords = new List<IPlayerProjectile>
-		{
-			CreateWoodSwordProjectileSprite(direction, position) , CreateWhiteSwordProjectileSprite(direction, position),
-			CreateMagicSwordProjectileSprite(direction, position)
-		};
-
-		return swords[sword];
+		Globals.audioLoader.Play("LOZ_Sword_Shoot");
+		switch (sword) {
+			case 0:
+				return CreateWoodSwordProjectileSprite(direction, position);
+			case 1:
+				return CreateWhiteSwordProjectileSprite(direction, position);
+			case 2:
+				return CreateMagicSwordProjectileSprite(direction, position);
+			default:
+				return null;
+		}
 	}
 
 	public IPlayerProjectile CreateArrowSprite(Direction direction, Vector2 position) {
+		Globals.audioLoader.Play("LOZ_Arrow_Boomerang", true);
 		switch (direction) {
 			case Direction.Up:
 				return new ArrowVerticalSprite(playerTexture, Direction.Up, position);
@@ -71,6 +88,7 @@ public class PlayerItemSpriteFactory {
 	}
 
 	public IPlayerProjectile CreateBlueArrowSprite(Direction direction, Vector2 position) {
+		Globals.audioLoader.Play("LOZ_Arrow_Boomerang", true);
 		switch (direction) {
 			case Direction.Up:
 				return new BlueArrowVerticalSprite(playerTexture, Direction.Up, position);
@@ -169,14 +187,17 @@ public class PlayerItemSpriteFactory {
 	}
 
 	public IPlayerProjectile CreateBoomerangSprite(Direction direction, Vector2 position) {
+		Globals.audioLoader.Play("LOZ_Arrow_Boomerang", true);
 		return new BoomerangSprite(playerTexture, direction, position);
 	}
 
 	public IPlayerProjectile CreateBlueBoomerangSprite(Direction direction, Vector2 position) {
+		Globals.audioLoader.Play("LOZ_Arrow_Boomerang", true);
 		return new BlueBoomerangSprite(playerTexture, direction, position);
 	}
 
 	public IPlayerProjectile CreateBombSprite(Direction direction, Vector2 position) {
+		Globals.audioLoader.Play("LOZ_Bomb_Drop");
 		return new BombSprite(playerTexture, direction, position);
 	}
 

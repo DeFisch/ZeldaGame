@@ -100,6 +100,8 @@ public class EnemyFactory {
 				}
 				dead_enemies.Add(enemies[i]);
 				enemies.RemoveAt(i);
+
+				Globals.audioLoader.Play("LOZ_Enemy_Die");
 			}
 		}
 	}

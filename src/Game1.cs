@@ -81,6 +81,9 @@ namespace ZeldaGame
 			Items = Content.Load<Texture2D>("Objects");
             font = Content.Load<SpriteFont>("Font");
 
+			// Load audio
+			Globals.audioLoader = new AudioLoader(this);
+
 			// Initialize map
 			// Load default map
 			Texture2D map_texture = Content.Load<Texture2D>("Level1_Map");
@@ -162,6 +165,9 @@ namespace ZeldaGame
 
 			//Registers commands with Keys for turning debug mode on and off
 			keyboardController.RegisterPressKey(Keys.F, new DebugCommand(map));
+
+			//Registers commands with Keys for muting and unmuting the audio
+			keyboardController.RegisterPressKey(Keys.M, new MuteCommand(Globals.audioLoader));
 
         }
 
