@@ -8,6 +8,7 @@ using ZeldaGame.Block;
 using ZeldaGame.Controllers;
 using ZeldaGame.Enemy;
 using ZeldaGame.Enemy.Commands;
+using ZeldaGame.GameScreens;
 using ZeldaGame.Items;
 using ZeldaGame.Map;
 using ZeldaGame.Map.Commands;
@@ -15,8 +16,9 @@ using ZeldaGame.NPCs;
 using ZeldaGame.Player;
 using ZeldaGame.Player.Commands;
 
-namespace ZeldaGame {
-	public class Game1 : Game {
+namespace ZeldaGame
+{
+    public class Game1 : Game {
 		private GraphicsDeviceManager _graphics;
 		private SpriteBatch _spriteBatch;
 
@@ -32,6 +34,7 @@ namespace ZeldaGame {
 		public EnemyFactory enemyFactory;
 		public BlockSpriteFactory blockSpriteFactory;
 		public CollisionHandler collisionHandler;
+		public GameStateScreenHandler gameStateScreenHandler;
 
 		private KeyboardController keyboardController;
 		private MouseController mouseController;
@@ -42,7 +45,8 @@ namespace ZeldaGame {
 		private SpriteFont font;
 
 
-		public Game1() {
+
+        public Game1() {
 			_graphics = new GraphicsDeviceManager(this);
 			Content.RootDirectory = "Content";
 			IsMouseVisible = true;
@@ -61,8 +65,10 @@ namespace ZeldaGame {
 			_graphics.PreferredBackBufferHeight = (int)windowSize.Y;
 			_graphics.ApplyChanges();
 
-			// Initialize collition handler
+			// Initialize collision handler
 			collisionHandler = new CollisionHandler(this);
+			// Initialize gameStateScreen handler
+			gameStateScreenHandler = new GameStateScreenHandler(this);
 
 			base.Initialize();
 		}
@@ -92,6 +98,7 @@ namespace ZeldaGame {
             NPCFactory = new NPCFactory(npcs, windowScale, font, map);
 			itemFactory = new ItemSpriteFactory(Items, npcs, windowScale, Link, map);
 			enemyFactory = new EnemyFactory(enemy_texture, windowScale, windowSize, itemFactory);
+
 		
 
             // Define the quadrants based on the window size
@@ -99,6 +106,9 @@ namespace ZeldaGame {
             Rectangle rightDoorQuadrant = new Rectangle((int)(3 * windowSize.X / 4), (int)(windowSize.Y / 4), (int)(windowSize.X / 4), (int)(windowSize.Y / 2));
             Rectangle topDoorQuadrant = new Rectangle((int)(windowSize.X / 4), 0, (int)(windowSize.X / 2), (int)(windowSize.Y / 4));
             Rectangle bottomDoorQuadrant = new Rectangle((int)(windowSize.X / 4), (int)(3 * windowSize.Y / 4), (int)(windowSize.X / 2), (int)(windowSize.Y / 4));
+
+			//Adds the title screen
+			gameStateScreenHandler.AddScreen(GameState.TitleScreen, new TitleScreen(Content.Load<Texture2D>("TitleScreen"), this));
 
 			//Add NPCs
 			if (NPCFactory.isInDungeon())
@@ -137,6 +147,9 @@ namespace ZeldaGame {
 			//Registers commands with Keys for Reset
 			keyboardController.RegisterPressKey(Keys.R, new ResetCommand(this));
 
+            //Registers command with Key to start game
+            keyboardController.RegisterPressKey(Keys.Space, new StartGameCommand(this));
+
             //Registers commands with Keys and MouseButton for Quit
             keyboardController.RegisterPressKey(Keys.Q, new QuitCommand(this));
             mouseController.RegisterPressButton(MouseButtons.Right, new QuitCommand(this));
@@ -157,8 +170,10 @@ namespace ZeldaGame {
 			foreach (IController controller in controllers) {
 				controller.Update();
 			}
-			// Updates enemies
-			enemyFactory.Update();
+			//updates game screen
+			gameStateScreenHandler.Update();
+            // Updates enemies
+            enemyFactory.Update();
 			//Updates blocks
 			blockSpriteFactory.Update();
 			// Updates npc's
@@ -178,6 +193,8 @@ namespace ZeldaGame {
 			GraphicsDevice.Clear(Color.CornflowerBlue);
 
 			_spriteBatch.Begin();
+			//Draws game screen
+			gameStateScreenHandler.Draw(_spriteBatch);
 			// Draws map
 			map.Draw(_spriteBatch);
 			// Draws Blocks

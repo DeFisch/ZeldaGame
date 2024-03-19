@@ -1,8 +1,4 @@
-﻿using System.Collections.Generic;
-using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
-
-namespace ZeldaGame
+﻿namespace ZeldaGame
 {
     public class ResetCommand: ICommand
     {
