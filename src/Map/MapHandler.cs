@@ -124,6 +124,9 @@ public class MapHandler {
         }
         if (debug){
             for (int i = 0; i < dlist.Count; i++)
+                spriteBatch.Draw(map_texture, dlist[i], sList[i], Color.Red);
+            dlist = this.getAllObjectRectangles(includeWater: false);
+            for (int i = 0; i < dlist.Count; i++)
                 spriteBatch.Draw(map_texture, dlist[i], sList[i], Color.Green);
         }
     }
@@ -159,8 +162,13 @@ public class MapHandler {
         else
             spriteBatch.Draw(map_texture, destRect, srcRect, Color.White);
     }
-    public List<Rectangle> getAllObjectRectangles(){
-        return mapRectangles.getDestinationRectangleList();
+    public List<Rectangle> getAllObjectRectangles(bool includeWater = true){
+        if (!includeWater)
+            mapRectangles.SetLists(window_size, false);
+        else
+            mapRectangles.SetLists(window_size, true);
+        List<Rectangle> dList = mapRectangles.getDestinationRectangleList();
+        return dList;
     }
 
     public Vector2 getMapXY(){

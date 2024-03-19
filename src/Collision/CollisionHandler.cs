@@ -35,7 +35,7 @@ public class CollisionHandler {
     public void PlayerProjectileMapCollision()
     {
         Dictionary<IPlayerProjectile, Rectangle> activeProjectiles = game.Link.GetProjectileHitBoxes();
-        foreach (Rectangle box in game.map.getAllObjectRectangles())
+        foreach (Rectangle box in game.map.getAllObjectRectangles(includeWater: false))
         {
             foreach (IPlayerProjectile projectile in activeProjectiles.Keys)
             {

@@ -3,7 +3,6 @@ using Microsoft.Xna.Framework;
 using ZeldaGame.Player;
 using ZeldaGame.Map;
 using System;
-using System.Diagnostics;
 
 namespace ZeldaGame.Block {
 	public class PushableBlock {

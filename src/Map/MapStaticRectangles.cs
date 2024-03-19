@@ -36,7 +36,7 @@ namespace ZeldaGame.Map
             return sRectangleList;
         }
 
-        public void SetLists(Vector2 window_size)
+        public void SetLists(Vector2 window_size, bool includeWater = true)
         {
             dRectangleList.Clear();
             sRectangleList.Clear();
@@ -50,6 +50,8 @@ namespace ZeldaGame.Map
                 {
                     if (!mapList[j, i].Equals("-"))
                     {
+                        if(!includeWater && mapList[j, i].Equals("w")) 
+                            continue;
                         width = window_size.X / 16;
                         height = window_size.Y / 11;
                         xPosition = (i * width) + (2 * width);
