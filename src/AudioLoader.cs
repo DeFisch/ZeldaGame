@@ -11,6 +11,13 @@ public class AudioLoader {
     public AudioLoader(Game1 game) {
         this.game = game;
         LoadAudio();
+        PlayBGM();
+    }
+    public void PlayBGM(){
+        SoundEffectInstance bgm = game.Content.Load<SoundEffect>("audio/BGM").CreateInstance();
+        bgm.IsLooped = true;
+        bgm.Volume = 0.2f;
+        bgm.Play();
     }
     public void LoadAudio() {
         DirectoryInfo dir = new DirectoryInfo(game.Content.RootDirectory + "/audio");               
