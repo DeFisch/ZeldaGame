@@ -62,8 +62,11 @@ namespace ZeldaGame.Block {
             Rectangle playerHitBox = player.GetPlayerHitBox();
             dx = playerHitBox.X - destinationRectangle.X;
             dy = playerHitBox.Y - destinationRectangle.Y;
-            if(playerHitBox.Intersects(destinationRectangle))
+            if(playerHitBox.Intersects(destinationRectangle)){
+                if (!isPushing && roomCheck().Equals(2))
+                    Globals.audioLoader.Play("LOZ_Door_Unlock");
                 isPushing = true;
+            }
             else
                 isPushing = false;
         }
