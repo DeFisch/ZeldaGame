@@ -75,6 +75,9 @@ namespace ZeldaGame {
 			Items = Content.Load<Texture2D>("Objects");
             font = Content.Load<SpriteFont>("Font");
 
+			// Load audio
+			Globals.audioLoader = new AudioLoader(this);
+
 			// Initialize map
 			// Load default map
 			Texture2D map_texture = Content.Load<Texture2D>("Level1_Map");

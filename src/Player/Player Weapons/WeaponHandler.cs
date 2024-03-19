@@ -38,6 +38,7 @@ public class WeaponHandler {
 	}
 
 	public void ProjectileExpiration(IPlayerProjectile projectile) {
+		Globals.audioLoader.Stop("LOZ_Arrow_Boomerang");
 		expiredProjectiles.Add(projectile);
 	}
 

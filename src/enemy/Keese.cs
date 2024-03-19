@@ -17,6 +17,7 @@ public class Keese : IEnemy {
 	private int health = 1;
 	private double general_speed = 4;
 	private int dead_timer = 0;
+	private int iFrame = -100;
 	public Keese(Texture2D texture, Vector2 position, string color, Vector2 scale) {
 		this.texture = texture;
 		this.position = position;
@@ -83,9 +84,13 @@ public class Keese : IEnemy {
 		}
 	}
 	
-	public void TakeDamage(int damage)
+	public bool TakeDamage(int damage)
     {
-		this.health -= damage;
+		if (frameID - iFrame < 60)
+			return false;
+		health -= damage;
+		iFrame = frameID;
+        return true;
     }
 
     public int GetHealth()

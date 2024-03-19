@@ -92,6 +92,7 @@ public class BombSprite : IPlayerProjectile {
 			frameID = 0;
 			if (bombCounter >= bombTimer)
 			{
+				Globals.audioLoader.Play("LOZ_Bomb_Blow");
 				exploded = true;
 				currentFrame++;
 			}

@@ -46,6 +46,15 @@ public class CollisionHandler {
 				}
             }
         }
+        // Check if projectile collides with window boundaries
+        foreach (IPlayerProjectile projectile in activeProjectiles.Keys)
+        {
+            if (activeProjectiles[projectile].X < 0 || activeProjectiles[projectile].X > game.windowSize.X || activeProjectiles[projectile].Y < 0 || activeProjectiles[projectile].Y > game.windowSize.Y)
+            {
+                projectile.Collided();
+                Debug.WriteLine("Projectile collides with window boundary.");
+            }
+        }
     }
 
     public void PlayerProjectileEnemyCollision()
@@ -53,7 +62,6 @@ public class CollisionHandler {
         Dictionary<IPlayerProjectile, Rectangle> activeProjectiles = game.Link.GetProjectileHitBoxes();
         List<IEnemy> enemies = game.enemyFactory.GetAllEnemies();
         List<IEnemy> shotEnemies = new();
-
         foreach (IEnemy enemy in enemies)
         {
             foreach (IPlayerProjectile projectile in activeProjectiles.Keys)
@@ -61,7 +69,8 @@ public class CollisionHandler {
                 if (activeProjectiles[projectile].Intersects(enemy.GetRectangle()))
                 {
                     projectile.Collided();
-                    enemy.TakeDamage(projectile.ProjectileDamage());
+                    if(enemy.TakeDamage(projectile.ProjectileDamage()))
+                        Globals.audioLoader.Play("LOZ_Enemy_Hit");
                     shotEnemies.Add(enemy);
 					Debug.WriteLine("Player projectile collides with enemy.");
 				}
@@ -72,7 +81,8 @@ public class CollisionHandler {
 	public void EnemyPlayerCollision() {
 		foreach (IEnemy enemy in game.enemyFactory.GetAllEnemies()) {
 			if (enemy.GetRectangle().Intersects(game.Link.GetPlayerHitBox()) && !game.Link.isHurting()) {
-				game.Link = new HurtPlayer(game.Link, game);
+				Globals.audioLoader.Play("LOZ_Link_Hurt");
+                game.Link = new HurtPlayer(game.Link, game);
 				Debug.WriteLine("Enemy collides with player.");
 			}
 		}
@@ -84,6 +94,7 @@ public class CollisionHandler {
         {
             if (projectile.GetRectangle().Intersects(game.Link.GetPlayerHitBox()) && !game.Link.isHurting())
             {
+                Globals.audioLoader.Play("LOZ_Link_Hurt");
                 game.Link = new HurtPlayer(game.Link, game);
 				Debug.WriteLine("Enemy projectile collides with player.");
 			}
@@ -93,6 +104,7 @@ public class CollisionHandler {
     public void ItemPlayerCollision() {
         foreach (IItemSprite item in game.itemFactory.GetAllItems().ToList()) {
             if (item.GetHitBox().Intersects(game.Link.GetPlayerHitBox())) {
+                Globals.audioLoader.Play("LOZ_Get_Item");
                 game.itemFactory.RemoveItem(item);
 				Debug.WriteLine("Player picks up item.");
 			}
@@ -133,6 +145,7 @@ public class CollisionHandler {
         {
             if (stair.Contains(playerCenterpoint))
             {
+                Globals.audioLoader.Play("LOZ_Stairs");
                 map.switch_map(0, 0);
                 map.x = 0;
                 map.y = 0;
@@ -147,6 +160,7 @@ public class CollisionHandler {
         {
             if (invisibleDoor.Contains(playerCenterpoint))
             {
+                Globals.audioLoader.Play("LOZ_Stairs");
                 map.switch_map(0, 1);
                 map.x = 1;
                 map.y = 0;

@@ -17,6 +17,7 @@ public class Gibdo : IEnemy {
 	private int speed = 2;
 	private int health = 3;
 	private int dead_timer = 0;
+	private int iFrame = -100;
 	public Gibdo(Texture2D texture, Vector2 position, Vector2 scale) {
 		this.texture = texture;
 		this.position = position;
@@ -98,9 +99,13 @@ public class Gibdo : IEnemy {
 	}
 
 
-    public void TakeDamage(int damage)
+    public bool TakeDamage(int damage)
     {
-		this.health -= damage;
+		if (frameID - iFrame < 60)
+			return false;
+		health -= damage;
+		iFrame = frameID;
+        return true;
     }
 
     public int GetHealth()

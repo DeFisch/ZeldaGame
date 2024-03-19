@@ -21,6 +21,7 @@ public class WizzRobe : IEnemy {
 	private int rand_seed;
 	private int health = 3;
 	private int dead_timer = 0;
+	private int iFrame = -100;
 	private EnemyProjectileFactory enemyProjectileFactory;
 	public WizzRobe(Texture2D texture, Vector2 position, EnemyProjectileFactory enemyProjectileFactory, string color, Vector2 scale) {
 		rand_seed = new Random().Next();
@@ -94,6 +95,7 @@ public class WizzRobe : IEnemy {
 	private void Attack() {
 		if( frameID % 20 == 0 ){
 			ShootProjectile();
+			Globals.audioLoader.Play("LOZ_MagicalRod");
 		}
 	}
 
@@ -151,9 +153,13 @@ public class WizzRobe : IEnemy {
 		}
 	}
 
-	public void TakeDamage(int damage)
+	public bool TakeDamage(int damage)
     {
-		this.health -= damage;
+		if (frameID - iFrame < 60)
+			return false;
+		health -= damage;
+		iFrame = frameID;
+        return true;
     }
 
     public int GetHealth()
