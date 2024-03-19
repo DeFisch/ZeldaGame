@@ -153,6 +153,9 @@ namespace ZeldaGame {
 			//Registers commands with Keys for turning debug mode on and off
 			keyboardController.RegisterPressKey(Keys.F, new DebugCommand(map));
 
+			//Registers commands with Keys for muting and unmuting the audio
+			keyboardController.RegisterPressKey(Keys.M, new MuteCommand(Globals.audioLoader));
+
         }
 
 		protected override void Update(GameTime gameTime) {
