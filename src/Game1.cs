@@ -9,6 +9,7 @@ using ZeldaGame.Controllers;
 using ZeldaGame.Enemy;
 using ZeldaGame.Enemy.Commands;
 using ZeldaGame.GameScreens;
+using ZeldaGame.HUD;
 using ZeldaGame.Items;
 using ZeldaGame.Map;
 using ZeldaGame.Map.Commands;
@@ -35,6 +36,9 @@ namespace ZeldaGame
 		public BlockSpriteFactory blockSpriteFactory;
 		public CollisionHandler collisionHandler;
 		public GameStateScreenHandler gameStateScreenHandler;
+
+		public Texture2D HUD;
+		public HeadUpDisplay headUpDisplay;
 
 		private KeyboardController keyboardController;
 		private MouseController mouseController;
@@ -80,6 +84,7 @@ namespace ZeldaGame
 			npcs = Content.Load<Texture2D>("NPCs");
 			Items = Content.Load<Texture2D>("Objects");
             font = Content.Load<SpriteFont>("Font");
+			HUD = Content.Load<Texture2D>("HUD");
 
 			// Load audio
 			Globals.audioLoader = new AudioLoader(this);
@@ -101,7 +106,7 @@ namespace ZeldaGame
             NPCFactory = new NPCFactory(npcs, windowScale, font, map);
 			itemFactory = new ItemSpriteFactory(Items, npcs, windowScale, Link, map);
 			enemyFactory = new EnemyFactory(enemy_texture, windowScale, windowSize, itemFactory);
-
+			headUpDisplay = new HeadUpDisplay(HUD,windowScale,windowSize);
 		
 
             // Define the quadrants based on the window size
@@ -169,9 +174,12 @@ namespace ZeldaGame
 			//Registers commands with Keys for muting and unmuting the audio
 			keyboardController.RegisterPressKey(Keys.M, new MuteCommand(Globals.audioLoader));
 
+            //Registers commands with Keys for displaying HUD
+            keyboardController.RegisterPressKey(Keys.H, new DisplayHUDCommand(this));
+
         }
 
-		protected override void Update(GameTime gameTime) {
+        protected override void Update(GameTime gameTime) {
 			// Updates controllers
 			foreach (IController controller in controllers) {
 				controller.Update();
@@ -220,7 +228,10 @@ namespace ZeldaGame
 			// Draws player
 			Link.Draw(_spriteBatch, Color.White);
 
-			_spriteBatch.End();
+            //Draws HUD
+            headUpDisplay.Draw(_spriteBatch);
+
+            _spriteBatch.End();
 
 			base.Draw(gameTime);
 		}
