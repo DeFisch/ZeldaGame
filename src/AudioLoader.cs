@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.IO;
 using Microsoft.Xna.Framework.Audio;
@@ -22,7 +23,23 @@ public class AudioLoader {
         sfx_instances.Add(("BGM", bgm));
     }
     public void LoadAudio() {
-        DirectoryInfo dir = new DirectoryInfo(game.Content.RootDirectory + "/audio");               
+        var pid = Environment.OSVersion.Platform;
+        DirectoryInfo dir; 
+        switch (pid) {
+            case PlatformID.Win32NT:
+			case PlatformID.Win32S:
+			case PlatformID.Win32Windows:
+			case PlatformID.WinCE:
+                dir = new DirectoryInfo("../../../" + game.Content.RootDirectory + "/audio");  
+                break;
+            case PlatformID.MacOSX:
+			case PlatformID.Unix:
+                dir = new DirectoryInfo(game.Content.RootDirectory + "/audio");
+                break;
+            default:
+                dir = new DirectoryInfo("../../../" + game.Content.RootDirectory + "/audio");  
+                break;
+        }             
         FileInfo[] files = dir.GetFiles("*.wav");
         foreach (FileInfo file in files) {
             string key = Path.GetFileNameWithoutExtension(file.Name);
