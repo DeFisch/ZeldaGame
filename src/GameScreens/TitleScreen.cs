@@ -1,7 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace ZeldaGame.GameScreens
+namespace ZeldaGame
 {
 
     public class TitleScreen : IGameScreen

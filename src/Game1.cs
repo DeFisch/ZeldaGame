@@ -8,7 +8,7 @@ using ZeldaGame.Block;
 using ZeldaGame.Controllers;
 using ZeldaGame.Enemy;
 using ZeldaGame.Enemy.Commands;
-using ZeldaGame.GameScreens;
+using ZeldaGame;
 using ZeldaGame.HUD;
 using ZeldaGame.Items;
 using ZeldaGame.Map;
@@ -35,7 +35,6 @@ namespace ZeldaGame
 		public EnemyFactory enemyFactory;
 		public BlockSpriteFactory blockSpriteFactory;
 		public CollisionHandler collisionHandler;
-		public GameStateScreenHandler gameStateScreenHandler;
 
 		public Texture2D HUD;
 		public HeadUpDisplay headUpDisplay;
@@ -72,7 +71,7 @@ namespace ZeldaGame
 			// Initialize collision handler
 			collisionHandler = new CollisionHandler(this);
 			// Initialize gameStateScreen handler
-			gameStateScreenHandler = new GameStateScreenHandler(this);
+			Globals.gameStateScreenHandler = new GameStateScreenHandler(this);
 
 			base.Initialize();
 		}
@@ -116,7 +115,7 @@ namespace ZeldaGame
             Rectangle bottomDoorQuadrant = new Rectangle((int)(windowSize.X / 4), (int)(3 * windowSize.Y / 4), (int)(windowSize.X / 2), (int)(windowSize.Y / 4));
 
 			//Adds the title screen
-			gameStateScreenHandler.AddScreen(GameState.TitleScreen, new TitleScreen(Content.Load<Texture2D>("TitleScreen"), this));
+			Globals.gameStateScreenHandler.AddScreen(GameState.TitleScreen, new TitleScreen(Content.Load<Texture2D>("TitleScreen"), this));
 
 			//Add NPCs
 			if (NPCFactory.isInDungeon())
@@ -184,8 +183,11 @@ namespace ZeldaGame
 			foreach (IController controller in controllers) {
 				controller.Update();
 			}
-			//updates game screen
-			gameStateScreenHandler.Update();
+			if (Globals.gameStateScreenHandler.CurrentGameState == GameState.TitleScreen)
+			{
+				Globals.gameStateScreenHandler.Update();
+				return;
+			}
             // Updates enemies
             enemyFactory.Update();
 			//Updates blocks
@@ -207,8 +209,12 @@ namespace ZeldaGame
 			GraphicsDevice.Clear(Color.CornflowerBlue);
 
 			_spriteBatch.Begin();
-			//Draws game screen
-			gameStateScreenHandler.Draw(_spriteBatch);
+			if (Globals.gameStateScreenHandler.CurrentGameState == GameState.TitleScreen)
+			{
+				Globals.gameStateScreenHandler.Draw(_spriteBatch);
+				_spriteBatch.End();
+				return;
+			}
 			// Draws map
 			map.Draw(_spriteBatch);
 			// Draws Blocks

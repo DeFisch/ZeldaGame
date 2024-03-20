@@ -1,4 +1,4 @@
-﻿using Microsoft.Xna.Framework.Graphics;
+﻿
 
 namespace ZeldaGame;
     public class StartGameCommand : ICommand
@@ -9,6 +9,6 @@ namespace ZeldaGame;
         }
     public void Execute()
         {
-            //Add code to switch to initial map
+            Globals.gameStateScreenHandler.CurrentGameState = GameState.Playing;
         }
     }

@@ -1,7 +1,7 @@
 ﻿using Microsoft.Xna.Framework.Graphics;
 using System.Collections.Generic;
 
-namespace ZeldaGame.GameScreens;
+namespace ZeldaGame;
 public enum GameState
 {
     TitleScreen, Playing, Pause, GameOver
@@ -30,5 +30,11 @@ public class GameStateScreenHandler
     public void Draw(SpriteBatch spriteBatch)
     {
         screens[currentGameState].Draw(spriteBatch);
+    }
+
+    public GameState CurrentGameState
+    {
+        get { return currentGameState; }
+        set { currentGameState = value; }
     }
 }

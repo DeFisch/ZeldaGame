@@ -1,7 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace ZeldaGame.GameScreens;
+namespace ZeldaGame;
 public interface IGameScreen
 {
     public void Draw(SpriteBatch spriteBatch);
