@@ -17,6 +17,8 @@ public class GameStateScreenHandler
         screens = new Dictionary<GameState, IGameScreen>();
         currentGameState = GameState.TitleScreen;
         this.myGame = game;
+        AddScreen(GameState.TitleScreen, new TitleScreen(game.Content.Load<Texture2D>("TitleScreen"), game));
+        AddScreen(GameState.Pause, new PauseGame(game.Content.Load<Texture2D>("TitleScreen"), game)); // Placeholder
     }
     public void AddScreen(GameState state, IGameScreen screen)
     {
@@ -36,5 +38,10 @@ public class GameStateScreenHandler
     {
         get { return currentGameState; }
         set { currentGameState = value; }
+    }
+
+    public bool IsPlaying()
+    {
+        return currentGameState == GameState.Playing;
     }
 }

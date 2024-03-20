@@ -47,8 +47,6 @@ namespace ZeldaGame
 		public Vector2 windowScale;
 		private SpriteFont font;
 
-
-
         public Game1() {
 			_graphics = new GraphicsDeviceManager(this);
 			Content.RootDirectory = "Content";
@@ -114,9 +112,6 @@ namespace ZeldaGame
             Rectangle topDoorQuadrant = new Rectangle((int)(windowSize.X / 4), 0, (int)(windowSize.X / 2), (int)(windowSize.Y / 4));
             Rectangle bottomDoorQuadrant = new Rectangle((int)(windowSize.X / 4), (int)(3 * windowSize.Y / 4), (int)(windowSize.X / 2), (int)(windowSize.Y / 4));
 
-			//Adds the title screen
-			Globals.gameStateScreenHandler.AddScreen(GameState.TitleScreen, new TitleScreen(Content.Load<Texture2D>("TitleScreen"), this));
-
 			//Add NPCs
 			if (NPCFactory.isInDungeon())
 			{
@@ -176,6 +171,8 @@ namespace ZeldaGame
             //Registers commands with Keys for displaying HUD
             keyboardController.RegisterPressKey(Keys.H, new DisplayHUDCommand(this));
 
+			//Registers commands with Keys for pausing and unpausing the game
+			keyboardController.RegisterPressKey(Keys.P, new PauseCommand(this));
         }
 
         protected override void Update(GameTime gameTime) {
@@ -183,7 +180,7 @@ namespace ZeldaGame
 			foreach (IController controller in controllers) {
 				controller.Update();
 			}
-			if (Globals.gameStateScreenHandler.CurrentGameState == GameState.TitleScreen)
+			if (!Globals.gameStateScreenHandler.IsPlaying())
 			{
 				Globals.gameStateScreenHandler.Update();
 				return;
@@ -206,15 +203,16 @@ namespace ZeldaGame
 		}
 
 		protected override void Draw(GameTime gameTime) {
-			GraphicsDevice.Clear(Color.CornflowerBlue);
-
 			_spriteBatch.Begin();
-			if (Globals.gameStateScreenHandler.CurrentGameState == GameState.TitleScreen)
+			if (!Globals.gameStateScreenHandler.IsPlaying())
 			{
 				Globals.gameStateScreenHandler.Draw(_spriteBatch);
+				//Draws HUD
+				headUpDisplay.Draw(_spriteBatch);
 				_spriteBatch.End();
 				return;
 			}
+			GraphicsDevice.Clear(Color.CornflowerBlue);
 			// Draws map
 			map.Draw(_spriteBatch);
 			// Draws Blocks
@@ -234,12 +232,22 @@ namespace ZeldaGame
 			// Draws player
 			Link.Draw(_spriteBatch, Color.White);
 
-            //Draws HUD
-            headUpDisplay.Draw(_spriteBatch);
-
             _spriteBatch.End();
 
 			base.Draw(gameTime);
+		}
+
+		public void PauseGame() {
+			if (Globals.gameStateScreenHandler.CurrentGameState == GameState.Pause)
+			{
+				Globals.audioLoader.Mute();
+				Globals.gameStateScreenHandler.CurrentGameState = GameState.Playing;
+			}
+			else
+			{
+				Globals.audioLoader.Mute();
+				Globals.gameStateScreenHandler.CurrentGameState = GameState.Pause;
+			}
 		}
 	}
 }
