@@ -28,7 +28,7 @@ public class OldWoman : INPC {
         {
             Globals.audioLoader.PlaySingleton("LOZ_Text", true);
             string displayedText = npcQuote.Substring(0, charactersDisplayed + 1);
-            spriteBatch.DrawString(font, displayedText, new Vector2(125, 125), Color.White);
+            spriteBatch.DrawString(font, displayedText, new Vector2(125, 300), Color.White);
             charactersDisplayed++;
             if (charactersDisplayed == npcQuote.Length)
             {
@@ -38,7 +38,7 @@ public class OldWoman : INPC {
         else if (quoteDisplayed)
         {
             Globals.audioLoader.StopSingleton("LOZ_Text");
-            spriteBatch.DrawString(font, npcQuote, new Vector2(125, 125), Color.White);
+            spriteBatch.DrawString(font, npcQuote, new Vector2(125, 300), Color.White);
         }
     }
 

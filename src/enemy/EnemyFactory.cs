@@ -16,11 +16,11 @@ public class EnemyFactory {
 	public string[] enemy_types = new string[] { "Stalfos", "Gibdo", "Keese", "WizzRobe", "DarkNut", "Goriya", "Aquamentus" };
 	public EnemyProjectileFactory enemyProjectileFactory;
 	ItemSpriteFactory itemSpriteFactory;
-	private Vector2 window_size;
-	public EnemyFactory(Texture2D[] textures, Vector2 scale, Vector2 window_size, ItemSpriteFactory itemSpriteFactory) {
+	private Vector3 map_size;
+	public EnemyFactory(Texture2D[] textures, Vector2 scale, Vector3 map_size, ItemSpriteFactory itemSpriteFactory) {
 		enemies = new List<IEnemy>();
 		this.itemSpriteFactory = itemSpriteFactory;
-		this.window_size = window_size;
+		this.map_size = map_size;
 		this.textures = textures;
 		enemyProjectileFactory = new EnemyProjectileFactory(textures);
 		this.scale = scale;
@@ -30,8 +30,8 @@ public class EnemyFactory {
 	public void AddEnemy(string enemy_name, string[,] map) {
 		IEnemy enemy = null;
 		List<Vector2> available_locations = new List<Vector2>();
-		float width = window_size.X / 16;
-		float height = window_size.Y / 11;
+		float width = map_size.X / 16;
+		float height = map_size.Y / 11;
 		for (int i = 0; i < map.GetLength(0); i++) {
 			for (int j = 0; j < map.GetLength(1); j++) {
 				if (map[i, j] == "-") {
@@ -45,7 +45,7 @@ public class EnemyFactory {
 			position.Y = 2.5f;
 		}
 		position.X = position.X * width + width * 2;
-		position.Y = position.Y * height + height * 2;
+		position.Y = position.Y * height + height * 2 + map_size.Z;
 		string color_variation = new Random().Next(0, 2) == 0 ? "blue" : "red";
 		switch (enemy_name) {
 			case "Stalfos":
@@ -91,8 +91,8 @@ public class EnemyFactory {
 				{
 					Point position = enemies[i].GetRectangle().Center;
 					//translate pixel coordinate back to map coordinate
-					double tile_width = window_size.X / 16.0;
-					double tile_height = window_size.Y / 11.0;
+					double tile_width = map_size.X / 16.0;
+					double tile_height = map_size.Y / 11.0;
 					int x = (int)(position.X / tile_width) - 2;
 					int y = (int)(position.Y / tile_height) - 2;
 					string[] available_items = itemSpriteFactory.GetAvailableItems();

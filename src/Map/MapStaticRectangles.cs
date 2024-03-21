@@ -36,13 +36,13 @@ namespace ZeldaGame.Map
             return sRectangleList;
         }
 
-        public void SetLists(Vector2 window_size, bool includeWater = true)
+        public void SetLists(Vector3 map_size, bool includeWater = true)
         {
             dRectangleList.Clear();
             sRectangleList.Clear();
 
             string[,] mapList = map.get_map_info();
-            addBoundaryRectangles(dRectangleList, sRectangleList, window_size); // add boundary rectangles
+            addBoundaryRectangles(dRectangleList, sRectangleList, map_size); // add boundary rectangles
             
             for (int i = 0; i < 12; i++)
             {
@@ -52,13 +52,13 @@ namespace ZeldaGame.Map
                     {
                         if(!includeWater && mapList[j, i].Equals("w")) 
                             continue;
-                        width = window_size.X / 16;
-                        height = window_size.Y / 11;
+                        width = map_size.X / 16;
+                        height = map_size.Y / 11;
                         xPosition = (i * width) + (2 * width);
                         yPosition = (j * height) + (2 * height);
                         if (!getSourceRectangle(mapList[j, i]).Equals(new Rectangle(0, 0, 0, 0)))
                         {
-                            dRectangleList.Add(new Rectangle((int)xPosition, (int)yPosition, (int)width, (int)height));
+                            dRectangleList.Add(new Rectangle((int)xPosition, (int)(yPosition + map_size.Z), (int)width, (int)height));
                             sRectangleList.Add(getSourceRectangle(mapList[j, i]));
                         }
                     }
@@ -66,50 +66,50 @@ namespace ZeldaGame.Map
             }
         }
 
-        public void addBoundaryRectangles(List<Rectangle> dRectangleList, List<Rectangle> sRectangleList, Vector2 window_size)
+        public void addBoundaryRectangles(List<Rectangle> dRectangleList, List<Rectangle> sRectangleList, Vector3 map_size)
         {
             if(map.isRoomAvailable("up")) {
                 // if there is a room above
-                dRectangleList.Add(new Rectangle(0, 0, (int)(window_size.X*0.46875), (int)(0.18*window_size.Y)));
-                dRectangleList.Add(new Rectangle((int)(window_size.X*0.53125), 0, (int)(window_size.X*0.46875), (int)(0.18*window_size.Y)));
+                dRectangleList.Add(new Rectangle(0, (int)(map_size.Z), (int)(map_size.X*0.46875), (int)(0.18*map_size.Y)));
+                dRectangleList.Add(new Rectangle((int)(map_size.X*0.53125), 0, (int)((map_size.X*0.46875) + map_size.Z), (int)(0.18*map_size.Y)));
                 sRectangleList.Add(getSourceRectangle("w"));
                 sRectangleList.Add(getSourceRectangle("w"));
             }else {
                 // if there is no room above
-                dRectangleList.Add(new Rectangle(0, 0, (int)window_size.X, (int)(0.18*window_size.Y)));
+                dRectangleList.Add(new Rectangle(0, (int)(map_size.Z), (int)map_size.X, (int)(0.18*map_size.Y)));
                 sRectangleList.Add(getSourceRectangle("w"));
             }
             if(map.isRoomAvailable("down")) {
                 // if there is a room below
-                dRectangleList.Add(new Rectangle(0, (int)(window_size.Y*0.82), (int)(window_size.X*0.46875), (int)(0.18*window_size.Y)));
-                dRectangleList.Add(new Rectangle((int)(window_size.X*0.53125), (int)(window_size.Y*0.82), (int)(window_size.X*0.46875), (int)(0.18*window_size.Y)));
+                dRectangleList.Add(new Rectangle(0, (int)((map_size.Y*0.82) + map_size.Z), (int)(map_size.X*0.46875), (int)(0.18*map_size.Y)));
+                dRectangleList.Add(new Rectangle((int)(map_size.X*0.53125), (int)((map_size.Y*0.82) + map_size.Z), (int)(map_size.X*0.46875), (int)(0.18*map_size.Y)));
                 sRectangleList.Add(getSourceRectangle("w"));
                 sRectangleList.Add(getSourceRectangle("w"));
             }else {
                 // if there is no room below
-                dRectangleList.Add(new Rectangle(0, (int)(window_size.Y*0.82), (int)window_size.X, (int)(0.18*window_size.Y)));
+                dRectangleList.Add(new Rectangle(0, (int)((map_size.Y*0.82) + map_size.Z), (int)map_size.X, (int)(0.18*map_size.Y)));
                 sRectangleList.Add(getSourceRectangle("w"));
             }
             if(map.isRoomAvailable("left")) {
                 // if there is a room to the left
-                dRectangleList.Add(new Rectangle(0, 0, (int)(0.125*window_size.X), (int)(window_size.Y*0.45)));
-                dRectangleList.Add(new Rectangle(0, (int)(window_size.Y*0.55), (int)(0.125*window_size.X), (int)(window_size.Y*0.45)));
+                dRectangleList.Add(new Rectangle(0, (int)(map_size.Z), (int)(0.125*map_size.X), (int)(map_size.Y*0.45)));
+                dRectangleList.Add(new Rectangle(0, (int)((map_size.Y*0.55) + map_size.Z), (int)(0.125*map_size.X), (int)(map_size.Y*0.45)));
                 sRectangleList.Add(getSourceRectangle("w"));
                 sRectangleList.Add(getSourceRectangle("w"));
             }else {
                 // if there is no room to the left
-                dRectangleList.Add(new Rectangle(0, 0, (int)(0.125*window_size.X), (int)window_size.Y));
+                dRectangleList.Add(new Rectangle(0, (int)(map_size.Z), (int)(0.125*map_size.X), (int)map_size.Y));
                 sRectangleList.Add(getSourceRectangle("w"));
             }
             if(map.isRoomAvailable("right")) {
                 // if there is a room to the right
-                dRectangleList.Add(new Rectangle((int)(window_size.X*0.875), 0, (int)(0.125*window_size.X), (int)(window_size.Y*0.45)));
-                dRectangleList.Add(new Rectangle((int)(window_size.X*0.875), (int)(window_size.Y*0.55), (int)(0.125*window_size.X), (int)(window_size.Y*0.45)));
+                dRectangleList.Add(new Rectangle((int)(map_size.X*0.875), (int)(map_size.Z), (int)(0.125*map_size.X), (int)(map_size.Y*0.45)));
+                dRectangleList.Add(new Rectangle((int)(map_size.X*0.875), (int)((map_size.Y*0.55) + map_size.Z), (int)(0.125*map_size.X), (int)(map_size.Y*0.45)));
                 sRectangleList.Add(getSourceRectangle("w"));
                 sRectangleList.Add(getSourceRectangle("w"));
             }else {
                 // if there is no room to the right
-                dRectangleList.Add(new Rectangle((int)(window_size.X*0.875), 0, (int)(0.125*window_size.X), (int)window_size.Y));
+                dRectangleList.Add(new Rectangle((int)(map_size.X*0.875), (int)(map_size.Z), (int)(0.125*map_size.X), (int)map_size.Y));
                 sRectangleList.Add(getSourceRectangle("w"));
             }
         }

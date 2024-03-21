@@ -46,11 +46,11 @@ namespace ZeldaGame.Block {
             CollisionAfterPush();
 		}
 
-		public void Draw(SpriteBatch spriteBatch, Texture2D texture, Vector2 window_size, Vector2 scale) {
+		public void Draw(SpriteBatch spriteBatch, Texture2D texture, Vector3 map_size, Vector2 scale) {
             room = map.getMapXY();
             if (!roomCheck().Equals(3))
             {
-                destinationRectangle = new Rectangle((int)(window_size.X/16* xPosition), (int)(window_size.Y/11*yPosition), (int)(sourceRectangle.Width * scale.X), (int)(sourceRectangle.Height * scale.Y));
+                destinationRectangle = new Rectangle((int)(map_size.X/16 * xPosition), (int)((map_size.Y/11 * yPosition) + map_size.Z), (int)(sourceRectangle.Width * scale.X), (int)(sourceRectangle.Height * scale.Y));
 		        spriteBatch.Draw(texture, destinationRectangle, sourceRectangle, Color.White);
                 isDrawn = true;
             }

@@ -16,8 +16,8 @@ public class MapHandler {
     private MapLoader mapLoader;
     private string[,] map;
     private Texture2D map_texture;
-    private Vector2 window_size;
-    private Vector2 map_size;
+    private Vector3 map_size;
+    private Vector2 room_size;
     public int x = 2, y = 5; // default map //Olivia modified this 
     private MapStaticRectangles mapRectangles;
     private Game1 game;
@@ -28,11 +28,11 @@ public class MapHandler {
         mapLoader = new MapLoader();
         this.game = game;
         this.map_texture = map_texture;
-        window_size = game.windowSize;
-        map_size = new Vector2(256, 176);
+        map_size = game.mapSize;
+        room_size = new Vector2(256, 176);
         map = mapLoader.get_map_info(); // get default map info
         mapRectangles = new MapStaticRectangles(this);
-        mapRectangles.SetLists(window_size);
+        mapRectangles.SetLists(map_size);
         // initialize enemy record
 		for (int i = 0; i < 7; i++) {
 			for (int j = 0; j < 12; j++) {
@@ -41,11 +41,11 @@ public class MapHandler {
 			}
 		}
     }
-    public Vector2 GetWindowScale(Vector2 windowSize) {
-		return new Vector2(windowSize.X / map_size.X, windowSize.Y / map_size.Y);
+    public Vector2 GetWindowScale(Vector3 mapSize) {
+		return new Vector2(mapSize.X / room_size.X, mapSize.Y / room_size.Y);
 	}
     private Rectangle get_map_location(int x, int y) {
-        return new Rectangle(1 + x * 257, 1 + y * 177, (int)map_size.X, (int)map_size.Y);
+        return new Rectangle(1 + x * 257, 1 + y * 177, (int)room_size.X, (int)room_size.Y);
     }
     public bool move_up() {
         if(mapLoader.isRoomAvailable("up")){
@@ -102,7 +102,7 @@ public class MapHandler {
             this.x = x;
             this.y = y;
             map = mapLoader.get_map_info();
-            mapRectangles.SetLists(window_size); // update map rectangles
+            mapRectangles.SetLists(map_size); // update map rectangles
             return true;
         }
         return false;
@@ -113,13 +113,13 @@ public class MapHandler {
 
     public void Draw(SpriteBatch spriteBatch){
         Rectangle mapSourceRectangle = get_map_location(x, y);
-        Rectangle mapTargetRectangle = new Rectangle(0, 0, (int)window_size.X, (int)window_size.Y);
+        Rectangle mapTargetRectangle = new Rectangle(0, (int)map_size.Z, (int)map_size.X, (int)map_size.Y);
         spriteBatch.Draw(map_texture, mapTargetRectangle, mapSourceRectangle, Color.White);
         List<Rectangle> sList = mapRectangles.getSourceRectangleList();
         List<Rectangle> dlist = mapRectangles.getDestinationRectangleList();
         foreach(string key in mapLoader.door_type.Keys){
             if(mapLoader.door_type[key] == 2){
-                DrawWallOnHole(spriteBatch, key, window_size);
+                DrawWallOnHole(spriteBatch, key, map_size);
             }
         }
         if (debug){
@@ -134,27 +134,27 @@ public class MapHandler {
     public bool BreakWall(string pos){
         if(mapLoader.door_type[pos] == 2){
             mapLoader.door_type[pos] = 1;
-            mapRectangles.SetLists(window_size); //refresh the map boundaries
+            mapRectangles.SetLists(map_size); //refresh the map boundaries
             return true;
         }
         return false;
     }
 
-    public void DrawWallOnHole(SpriteBatch spriteBatch, string pos, Vector2 window_size){
+    public void DrawWallOnHole(SpriteBatch spriteBatch, string pos, Vector3 map_size){
         Rectangle srcRect = new Rectangle(1527, 0, 16, 32);
         Rectangle destRect = new Rectangle(0, 0, 0, 0);
         switch(pos){
             case "up":
-                destRect = new Rectangle((int)(window_size.X*0.46875), 0, (int)(window_size.X*0.0625), (int)(window_size.Y*0.18));
+                destRect = new Rectangle((int)(map_size.X*0.46875), (int)(map_size.Z), (int)(map_size.X*0.0625), (int)(map_size.Y*0.18));
                 break;
             case "down":
-                destRect = new Rectangle((int)(window_size.X*0.46875), (int)(window_size.Y*0.82), (int)(window_size.X*0.0625), (int)(window_size.Y*0.18));
+                destRect = new Rectangle((int)(map_size.X*0.46875), (int)((map_size.Y*0.82) + map_size.Z), (int)(map_size.X*0.0625), (int)(map_size.Y*0.18));
                 break;
             case "left":
-                destRect = new Rectangle(0, (int)(window_size.Y*0.45), (int)(window_size.X*0.125), (int)(window_size.Y*0.1));
+                destRect = new Rectangle(0, (int)((map_size.Y*0.45) + map_size.Z), (int)(map_size.X*0.125), (int)(map_size.Y*0.1));
                 break;
             case "right":
-                destRect = new Rectangle((int)(window_size.X*0.875), (int)(window_size.Y*0.45), (int)(window_size.X*0.125), (int)(window_size.Y*0.1));
+                destRect = new Rectangle((int)(map_size.X*0.875), (int)((map_size.Y*0.45) + map_size.Z), (int)(map_size.X*0.125), (int)(map_size.Y*0.1));
                 break;
         }
         if (pos == "down")
@@ -164,9 +164,9 @@ public class MapHandler {
     }
     public List<Rectangle> getAllObjectRectangles(bool includeWater = true){
         if (!includeWater)
-            mapRectangles.SetLists(window_size, false);
+            mapRectangles.SetLists(map_size, false);
         else
-            mapRectangles.SetLists(window_size, true);
+            mapRectangles.SetLists(map_size, true);
         List<Rectangle> dList = mapRectangles.getDestinationRectangleList();
         return dList;
     }
@@ -185,7 +185,7 @@ public class MapHandler {
         x = 2;
         y = 5;
         map = mapLoader.get_map_info();
-        mapRectangles.SetLists(window_size);
+        mapRectangles.SetLists(map_size);
         mapLoader.load_map(x,y);
         for (int i = 0; i < 7; i++)
             for (int j = 0; j < 12; j++)

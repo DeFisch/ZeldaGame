@@ -38,13 +38,15 @@ namespace ZeldaGame
 
 		public Texture2D HUD;
 		public HeadUpDisplay headUpDisplay;
+		public PlayerInfoHUD playerInfoHUD;
 
 		private KeyboardController keyboardController;
 		private MouseController mouseController;
 		private List<IController> controllers;
 		public MapHandler map;
+		public Vector3 mapSize;
+		public Vector2 mapScale;
 		public Vector2 windowSize;
-		public Vector2 windowScale;
 		private SpriteFont font;
 
         public Game1() {
@@ -60,8 +62,9 @@ namespace ZeldaGame
             mouseController = new MouseController();
 			controllers = new List<IController> { keyboardController, mouseController };
 
-			// set fixed window size
-			windowSize = new Vector2(800, 600);
+			// set fixed window size and map size
+			windowSize = new Vector2(800, 725);
+			mapSize = new Vector3(800, 550, 175);
             _graphics.PreferredBackBufferWidth = (int)windowSize.X;
 			_graphics.PreferredBackBufferHeight = (int)windowSize.Y;
 			_graphics.ApplyChanges();
@@ -90,27 +93,28 @@ namespace ZeldaGame
 			// Load default map
 			Texture2D map_texture = Content.Load<Texture2D>("Level1_Map");
 			map = new MapHandler(map_texture, this);
-			windowScale = map.GetWindowScale(windowSize);
+			mapScale = map.GetWindowScale(mapSize);
 
 			// Initializes item classes
 			PlayerSpriteFactory.Instance.LoadAllTextures(Content);
 			PlayerItemSpriteFactory.Instance.LoadAllTextures(Content);
-            Link = new Player1(new Vector2(windowSize.X / 2, windowSize.X / 2), windowScale);
+            Link = new Player1(new Vector2(mapSize.X / 2, (mapSize.X / 2) + mapSize.Z), mapScale);
 
 			
 			Texture2D[] enemy_texture = {Content.Load<Texture2D>("enemies"),Content.Load<Texture2D>("enemies_1")};
-			blockSpriteFactory = new BlockSpriteFactory(map_texture, windowScale,windowSize,Link,map);
-            NPCFactory = new NPCFactory(npcs, windowScale, font, map);
-			itemFactory = new ItemSpriteFactory(Items, npcs, windowScale, Link, map);
-			enemyFactory = new EnemyFactory(enemy_texture, windowScale, windowSize, itemFactory);
-			headUpDisplay = new HeadUpDisplay(HUD,windowScale,windowSize);
+			blockSpriteFactory = new BlockSpriteFactory(map_texture, mapScale,mapSize,Link,map);
+            NPCFactory = new NPCFactory(npcs, mapScale, font, map);
+			itemFactory = new ItemSpriteFactory(Items, npcs, mapScale, Link, map);
+			enemyFactory = new EnemyFactory(enemy_texture, mapScale, mapSize, itemFactory);
+			headUpDisplay = new HeadUpDisplay(HUD,mapScale,windowSize);
+			playerInfoHUD = new PlayerInfoHUD(HUD, mapScale, windowSize);
 		
 
-            // Define the quadrants based on the window size
-            Rectangle leftDoorQuadrant = new Rectangle(0, (int)(windowSize.Y / 4), (int)(windowSize.X / 4), (int)(windowSize.Y / 2));
-            Rectangle rightDoorQuadrant = new Rectangle((int)(3 * windowSize.X / 4), (int)(windowSize.Y / 4), (int)(windowSize.X / 4), (int)(windowSize.Y / 2));
-            Rectangle topDoorQuadrant = new Rectangle((int)(windowSize.X / 4), 0, (int)(windowSize.X / 2), (int)(windowSize.Y / 4));
-            Rectangle bottomDoorQuadrant = new Rectangle((int)(windowSize.X / 4), (int)(3 * windowSize.Y / 4), (int)(windowSize.X / 2), (int)(windowSize.Y / 4));
+            // Define the quadrants based on the map size
+            Rectangle leftDoorQuadrant = new Rectangle(0, (int)((mapSize.Y / 4) + mapSize.Z), (int)(mapSize.X / 4), (int)(mapSize.Y / 2));
+            Rectangle rightDoorQuadrant = new Rectangle((int)(3 * mapSize.X / 4), (int)((mapSize.Y / 4) + mapSize.Z), (int)(mapSize.X / 4), (int)(mapSize.Y / 2));
+            Rectangle topDoorQuadrant = new Rectangle((int)(mapSize.X / 4), (int)(mapSize.Z), (int)(mapSize.X / 2), (int)(mapSize.Y / 4));
+            Rectangle bottomDoorQuadrant = new Rectangle((int)(mapSize.X / 4), (int)((3 * mapSize.Y / 4) + mapSize.Z), (int)(mapSize.X / 2), (int)(mapSize.Y / 4));
 
 			//Add NPCs
 			if (NPCFactory.isInDungeon())
@@ -231,6 +235,9 @@ namespace ZeldaGame
 			}
 			// Draws player
 			Link.Draw(_spriteBatch, Color.White);
+
+			//Draws player info HUD
+			playerInfoHUD.Draw(_spriteBatch);
 
             _spriteBatch.End();
 

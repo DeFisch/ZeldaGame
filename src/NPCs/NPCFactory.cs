@@ -112,7 +112,7 @@ public class NPCFactory
     {
         float width = scale.X/2;
         float height = scale.Y/2;
-        return new Vector2(width + (x * 70), height + (y * 70));
+        return new Vector2(width + (x * 70), height + (y * 70) + 175);// +175: moves NPC downward 
     }
 
     public List<INPC> GetNPCList()

@@ -49,7 +49,7 @@ public class CollisionHandler {
         // Check if projectile collides with window boundaries
         foreach (IPlayerProjectile projectile in activeProjectiles.Keys)
         {
-            if (activeProjectiles[projectile].X < 0 || activeProjectiles[projectile].X > game.windowSize.X || activeProjectiles[projectile].Y < 0 || activeProjectiles[projectile].Y > game.windowSize.Y)
+            if (activeProjectiles[projectile].X < 0 || activeProjectiles[projectile].X > game.mapSize.X || activeProjectiles[projectile].Y < game.mapSize.Z || activeProjectiles[projectile].Y > game.windowSize.Y)
             {
                 projectile.Collided();
                 Debug.WriteLine("Projectile collides with window boundary.");
@@ -111,36 +111,36 @@ public class CollisionHandler {
         }
     }
 
-    public void PlayerDoorCollision(Vector2 window_size, IPlayer player, MapHandler map){
+    public void PlayerDoorCollision(Vector3 map_size, IPlayer player, MapHandler map){
         Rectangle playerHitBox = player.GetPlayerHitBox();
         Vector2 playerCenterpoint = new Vector2(playerHitBox.X + playerHitBox.Width/2, playerHitBox.Y + playerHitBox.Height/2);
-        Rectangle up_door = new Rectangle((int)(0.46875*window_size.X), 0, (int)(0.0625*window_size.X), (int)(0.18*window_size.Y));
-        Rectangle down_door = new Rectangle((int)(0.46875*window_size.X), (int)(0.82*window_size.Y), (int)(0.0625*window_size.X), (int)(0.18*window_size.Y));
-        Rectangle left_door = new Rectangle(0, (int)(0.45*window_size.Y), (int)(0.125*window_size.X), (int)(0.1*window_size.Y));
-        Rectangle right_door = new Rectangle((int)(0.875*window_size.X), (int)(0.45*window_size.Y), (int)(0.125*window_size.X), (int)(0.1*window_size.Y));
+        Rectangle up_door = new Rectangle((int)(0.46875*map_size.X), (int)(map_size.Z), (int)(0.0625*map_size.X), (int)(0.18*map_size.Y));
+        Rectangle down_door = new Rectangle((int)(0.46875*map_size.X), (int)((0.82*map_size.Y) + map_size.Z), (int)(0.0625*map_size.X), (int)(0.18*map_size.Y));
+        Rectangle left_door = new Rectangle(0, (int)((0.45*map_size.Y) + map_size.Z), (int)(0.125*map_size.X), (int)(0.1*map_size.Y));
+        Rectangle right_door = new Rectangle((int)(0.875*map_size.X), (int)((0.45*map_size.Y) + map_size.Z), (int)(0.125*map_size.X), (int)(0.1*map_size.Y));
         if (up_door.Contains(playerCenterpoint)){
             map.move_up();
-            player.SetPlayerPosition(new Vector2((int)(window_size.X/2), (int)(0.8*window_size.Y)));
+            player.SetPlayerPosition(new Vector2((int)(map_size.X/2), (int)((0.8*map_size.Y) + map_size.Z)));
 			Debug.WriteLine("Player enters top door.");
 		}
 		else if (down_door.Contains(playerCenterpoint)){
             map.move_down();
-            player.SetPlayerPosition(new Vector2((int)(window_size.X/2), (int)(0.2*window_size.Y)));
+            player.SetPlayerPosition(new Vector2((int)(map_size.X/2), (int)((0.2*map_size.Y) + map_size.Z)));
 			Debug.WriteLine("Player enters bottom door.");
 		}
 		else if (left_door.Contains(playerCenterpoint)){
             map.move_left();
-            player.SetPlayerPosition(new Vector2((int)(0.8*window_size.X), (int)(window_size.Y/2)));
+            player.SetPlayerPosition(new Vector2((int)(0.8*map_size.X), (int)((map_size.Y/2) + map_size.Z)));
 			Debug.WriteLine("Player enters left door.");
 		}
 		else if (right_door.Contains(playerCenterpoint)){
             map.move_right();
-            player.SetPlayerPosition(new Vector2((int)(0.2*window_size.X), (int)(window_size.Y/2)));
+            player.SetPlayerPosition(new Vector2((int)(0.2*map_size.X), (int)((map_size.Y/2) + map_size.Z)));
 			Debug.WriteLine("Player enters right door.");
 		}
 
         //Room_0_1 Stair collision
-        Rectangle stair = new Rectangle((int)(window_size.X / 2), (int)(window_size.Y / 11 * 5), (int)(window_size.X / 16), (int)(window_size.Y / 11));
+        Rectangle stair = new Rectangle((int)(map_size.X / 2), (int)((map_size.Y / 11 * 5) + map_size.Z), (int)(map_size.X / 16), (int)(map_size.Y / 11));
         if (map.getMapXY().Equals(new Vector2(1, 0)))
         {
             if (stair.Contains(playerCenterpoint))
@@ -149,13 +149,13 @@ public class CollisionHandler {
                 map.switch_map(0, 0);
                 map.x = 0;
                 map.y = 0;
-                player.SetPlayerPosition(new Vector2(175, 240));
+                player.SetPlayerPosition(new Vector2(175, 415));
                 Debug.WriteLine("Player enters stairs.");
             }
         }
 
         //Room_0_0 back to room_0_1
-        Rectangle invisibleDoor = new Rectangle((int)(window_size.X / 16 * 3), 0, (int)(window_size.X / 16), (int)(window_size.Y / 3));
+        Rectangle invisibleDoor = new Rectangle((int)(map_size.X / 16 * 3), (int)(map_size.Z), (int)(map_size.X / 16), (int)(map_size.Y / 3));
         if (map.getMapXY().Equals(new Vector2(0, 0)))
         {
             if (invisibleDoor.Contains(playerCenterpoint))
@@ -164,7 +164,7 @@ public class CollisionHandler {
                 map.switch_map(0, 1);
                 map.x = 1;
                 map.y = 0;
-                player.SetPlayerPosition(new Vector2(375,305));
+                player.SetPlayerPosition(new Vector2(375,480));
 				Debug.WriteLine("Player enters invisible door.");
 			}
         }
@@ -212,10 +212,10 @@ public class CollisionHandler {
     public void BombBreakableWallCollision()
     {
         Dictionary<string, Rectangle> door_type = new Dictionary<string, Rectangle>(){
-            {"up", new Rectangle( (int)(game.windowSize.X * 0.46875), (int)(game.windowSize.Y * 0), (int)(game.windowSize.X * 0.0625), (int)(game.windowSize.Y * 0.18))},
-            {"down", new Rectangle( (int)(game.windowSize.X * 0.46875), (int)(game.windowSize.Y * 0.82), (int)(game.windowSize.X * 0.0625), (int)(game.windowSize.Y * 0.18))},
-            {"left", new Rectangle( 0, (int)(game.windowSize.Y * 0.45), (int)(game.windowSize.X * 0.125), (int)(game.windowSize.Y * 0.1))},
-            {"right", new Rectangle( (int)(game.windowSize.X * 0.875), (int)(game.windowSize.Y * 0.45), (int)(game.windowSize.X * 0.125), (int)(game.windowSize.Y * 0.1))}
+            {"up", new Rectangle( (int)(game.mapSize.X * 0.46875), (int)((game.mapSize.Y * 0) + game.mapSize.Z), (int)(game.mapSize.X * 0.0625), (int)(game.mapSize.Y * 0.18))},
+            {"down", new Rectangle( (int)(game.mapSize.X * 0.46875), (int)((game.mapSize.Y * 0.82) + game.mapSize.Z), (int)(game.mapSize.X * 0.0625), (int)(game.mapSize.Y * 0.18))},
+            {"left", new Rectangle( 0, (int)(game.mapSize.Y * 0.45), (int)((game.mapSize.X * 0.125) + game.mapSize.Z), (int)(game.mapSize.Y * 0.1))},
+            {"right", new Rectangle( (int)(game.mapSize.X * 0.875), (int)((game.mapSize.Y * 0.45) + game.mapSize.Z), (int)(game.mapSize.X * 0.125), (int)(game.mapSize.Y * 0.1))}
         };
         foreach (IPlayerProjectile projectile in game.Link.GetProjectileHitBoxes().Keys)
         {
@@ -237,7 +237,7 @@ public class CollisionHandler {
 		PlayerProjectileEnemyCollision();
         PlayerProjectileMapCollision();
         PlayerMapCollision();
-        PlayerDoorCollision(game.windowSize, game.Link, game.map);
+        PlayerDoorCollision(game.mapSize, game.Link, game.map);
         PlayerNPCCollision();
 		EnemyPlayerCollision();
         EnemyProjectilePlayerCollision();
