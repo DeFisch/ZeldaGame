@@ -55,7 +55,7 @@ public class EnemyFactory {
 				enemy = new Gibdo(textures[0], position, scale);
 				break;
 			case "Keese":
-				enemy = new Keese(textures[0], position, color_variation, scale);
+				enemy = new Keese(textures[0], position, color_variation, map_size, scale);
 				break;
 			case "WizzRobe":
 				enemy = new WizzRobe(textures[0], position, enemyProjectileFactory, color_variation, scale);

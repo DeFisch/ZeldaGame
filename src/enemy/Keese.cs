@@ -12,22 +12,24 @@ public class Keese : IEnemy {
 	private State state;
 	private Vector2 scale;
 	private int[,] character_sprites = new int[,] { { 183, 11, 16, 16 }, { 200, 11, 16, 16 } }; // x, y, width, height
+	private Vector3 map_size;
 	private double speedX = 0;
 	private double speedY = 0;
 	private int health = 1;
 	private double general_speed = 4;
 	private int dead_timer = 0;
 	private int iFrame = -100;
-	public Keese(Texture2D texture, Vector2 position, string color, Vector2 scale) {
+	public Keese(Texture2D texture, Vector2 position, string color, Vector3 map_size, Vector2 scale) {
 		this.texture = texture;
 		this.position = position;
 		state = State.Walking;
-		this.speedX = new Random().NextDouble() * general_speed - general_speed / 2;
-		this.speedY = new Random().NextDouble() * general_speed - general_speed / 2;
+		speedX = new Random().NextDouble() * general_speed - general_speed / 2;
+		speedY = new Random().NextDouble() * general_speed - general_speed / 2;
 		if (color == "blue") {
 			character_sprites[0, 1] = 28;
 			character_sprites[1, 1] = 28;
 		}
+		this.map_size = map_size;
 		this.scale = scale;
 	}
 
@@ -72,7 +74,10 @@ public class Keese : IEnemy {
 			speedX = new Random().NextDouble() * general_speed - general_speed / 2;
 			speedY = new Random().NextDouble() * general_speed - general_speed / 2;
 		}
-		if (position.X > 0 && position.X < 800 - character_sprites[sprite_id, 2] * scale.X && position.Y > 0 && position.Y < 600 - character_sprites[sprite_id, 3] * scale.Y) {
+		if (position.X + speedX < map_size.X - character_sprites[sprite_id,2] * scale.X &&
+		position.X + speedX > 0 &&
+		position.Y + speedY > map_size.Z &&
+		position.Y + speedY < map_size.Y + map_size.Z - character_sprites[sprite_id,3] * scale.Y) {
 			position.X += (float)speedX;
 			position.Y += (float)speedY;
 		}
