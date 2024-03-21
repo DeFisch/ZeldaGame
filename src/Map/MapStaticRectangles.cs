@@ -71,7 +71,7 @@ namespace ZeldaGame.Map
             if(map.isRoomAvailable("up")) {
                 // if there is a room above
                 dRectangleList.Add(new Rectangle(0, (int)(map_size.Z), (int)(map_size.X*0.46875), (int)(0.18*map_size.Y)));
-                dRectangleList.Add(new Rectangle((int)(map_size.X*0.53125), 0, (int)((map_size.X*0.46875) + map_size.Z), (int)(0.18*map_size.Y)));
+                dRectangleList.Add(new Rectangle((int)(map_size.X*0.53125), (int)(map_size.Z), (int)((map_size.X*0.46875) + map_size.Z), (int)(0.18*map_size.Y)));
                 sRectangleList.Add(getSourceRectangle("w"));
                 sRectangleList.Add(getSourceRectangle("w"));
             }else {
