@@ -49,7 +49,7 @@ public class CollisionHandler {
         // Check if projectile collides with window boundaries
         foreach (IPlayerProjectile projectile in activeProjectiles.Keys)
         {
-            if (activeProjectiles[projectile].X < 0 || activeProjectiles[projectile].X > game.mapSize.X || activeProjectiles[projectile].Y < game.mapSize.Z || activeProjectiles[projectile].Y > game.windowSize.Y)
+            if (activeProjectiles[projectile].X < 0 || activeProjectiles[projectile].X > game.windowSize.X || activeProjectiles[projectile].Y < 0 || activeProjectiles[projectile].Y > game.windowSize.Y)
             {
                 projectile.Collided();
                 Debug.WriteLine("Projectile collides with window boundary.");
