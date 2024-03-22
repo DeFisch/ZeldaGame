@@ -59,5 +59,10 @@ namespace ZeldaGame.HUD
         {
             isDisplayed *= -1;
         }
+
+        public bool isVisible()
+        {
+            return isDisplayed == 1;
+        }
     }
 }
