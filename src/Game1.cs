@@ -47,7 +47,7 @@ namespace ZeldaGame
 		public Vector3 mapSize;
 		public Vector2 mapScale;
 		public Vector2 windowSize;
-		private SpriteFont font;
+		public SpriteFont font;
 
         public Game1() {
 			_graphics = new GraphicsDeviceManager(this);
