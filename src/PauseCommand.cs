@@ -11,13 +11,13 @@ namespace ZeldaGame
         }
         public void Execute()
         {
-            if (myGame.headUpDisplay.isVisible())
+            if (Globals.gameStateScreenHandler.CurrentGameState == GameState.HUD) // If the game displaying HUD, don't pause
                 return;
             Globals.audioLoader.PlayDisregardMute("Pause");
             if (myGame.IsPaused())
                 myGame.ResumeGame();
             else
-                myGame.PauseGame();
+                myGame.PauseGame(GameState.Pause);
         }
     }
 }
