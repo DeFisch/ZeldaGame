@@ -13,6 +13,7 @@ namespace ZeldaGame
         {
             if (myGame.headUpDisplay.isVisible())
                 return;
+            Globals.audioLoader.PlayDisregardMute("Pause");
             if (myGame.IsPaused())
                 myGame.ResumeGame();
             else

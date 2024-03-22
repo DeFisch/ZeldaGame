@@ -18,7 +18,7 @@ public class AudioLoader {
     public void PlayBGM(){
         SoundEffectInstance bgm = game.Content.Load<SoundEffect>("audio/BGM").CreateInstance();
         bgm.IsLooped = true;
-        bgm.Volume = 0.2f;
+        bgm.Volume = 0.4f;
         bgm.Play();
         sfx_instances.Add(("BGM", bgm));
     }
@@ -45,6 +45,10 @@ public class AudioLoader {
             string key = Path.GetFileNameWithoutExtension(file.Name);
             sfx[key] = game.Content.Load<SoundEffect>("audio/" + key);
         }
+    }
+
+    public void PlayDisregardMute(string key) {
+        sfx[key].Play();
     }
 
     public void Play(string key, bool loop = false) {

@@ -17,6 +17,7 @@ namespace ZeldaGame.HUD
 
         public void Execute()
         {
+            Globals.audioLoader.PlayDisregardMute("Pause");
             if (MyGame.IsPaused())
                 MyGame.ResumeGame();
             else
