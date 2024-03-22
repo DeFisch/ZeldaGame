@@ -15,9 +15,11 @@ namespace ZeldaGame;
 public class CollisionHandler {
     private readonly Game1 game;
     private readonly EnemyCollisionHandler enemyCollisionHandler;
+    private readonly ItemActionHandler itemActionHandler;
     public CollisionHandler(Game1 game) {
         this.game = game;
         enemyCollisionHandler = new EnemyCollisionHandler(game);
+        itemActionHandler = new ItemActionHandler();
     }
 
     public void PlayerMapCollision()
@@ -104,6 +106,7 @@ public class CollisionHandler {
     public void ItemPlayerCollision() {
         foreach (IItemSprite item in game.itemFactory.GetAllItems().ToList()) {
             if (item.GetHitBox().Intersects(game.Link.GetPlayerHitBox())) {
+                itemActionHandler.InventoryCounts(item);
                 Globals.audioLoader.Play("LOZ_Get_Item");
                 game.itemFactory.RemoveItem(item);
 				Debug.WriteLine("Player picks up item.");

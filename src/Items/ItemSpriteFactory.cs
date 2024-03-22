@@ -27,6 +27,7 @@ namespace ZeldaGame.Items {
 		private int inity;
 		List<IItemSprite>[,] arrayOfLists;
 
+
         public ItemSpriteFactory(Texture2D texture, Texture2D texture2, Vector2 scale, IPlayer player, MapHandler mapHandler) {
 			objectList = new List<IItemSprite>();
 			this.texture = texture;
@@ -124,30 +125,13 @@ namespace ZeldaGame.Items {
 			switchCheck = 0;
         }
 
-		public bool ItemCollisionHandler()
-		{
-			Rectangle itemdest = objectList[k].GetHitBox();
-            Rectangle playrect = player.GetPlayerHitBox();
-            if (playrect.Contains(itemdest.Center) || collCheck[k] == 1)
-            {
-                collCheck[k] = 1;
-                objectList.RemoveAt(k);
-                collCheck.RemoveAt(k);
-                objectList.Insert(k, new BlankItem(this.texture, this.pos));
-				return true;
-            }
-			return false;
-        }
 		public void Draw(SpriteBatch spriteBatch) {
 			int count = objectList.Count;
 			if (switchCheck == 0)
 			{
 				for (k = 0; k < count; k++)
 				{
-					bool check = ItemCollisionHandler();
-					if (check == false) { 
 						objectList[k].Draw(spriteBatch, pos, Color.White, scale);
-					}
 				}
 			}
         }
