@@ -9,7 +9,12 @@ namespace ZeldaGame
         }
         public void Execute()
         {
-            myGame.PauseGame();
+            if (myGame.headUpDisplay.isVisible())
+                return;
+            if (myGame.IsPaused())
+                myGame.ResumeGame();
+            else
+                myGame.PauseGame();
         }
     }
 }

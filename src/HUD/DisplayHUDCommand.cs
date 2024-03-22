@@ -17,7 +17,10 @@ namespace ZeldaGame.HUD
 
         public void Execute()
         {
-            MyGame.PauseGame();
+            if (MyGame.IsPaused())
+                MyGame.ResumeGame();
+            else
+                MyGame.PauseGame();
             MyGame.headUpDisplay.Display();
         }
     }

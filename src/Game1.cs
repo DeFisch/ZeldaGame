@@ -214,7 +214,8 @@ namespace ZeldaGame
 			{
                 Globals.gameStateScreenHandler.Draw(_spriteBatch);
                 //Draws HUD
-                headUpDisplay.Draw(_spriteBatch);
+                if (headUpDisplay.isVisible())
+					headUpDisplay.Draw(_spriteBatch);
 				_spriteBatch.End();
 				return;
 			}
@@ -244,16 +245,23 @@ namespace ZeldaGame
 		}
 
 		public void PauseGame() {
+			if (Globals.gameStateScreenHandler.IsPlaying())
+			{
+				Globals.audioLoader.Mute();
+				Globals.gameStateScreenHandler.CurrentGameState = GameState.Pause;
+			}
+		}
+
+		public void ResumeGame() {
 			if (Globals.gameStateScreenHandler.CurrentGameState == GameState.Pause)
 			{
 				Globals.audioLoader.Mute();
 				Globals.gameStateScreenHandler.CurrentGameState = GameState.Playing;
 			}
-			else
-			{
-				Globals.audioLoader.Mute();
-				Globals.gameStateScreenHandler.CurrentGameState = GameState.Pause;
-			}
+		}
+
+		public bool IsPaused() {
+			return !Globals.gameStateScreenHandler.IsPlaying();
 		}
 	}
 }
