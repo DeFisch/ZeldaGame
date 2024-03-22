@@ -8,9 +8,10 @@ namespace ZeldaGame.HUD
 {
     public class HeadUpDisplay
     {
+        private HUDMapHandler HUDMapHandler;
         private Texture2D texture;
         private Vector2 scale;
-        private Vector2 window_size;
+        private Vector3 map_size;
         private Rectangle inventorySR;
         private Rectangle mapSR;
         private Rectangle playerInfoSR;
@@ -19,11 +20,12 @@ namespace ZeldaGame.HUD
         private Rectangle playerInfoDR;
         private int isDisplayed = -1;
 
-        public HeadUpDisplay (Texture2D texture, Vector2 scale, Vector2 window_size )
+        public HeadUpDisplay (Texture2D texture, Vector2 scale, Vector3 map_size)
         {
             this.texture = texture;
             this.scale = scale;
-            this.window_size = window_size;
+            this.map_size = map_size;
+            HUDMapHandler = new HUDMapHandler(map_size, scale, texture);
             inventorySR = new Rectangle(1, 11, 256, 88);
             mapSR = new Rectangle(258, 112, 256, 88);
             playerInfoSR = new Rectangle(258, 11, 256, 56);
@@ -45,6 +47,7 @@ namespace ZeldaGame.HUD
                 playerInfoDR = new Rectangle(0, (int)(inventorySR.Height * scale.Y) + (int)(mapSR.Height * scale.Y), (int)(playerInfoSR.Width * scale.X), (int)(playerInfoSR.Height * scale.Y));
                 spriteBatch.Draw(texture, playerInfoDR, playerInfoSR, Color.White);
             }
+            HUDMapHandler.Draw(spriteBatch, isDisplayed);
         }
 
         public void Update ()

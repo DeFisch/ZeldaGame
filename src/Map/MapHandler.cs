@@ -194,7 +194,5 @@ public class MapHandler {
                 door_record[i,j] = (false, null);
             }    
         switch_map(y, x);
-
-
     }
 }

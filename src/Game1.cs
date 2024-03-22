@@ -106,7 +106,7 @@ namespace ZeldaGame
             NPCFactory = new NPCFactory(npcs, mapScale, font, map);
 			itemFactory = new ItemSpriteFactory(Items, npcs, mapScale, Link, map);
 			enemyFactory = new EnemyFactory(enemy_texture, mapScale, mapSize, itemFactory);
-			headUpDisplay = new HeadUpDisplay(HUD,mapScale,windowSize);
+			headUpDisplay = new HeadUpDisplay(HUD,mapScale,mapSize);
 			playerInfoHUD = new PlayerInfoHUD(HUD, mapScale, windowSize);
 		
 
@@ -208,17 +208,19 @@ namespace ZeldaGame
 
 		protected override void Draw(GameTime gameTime) {
 			_spriteBatch.Begin();
-			if (!Globals.gameStateScreenHandler.IsPlaying())
+            //Draws player info HUD
+            playerInfoHUD.Draw(_spriteBatch);
+            if (!Globals.gameStateScreenHandler.IsPlaying())
 			{
-				Globals.gameStateScreenHandler.Draw(_spriteBatch);
-				//Draws HUD
-				headUpDisplay.Draw(_spriteBatch);
+                Globals.gameStateScreenHandler.Draw(_spriteBatch);
+                //Draws HUD
+                headUpDisplay.Draw(_spriteBatch);
 				_spriteBatch.End();
 				return;
 			}
 			GraphicsDevice.Clear(Color.CornflowerBlue);
-			// Draws map
-			map.Draw(_spriteBatch);
+            // Draws map
+            map.Draw(_spriteBatch);
 			// Draws Blocks
 			blockSpriteFactory.Draw(_spriteBatch);
             // Draws enemies
@@ -235,9 +237,6 @@ namespace ZeldaGame
 			}
 			// Draws player
 			Link.Draw(_spriteBatch, Color.White);
-
-			//Draws player info HUD
-			playerInfoHUD.Draw(_spriteBatch);
 
             _spriteBatch.End();
 
