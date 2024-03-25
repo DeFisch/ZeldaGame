@@ -21,10 +21,10 @@ namespace ZeldaGame.HUD
             if (Globals.gameStateScreenHandler.CurrentGameState == GameState.Pause) // If the game is paused, don't display the HUD
                 return;
             Globals.audioLoader.PlayDisregardMute("Pause");
-            if (MyGame.IsPaused())
-                MyGame.ResumeGame();
+            if (Globals.gameStateScreenHandler.IsPaused())
+                Globals.gameStateScreenHandler.ResumeGame();
             else
-                MyGame.PauseGame(GameState.HUD);
+                Globals.gameStateScreenHandler.PauseGame(GameState.HUD);
             MyGame.headUpDisplay.Display();
         }
     }

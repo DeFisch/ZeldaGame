@@ -14,8 +14,8 @@ namespace ZeldaGame.HUD
         private List<Rectangle> targetRectangle;
 
         public HUDMapHandler(Texture2D texture, Vector2 scale, MapHandler map)
-        {
-            this.texture = texture;
+            {
+                this.texture = texture;
             sourceRectangle = new List<Rectangle>();
             targetRectangle = new List<Rectangle>();
             mapType = new HUDMapType(scale, map);
