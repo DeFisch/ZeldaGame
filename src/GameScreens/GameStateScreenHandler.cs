@@ -18,7 +18,7 @@ public class GameStateScreenHandler
         currentGameState = GameState.TitleScreen;
         this.myGame = game;
         AddScreen(GameState.TitleScreen, new TitleScreen(game.Content.Load<Texture2D>("TitleScreen"), game));
-        AddScreen(GameState.Pause, new PauseGame(game.Content.Load<Texture2D>("TitleScreen"), game)); // Placeholder
+        AddScreen(GameState.Pause, new PauseScreen(null, game));
     }
     public void AddScreen(GameState state, IGameScreen screen)
     {
@@ -45,5 +45,24 @@ public class GameStateScreenHandler
     public bool IsPlaying()
     {
         return currentGameState == GameState.Playing;
+    }
+    public void PauseGame(GameState gameState)
+    {
+        if (Globals.gameStateScreenHandler.IsPlaying())
+        {
+            Globals.audioLoader.Mute();
+            currentGameState = gameState;
+        }
+    }
+
+    public void ResumeGame()
+    {
+        Globals.audioLoader.Mute();
+        currentGameState = GameState.Playing;
+    }
+
+    public bool IsPaused()
+    {
+        return !IsPlaying();
     }
 }

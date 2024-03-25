@@ -246,22 +246,5 @@ namespace ZeldaGame
 
 			base.Draw(gameTime);
 		}
-
-		public void PauseGame(GameState gameState) {
-			if (Globals.gameStateScreenHandler.IsPlaying())
-			{
-				Globals.audioLoader.Mute();
-				Globals.gameStateScreenHandler.CurrentGameState = gameState;
-			}
-		}
-
-		public void ResumeGame() {
-			Globals.audioLoader.Mute();
-			Globals.gameStateScreenHandler.CurrentGameState = GameState.Playing;
-		}
-
-		public bool IsPaused() {
-			return !Globals.gameStateScreenHandler.IsPlaying();
-		}
 	}
 }
