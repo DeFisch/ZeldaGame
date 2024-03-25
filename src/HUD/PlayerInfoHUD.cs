@@ -29,7 +29,6 @@ namespace ZeldaGame.HUD
         {
             this.texture = texture;
             this.scale = scale;
-            this.window_size = window_size;
             this.font = font;
             this.collisionHandler = collisionHandler;
             playerInfoSR = new Rectangle(258, 11, 256, 56);
@@ -51,10 +50,12 @@ namespace ZeldaGame.HUD
             spriteBatch.DrawString(font, countString, new Vector2(300, 50), Color.White);
 
             if (!isDisplayed)
+            {
                 mapHandler.Draw(spriteBatch, -1);
+            }
 
         }
-    }
+
 
         public void Update()
         {
@@ -62,3 +63,4 @@ namespace ZeldaGame.HUD
         }
     }
 }
+
