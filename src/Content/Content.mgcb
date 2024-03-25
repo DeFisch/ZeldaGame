@@ -145,6 +145,12 @@
 /processorParam:Quality=Best
 /build:audio/LOZ_Text.wav
 
+#begin audio/Pause.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:audio/Pause.wav
+
 #begin enemies_1.png
 /importer:TextureImporter
 /processor:TextureProcessor
