@@ -15,7 +15,7 @@ namespace ZeldaGame;
 public class CollisionHandler {
     private readonly Game1 game;
     private readonly EnemyCollisionHandler enemyCollisionHandler;
-    private readonly ItemActionHandler itemActionHandler;
+    public ItemActionHandler itemActionHandler;
     public CollisionHandler(Game1 game) {
         this.game = game;
         enemyCollisionHandler = new EnemyCollisionHandler(game);
