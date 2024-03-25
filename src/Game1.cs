@@ -107,7 +107,7 @@ namespace ZeldaGame
 			itemFactory = new ItemSpriteFactory(Items, npcs, mapScale, Link, map);
 			enemyFactory = new EnemyFactory(enemy_texture, mapScale, mapSize, itemFactory);
 			headUpDisplay = new HeadUpDisplay(HUD,mapScale,mapSize);
-			playerInfoHUD = new PlayerInfoHUD(HUD, mapScale, windowSize);
+			playerInfoHUD = new PlayerInfoHUD(HUD, mapScale, windowSize, font, collisionHandler);
 		
 
             // Define the quadrants based on the map size
