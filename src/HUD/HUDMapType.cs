@@ -10,8 +10,8 @@ namespace ZeldaGame.HUD
         private HUDMapLoader map;
         private MapHandler mapHandler;
         private string[,] mapList;
-        private Vector2 roomNumber;
-        private Dictionary<Vector2,bool> roomCheck;
+        private Vector2 roomPosition;
+        private Dictionary<Vector2,bool> isVisited;
         private Dictionary<Vector2,bool> defaultRoomCheck;
         private Vector3 map_size;
         private Vector2 scale;
@@ -27,9 +27,9 @@ namespace ZeldaGame.HUD
             this.scale = scale;
             this.map = new HUDMapLoader();
             this.mapHandler = mapHandler;
-            this.roomNumber = mapHandler.getMapXY();
+            this.roomPosition = mapHandler.getMapXY();
             defaultRoomCheck = new Dictionary<Vector2, bool>();
-            roomCheck = defaultRoomVisited();
+            isVisited = defaultRoomVisited();
             mapList = map.load_map();
             sourceRectangle = new Rectangle(0, 0, 0, 0);
             dRectangleList = new List<Rectangle>();
@@ -43,7 +43,6 @@ namespace ZeldaGame.HUD
         {
             dRectangleList.Clear();
             sRectangleList.Clear();
-            roomNumber = mapHandler.getMapXY();
 
             for (int i = 0; i < 8; i++)
             {
@@ -56,7 +55,7 @@ namespace ZeldaGame.HUD
                         xPosition = i * width + scale.X * 128;
                         yPosition = j * height + scale.Y * 96;
                         isRoomVisited(i-1,j-2);
-                        if(roomCheck[new Vector2(i-1,j-2)]) 
+                        if(isVisited[new Vector2(i-1,j-2)]) 
                             sRectangleList.Add(map.getSourceRectangle_O(mapList[j, i]));
                         else 
                             sRectangleList.Add(new Rectangle(360, 140, 8, 8));
@@ -86,8 +85,9 @@ namespace ZeldaGame.HUD
 
         public void isRoomVisited(int xPosition, int yPosition) 
         {
-            if (roomNumber.Equals(new Vector2(xPosition,yPosition)))
-                roomCheck[new Vector2(xPosition,yPosition)] = true;
+            roomPosition = mapHandler.getMapXY();
+            if (roomPosition.Equals(new Vector2(xPosition,yPosition)))
+                isVisited[new Vector2(xPosition,yPosition)] = true;
         }
 
         public Dictionary<Vector2, bool> defaultRoomVisited()

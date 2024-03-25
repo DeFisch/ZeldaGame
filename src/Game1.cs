@@ -203,6 +203,9 @@ namespace ZeldaGame
 			// Handles collisions
 			collisionHandler.Update();
 
+			//Update HUD
+			headUpDisplay.Update();	
+
 			base.Update(gameTime);
 		}
 

@@ -53,7 +53,7 @@ namespace ZeldaGame.HUD
 
         public void Update ()
         {
-
+            HUDMapHandler.Update();
         }
 
         public void Display()
