@@ -9,20 +9,16 @@ namespace ZeldaGame.HUD
     public class HUDMapHandler
     {
         private HUDMapType mapType;
-        private Vector3 map_size;
-        private Vector2 scale;
         private Texture2D texture;
         private List<Rectangle> sourceRectangle;
         private List<Rectangle> targetRectangle;
 
-        public HUDMapHandler(Vector3 map_size, Vector2 scale, Texture2D texture, MapHandler map)
+        public HUDMapHandler(Texture2D texture, Vector2 scale, MapHandler map)
         {
-            this.map_size = map_size;
-            this.scale = scale;
             this.texture = texture;
             sourceRectangle = new List<Rectangle>();
             targetRectangle = new List<Rectangle>();
-            mapType = new HUDMapType(map_size, scale, map);
+            mapType = new HUDMapType(scale, map);
         }
 
         public void Draw(SpriteBatch spriteBatch, int isDisplayed)
@@ -32,7 +28,7 @@ namespace ZeldaGame.HUD
                 DrawHUDMap("Bottom_Blue", spriteBatch);
                 DrawHUDMap("Orange", spriteBatch);
             }
-            else if (isDisplayed == -1)
+            if (isDisplayed == -1)
             {
                 DrawHUDMap("Top_Blue", spriteBatch);
             }

@@ -13,7 +13,6 @@ namespace ZeldaGame.HUD
         private Vector2 roomPosition;
         private Dictionary<Vector2,bool> isVisited;
         private Dictionary<Vector2,bool> defaultRoomCheck;
-        private Vector3 map_size;
         private Vector2 scale;
         private List<Rectangle> dRectangleList;
         private List<Rectangle> sRectangleList;
@@ -21,9 +20,8 @@ namespace ZeldaGame.HUD
         private float xPosition = 0, yPosition = 0;
         private float width = 0, height = 0;
 
-        public HUDMapType(Vector3 map_size, Vector2 scale, MapHandler mapHandler)
+        public HUDMapType(Vector2 scale, MapHandler mapHandler)
         {
-            this.map_size = map_size;
             this.scale = scale;
             this.map = new HUDMapLoader();
             this.mapHandler = mapHandler;
