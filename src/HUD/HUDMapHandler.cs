@@ -53,5 +53,10 @@ namespace ZeldaGame.HUD
                 for (int j = 0; j < 8; j++)
                     mapType.isRoomVisited(i-1,j-2);
         }
+
+        public void Reset()
+        {
+            mapType.Reset();
+        }
     }
 }

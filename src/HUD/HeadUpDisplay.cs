@@ -65,5 +65,10 @@ namespace ZeldaGame.HUD
         {
             return isDisplayed == 1;
         }
+
+        public void Reset()
+        {
+            HUDMapHandler.Reset();
+        }
     }
 }

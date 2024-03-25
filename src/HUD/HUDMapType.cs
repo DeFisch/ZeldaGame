@@ -28,7 +28,6 @@ namespace ZeldaGame.HUD
             this.map = new HUDMapLoader();
             this.mapHandler = mapHandler;
             this.roomPosition = mapHandler.getMapXY();
-            defaultRoomCheck = new Dictionary<Vector2, bool>();
             isVisited = defaultRoomVisited();
             mapList = map.load_map();
             sourceRectangle = new Rectangle(0, 0, 0, 0);
@@ -92,10 +91,16 @@ namespace ZeldaGame.HUD
 
         public Dictionary<Vector2, bool> defaultRoomVisited()
         {
+            defaultRoomCheck = new Dictionary<Vector2, bool>();
             for (int i = -1; i < 7; i++)
                 for (int j = -2; j < 6; j++)
                     defaultRoomCheck.Add(new Vector2(i,j),false);
             return defaultRoomCheck;
-        }   
+        }
+        
+        public void Reset()
+        {
+            isVisited = defaultRoomVisited();
+        }
     }
 }

@@ -15,6 +15,7 @@
             MyGame.Link.Reset();
             MyGame.itemFactory.Reset();
             MyGame.enemyFactory.Reset();
+            MyGame.headUpDisplay.Reset();
             MyGame.blockSpriteFactory.Reset();
         }
     }
