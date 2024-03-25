@@ -4,7 +4,7 @@ using System.Collections.Generic;
 namespace ZeldaGame;
 public enum GameState
 {
-    TitleScreen, Playing, Pause, GameOver
+    TitleScreen, Playing, Pause, GameOver, HUD
 };
 
 public class GameStateScreenHandler
@@ -27,11 +27,13 @@ public class GameStateScreenHandler
 
     public void Update()
     {
-        screens[currentGameState].Update();
+        if (screens.ContainsKey(currentGameState))
+            screens[currentGameState].Update();
     }
     public void Draw(SpriteBatch spriteBatch)
     {
-        screens[currentGameState].Draw(spriteBatch);
+        if (screens.ContainsKey(currentGameState))
+            screens[currentGameState].Draw(spriteBatch);
     }
 
     public GameState CurrentGameState

@@ -47,7 +47,7 @@ namespace ZeldaGame
 		public Vector3 mapSize;
 		public Vector2 mapScale;
 		public Vector2 windowSize;
-		private SpriteFont font;
+		public SpriteFont font;
 
         public Game1() {
 			_graphics = new GraphicsDeviceManager(this);
@@ -106,8 +106,8 @@ namespace ZeldaGame
             NPCFactory = new NPCFactory(npcs, mapScale, font, map);
 			itemFactory = new ItemSpriteFactory(Items, npcs, mapScale, Link, map);
 			enemyFactory = new EnemyFactory(enemy_texture, mapScale, mapSize, itemFactory);
-			headUpDisplay = new HeadUpDisplay(HUD,mapScale,mapSize);
-			playerInfoHUD = new PlayerInfoHUD(HUD, mapScale, windowSize, font, collisionHandler);
+			headUpDisplay = new HeadUpDisplay(HUD,mapScale, map);
+			playerInfoHUD = new PlayerInfoHUD(HUD, mapScale, map, headUpDisplay.isVisible(), font, collisionHandler);
 		
 
             // Define the quadrants based on the map size
@@ -203,6 +203,9 @@ namespace ZeldaGame
 			// Handles collisions
 			collisionHandler.Update();
 
+			//Update HUD
+			headUpDisplay.Update();	
+
 			base.Update(gameTime);
 		}
 
@@ -244,20 +247,17 @@ namespace ZeldaGame
 			base.Draw(gameTime);
 		}
 
-		public void PauseGame() {
+		public void PauseGame(GameState gameState) {
 			if (Globals.gameStateScreenHandler.IsPlaying())
 			{
 				Globals.audioLoader.Mute();
-				Globals.gameStateScreenHandler.CurrentGameState = GameState.Pause;
+				Globals.gameStateScreenHandler.CurrentGameState = gameState;
 			}
 		}
 
 		public void ResumeGame() {
-			if (Globals.gameStateScreenHandler.CurrentGameState == GameState.Pause)
-			{
-				Globals.audioLoader.Mute();
-				Globals.gameStateScreenHandler.CurrentGameState = GameState.Playing;
-			}
+			Globals.audioLoader.Mute();
+			Globals.gameStateScreenHandler.CurrentGameState = GameState.Playing;
 		}
 
 		public bool IsPaused() {

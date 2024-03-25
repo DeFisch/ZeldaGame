@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using ZeldaGame.Player;
+using ZeldaGame.Map;
 
 namespace ZeldaGame.HUD
 {
@@ -11,7 +12,6 @@ namespace ZeldaGame.HUD
         private HUDMapHandler HUDMapHandler;
         private Texture2D texture;
         private Vector2 scale;
-        private Vector3 map_size;
         private Rectangle inventorySR;
         private Rectangle mapSR;
         private Rectangle playerInfoSR;
@@ -20,12 +20,11 @@ namespace ZeldaGame.HUD
         private Rectangle playerInfoDR;
         private int isDisplayed = -1;
 
-        public HeadUpDisplay (Texture2D texture, Vector2 scale, Vector3 map_size)
+        public HeadUpDisplay (Texture2D texture, Vector2 scale,MapHandler map)
         {
             this.texture = texture;
             this.scale = scale;
-            this.map_size = map_size;
-            HUDMapHandler = new HUDMapHandler(map_size, scale, texture);
+            HUDMapHandler = new HUDMapHandler(texture, scale, map);
             inventorySR = new Rectangle(1, 11, 256, 88);
             mapSR = new Rectangle(258, 112, 256, 88);
             playerInfoSR = new Rectangle(258, 11, 256, 56);
@@ -52,7 +51,7 @@ namespace ZeldaGame.HUD
 
         public void Update ()
         {
-
+            HUDMapHandler.Update();
         }
 
         public void Display()
@@ -63,6 +62,12 @@ namespace ZeldaGame.HUD
         public bool isVisible()
         {
             return isDisplayed == 1;
+        }
+
+        public void Reset()
+        {
+            HUDMapHandler.Reset();
+            isDisplayed = -1;
         }
     }
 }

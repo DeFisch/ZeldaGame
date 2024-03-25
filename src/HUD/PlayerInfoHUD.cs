@@ -4,6 +4,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using ZeldaGame.Items;
 using ZeldaGame.Player;
+using ZeldaGame.Map;
 
 namespace ZeldaGame.HUD
 {
@@ -12,7 +13,6 @@ namespace ZeldaGame.HUD
         private Texture2D texture;
         private SpriteFont font;
         private Vector2 scale;
-        private Vector2 window_size;
         private Rectangle playerInfoSR;
         private Rectangle playerInfoDR;
         private Rectangle rubyBlankSR;
@@ -21,9 +21,11 @@ namespace ZeldaGame.HUD
         private string countString;
         private ItemActionHandler itemActionHandler;
         private CollisionHandler collisionHandler;
+        private bool isDisplayed;
+        private HUDMapHandler mapHandler;
 
 
-        public PlayerInfoHUD(Texture2D texture, Vector2 scale, Vector2 window_size, SpriteFont font, CollisionHandler collisionHandler)
+        public PlayerInfoHUD(Texture2D texture, Vector2 scale, MapHandler map, bool isDisplayed, SpriteFont font, CollisionHandler collisionHandler)
         {
             this.texture = texture;
             this.scale = scale;
@@ -35,6 +37,8 @@ namespace ZeldaGame.HUD
             rubyBlankSR = new Rectangle(353, 11, 23, 15);
             rubyBlankDR = new Rectangle(300, 50, 85, 25);
             itemActionHandler = collisionHandler.itemActionHandler;
+            this.isDisplayed = isDisplayed;
+            mapHandler = new HUDMapHandler(texture, scale, map);
         }
 
         public void Draw(SpriteBatch spriteBatch)
@@ -45,7 +49,12 @@ namespace ZeldaGame.HUD
             spriteBatch.Draw(texture, playerInfoDR, playerInfoSR, Color.White);
             spriteBatch.Draw(texture, rubyBlankDR, rubyBlankSR, Color.Red);
             spriteBatch.DrawString(font, countString, new Vector2(300, 50), Color.White);
+
+            if (!isDisplayed)
+                mapHandler.Draw(spriteBatch, -1);
+
         }
+    }
 
         public void Update()
         {

@@ -6,6 +6,7 @@
 */
 using System;
 using System.IO;
+using Microsoft.Xna.Framework;
 
 namespace ZeldaGame.HUD;
 
@@ -13,6 +14,7 @@ public class HUDMapLoader
 {
     private string map_path;
     private string[,] map = new string[8, 8];
+    private Rectangle sourceRectangle;
     public HUDMapLoader()
     {
         // set map path based on OS platform
@@ -33,6 +35,7 @@ public class HUDMapLoader
                 map_path = "../../../Content/map_data/";
                 break;
         }
+        sourceRectangle = new Rectangle(0,0,0,0);
     }
 
     public string[,] load_map()
@@ -49,5 +52,68 @@ public class HUDMapLoader
             }
         }
         return map;
+    }
+
+
+    public Rectangle getSourceRectangle_O(string blockType)
+    {
+        sourceRectangle = new Rectangle(360, 140, 8, 8);
+       switch (blockType)
+       {
+            case "0":
+                sourceRectangle = new Rectangle(528, 108, 8, 8);
+                break;
+            case "1":
+                sourceRectangle = new Rectangle(537, 108, 8, 8);
+                break;
+            case "2":
+                sourceRectangle = new Rectangle(546, 108, 8, 8);
+                break;
+            case "3":
+                sourceRectangle = new Rectangle(555, 108, 8, 8);
+                break;
+            case "4":
+                sourceRectangle = new Rectangle(564, 108, 8, 8);
+                break;
+            case "5":
+                sourceRectangle = new Rectangle(573, 108, 8, 8);
+                break;
+            case "6":
+                sourceRectangle = new Rectangle(582, 108, 8, 8);
+                break;
+            case "7":
+                sourceRectangle = new Rectangle(591, 108, 8, 8);
+                break;
+            case "9":
+                sourceRectangle = new Rectangle(609, 108, 8, 8);
+                break;
+            case "a":
+                sourceRectangle = new Rectangle(618, 108, 8, 8);
+                break;
+            case "b":
+                sourceRectangle = new Rectangle(627, 108, 8, 8);
+                break;
+            case "e":
+                sourceRectangle = new Rectangle(654, 108, 8, 8);
+                break;
+            default:
+                sourceRectangle = new Rectangle(360, 140, 8, 8);
+                break;
+        }
+        return sourceRectangle;
+    }
+    public Rectangle getSourceRectangle_B(string blockType)
+    {
+        sourceRectangle = new Rectangle(360, 140, 7, 3);
+        switch (blockType)
+        {
+            case "-":
+                sourceRectangle = new Rectangle(663, 111, 8, 4);
+                break;
+            default:
+                sourceRectangle = new Rectangle(663, 108, 8, 4);
+                break;
+        }
+        return sourceRectangle;
     }
 }
