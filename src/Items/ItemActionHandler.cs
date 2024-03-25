@@ -13,9 +13,10 @@ namespace ZeldaGame.Items
 {
     public class ItemActionHandler
     {
-        public int[] inventoryCounts = new int[9];
+        public int[] inventoryCounts = new int[10];
         public void InventoryCounts(IItemSprite item)
         {
+            inventoryCounts[9] = 8;
             switch (item)
             {
                 case BlueRuby:
@@ -45,8 +46,11 @@ namespace ZeldaGame.Items
                 case Bow:
                     inventoryCounts[8]++;
                     break;
-                default:
+                case Bomb:
                     inventoryCounts[9]++;
+                    break;
+                default:
+                    inventoryCounts[10]++;
                     break;
 
             }

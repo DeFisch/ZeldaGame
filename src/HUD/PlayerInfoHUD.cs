@@ -15,10 +15,12 @@ namespace ZeldaGame.HUD
         private Vector2 scale;
         private Rectangle playerInfoSR;
         private Rectangle playerInfoDR;
-        private Rectangle rubyBlankSR;
+        private Rectangle allBlankSR;
         private Rectangle rubyBlankDR;
-        private int countInt;
-        private string countString;
+        private Rectangle keyBlankDR;
+        private Rectangle bombBlankDR;
+        private int rubyCountInt;
+        private string rubyCountString;
         private ItemActionHandler itemActionHandler;
         private CollisionHandler collisionHandler;
         private bool isDisplayed;
@@ -33,8 +35,11 @@ namespace ZeldaGame.HUD
             this.collisionHandler = collisionHandler;
             playerInfoSR = new Rectangle(258, 11, 256, 56);
             playerInfoDR = new Rectangle(0, 0, 0, 0);
-            rubyBlankSR = new Rectangle(353, 11, 23, 15);
+            allBlankSR = new Rectangle(353, 11, 23, 15);
             rubyBlankDR = new Rectangle(300, 50, 85, 25);
+            keyBlankDR = new Rectangle(300, 100, 85, 25);
+            bombBlankDR = new Rectangle(300, 125, 85, 25);
+
             itemActionHandler = collisionHandler.itemActionHandler;
             this.isDisplayed = isDisplayed;
             mapHandler = new HUDMapHandler(texture, scale, map);
@@ -43,11 +48,13 @@ namespace ZeldaGame.HUD
         public void Draw(SpriteBatch spriteBatch)
         {
             playerInfoDR = new Rectangle(0, 0, (int)(playerInfoSR.Width * scale.X), (int)(playerInfoSR.Height * scale.Y));
-            countInt = (itemActionHandler.inventoryCounts[0] * 5) + itemActionHandler.inventoryCounts[1];
-            countString = "x" + countInt.ToString();
+            rubyCountInt = (itemActionHandler.inventoryCounts[0] * 5) + itemActionHandler.inventoryCounts[1];
+            rubyCountString = "x" + rubyCountInt.ToString();
             spriteBatch.Draw(texture, playerInfoDR, playerInfoSR, Color.White);
-            spriteBatch.Draw(texture, rubyBlankDR, rubyBlankSR, Color.Red);
-            spriteBatch.DrawString(font, countString, new Vector2(300, 50), Color.White);
+            spriteBatch.Draw(texture, rubyBlankDR, allBlankSR, Color.White);
+            spriteBatch.Draw(texture, keyBlankDR, allBlankSR, Color.White);
+            spriteBatch.Draw(texture, bombBlankDR, allBlankSR, Color.White);
+            spriteBatch.DrawString(font, rubyCountString, new Vector2(300, 50), Color.White);
 
             if (!isDisplayed)
             {
