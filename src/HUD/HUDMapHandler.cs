@@ -12,12 +12,14 @@ namespace ZeldaGame.HUD
         private Texture2D texture;
         private List<Rectangle> sourceRectangle;
         private List<Rectangle> targetRectangle;
+        private Dictionary<string, Rectangle> playerPosition;
 
         public HUDMapHandler(Texture2D texture, Vector2 scale, MapHandler map)
             {
                 this.texture = texture;
             sourceRectangle = new List<Rectangle>();
             targetRectangle = new List<Rectangle>();
+            playerPosition = new Dictionary<string, Rectangle>();
             mapType = new HUDMapType(scale, map);
         }
 
@@ -39,8 +41,10 @@ namespace ZeldaGame.HUD
             mapType.SetLists(map_name);
             sourceRectangle = mapType.getSourceRectangleList();
             targetRectangle = mapType.getDestinationRectangleList();
+            playerPosition = mapType.playerCurrentPosition();
             for (int i = 0; i < sourceRectangle.Count; i++)
                 spriteBatch.Draw(texture, targetRectangle[i], sourceRectangle[i], Color.White);
+            spriteBatch.Draw(texture, playerPosition[map_name], new Rectangle(519, 126, 3, 3), Color.White);
         }
 
         public void Update()
