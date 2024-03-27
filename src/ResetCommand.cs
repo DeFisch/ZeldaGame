@@ -17,6 +17,8 @@
             MyGame.enemyFactory.Reset();
             MyGame.headUpDisplay.Reset();
             MyGame.blockSpriteFactory.Reset();
+            Globals.audioLoader.Reset();
+            Globals.audioLoader.PlayBGM();
         }
     }
 }
