@@ -90,6 +90,7 @@ public class EnemyFactory {
 				if (new Random().Next(0, 5) != -1) // 20% chance to drop item
 				{
 					Point position = enemies[i].GetRectangle().Center;
+					position.Y -= 175;
 					//translate pixel coordinate back to map coordinate
 					double tile_width = map_size.X / 16.0;
 					double tile_height = map_size.Y / 11.0;
