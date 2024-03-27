@@ -84,6 +84,7 @@ public class CollisionHandler {
 		foreach (IEnemy enemy in game.enemyFactory.GetAllEnemies()) {
 			if (enemy.GetRectangle().Intersects(game.Link.GetPlayerHitBox()) && !game.Link.isHurting()) {
 				Globals.audioLoader.Play("LOZ_Link_Hurt");
+                game.Link.TakeDamage(enemy.DoDamage());
                 game.Link = new HurtPlayer(game.Link, game);
 				Debug.WriteLine("Enemy collides with player.");
 			}
@@ -97,6 +98,7 @@ public class CollisionHandler {
             if (projectile.GetRectangle().Intersects(game.Link.GetPlayerHitBox()) && !game.Link.isHurting())
             {
                 Globals.audioLoader.Play("LOZ_Link_Hurt");
+                game.Link.TakeDamage(projectile.DoDamage());
                 game.Link = new HurtPlayer(game.Link, game);
 				Debug.WriteLine("Enemy projectile collides with player.");
 			}

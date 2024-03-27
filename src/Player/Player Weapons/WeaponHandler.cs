@@ -26,7 +26,7 @@ public class WeaponHandler {
 		}
 	}
 
-	public void UseSword(int sword, Vector2 location, Direction direction, int currHealth, int maxHealth) {
+	public void UseSword(int sword, Vector2 location, Direction direction, float currHealth, float maxHealth) {
 		IPlayerProjectile weapon = PlayerItemSpriteFactory.Instance.CreateSwordSprite(direction, sword, location);
 		activeProjectiles.Add(weapon);
 

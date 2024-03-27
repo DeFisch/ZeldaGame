@@ -23,6 +23,7 @@ public class Goriya : IEnemy {
 	private int health = 3;
 	private int dead_timer = 0;
 	private int iFrame = -100;
+	private float damage = 0.5f;
 	public Goriya(Texture2D texture, Vector2 position, EnemyProjectileFactory enemyProjectileFactory, string color, Vector2 scale) {
 		this.texture = texture;
 		this.position = position;
@@ -39,7 +40,12 @@ public class Goriya : IEnemy {
 		this.scale = scale;
 	}
 
-	public void Draw(SpriteBatch spriteBatch) {
+    public float DoDamage()
+    {
+        return damage;
+    }
+
+    public void Draw(SpriteBatch spriteBatch) {
 		Rectangle sourceRectangle = new Rectangle(character_sprites[sprite_id, 0], character_sprites[sprite_id, 1], character_sprites[sprite_id, 2], character_sprites[sprite_id, 3]);
 		Rectangle destinationRectangle = new Rectangle((int)position.X, (int)position.Y, (int)(character_sprites[sprite_id, 2] * scale.X), (int)(character_sprites[sprite_id, 3] * scale.Y));
 		SpriteEffects sprite_effect = SpriteEffects.None;

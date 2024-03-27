@@ -2,6 +2,7 @@ using System;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using ZeldaGame.Player;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace Enemy.Projectiles
 {
@@ -15,6 +16,7 @@ namespace Enemy.Projectiles
         private int currentFrame = 0;
         private int frameID = 0;
         private Rectangle sourceRectangle;
+        private float damage = 1.5f;
         
         public FireBall(Texture2D texture, Vector2 location, Vector2 direction)
         {
@@ -32,6 +34,11 @@ namespace Enemy.Projectiles
                 return true;
             }
             return false;
+        }
+
+        public float DoDamage()
+        {
+            return damage;
         }
 
         public void Draw(SpriteBatch spriteBatch)

@@ -23,8 +23,8 @@ namespace ZeldaGame.Player {
 		private Swords currSword;
 		private int animTimer;
 
-		public int currHealth = 3;
-		public int maxHealth = 3;
+		public static float health = 3f;
+		public float maxHealth = 3f;
 
 		public Player1(Vector2 position, Vector2 scale)
 		{
@@ -108,7 +108,7 @@ namespace ZeldaGame.Player {
 			if (animTimer < 0 && currSword != Swords.None) {
 				animTimer = 16;
 				sprite = stateMachine.Attack();
-				weaponHandler.UseSword((int)currSword, position, stateMachine.GetDirection(), currHealth, maxHealth);
+				weaponHandler.UseSword((int)currSword, position, stateMachine.GetDirection(), health, maxHealth);
 			}
 		}
 
@@ -150,6 +150,18 @@ namespace ZeldaGame.Player {
 		{
 			return false;
 		}
+
+		public void TakeDamage(float damage)
+		{
+			health -= damage;
+			Debug.WriteLine("Health: " + health);
+		}
+
+		public float GetHealth()
+		{
+			return health;
+		}
+
 
 		public void Draw(SpriteBatch spriteBatch, Color color)
 		{

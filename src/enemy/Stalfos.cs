@@ -1,6 +1,7 @@
 using System;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace ZeldaGame.Enemy;
 
@@ -18,15 +19,22 @@ public class Stalfos : IEnemy {
 	private int health = 3;
 	private int dead_timer = 0;
 	private int iFrame = -100;
-	public Stalfos(Texture2D texture, Vector2 position, Vector2 scale) {
+    private float damage = 0.5f;
+
+    public Stalfos(Texture2D texture, Vector2 position, Vector2 scale) {
 		this.texture = texture;
 		this.position = position;
 		state = State.Walking;
 		direction = Direction.Down;
 		this.scale = scale;
-	}
+    }
 
-	public void Draw(SpriteBatch spriteBatch) {
+    public float DoDamage()
+    {
+        return damage;
+    }
+
+    public void Draw(SpriteBatch spriteBatch) {
 		Rectangle sourceRectangle = new Rectangle(character_sprites[0], character_sprites[1], character_sprites[2], character_sprites[3]);
 		Rectangle destinationRectangle = new Rectangle((int)position.X, (int)position.Y, (int)(character_sprites[2] * scale.X), (int)(character_sprites[3] * scale.Y));
 		SpriteEffects sprite_effect = SpriteEffects.None;

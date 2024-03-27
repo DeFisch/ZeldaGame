@@ -40,6 +40,16 @@ namespace ZeldaGame.Player {
 			return true;
 		}
 
+		public void TakeDamage(float damage)
+		{
+			// No implementation, don't take damage when already injured
+		}
+
+		public float GetHealth()
+		{
+			return 0; // FIX
+		}
+
 		public void Update() {
 			timer--;
 			if (timer == 0) {

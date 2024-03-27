@@ -1,6 +1,7 @@
 using System;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace ZeldaGame.Enemy;
 
@@ -19,7 +20,9 @@ public class Keese : IEnemy {
 	private double general_speed = 4;
 	private int dead_timer = 0;
 	private int iFrame = -100;
-	public Keese(Texture2D texture, Vector2 position, string color, Vector3 map_size, Vector2 scale) {
+    private float damage = 0.5f;
+
+    public Keese(Texture2D texture, Vector2 position, string color, Vector3 map_size, Vector2 scale) {
 		this.texture = texture;
 		this.position = position;
 		state = State.Walking;
@@ -31,9 +34,14 @@ public class Keese : IEnemy {
 		}
 		this.map_size = map_size;
 		this.scale = scale;
-	}
+    }
 
-	public void Draw(SpriteBatch spriteBatch) {
+    public float DoDamage()
+    {
+        return damage;
+    }
+
+    public void Draw(SpriteBatch spriteBatch) {
 		int sprite_id = (frameID / 18) % 2;
 		Rectangle sourceRectangle = new Rectangle(character_sprites[sprite_id, 0], character_sprites[sprite_id, 1], character_sprites[sprite_id, 2], character_sprites[sprite_id, 3]);
 		Rectangle destinationRectangle = new Rectangle((int)position.X, (int)position.Y, (int)(character_sprites[sprite_id, 2] * scale.X), (int)(character_sprites[sprite_id, 3] * scale.Y));
