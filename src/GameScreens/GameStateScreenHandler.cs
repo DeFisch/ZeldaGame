@@ -48,7 +48,7 @@ public class GameStateScreenHandler
     }
     public void PauseGame(GameState gameState)
     {
-        if (Globals.gameStateScreenHandler.IsPlaying())
+        if (IsPlaying())
         {
             Globals.audioLoader.Mute();
             currentGameState = gameState;
