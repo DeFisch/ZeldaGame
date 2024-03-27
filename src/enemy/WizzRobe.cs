@@ -2,6 +2,7 @@ using System;
 using Enemy;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace ZeldaGame.Enemy;
 
@@ -23,7 +24,9 @@ public class WizzRobe : IEnemy {
 	private int dead_timer = 0;
 	private int iFrame = -100;
 	private EnemyProjectileFactory enemyProjectileFactory;
-	public WizzRobe(Texture2D texture, Vector2 position, EnemyProjectileFactory enemyProjectileFactory, string color, Vector2 scale) {
+    private float damage = 0.5f;
+
+    public WizzRobe(Texture2D texture, Vector2 position, EnemyProjectileFactory enemyProjectileFactory, string color, Vector2 scale) {
 		rand_seed = new Random().Next();
 		this.texture = texture;
 		this.position = position;
@@ -37,9 +40,14 @@ public class WizzRobe : IEnemy {
             character_sprites[3, 1] = 107;
         }
 		this.scale = scale;
-	}
+    }
 
-	public void Draw(SpriteBatch spriteBatch) {
+    public float DoDamage()
+    {
+        return damage;
+    }
+
+    public void Draw(SpriteBatch spriteBatch) {
 		Rectangle sourceRectangle = new Rectangle(character_sprites[sprite_id, 0], character_sprites[sprite_id, 1], character_sprites[sprite_id, 2], character_sprites[sprite_id, 3]);
 		Rectangle destinationRectangle = new Rectangle((int)position.X, (int)position.Y, (int)(character_sprites[sprite_id, 2] * scale.X), (int)(character_sprites[sprite_id, 3] * scale.Y));
 		SpriteEffects sprite_effect = SpriteEffects.None;

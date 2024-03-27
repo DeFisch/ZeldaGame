@@ -2,6 +2,8 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Enemy;
+using static System.Net.Mime.MediaTypeNames;
+using ZeldaGame.Player.Commands;
 namespace ZeldaGame.Enemy;
 
 public class Aquamentus : IEnemy {
@@ -19,15 +21,21 @@ public class Aquamentus : IEnemy {
 	private int dead_timer = 0;
 	private int iFrame = -100;
     private EnemyProjectileFactory enemyProjectileFactory;
+	private float damage = 0.5f;
 	public Aquamentus(Texture2D texture, Vector2 position, EnemyProjectileFactory enemyProjectileFactory, Vector2 scale) {
 		this.texture = texture;
 		this.position = position;
 		state = State.Walking;
         this.enemyProjectileFactory = enemyProjectileFactory;
 		this.scale = scale;
-	}
+    }
 
-	public void Draw(SpriteBatch spriteBatch) {
+    public float DoDamage()
+    {
+        return damage;
+    }
+
+    public void Draw(SpriteBatch spriteBatch) {
 		Rectangle sourceRectangle = new Rectangle(character_sprites[currentFrame, 0], character_sprites[currentFrame, 1], character_sprites[currentFrame, 2], character_sprites[currentFrame, 3]);
 		Rectangle destinationRectangle = new Rectangle((int)position.X, (int)position.Y, (int)(character_sprites[currentFrame, 2] * scale.X), (int)(character_sprites[currentFrame, 3] * scale.Y));
 		spriteBatch.Draw(texture, destinationRectangle, sourceRectangle, Color.White);
