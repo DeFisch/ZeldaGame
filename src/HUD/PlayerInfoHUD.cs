@@ -21,6 +21,10 @@ namespace ZeldaGame.HUD
         private Rectangle bombBlankDR;
         private int rubyCountInt;
         private string rubyCountString;
+        private int keyCountInt;
+        private string keyCountString;
+        private int bombCountInt;
+        private string bombCountString;
         private ItemActionHandler itemActionHandler;
         private CollisionHandler collisionHandler;
         private bool isDisplayed;
@@ -45,17 +49,39 @@ namespace ZeldaGame.HUD
             mapHandler = new HUDMapHandler(texture, scale, map);
         }
 
+        public void RubyCount(SpriteBatch spriteBatch)
+        {
+            rubyCountInt = (itemActionHandler.inventoryCounts[0] * 5) + itemActionHandler.inventoryCounts[1];
+            rubyCountString = "x" + rubyCountInt.ToString();
+            spriteBatch.Draw(texture, rubyBlankDR, allBlankSR, Color.White);
+            spriteBatch.DrawString(font, rubyCountString, new Vector2(300, 50), Color.White);
+        }
+
+        public void KeyCount(SpriteBatch spriteBatch)
+        {
+            keyCountInt = itemActionHandler.inventoryCounts[2];
+            keyCountString = "x" + keyCountInt.ToString();
+            spriteBatch.Draw(texture, keyBlankDR, allBlankSR, Color.White);
+            spriteBatch.DrawString(font, keyCountString, new Vector2(300, 100), Color.White);
+        }
+
+        public void BombCount(SpriteBatch spriteBatch)
+        {
+            bombCountInt = itemActionHandler.inventoryCounts[9];
+            bombCountString = "x" + bombCountInt.ToString();
+            spriteBatch.Draw(texture, bombBlankDR, allBlankSR, Color.White);
+            spriteBatch.DrawString(font, bombCountString, new Vector2(300, 125), Color.White);
+        }
+
         public void Draw(SpriteBatch spriteBatch)
         {
             playerInfoDR = new Rectangle(0, 0, (int)(playerInfoSR.Width * scale.X), (int)(playerInfoSR.Height * scale.Y));
-            rubyCountInt = (itemActionHandler.inventoryCounts[0] * 5) + itemActionHandler.inventoryCounts[1];
-            rubyCountString = "x" + rubyCountInt.ToString();
             spriteBatch.Draw(texture, playerInfoDR, playerInfoSR, Color.White);
-            spriteBatch.Draw(texture, rubyBlankDR, allBlankSR, Color.White);
             spriteBatch.Draw(texture, keyBlankDR, allBlankSR, Color.White);
             spriteBatch.Draw(texture, bombBlankDR, allBlankSR, Color.White);
-            spriteBatch.DrawString(font, rubyCountString, new Vector2(300, 50), Color.White);
-
+            RubyCount(spriteBatch);
+            KeyCount(spriteBatch);
+            BombCount(spriteBatch);
             if (!isDisplayed)
             {
                 mapHandler.Draw(spriteBatch, -1);

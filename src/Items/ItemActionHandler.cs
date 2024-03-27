@@ -14,6 +14,7 @@ namespace ZeldaGame.Items
     public class ItemActionHandler
     {
         public int[] inventoryCounts = new int[10];
+        
         public void InventoryCounts(IItemSprite item)
         {
             inventoryCounts[9] = 8;

@@ -51,7 +51,7 @@ namespace ZeldaGame.Items {
 
 		public string[] GetAvailableItems()
 		{
-			return new string[] { "br", "yr", "cl", "h" };
+			return new string[] { "br", "yr", "cl", "h", "bm"};
 		}
 
 		public List<IItemSprite> GetAllItems() {
@@ -87,6 +87,9 @@ namespace ZeldaGame.Items {
 					break;
 				case "bo":
 					objectList.Add(new Bow(this.texture, pos));
+					break;
+				case "bm":
+					objectList.Add(new Bomb(this.texture, pos));
 					break;
 				default:
 					break;
