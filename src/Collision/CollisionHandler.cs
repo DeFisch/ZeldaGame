@@ -111,8 +111,8 @@ public class CollisionHandler {
                 itemActionHandler.InventoryCounts(item);
                 Globals.audioLoader.Play("LOZ_Get_Item");
                 game.itemFactory.RemoveItem(item);
-				Debug.WriteLine("Player picks up item.");
-			}
+				Debug.WriteLine("Player picks up item \"" + item.GetID() + "\".");
+			} 
         }
     }
 

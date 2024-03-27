@@ -14,6 +14,8 @@ namespace ZeldaGame.Items
         new void Draw(SpriteBatch spriteBatch, Vector2 location, Color color, Vector2 scale);
         public Rectangle GetHitBox();
 
+        public String GetID();
+
         public void ItemAction(); //Dictates what should happen to Link after collision
     }
 }

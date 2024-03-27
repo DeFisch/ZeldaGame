@@ -12,10 +12,11 @@ namespace ZeldaGame.Items {
 		private Vector2 pos;
         private Rectangle sourceRectangle;
         private Rectangle destinationRectangle;
-        public HeartContainer(Texture2D texture, Vector2 pos) {
+		public String id;
+		public HeartContainer(Texture2D texture, Vector2 pos) {
 			this.texture = texture;
 			this.pos = pos;
-
+			this.id = "HeartContainer";
 		}
 
 		public void Draw(SpriteBatch spriteBatch, Vector2 location, Color color, Vector2 scale) {
@@ -35,7 +36,11 @@ namespace ZeldaGame.Items {
             return destinationRectangle;
         }
 
-        public void ItemAction()
+		public String GetID() {
+			return id;
+		}
+
+		public void ItemAction()
         {
 
         }
