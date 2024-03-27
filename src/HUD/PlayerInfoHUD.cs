@@ -5,6 +5,7 @@ using Microsoft.Xna.Framework.Graphics;
 using ZeldaGame.Items;
 using ZeldaGame.Player;
 using ZeldaGame.Map;
+using System.Diagnostics;
 
 namespace ZeldaGame.HUD
 {
@@ -46,7 +47,7 @@ namespace ZeldaGame.HUD
 
             itemActionHandler = collisionHandler.itemActionHandler;
             this.isDisplayed = isDisplayed;
-            mapHandler = new HUDMapHandler(texture, scale, map);
+            mapHandler = new HUDMapHandler(texture, scale, map, collisionHandler);
         }
 
         public void RubyCount(SpriteBatch spriteBatch)

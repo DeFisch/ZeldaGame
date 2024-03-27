@@ -13,9 +13,12 @@ namespace ZeldaGame.Items
 {
     public class ItemActionHandler
     {
-        public int[] inventoryCounts = new int[10];
+        public int[] inventoryCounts;
+        private bool getMap;
         public ItemActionHandler() {
+            inventoryCounts = new int[10];
             inventoryCounts[9] = 8;
+            getMap = false;
         }  
         public void InventoryCounts(IItemSprite item)
         {
@@ -54,12 +57,24 @@ namespace ZeldaGame.Items
                         inventoryCounts[9] = inventoryCounts[9] + 4;
                     }
                     break;
+                case Map:
+                    getMap = true;
+                    break;
                 default:
                     inventoryCounts[10]++;
                     break;
 
             }
 
+        }
+
+        public bool isMapObtained() => getMap;
+
+        public void Reset()
+        {
+            inventoryCounts = new int[10];
+            inventoryCounts[9] = 8;
+            getMap = false;
         }
 
     }

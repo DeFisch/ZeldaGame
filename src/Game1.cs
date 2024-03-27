@@ -106,7 +106,7 @@ namespace ZeldaGame
             NPCFactory = new NPCFactory(npcs, mapScale, font, map);
 			itemFactory = new ItemSpriteFactory(Items, npcs, mapScale, Link, map);
 			enemyFactory = new EnemyFactory(enemy_texture, mapScale, mapSize, itemFactory);
-			headUpDisplay = new HeadUpDisplay(HUD,mapScale, map);
+			headUpDisplay = new HeadUpDisplay(HUD, mapScale, map, collisionHandler);
 			playerInfoHUD = new PlayerInfoHUD(HUD, mapScale, map, headUpDisplay.isVisible(), font, collisionHandler);
 		
 
