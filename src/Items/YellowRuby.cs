@@ -17,11 +17,12 @@ namespace ZeldaGame.Items
 		private Rectangle sourceRectangle_2;
 		private Rectangle destinationRectangle_1;
 		private Rectangle destinationRectangle_2;
+		public String id;
 		public YellowRuby(Texture2D texture, Vector2 pos)
 		{
 			this.texture = texture;
 			this.pos = pos;
-
+			this.id = "YellowRuby";
 		}
 
 		public void Draw(SpriteBatch spriteBatch, Vector2 location, Color color, Vector2 scale)
@@ -61,6 +62,9 @@ namespace ZeldaGame.Items
 			return destinationRectangle_1;
 		}
 
+		public String GetID() {
+			return id;
+		}
 		public void ItemAction()
 		{
 

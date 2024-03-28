@@ -13,7 +13,6 @@ public class AudioLoader {
     public AudioLoader(Game1 game) {
         this.game = game;
         LoadAudio();
-        PlayBGM();
     }
     public void PlayBGM(){
         SoundEffectInstance bgm = game.Content.Load<SoundEffect>("audio/BGM").CreateInstance();
@@ -111,6 +110,14 @@ public class AudioLoader {
             }
             isMuted = true;
         }
+    }
+
+    public void Reset() {
+        foreach (var sfx in sfx_instances) {
+            sfx.Item2.Stop();
+        }
+        sfx_instances.Clear();
+        singletonIsPlaying = false;
     }
 }
         

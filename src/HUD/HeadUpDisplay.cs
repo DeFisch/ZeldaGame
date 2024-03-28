@@ -20,11 +20,11 @@ namespace ZeldaGame.HUD
         private Rectangle playerInfoDR;
         private int isDisplayed = -1;
 
-        public HeadUpDisplay (Texture2D texture, Vector2 scale,MapHandler map)
+        public HeadUpDisplay (Texture2D texture, Vector2 scale, MapHandler map, CollisionHandler collisionHandler)
         {
             this.texture = texture;
             this.scale = scale;
-            HUDMapHandler = new HUDMapHandler(texture, scale, map);
+            HUDMapHandler = new HUDMapHandler(texture, scale, map, collisionHandler);
             inventorySR = new Rectangle(1, 11, 256, 88);
             mapSR = new Rectangle(258, 112, 256, 88);
             playerInfoSR = new Rectangle(258, 11, 256, 56);

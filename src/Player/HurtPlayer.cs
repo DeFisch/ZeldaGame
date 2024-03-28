@@ -45,9 +45,14 @@ namespace ZeldaGame.Player {
 			// No implementation, don't take damage when already injured
 		}
 
+		public void GainHealth(float heal)
+		{
+			// Gain Health
+		}
+
 		public float GetHealth()
 		{
-			return 0; // FIX
+			return decoratedPlayer.GetHealth();
 		}
 
 		public void Update() {

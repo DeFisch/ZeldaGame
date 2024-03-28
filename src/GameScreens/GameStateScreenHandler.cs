@@ -12,7 +12,7 @@ public class GameStateScreenHandler
     private Dictionary<GameState, IGameScreen> screens;
     private GameState currentGameState;
     private Game1 myGame;
-    public GameStateScreenHandler(Game1 game)
+    public GameStateScreenHandler(Texture2D gameOverBackground, Game1 game)
     {
         screens = new Dictionary<GameState, IGameScreen>();
         currentGameState = GameState.TitleScreen;
@@ -66,5 +66,15 @@ public class GameStateScreenHandler
     public bool IsPaused()
     {
         return !IsPlaying();
+    }
+
+    public bool GameOver()
+    {
+        return myGame.Link.GetHealth() == 0;
+    }
+
+    public void EndGame()
+    {
+        currentGameState = GameState.GameOver;
     }
 }

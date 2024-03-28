@@ -5,7 +5,6 @@ using static ZeldaGame.Player.PlayerStateMachine;
 
 namespace ZeldaGame.Player {
 	public interface IPlayer {
-
 		public void Attack();
 		public void Idle();
 		public void OnCollision(Rectangle collision);
@@ -20,6 +19,7 @@ namespace ZeldaGame.Player {
 		public Dictionary<IPlayerProjectile, Rectangle> GetProjectileHitBoxes();
 		public bool isHurting();
 		public void TakeDamage(float damage);
+		public void GainHealth(float heal);
 		public float GetHealth();
 	}
 }

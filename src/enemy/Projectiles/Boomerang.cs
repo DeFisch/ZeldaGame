@@ -17,7 +17,7 @@ namespace Enemy.Projectiles
         private int duration = 180;
         private SpriteEffects sprite_effect = SpriteEffects.None;
         private Rectangle sourceRectangle;
-        private float damage = 1;
+        private float damage = 0.5f;
         
         public Boomerang(Texture2D texture, Vector2 location, Vector2 direction)
         {

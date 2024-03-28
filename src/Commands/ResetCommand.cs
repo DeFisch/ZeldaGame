@@ -17,6 +17,10 @@
             MyGame.enemyFactory.Reset();
             MyGame.headUpDisplay.Reset();
             MyGame.blockSpriteFactory.Reset();
+            MyGame.collisionHandler.itemActionHandler.Reset();
+            Globals.audioLoader.Reset();
+            Globals.audioLoader.PlayBGM();
+            Globals.gameStateScreenHandler.CurrentGameState = GameState.TitleScreen;
         }
     }
 }

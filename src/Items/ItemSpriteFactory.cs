@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -90,6 +91,9 @@ namespace ZeldaGame.Items {
 					break;
 				case "bm":
 					objectList.Add(new Bomb(this.texture, pos));
+					break;
+				case "mp":
+				    objectList.Add(new Map(this.texture, pos));
 					break;
 				default:
 					break;

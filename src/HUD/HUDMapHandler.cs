@@ -14,13 +14,13 @@ namespace ZeldaGame.HUD
         private List<Rectangle> targetRectangle;
         private Dictionary<string, Rectangle> playerPosition;
 
-        public HUDMapHandler(Texture2D texture, Vector2 scale, MapHandler map)
-            {
-                this.texture = texture;
+        public HUDMapHandler(Texture2D texture, Vector2 scale, MapHandler map, CollisionHandler collisionHandler)
+        {
+            this.texture = texture;
             sourceRectangle = new List<Rectangle>();
             targetRectangle = new List<Rectangle>();
             playerPosition = new Dictionary<string, Rectangle>();
-            mapType = new HUDMapType(scale, map);
+            mapType = new HUDMapType(scale, map, collisionHandler);
         }
 
         public void Draw(SpriteBatch spriteBatch, int isDisplayed)
