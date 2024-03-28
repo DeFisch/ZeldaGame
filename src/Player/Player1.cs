@@ -189,6 +189,7 @@ namespace ZeldaGame.Player {
             position = resetPosition;
             movement = new Vector2(0, 0);
             animTimer = -1;
+			health = 3.0f;
         }
     }
 }
