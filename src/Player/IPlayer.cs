@@ -19,6 +19,7 @@ namespace ZeldaGame.Player {
 		public Dictionary<IPlayerProjectile, Rectangle> GetProjectileHitBoxes();
 		public bool isHurting();
 		public void TakeDamage(float damage);
+		public void GainHealth(float heal);
 		public float GetHealth();
 	}
 }

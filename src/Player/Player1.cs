@@ -157,6 +157,15 @@ namespace ZeldaGame.Player {
 			Debug.WriteLine("Health: " + health);
 		}
 
+		public void GainHealth(float heal)
+		{
+			if (health <= 2.0f)
+				health += heal;
+			else
+				health = 3.0f;
+			Debug.WriteLine("Health: " + health);
+		}
+
 		public float GetHealth()
 		{
 			return health;

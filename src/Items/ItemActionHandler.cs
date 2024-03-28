@@ -15,10 +15,14 @@ namespace ZeldaGame.Items
     {
         public int[] inventoryCounts;
         private bool getMap;
-        public ItemActionHandler() {
+        private Game1 game;
+        private readonly int heartHealing = 1; 
+
+        public ItemActionHandler(Game1 game) {
             inventoryCounts = new int[10];
             inventoryCounts[9] = 8;
             getMap = false;
+            this.game = game;
         }  
         public void InventoryCounts(IItemSprite item)
         {
@@ -40,6 +44,7 @@ namespace ZeldaGame.Items
                     inventoryCounts[4]++;
                     break;
                 case Heart:
+                    game.Link.GainHealth(heartHealing);
                     inventoryCounts[5]++;
                     break;
                 case HeartContainer:

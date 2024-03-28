@@ -19,7 +19,7 @@ public class CollisionHandler {
     public CollisionHandler(Game1 game) {
         this.game = game;
         enemyCollisionHandler = new EnemyCollisionHandler(game);
-        itemActionHandler = new ItemActionHandler();
+        itemActionHandler = new ItemActionHandler(game);
     }
 
     public void PlayerMapCollision()
