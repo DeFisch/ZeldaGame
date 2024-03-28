@@ -19,6 +19,8 @@ public class GameStateScreenHandler
         this.myGame = game;
         AddScreen(GameState.TitleScreen, new TitleScreen(game.Content.Load<Texture2D>("TitleScreen"), game));
         AddScreen(GameState.Pause, new PauseScreen(null, game));
+        AddScreen(GameState.GameOver, new GameOverScreen(new Texture2D(game.GraphicsDevice, 1, 1), game));
+
     }
     public void AddScreen(GameState state, IGameScreen screen)
     {

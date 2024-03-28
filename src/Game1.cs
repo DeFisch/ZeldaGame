@@ -1,14 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Runtime.InteropServices;
+﻿using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using ZeldaGame.Block;
 using ZeldaGame.Controllers;
 using ZeldaGame.Enemy;
-using ZeldaGame.Enemy.Commands;
-using ZeldaGame;
 using ZeldaGame.HUD;
 using ZeldaGame.Items;
 using ZeldaGame.Map;
