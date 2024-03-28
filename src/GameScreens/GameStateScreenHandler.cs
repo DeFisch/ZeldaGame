@@ -12,7 +12,7 @@ public class GameStateScreenHandler
     private Dictionary<GameState, IGameScreen> screens;
     private GameState currentGameState;
     private Game1 myGame;
-    public GameStateScreenHandler(Texture2D gameOverBackground, Game1 game)
+    public GameStateScreenHandler(Game1 game)
     {
         screens = new Dictionary<GameState, IGameScreen>();
         currentGameState = GameState.TitleScreen;

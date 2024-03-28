@@ -81,7 +81,7 @@ namespace ZeldaGame
 			HUD = Content.Load<Texture2D>("HUD");
 
             // Initialize gameStateScreen handler
-            Globals.gameStateScreenHandler = new GameStateScreenHandler(HUD, this);
+            Globals.gameStateScreenHandler = new GameStateScreenHandler(this);
 
             // Load audio
             Globals.audioLoader = new AudioLoader(this);
