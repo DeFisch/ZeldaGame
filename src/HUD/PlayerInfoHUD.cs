@@ -14,6 +14,17 @@ namespace ZeldaGame.HUD
         private Texture2D texture;
         private SpriteFont font;
         private Vector2 scale;
+
+        private Rectangle fullHeartSR;
+        private Rectangle halfHeartSR;
+        private Rectangle emptyHeartSR;
+        private Rectangle firstHeartDR;
+        private Rectangle secondHeartDR;
+        private Rectangle thirdHeartDR;
+        private Rectangle firstHeartSR;
+        private Rectangle secondHeartSR;
+        private Rectangle thirdHeartSR;
+
         private Rectangle playerInfoSR;
         private Rectangle playerInfoDR;
         private Rectangle allBlankSR;
@@ -30,14 +41,24 @@ namespace ZeldaGame.HUD
         private CollisionHandler collisionHandler;
         private bool isDisplayed;
         private HUDMapHandler mapHandler;
+        private Game1 myGame;
 
 
-        public PlayerInfoHUD(Texture2D texture, Vector2 scale, MapHandler map, bool isDisplayed, SpriteFont font, CollisionHandler collisionHandler)
+        public PlayerInfoHUD(Texture2D texture, Vector2 scale, MapHandler map, bool isDisplayed, SpriteFont font, CollisionHandler collisionHandler, Game1 myGame)
         {
             this.texture = texture;
             this.scale = scale;
             this.font = font;
             this.collisionHandler = collisionHandler;
+            this.myGame = myGame;
+
+            fullHeartSR = new Rectangle(645, 117, 8, 8);
+            halfHeartSR = new Rectangle(636, 117, 8, 8);
+            emptyHeartSR = new Rectangle(627, 117, 8, 8);
+            firstHeartDR = new Rectangle(550, 95, 70, 60);
+            secondHeartDR = new Rectangle(620, 95, 70, 60);
+            thirdHeartDR = new Rectangle(690, 95, 70, 60);
+
             playerInfoSR = new Rectangle(258, 11, 256, 56);
             playerInfoDR = new Rectangle(0, 0, 0, 0);
             allBlankSR = new Rectangle(353, 11, 23, 15);
@@ -77,12 +98,20 @@ namespace ZeldaGame.HUD
         public void Draw(SpriteBatch spriteBatch)
         {
             playerInfoDR = new Rectangle(0, 0, (int)(playerInfoSR.Width * scale.X), (int)(playerInfoSR.Height * scale.Y));
+
+            rubyCountInt = (itemActionHandler.inventoryCounts[0] * 5) + itemActionHandler.inventoryCounts[1];
+            rubyCountString = "x" + rubyCountInt.ToString();
+
+
             spriteBatch.Draw(texture, playerInfoDR, playerInfoSR, Color.White);
             spriteBatch.Draw(texture, keyBlankDR, allBlankSR, Color.White);
             spriteBatch.Draw(texture, bombBlankDR, allBlankSR, Color.White);
             RubyCount(spriteBatch);
             KeyCount(spriteBatch);
             BombCount(spriteBatch);
+
+            DrawHealth(spriteBatch);
+
             if (!isDisplayed)
             {
                 mapHandler.Draw(spriteBatch, -1);
@@ -94,6 +123,23 @@ namespace ZeldaGame.HUD
         public void Update()
         {
 
+        }
+
+        private void DrawHealth(SpriteBatch spriteBatch)
+        {
+            switch (myGame.Link.GetHealth())
+            {
+                case 3: firstHeartSR = fullHeartSR; secondHeartSR = fullHeartSR; thirdHeartSR = fullHeartSR; break;
+                case 2.5f: thirdHeartSR = halfHeartSR; break;
+                case 2: thirdHeartSR = emptyHeartSR; break;
+                case 1.5f: secondHeartSR = halfHeartSR; break;
+                case 1: secondHeartSR = emptyHeartSR; break;
+                case 0.5f: firstHeartSR = halfHeartSR; break;
+                case 0: firstHeartSR = emptyHeartSR; break;
+            }
+            spriteBatch.Draw(texture, firstHeartDR, firstHeartSR, Color.White);
+            spriteBatch.Draw(texture, secondHeartDR, secondHeartSR, Color.White);
+            spriteBatch.Draw(texture, thirdHeartDR, thirdHeartSR, Color.White);
         }
     }
 }

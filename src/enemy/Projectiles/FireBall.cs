@@ -16,7 +16,7 @@ namespace Enemy.Projectiles
         private int currentFrame = 0;
         private int frameID = 0;
         private Rectangle sourceRectangle;
-        private float damage = 1.5f;
+        private float damage = 0.5f;
         
         public FireBall(Texture2D texture, Vector2 location, Vector2 direction)
         {

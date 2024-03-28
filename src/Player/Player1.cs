@@ -23,8 +23,8 @@ namespace ZeldaGame.Player {
 		private Swords currSword;
 		private int animTimer;
 
-		public static float health = 3f;
-		public float maxHealth = 3f;
+		private static float health = 3.0f;
+		private float maxHealth = 3f;
 
 		public Player1(Vector2 position, Vector2 scale)
 		{

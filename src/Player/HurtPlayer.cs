@@ -47,7 +47,7 @@ namespace ZeldaGame.Player {
 
 		public float GetHealth()
 		{
-			return 0; // FIX
+			return decoratedPlayer.GetHealth();
 		}
 
 		public void Update() {

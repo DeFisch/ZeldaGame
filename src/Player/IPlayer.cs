@@ -5,7 +5,6 @@ using static ZeldaGame.Player.PlayerStateMachine;
 
 namespace ZeldaGame.Player {
 	public interface IPlayer {
-
 		public void Attack();
 		public void Idle();
 		public void OnCollision(Rectangle collision);
