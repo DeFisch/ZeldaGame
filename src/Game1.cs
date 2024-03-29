@@ -95,7 +95,7 @@ namespace ZeldaGame
 			// Initializes item classes
 			PlayerSpriteFactory.Instance.LoadAllTextures(Content);
 			PlayerItemSpriteFactory.Instance.LoadAllTextures(Content);
-            Link = new Player1(new Vector2(mapSize.X / 2, (mapSize.X / 2) + mapSize.Z), mapScale);
+            Link = new Player1(new Vector2(mapSize.X / 2, (mapSize.X / 2) + mapSize.Z), mapScale, this);
 
 			
 			Texture2D[] enemy_texture = {Content.Load<Texture2D>("enemies"),Content.Load<Texture2D>("enemies_1")};

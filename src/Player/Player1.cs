@@ -27,13 +27,13 @@ namespace ZeldaGame.Player {
         private static float health = 3.0f;
 		private float maxHealth = 3f;
 
-		public Player1(Vector2 position, Vector2 scale)
+		public Player1(Vector2 position, Vector2 scale, Game1 game)
 		{
 			direction = Direction.Down;
 			sprite = PlayerSpriteFactory.Instance.CreateWalkSprite(direction);
 			stateMachine = new PlayerStateMachine(sprite);
 			weaponHandler = new WeaponHandler();
-			itemActionHandler = new ItemActionHandler();
+			itemActionHandler = new ItemActionHandler(game);
 
 			currSword = weaponHandler.currSword;
 			this.position = position;
@@ -121,10 +121,10 @@ namespace ZeldaGame.Player {
 				sprite = stateMachine.UseItem();
                 if (item == 4)
                 {
-					if (ItemActionHandler.inventoryCounts[9] > 0)
+					if (ItemActionHandler.inventoryCounts[8] > 0)
 					{
 						weaponHandler.UseItem(item, position, stateMachine.GetDirection());
-						ItemActionHandler.inventoryCounts[9]--;
+						ItemActionHandler.inventoryCounts[8]--;
 					}
                 }
 				else

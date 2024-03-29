@@ -13,16 +13,15 @@ namespace ZeldaGame.Items
 {
     public class ItemActionHandler
     {
-        public int[] inventoryCounts;
+        public static int[] inventoryCounts;
         private bool getMap;
         private bool getCompass;
         private Game1 game;
         private readonly int heartHealing = 1;
-        public static int[] inventoryCounts = new int[10];
 
         public ItemActionHandler(Game1 game) {
             inventoryCounts = new int[9];
-            inventoryCounts[9] = 8;
+            inventoryCounts[8] = 8;
             getMap = false;
             getCompass = false;
             this.game = game;
@@ -63,7 +62,7 @@ namespace ZeldaGame.Items
                     }
                     else
                     {
-                        inventoryCounts[9] = 8;
+                        inventoryCounts[8] = 8;
                     }
                     break;
                 case Map:
@@ -73,7 +72,6 @@ namespace ZeldaGame.Items
                     getCompass = true;
                     break;
                 default:
-                    inventoryCounts[9]++;
                     break;
 
             }
