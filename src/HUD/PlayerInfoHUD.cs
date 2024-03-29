@@ -130,12 +130,12 @@ namespace ZeldaGame.HUD
             switch (myGame.Link.GetHealth())
             {
                 case 3: firstHeartSR = fullHeartSR; secondHeartSR = fullHeartSR; thirdHeartSR = fullHeartSR; break;
-                case 2.5f: thirdHeartSR = halfHeartSR; break;
-                case 2: thirdHeartSR = emptyHeartSR; break;
-                case 1.5f: secondHeartSR = halfHeartSR; break;
-                case 1: secondHeartSR = emptyHeartSR; break;
-                case 0.5f: firstHeartSR = halfHeartSR; break;
-                case 0: firstHeartSR = emptyHeartSR; break;
+                case 2.5f: firstHeartSR = fullHeartSR; secondHeartSR = fullHeartSR; thirdHeartSR = halfHeartSR; break;
+                case 2: firstHeartSR = fullHeartSR; secondHeartSR = fullHeartSR; thirdHeartSR = emptyHeartSR; break;
+                case 1.5f: firstHeartSR = fullHeartSR; secondHeartSR = halfHeartSR; thirdHeartSR = emptyHeartSR; break;
+                case 1: firstHeartSR = fullHeartSR; secondHeartSR = emptyHeartSR; thirdHeartSR = emptyHeartSR; break;
+                case 0.5f: firstHeartSR = halfHeartSR; secondHeartSR = emptyHeartSR; thirdHeartSR = emptyHeartSR; break;
+                case 0: firstHeartSR = emptyHeartSR; secondHeartSR = emptyHeartSR; thirdHeartSR = emptyHeartSR; break;
             }
             spriteBatch.Draw(texture, firstHeartDR, firstHeartSR, Color.White);
             spriteBatch.Draw(texture, secondHeartDR, secondHeartSR, Color.White);
