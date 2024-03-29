@@ -15,7 +15,7 @@ public class MagicSwordVerticalSprite : IPlayerProjectile {
 
 	private Vector2 position;
 	private Vector2 offset;
-    private readonly int damage = 2;
+    private readonly int damage = 4;
 
     private Rectangle destinationRectangle;
 
