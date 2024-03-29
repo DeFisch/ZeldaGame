@@ -16,7 +16,7 @@ public class OldMan : INPC {
     public OldMan(Texture2D texture, Vector2 position) {
 		this.texture = texture;
 		this.position = position;
-        npcQuote = "EASTMOST PENNINSULA IS THE SECRET";
+        npcQuote = "EASTMOST PENNINSULA IS THE SECRET.";
 
     }
 

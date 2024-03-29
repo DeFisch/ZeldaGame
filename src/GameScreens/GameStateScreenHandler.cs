@@ -4,7 +4,7 @@ using System.Collections.Generic;
 namespace ZeldaGame;
 public enum GameState
 {
-    TitleScreen, Playing, Pause, GameOver, HUD
+    TitleScreen, Playing, Pause, GameOver, HUD, GameWin
 };
 
 public class GameStateScreenHandler
@@ -20,7 +20,7 @@ public class GameStateScreenHandler
         AddScreen(GameState.TitleScreen, new TitleScreen(game.Content.Load<Texture2D>("TitleScreen"), game));
         AddScreen(GameState.Pause, new PauseScreen(null, game));
         AddScreen(GameState.GameOver, new GameOverScreen(new Texture2D(game.GraphicsDevice, 1, 1), game));
-
+        AddScreen(GameState.GameWin, new GameWinScreen(new Texture2D(game.GraphicsDevice, 1, 1), game));
     }
     public void AddScreen(GameState state, IGameScreen screen)
     {
