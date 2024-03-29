@@ -68,8 +68,6 @@ namespace ZeldaGame.HUD
                             sRectangleList.Add(new Rectangle(360, 140, 8, 8));
                         if(currentPosition[new Vector2(i-1,j-2)])
                             playerPosition.Add("Orange", new Rectangle((int)xPosition +8, (int)yPosition +8, (int)(scale.X * 3), (int)(scale.Y * 3)));
-                            
-
                     }
                     else if(map_name.Equals("Top_Blue"))
                     {

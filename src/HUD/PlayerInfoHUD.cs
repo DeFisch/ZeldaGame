@@ -89,7 +89,7 @@ namespace ZeldaGame.HUD
 
         public void BombCount(SpriteBatch spriteBatch)
         {
-            bombCountInt = itemActionHandler.inventoryCounts[9];
+            bombCountInt = itemActionHandler.inventoryCounts[8];
             bombCountString = "x" + bombCountInt.ToString();
             spriteBatch.Draw(texture, bombBlankDR, allBlankSR, Color.White);
             spriteBatch.DrawString(font, bombCountString, new Vector2(300, 125), Color.White);
