@@ -135,12 +135,12 @@ public class CollisionHandler {
 		}
 		else if (left_door.Contains(playerCenterpoint)){
             map.move_left();
-            player.SetPlayerPosition(new Vector2((int)(0.8*map_size.X), (int)((map_size.Y/2) + map_size.Z)));
+            player.SetPlayerPosition(new Vector2((int)(0.85*map_size.X), (int)((map_size.Y/2) + map_size.Z)));
 			Debug.WriteLine("Player enters left door.");
 		}
 		else if (right_door.Contains(playerCenterpoint)){
             map.move_right();
-            player.SetPlayerPosition(new Vector2((int)(0.2*map_size.X), (int)((map_size.Y/2) + map_size.Z)));
+            player.SetPlayerPosition(new Vector2((int)(0.15*map_size.X), (int)((map_size.Y/2) + map_size.Z)));
 			Debug.WriteLine("Player enters right door.");
 		}
 
