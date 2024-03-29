@@ -76,5 +76,7 @@ public class GameStateScreenHandler
     public void EndGame()
     {
         currentGameState = GameState.GameOver;
+        Globals.audioLoader.Reset();
+        Globals.audioLoader.Play("GameOver");
     }
 }

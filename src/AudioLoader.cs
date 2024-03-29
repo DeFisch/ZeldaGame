@@ -115,6 +115,7 @@ public class AudioLoader {
     public void Reset() {
         foreach (var sfx in sfx_instances) {
             sfx.Item2.Stop();
+            sfx.Item2.Dispose();
         }
         sfx_instances.Clear();
         singletonIsPlaying = false;

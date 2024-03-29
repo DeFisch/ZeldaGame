@@ -40,9 +40,9 @@ public class GameOverScreen : IGameScreen
 
                 SpriteFont font = myGame.font;
                 float fontScale = 2;
-                Vector2 fontSize = font.MeasureString("GAME OVER") * fontScale;
+                Vector2 fontSize = font.MeasureString("    GAME OVER\nPress R to restart") * fontScale;
                 Vector2 fontPosition = (window_size - fontSize) / 2;
-                spriteBatch.DrawString(font, "GAME OVER", fontPosition, Color.White, 0, Vector2.Zero, fontScale, SpriteEffects.None, 0);
+                spriteBatch.DrawString(font, "    GAME OVER\nPress R to restart", fontPosition, Color.White, 0, Vector2.Zero, fontScale, SpriteEffects.None, 0);
             }
     }
 
