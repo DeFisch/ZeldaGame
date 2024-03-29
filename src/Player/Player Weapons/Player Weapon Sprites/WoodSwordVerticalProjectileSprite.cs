@@ -12,9 +12,10 @@ public class WoodSwordVerticalProjectileSprite : IPlayerProjectile {
 	private bool collided;
 
 	private Vector2 position;
+	private Vector2 offset;
 	private Vector2 projectileMovement;
 	private readonly int projectileSpeed = 6;
-	private readonly int damage = 3;
+	private readonly int damage = 1;
 	private readonly int expirationTimer = 10;
 	private int expirationCounter;
 
@@ -27,6 +28,7 @@ public class WoodSwordVerticalProjectileSprite : IPlayerProjectile {
 		effect = SpriteEffects.None;
 		this.direction = direction;
 		this.position = position;
+		offset = new Vector2(5, 12);
 		expirationCounter = 0;
 	}
 
@@ -54,11 +56,16 @@ public class WoodSwordVerticalProjectileSprite : IPlayerProjectile {
 	public void Draw(SpriteBatch spriteBatch, Vector2 scale) {
 		if (!collided) {
 			sourceRectangle = new Rectangle(1, 154, 8, 16);
-			destinationRectangle = new Rectangle((int)position.X, (int)position.Y, (int)(sourceRectangle.Width * scale.X), (int)(sourceRectangle.Height * scale.Y));
+			if (direction == Direction.Down) {
+				destinationRectangle = new Rectangle((int)(position.X + offset.X * scale.X), (int)(position.Y + offset.Y * scale.Y), (int)(sourceRectangle.Width * scale.X), (int)(sourceRectangle.Height * scale.Y));
+			}
+			else {
+				destinationRectangle = new Rectangle((int)(position.X + offset.X * scale.X), (int)(position.Y - offset.Y * scale.Y), (int)(sourceRectangle.Width * scale.X), (int)(sourceRectangle.Height * scale.Y));
+			}
 		}
 		else {
 			// Drawing explosion after arrow collides
-			if (direction == Direction.Right) {
+			if (direction == Direction.Down) {
 				destinationRectangle = new Rectangle((int)position.X + 20, (int)position.Y, (int)(sourceRectangle.Width * scale.X), (int)(sourceRectangle.Height * scale.Y));
 			}
 			else {

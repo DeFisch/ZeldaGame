@@ -23,9 +23,9 @@ namespace ZeldaGame.Player {
 		private Direction direction;
 		private Swords currSword;
 		private int animTimer;
-		private ItemActionHandler itemActionHandler;
-		public static float health = 3f;
-		public float maxHealth = 3f;
+        private ItemActionHandler itemActionHandler;
+        private static float health = 3.0f;
+		private float maxHealth = 3f;
 
 		public Player1(Vector2 position, Vector2 scale)
 		{
@@ -171,6 +171,15 @@ namespace ZeldaGame.Player {
 			Debug.WriteLine("Health: " + health);
 		}
 
+		public void GainHealth(float heal)
+		{
+			if (health <= 2.0f)
+				health += heal;
+			else
+				health = 3.0f;
+			Debug.WriteLine("Health: " + health);
+		}
+
 		public float GetHealth()
 		{
 			return health;
@@ -203,6 +212,7 @@ namespace ZeldaGame.Player {
             position = resetPosition;
             movement = new Vector2(0, 0);
             animTimer = -1;
+			health = 3.0f;
         }
     }
 }

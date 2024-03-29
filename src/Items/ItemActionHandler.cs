@@ -13,10 +13,19 @@ namespace ZeldaGame.Items
 {
     public class ItemActionHandler
     {
+        public int[] inventoryCounts;
+        private bool getMap;
+        private bool getCompass;
+        private Game1 game;
+        private readonly int heartHealing = 1;
         public static int[] inventoryCounts = new int[10];
-        Game1 game;
-        public ItemActionHandler() {
-            inventoryCounts[9] = 0;
+
+        public ItemActionHandler(Game1 game) {
+            inventoryCounts = new int[9];
+            inventoryCounts[9] = 8;
+            getMap = false;
+            getCompass = false;
+            this.game = game;
         }  
         public void InventoryCounts(IItemSprite item)
         {
@@ -34,37 +43,52 @@ namespace ZeldaGame.Items
                 case Clock:
                     inventoryCounts[3]++;
                     break;
-                case Compass:
+                case Heart:
+                    game.Link.GainHealth(heartHealing);
                     inventoryCounts[4]++;
                     break;
-                case Heart:
+                case HeartContainer:
                     inventoryCounts[5]++;
                     break;
-                case HeartContainer:
+                case Triforce:
                     inventoryCounts[6]++;
                     break;
-                case Triforce:
+                case Bow:
                     inventoryCounts[7]++;
                     break;
-                case Bow:
-                    inventoryCounts[8]++;
-                    break;
                 case Bomb:
-                    if (inventoryCounts[9] + 4 <= 8)
+                    if (inventoryCounts[8] + 4 < 8)
                     {
-                        inventoryCounts[9] = inventoryCounts[9] + 4;
+                        inventoryCounts[8] = inventoryCounts[8] + 4;
                     }
                     else
                     {
                         inventoryCounts[9] = 8;
                     }
                     break;
+                case Map:
+                    getMap = true;
+                    break;
+                case Compass:
+                    getCompass = true;
+                    break;
                 default:
-                    inventoryCounts[10]++;
+                    inventoryCounts[9]++;
                     break;
 
             }
 
+        }
+
+        public bool isMapObtained() => getMap;
+        public bool isCompassObtained() => getCompass;
+
+        public void Reset()
+        {
+            inventoryCounts = new int[9];
+            inventoryCounts[8] = 8;
+            getMap = false;
+            getCompass = false;
         }
 
     }

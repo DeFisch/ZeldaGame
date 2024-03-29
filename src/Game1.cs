@@ -1,14 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Runtime.InteropServices;
+﻿using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using ZeldaGame.Block;
 using ZeldaGame.Controllers;
 using ZeldaGame.Enemy;
-using ZeldaGame.Enemy.Commands;
-using ZeldaGame;
 using ZeldaGame.HUD;
 using ZeldaGame.Items;
 using ZeldaGame.Map;
@@ -71,8 +67,6 @@ namespace ZeldaGame
 
 			// Initialize collision handler
 			collisionHandler = new CollisionHandler(this);
-			// Initialize gameStateScreen handler
-			Globals.gameStateScreenHandler = new GameStateScreenHandler(this);
 
 			base.Initialize();
 		}
@@ -86,8 +80,11 @@ namespace ZeldaGame
             font = Content.Load<SpriteFont>("Font");
 			HUD = Content.Load<Texture2D>("HUD");
 
-			// Load audio
-			Globals.audioLoader = new AudioLoader(this);
+            // Initialize gameStateScreen handler
+            Globals.gameStateScreenHandler = new GameStateScreenHandler(this);
+
+            // Load audio
+            Globals.audioLoader = new AudioLoader(this);
 
 			// Initialize map
 			// Load default map
@@ -106,8 +103,8 @@ namespace ZeldaGame
             NPCFactory = new NPCFactory(npcs, mapScale, font, map);
 			itemFactory = new ItemSpriteFactory(Items, npcs, mapScale, Link, map);
 			enemyFactory = new EnemyFactory(enemy_texture, mapScale, mapSize, itemFactory);
-			headUpDisplay = new HeadUpDisplay(HUD,mapScale, map);
-			playerInfoHUD = new PlayerInfoHUD(HUD, mapScale, map, headUpDisplay.isVisible(), font, collisionHandler);
+			headUpDisplay = new HeadUpDisplay(HUD, mapScale, map, collisionHandler);
+			playerInfoHUD = new PlayerInfoHUD(HUD, mapScale, map, headUpDisplay.isVisible(), font, collisionHandler, this);
 		
 
             // Define the quadrants based on the map size
@@ -204,9 +201,13 @@ namespace ZeldaGame
 			collisionHandler.Update();
 
 			//Update HUD
-			headUpDisplay.Update();	
+			headUpDisplay.Update();
 
-			base.Update(gameTime);
+			// Checks if end game
+            if (Globals.gameStateScreenHandler.GameOver())
+                Globals.gameStateScreenHandler.EndGame();
+
+            base.Update(gameTime);
 		}
 
 		protected override void Draw(GameTime gameTime) {
@@ -222,7 +223,7 @@ namespace ZeldaGame
 				_spriteBatch.End();
 				return;
 			}
-			GraphicsDevice.Clear(Color.CornflowerBlue);
+
             // Draws map
             map.Draw(_spriteBatch);
 			// Draws Blocks
@@ -241,6 +242,9 @@ namespace ZeldaGame
 			}
 			// Draws player
 			Link.Draw(_spriteBatch, Color.White);
+
+			if (Globals.gameStateScreenHandler.GameOver())
+                GraphicsDevice.Clear(Color.Black);
 
             _spriteBatch.End();
 

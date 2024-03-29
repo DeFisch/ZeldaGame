@@ -15,9 +15,11 @@ namespace ZeldaGame.Items {
 		private Rectangle sourceRectangle_2;
 		private Rectangle destinationRectangle_1;
 		private Rectangle destinationRectangle_2;
+		public String id;
 		public FireItem(Texture2D texture, Vector2 pos) {
 			this.texture = texture;
 			this.pos = pos;
+			this.id = "FireItem";
 		}
 
 		public void Draw(SpriteBatch spriteBatch, Vector2 location, Color color, Vector2 scale) {
@@ -50,7 +52,11 @@ namespace ZeldaGame.Items {
 
         }
 
-        public void Update() {
+		public String GetID() {
+			return id;
+		}
+
+		public void Update() {
 
 		}
 	}

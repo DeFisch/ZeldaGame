@@ -15,7 +15,7 @@ public class WoodSwordVerticalSprite : IPlayerProjectile {
 
 	private Vector2 position;
 	private Vector2 offset;
-    private readonly int damage = 2;
+    private readonly int damage = 1;
 
     private Rectangle destinationRectangle;
 

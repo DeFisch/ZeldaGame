@@ -19,7 +19,7 @@ public class CollisionHandler {
     public CollisionHandler(Game1 game) {
         this.game = game;
         enemyCollisionHandler = new EnemyCollisionHandler(game);
-        itemActionHandler = new ItemActionHandler();
+        itemActionHandler = new ItemActionHandler(game);
     }
 
     public void PlayerMapCollision()
@@ -111,8 +111,8 @@ public class CollisionHandler {
                 itemActionHandler.InventoryCounts(item);
                 Globals.audioLoader.Play("LOZ_Get_Item");
                 game.itemFactory.RemoveItem(item);
-				Debug.WriteLine("Player picks up item.");
-			}
+				Debug.WriteLine("Player picks up item \"" + item.GetID() + "\".");
+			} 
         }
     }
 

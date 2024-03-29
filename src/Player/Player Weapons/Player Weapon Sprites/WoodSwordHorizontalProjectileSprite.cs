@@ -11,9 +11,10 @@ public class WoodSwordHorizontalProjectileSprite : IPlayerProjectile {
 	private bool collided;
 
 	private Vector2 position;
+	private Vector2 offset;
 	private Vector2 projectileMovement;
 	private readonly int projectileSpeed = 6;
-	private readonly int damage = 3;
+	private readonly int damage = 1;
 	private readonly int expirationTimer = 10;
 	private int expirationCounter;
 
@@ -25,6 +26,7 @@ public class WoodSwordHorizontalProjectileSprite : IPlayerProjectile {
 		Sprite = sprite;
 		effect = SpriteEffects.None;
 		this.direction = direction;
+		offset = new Vector2(12, 1);
 		this.position = position;
 		expirationCounter = 0;
 	}
@@ -53,7 +55,13 @@ public class WoodSwordHorizontalProjectileSprite : IPlayerProjectile {
 	public void Draw(SpriteBatch spriteBatch, Vector2 scale) {
 		if (!collided) {
 			sourceRectangle = new Rectangle(10, 154, 16, 16);
-			destinationRectangle = new Rectangle((int)position.X, (int)position.Y, (int)(sourceRectangle.Width * scale.X), (int)(sourceRectangle.Height * scale.Y));
+			if (direction == Direction.Right) {
+				destinationRectangle = new Rectangle((int)(position.X + offset.X * scale.X), (int)(position.Y + offset.Y * scale.Y), (int)(sourceRectangle.Width * scale.X), (int)(sourceRectangle.Height * scale.Y));
+			}
+			else {
+				destinationRectangle = new Rectangle((int)(position.X - offset.X * scale.X), (int)(position.Y + offset.Y * scale.Y), (int)(sourceRectangle.Width * scale.X), (int)(sourceRectangle.Height * scale.Y));
+			}
+			
 		}
 		else {
 			// Drawing explosion after arrow collides

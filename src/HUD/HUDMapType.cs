@@ -21,13 +21,17 @@ namespace ZeldaGame.HUD
         private Dictionary<string, Rectangle> playerPosition;
         private float xPosition = 0, yPosition = 0;
         private float width = 0, height = 0;
+        private bool isMapObtained;
+        private CollisionHandler collisionHandler;
 
-        public HUDMapType(Vector2 scale, MapHandler mapHandler)
+        public HUDMapType(Vector2 scale, MapHandler mapHandler, CollisionHandler collisionHandler)
         {
             this.scale = scale;
             this.map = new HUDMapLoader();
             this.mapHandler = mapHandler;
             this.roomPosition = mapHandler.getMapXY();
+            this.collisionHandler = collisionHandler;
+            this.isMapObtained = collisionHandler.itemActionHandler.isMapObtained();
             isVisited = defaultRoomVisited();
             currentPosition = defaultRoomVisited();
             mapList = map.load_map();
@@ -45,6 +49,7 @@ namespace ZeldaGame.HUD
             dRectangleList.Clear();
             sRectangleList.Clear();
             playerPosition.Clear();
+            isMapObtained = collisionHandler.itemActionHandler.isMapObtained();
 
             for (int i = 0; i < 8; i++)
             {
@@ -63,8 +68,6 @@ namespace ZeldaGame.HUD
                             sRectangleList.Add(new Rectangle(360, 140, 8, 8));
                         if(currentPosition[new Vector2(i-1,j-2)])
                             playerPosition.Add("Orange", new Rectangle((int)xPosition +8, (int)yPosition +8, (int)(scale.X * 3), (int)(scale.Y * 3)));
-                            
-
                     }
                     else if(map_name.Equals("Top_Blue"))
                     {
@@ -72,7 +75,8 @@ namespace ZeldaGame.HUD
                         height = scale.Y * 4;
                         xPosition = i * width + scale.X * 16;
                         yPosition = j * height + scale.Y * 16;
-                        sRectangleList.Add(map.getSourceRectangle_B(mapList[j, i]));
+                        if(isMapObtained)
+                            sRectangleList.Add(map.getSourceRectangle_B(mapList[j, i]));
                         isRoomVisited(i-1,j-2);
                         if(currentPosition[new Vector2(i-1,j-2)])
                             playerPosition.Add("Top_Blue", new Rectangle((int)xPosition + 7, (int)yPosition, (int)(scale.X * 3), (int)(scale.Y * 3)));
@@ -83,7 +87,8 @@ namespace ZeldaGame.HUD
                         height = scale.Y * 4;
                         xPosition = i * width + scale.X * 16;
                         yPosition = j * height + scale.Y * (16 + 176);
-                        sRectangleList.Add(map.getSourceRectangle_B(mapList[j, i]));
+                        if(isMapObtained)
+                            sRectangleList.Add(map.getSourceRectangle_B(mapList[j, i]));
                         isRoomVisited(i-1,j-2);
                         if(currentPosition[new Vector2(i-1,j-2)])
                             playerPosition.Add("Bottom_Blue", new Rectangle((int)xPosition + 7, (int)yPosition, (int)(scale.X * 3), (int)(scale.Y * 3)));
