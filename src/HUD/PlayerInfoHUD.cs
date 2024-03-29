@@ -51,7 +51,7 @@ namespace ZeldaGame.HUD
 
         public void RubyCount(SpriteBatch spriteBatch)
         {
-            rubyCountInt = (itemActionHandler.inventoryCounts[0] * 5) + itemActionHandler.inventoryCounts[1];
+            rubyCountInt = (ItemActionHandler.inventoryCounts[0] * 5) + ItemActionHandler.inventoryCounts[1];
             rubyCountString = "x" + rubyCountInt.ToString();
             spriteBatch.Draw(texture, rubyBlankDR, allBlankSR, Color.White);
             spriteBatch.DrawString(font, rubyCountString, new Vector2(300, 50), Color.White);
@@ -59,7 +59,7 @@ namespace ZeldaGame.HUD
 
         public void KeyCount(SpriteBatch spriteBatch)
         {
-            keyCountInt = itemActionHandler.inventoryCounts[2];
+            keyCountInt = ItemActionHandler.inventoryCounts[2];
             keyCountString = "x" + keyCountInt.ToString();
             spriteBatch.Draw(texture, keyBlankDR, allBlankSR, Color.White);
             spriteBatch.DrawString(font, keyCountString, new Vector2(300, 100), Color.White);
@@ -67,7 +67,7 @@ namespace ZeldaGame.HUD
 
         public void BombCount(SpriteBatch spriteBatch)
         {
-            bombCountInt = itemActionHandler.inventoryCounts[9];
+            bombCountInt = ItemActionHandler.inventoryCounts[9];
             bombCountString = "x" + bombCountInt.ToString();
             spriteBatch.Draw(texture, bombBlankDR, allBlankSR, Color.White);
             spriteBatch.DrawString(font, bombCountString, new Vector2(300, 125), Color.White);

@@ -3,6 +3,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System.Collections.Generic;
 using System.Diagnostics;
+using ZeldaGame.Items;
 using static ZeldaGame.Player.PlayerStateMachine;
 using static ZeldaGame.Player.WeaponHandler;
 
@@ -22,7 +23,7 @@ namespace ZeldaGame.Player {
 		private Direction direction;
 		private Swords currSword;
 		private int animTimer;
-
+		private ItemActionHandler itemActionHandler;
 		public static float health = 3f;
 		public float maxHealth = 3f;
 
@@ -32,6 +33,7 @@ namespace ZeldaGame.Player {
 			sprite = PlayerSpriteFactory.Instance.CreateWalkSprite(direction);
 			stateMachine = new PlayerStateMachine(sprite);
 			weaponHandler = new WeaponHandler();
+			itemActionHandler = new ItemActionHandler();
 
 			currSword = weaponHandler.currSword;
 			this.position = position;
@@ -117,8 +119,20 @@ namespace ZeldaGame.Player {
 			if (animTimer < 0) {
 				animTimer = 15;
 				sprite = stateMachine.UseItem();
-				weaponHandler.UseItem(item, position, stateMachine.GetDirection());
-			}
+                if (item == 4)
+                {
+					if (ItemActionHandler.inventoryCounts[9] > 0)
+					{
+						weaponHandler.UseItem(item, position, stateMachine.GetDirection());
+						ItemActionHandler.inventoryCounts[9]--;
+					}
+                }
+				else
+				{
+                    weaponHandler.UseItem(item, position, stateMachine.GetDirection());
+                }
+
+            }
 		}
 
 		public void Update()

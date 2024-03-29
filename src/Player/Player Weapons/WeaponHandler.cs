@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework.Graphics;
 using System.Collections.Generic;
 using System.Diagnostics;
+using ZeldaGame.Items;
 using static ZeldaGame.Player.PlayerStateMachine;
 
 namespace ZeldaGame.Player;
@@ -9,13 +10,15 @@ public class WeaponHandler {
 	public enum Swords {Wood, White, Magic, None};
 	private readonly List<IPlayerProjectile> activeProjectiles;
 	private readonly List<IPlayerProjectile> expiredProjectiles;
-	int cooldown = 0;
+
+    int cooldown = 0;
 
 	public Swords currSword;
 	public WeaponHandler() {
 		activeProjectiles = new List<IPlayerProjectile>();
 		expiredProjectiles = new List<IPlayerProjectile>();
 		currSword = Swords.Wood; //later, the default will be no sword
+
 	}
 
 	public void UseItem(int item, Vector2 location, Direction direction) {
@@ -23,7 +26,7 @@ public class WeaponHandler {
 			IPlayerProjectile weapon = PlayerItemSpriteFactory.Instance.CreateItemSprite(direction, item, location);
 			activeProjectiles.Add(weapon);
 			cooldown = 20;
-		}
+        }
 	}
 
 	public void UseSword(int sword, Vector2 location, Direction direction, float currHealth, float maxHealth) {

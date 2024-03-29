@@ -13,9 +13,10 @@ namespace ZeldaGame.Items
 {
     public class ItemActionHandler
     {
-        public int[] inventoryCounts = new int[10];
+        public static int[] inventoryCounts = new int[10];
+        Game1 game;
         public ItemActionHandler() {
-            inventoryCounts[9] = 8;
+            inventoryCounts[9] = 0;
         }  
         public void InventoryCounts(IItemSprite item)
         {
@@ -49,9 +50,13 @@ namespace ZeldaGame.Items
                     inventoryCounts[8]++;
                     break;
                 case Bomb:
-                    if (inventoryCounts[9] + 4 < 8)
+                    if (inventoryCounts[9] + 4 <= 8)
                     {
                         inventoryCounts[9] = inventoryCounts[9] + 4;
+                    }
+                    else
+                    {
+                        inventoryCounts[9] = 8;
                     }
                     break;
                 default:
