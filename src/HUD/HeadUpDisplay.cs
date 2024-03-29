@@ -10,27 +10,33 @@ namespace ZeldaGame.HUD
     public class HeadUpDisplay
     {
         private HUDMapHandler HUDMapHandler;
+        private CollisionHandler collision;
         private Texture2D texture;
         private Vector2 scale;
         private Rectangle inventorySR;
         private Rectangle mapSR;
         private Rectangle playerInfoSR;
+        private Rectangle mapItemSR;
         private Rectangle inventoryDR;
         private Rectangle mapDR;
         private Rectangle playerInfoDR;
+        private Rectangle mapItemDR;
         private int isDisplayed = -1;
 
         public HeadUpDisplay (Texture2D texture, Vector2 scale, MapHandler map, CollisionHandler collisionHandler)
         {
             this.texture = texture;
             this.scale = scale;
+            this.collision = collisionHandler;
             HUDMapHandler = new HUDMapHandler(texture, scale, map, collisionHandler);
             inventorySR = new Rectangle(1, 11, 256, 88);
             mapSR = new Rectangle(258, 112, 256, 88);
             playerInfoSR = new Rectangle(258, 11, 256, 56);
+            mapItemSR = new Rectangle(601, 156, 8, 16);
             inventoryDR = new Rectangle(0, 0, 0, 0);
             mapDR = new Rectangle(0, 0, 0, 0);
             playerInfoDR = new Rectangle(0, 0, 0, 0);
+            mapItemDR = new Rectangle(0,0,0,0);
         }
 
         public void Draw(SpriteBatch spriteBatch)
@@ -45,6 +51,7 @@ namespace ZeldaGame.HUD
 
                 playerInfoDR = new Rectangle(0, (int)(inventorySR.Height * scale.Y) + (int)(mapSR.Height * scale.Y), (int)(playerInfoSR.Width * scale.X), (int)(playerInfoSR.Height * scale.Y));
                 spriteBatch.Draw(texture, playerInfoDR, playerInfoSR, Color.White);
+                DrawMapItem(spriteBatch);
             }
             HUDMapHandler.Draw(spriteBatch, isDisplayed);
         }
@@ -62,6 +69,15 @@ namespace ZeldaGame.HUD
         public bool isVisible()
         {
             return isDisplayed == 1;
+        }
+
+        public void DrawMapItem(SpriteBatch spriteBatch)
+        {
+            if(collision.itemActionHandler.isMapObtained())
+            {
+                mapItemDR = new Rectangle((int)(48 * scale.X), (int)(112 * scale.Y), (int)(mapItemSR.Width * scale.X), (int)(mapItemSR.Height * scale.Y));
+                spriteBatch.Draw(texture, mapItemDR, mapItemSR, Color.White);
+            }
         }
 
         public void Reset()
