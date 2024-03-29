@@ -9,6 +9,10 @@ namespace ZeldaGame;
         }
     public void Execute()
         {
+            if(Globals.gameStateScreenHandler.CurrentGameState == GameState.Playing)
+            {
+                return;
+            }
             Globals.gameStateScreenHandler.CurrentGameState = GameState.Playing;
             Globals.audioLoader.PlayBGM();
         }

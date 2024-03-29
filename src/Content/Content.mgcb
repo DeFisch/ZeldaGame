@@ -19,6 +19,12 @@
 /processorParam:Quality=Best
 /build:audio/BGM.wav
 
+#begin audio/GameOver.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:audio/GameOver.wav
+
 #begin audio/LOZ_Arrow_Boomerang.wav
 /importer:WavImporter
 /processor:SoundEffectProcessor
