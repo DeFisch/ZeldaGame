@@ -35,24 +35,27 @@ namespace ZeldaGame.Player {
 		public void SetDirection(Direction direction) {
 			decoratedPlayer.SetDirection(direction);
 		}
-
 		public bool isHurting() {
 			return true;
 		}
-
 		public void TakeDamage(float damage)
 		{
 			// No implementation, don't take damage when already injured
 		}
-
 		public void GainHealth(float heal)
 		{
-			// Gain Health
+			decoratedPlayer.GainHealth(heal);
 		}
-
+		public void GainMaxHealth(float hearts) {
+			decoratedPlayer.GainMaxHealth(hearts);
+		}
 		public float GetHealth()
 		{
 			return decoratedPlayer.GetHealth();
+		}
+
+		public float GetMaxHealth() {
+			return decoratedPlayer.GetMaxHealth();
 		}
 
 		public void Update() {

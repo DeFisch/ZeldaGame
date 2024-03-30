@@ -18,14 +18,12 @@ namespace ZeldaGame.HUD
         private Rectangle fullHeartSR;
         private Rectangle halfHeartSR;
         private Rectangle emptyHeartSR;
-        private Rectangle firstHeartDR;
-        private Rectangle secondHeartDR;
-        private Rectangle thirdHeartDR;
-        private Rectangle firstHeartSR;
-        private Rectangle secondHeartSR;
-        private Rectangle thirdHeartSR;
+        private Rectangle noHeartSR;
 
-        private Rectangle playerInfoSR;
+        private List<Rectangle> heartRowsDR;
+		private List<Rectangle> heartRowsSR;
+
+		private Rectangle playerInfoSR;
         private Rectangle playerInfoDR;
         private Rectangle allBlankSR;
         private Rectangle rubyBlankDR;
@@ -55,11 +53,19 @@ namespace ZeldaGame.HUD
             fullHeartSR = new Rectangle(645, 117, 8, 8);
             halfHeartSR = new Rectangle(636, 117, 8, 8);
             emptyHeartSR = new Rectangle(627, 117, 8, 8);
-            firstHeartDR = new Rectangle(550, 95, 70, 60);
-            secondHeartDR = new Rectangle(620, 95, 70, 60);
-            thirdHeartDR = new Rectangle(690, 95, 70, 60);
+            noHeartSR = new Rectangle(426, 43, 8, 8);
 
-            playerInfoSR = new Rectangle(258, 11, 256, 56);
+            heartRowsDR = new List<Rectangle>();
+            heartRowsSR = new List<Rectangle>();
+
+            for (int i = 0; i < 2; i++) {
+                for (int j = 0; j < 8; j++) {
+                    heartRowsDR.Add(new Rectangle((int)((176 + (8 * j)) * scale.X), (int)((32 + (8 * i)) * scale.Y), (int)(8 * scale.X), (int)(8 * scale.Y)));
+                    heartRowsSR.Add(new Rectangle());
+                }
+            }
+
+			playerInfoSR = new Rectangle(258, 11, 256, 56);
             playerInfoDR = new Rectangle(0, 0, 0, 0);
             allBlankSR = new Rectangle(353, 11, 23, 15);
             rubyBlankDR = new Rectangle(300, 50, 85, 25);
@@ -127,19 +133,22 @@ namespace ZeldaGame.HUD
 
         private void DrawHealth(SpriteBatch spriteBatch)
         {
-            switch (myGame.Link.GetHealth())
-            {
-                case 3: firstHeartSR = fullHeartSR; secondHeartSR = fullHeartSR; thirdHeartSR = fullHeartSR; break;
-                case 2.5f: firstHeartSR = fullHeartSR; secondHeartSR = fullHeartSR; thirdHeartSR = halfHeartSR; break;
-                case 2: firstHeartSR = fullHeartSR; secondHeartSR = fullHeartSR; thirdHeartSR = emptyHeartSR; break;
-                case 1.5f: firstHeartSR = fullHeartSR; secondHeartSR = halfHeartSR; thirdHeartSR = emptyHeartSR; break;
-                case 1: firstHeartSR = fullHeartSR; secondHeartSR = emptyHeartSR; thirdHeartSR = emptyHeartSR; break;
-                case 0.5f: firstHeartSR = halfHeartSR; secondHeartSR = emptyHeartSR; thirdHeartSR = emptyHeartSR; break;
-                case 0: firstHeartSR = emptyHeartSR; secondHeartSR = emptyHeartSR; thirdHeartSR = emptyHeartSR; break;
+            for (int i = 0; i < 16; i++) {
+                if (i >= myGame.Link.GetMaxHealth()) { //if index is greater than / equal to maxHealth
+                    heartRowsSR[i] = noHeartSR;
+                }
+                else if (i >= myGame.Link.GetHealth()) { //if index is greater than / equal to currHealth
+                    heartRowsSR[i] = emptyHeartSR;
+                }
+                else if (i + 0.5f == myGame.Link.GetHealth()) { // if index equals currHealth
+                    heartRowsSR[i] = halfHeartSR;
+                }
+                else {
+                    heartRowsSR[i] = fullHeartSR;
+                }
+
+                spriteBatch.Draw(texture, heartRowsDR[i], heartRowsSR[i], Color.White);
             }
-            spriteBatch.Draw(texture, firstHeartDR, firstHeartSR, Color.White);
-            spriteBatch.Draw(texture, secondHeartDR, secondHeartSR, Color.White);
-            spriteBatch.Draw(texture, thirdHeartDR, thirdHeartSR, Color.White);
         }
     }
 }

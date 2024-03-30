@@ -47,6 +47,7 @@ namespace ZeldaGame.Items
                     inventoryCounts[4]++;
                     break;
                 case HeartContainer:
+                    game.Link.GainMaxHealth(heartHealing);
                     inventoryCounts[5]++;
                     break;
                 case Triforce:

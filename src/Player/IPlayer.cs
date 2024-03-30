@@ -20,6 +20,8 @@ namespace ZeldaGame.Player {
 		public bool isHurting();
 		public void TakeDamage(float damage);
 		public void GainHealth(float heal);
+		public void GainMaxHealth(float hearts);
 		public float GetHealth();
+		public float GetMaxHealth();
 	}
 }

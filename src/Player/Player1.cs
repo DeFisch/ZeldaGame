@@ -173,18 +173,30 @@ namespace ZeldaGame.Player {
 
 		public void GainHealth(float heal)
 		{
-			if (health <= 2.0f)
-				health += heal;
-			else
-				health = 3.0f;
+			health += heal;
+			if (health > maxHealth) {
+				health = maxHealth;
+			}
+
 			Debug.WriteLine("Health: " + health);
+		}
+
+		public void GainMaxHealth(float hearts) {
+			maxHealth += hearts;
+			if (maxHealth > 16.0f) {
+				maxHealth = 16.0f;
+			}
+
+			Debug.WriteLine("Max Health: " + maxHealth);
 		}
 
 		public float GetHealth()
 		{
 			return health;
 		}
-
+		public float GetMaxHealth() {
+			return maxHealth;
+		}
 
 		public void Draw(SpriteBatch spriteBatch, Color color)
 		{
