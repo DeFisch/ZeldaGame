@@ -12,14 +12,16 @@ public class GameStateScreenHandler
     private Dictionary<GameState, IGameScreen> screens;
     private GameState currentGameState;
     private Game1 myGame;
+    private GameOverScreen gameOverScreen;
     public GameStateScreenHandler(Game1 game)
     {
         screens = new Dictionary<GameState, IGameScreen>();
         currentGameState = GameState.TitleScreen;
         this.myGame = game;
+        gameOverScreen = new GameOverScreen(new Texture2D(game.GraphicsDevice, 1, 1), game);
         AddScreen(GameState.TitleScreen, new TitleScreen(game.Content.Load<Texture2D>("TitleScreen"), game));
         AddScreen(GameState.Pause, new PauseScreen(null, game));
-        AddScreen(GameState.GameOver, new GameOverScreen(new Texture2D(game.GraphicsDevice, 1, 1), game));
+        AddScreen(GameState.GameOver, gameOverScreen);
         AddScreen(GameState.GameWin, new GameWinScreen(new Texture2D(game.GraphicsDevice, 1, 1), game));
     }
     public void AddScreen(GameState state, IGameScreen screen)
@@ -78,5 +80,11 @@ public class GameStateScreenHandler
         currentGameState = GameState.GameOver;
         Globals.audioLoader.Reset();
         Globals.audioLoader.Play("GameOver");
+    }
+
+    public void Reset()
+    {
+       currentGameState = GameState.TitleScreen;
+       gameOverScreen.Reset();
     }
 }

@@ -1,12 +1,11 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using ZeldaGame;
 
 namespace ZeldaGame
 {
 
-public class GameOverScreen : IGameScreen
-{
+    public class GameOverScreen : IGameScreen
+    {
         private Game1 myGame;
         private Vector2 window_size;
         private Texture2D blackTexture;
@@ -16,16 +15,16 @@ public class GameOverScreen : IGameScreen
         private int currentFrame = 0;
 
         public GameOverScreen(Texture2D gameOverTexture, Game1 game)
-    {
+        {
             this.myGame = game;
             window_size = game.windowSize;
-            this.blackTexture  = gameOverTexture;
+            this.blackTexture = gameOverTexture;
             this.blackTexture.SetData(new Color[] { Color.Black });
             redTexture = new Texture2D(myGame.GraphicsDevice, 1, 1);
-    }
+        }
 
-    public void Draw(SpriteBatch spriteBatch)
-    {
+        public void Draw(SpriteBatch spriteBatch)
+        {
             if (showRedScreen)
             {
                 float transparency = (float)currentFrame / fadeDuration;
@@ -44,15 +43,20 @@ public class GameOverScreen : IGameScreen
                 Vector2 fontPosition = (window_size - fontSize) / 2;
                 spriteBatch.DrawString(font, "    GAME OVER\nPress R to restart", fontPosition, Color.White, 0, Vector2.Zero, fontScale, SpriteEffects.None, 0);
             }
-    }
+        }
 
-    public void Update()
-    {
+        public void Update()
+        {
             currentFrame++;
             if (currentFrame >= fadeDuration)
             {
                 showRedScreen = false;
+                currentFrame = 0;
             }
+        }
+        public void Reset()
+        {
+            showRedScreen = true;
         }
     }
 }
