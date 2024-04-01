@@ -26,10 +26,7 @@ namespace ZeldaGame.HUD
 		private Rectangle playerInfoSR;
         private Rectangle playerInfoDR;
         private Rectangle currentWeaponDR;
-        private Rectangle allBlankSR;
-        private Rectangle rubyBlankDR;
-        private Rectangle keyBlankDR;
-        private Rectangle bombBlankDR;
+
         private int rubyCountInt;
         private string rubyCountString;
         private int keyCountInt;
@@ -64,10 +61,6 @@ namespace ZeldaGame.HUD
 			playerInfoSR = new Rectangle(258, 11, 256, 56);
             playerInfoDR = new Rectangle(0, 0, 0, 0);
             currentWeaponDR = new Rectangle((int)(128 * scale.X), (int)(24 * scale.Y), (int)(8 * scale.X), (int)(16 * scale.Y));
-            allBlankSR = new Rectangle(353, 11, 23, 15);
-            rubyBlankDR = new Rectangle(300, 50, 85, 25);
-            keyBlankDR = new Rectangle(300, 100, 85, 25);
-            bombBlankDR = new Rectangle(300, 125, 85, 25);
 
             itemActionHandler = collisionHandler.itemActionHandler;
             mapHandler = new HUDMapHandler(texture, scale, map, collisionHandler);
@@ -77,7 +70,6 @@ namespace ZeldaGame.HUD
         {
             rubyCountInt = (ItemActionHandler.inventoryCounts[0] * 5) + ItemActionHandler.inventoryCounts[1];
             rubyCountString = "x" + rubyCountInt.ToString();
-            spriteBatch.Draw(texture, rubyBlankDR, allBlankSR, Color.White);
             if(isDisplayed == -1)
                 spriteBatch.DrawString(font, rubyCountString, new Vector2(300, 50), Color.White);
             if(isDisplayed == 1)
@@ -88,7 +80,6 @@ namespace ZeldaGame.HUD
         {
             keyCountInt = ItemActionHandler.inventoryCounts[2];
             keyCountString = "x" + keyCountInt.ToString();
-            spriteBatch.Draw(texture, keyBlankDR, allBlankSR, Color.White);
             if(isDisplayed == -1)
                 spriteBatch.DrawString(font, keyCountString, new Vector2(300, 100), Color.White);
             if(isDisplayed == 1)
@@ -99,7 +90,6 @@ namespace ZeldaGame.HUD
         {
             bombCountInt = ItemActionHandler.inventoryCounts[8];
             bombCountString = "x" + bombCountInt.ToString();
-            spriteBatch.Draw(texture, bombBlankDR, allBlankSR, Color.White);
             if(isDisplayed == -1)
                 spriteBatch.DrawString(font, bombCountString, new Vector2(300, 125), Color.White);
             if(isDisplayed == 1)
@@ -115,8 +105,6 @@ namespace ZeldaGame.HUD
                 spriteBatch.Draw(texture, playerInfoDR, playerInfoSR, Color.White);
                 mapHandler.Draw(spriteBatch, isDisplayed);
                 spriteBatch.Draw(texture, currentWeaponDR, headUpDisplay.HUDInventory.currentWeapon(), Color.White);
-                spriteBatch.Draw(texture, keyBlankDR, allBlankSR, Color.White);
-                spriteBatch.Draw(texture, bombBlankDR, allBlankSR, Color.White);
             }
 
             rubyCountInt = (ItemActionHandler.inventoryCounts[0] * 5) + ItemActionHandler.inventoryCounts[1];
