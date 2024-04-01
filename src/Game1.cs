@@ -174,6 +174,12 @@ namespace ZeldaGame
 
 			//Registers commands with Keys for pausing and unpausing the game
 			keyboardController.RegisterPressKey(Keys.P, new PauseCommand(this));
+
+			//Registers commands with Keys for HUD weapon selection
+            keyboardController.RegisterPressKey(Keys.A, new HUDInventoryCommandLast(this));
+            keyboardController.RegisterPressKey(Keys.D, new HUDInventoryCommandNext(this));
+            keyboardController.RegisterPressKey(Keys.Left, new HUDInventoryCommandLast(this));
+            keyboardController.RegisterPressKey(Keys.Right, new HUDInventoryCommandNext(this));
         }
 
         protected override void Update(GameTime gameTime) {

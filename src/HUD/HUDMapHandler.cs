@@ -34,12 +34,12 @@ namespace ZeldaGame.HUD
             {
                 DrawHUDMap("Bottom_Blue", spriteBatch);
                 DrawHUDMap("Orange", spriteBatch);
-                DrawFianlRoom("Bottom_Blue", spriteBatch);
+                DrawFinalRoom("Bottom_Blue", spriteBatch);
             }
             if (isDisplayed == -1)
             {
                 DrawHUDMap("Top_Blue", spriteBatch);
-                DrawFianlRoom("Top_Blue", spriteBatch);
+                DrawFinalRoom("Top_Blue", spriteBatch);
             }
         }
 
@@ -54,7 +54,7 @@ namespace ZeldaGame.HUD
             spriteBatch.Draw(texture, playerPosition[map_name], new Rectangle(519, 126, 3, 3), Color.White);
         }
 
-        public void DrawFianlRoom(string map_name, SpriteBatch spriteBatch)
+        public void DrawFinalRoom(string map_name, SpriteBatch spriteBatch)
         {
             if(collision.itemActionHandler.isCompassObtained())
             {

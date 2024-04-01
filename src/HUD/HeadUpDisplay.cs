@@ -11,6 +11,7 @@ namespace ZeldaGame.HUD
     {
         private HUDMapHandler HUDMapHandler;
         private CollisionHandler collision;
+        public HUDInventory HUDInventory;
         private Texture2D texture;
         private Vector2 scale;
         private Rectangle inventorySR;
@@ -26,6 +27,7 @@ namespace ZeldaGame.HUD
             this.texture = texture;
             this.scale = scale;
             this.collision = collisionHandler;
+            HUDInventory = new HUDInventory(texture, scale);
             HUDMapHandler = new HUDMapHandler(texture, scale, map, collisionHandler);
             inventorySR = new Rectangle(1, 11, 256, 88);
             mapSR = new Rectangle(258, 112, 256, 88);
@@ -51,6 +53,7 @@ namespace ZeldaGame.HUD
                 DrawCompassItem(spriteBatch);
             }
             HUDMapHandler.Draw(spriteBatch, isDisplayed);
+            HUDInventory.Draw(spriteBatch, isDisplayed);
         }
 
         public void Update ()
