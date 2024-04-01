@@ -38,18 +38,19 @@ namespace ZeldaGame.HUD
         private string bombCountString;
         private ItemActionHandler itemActionHandler;
         private CollisionHandler collisionHandler;
-        private bool isDisplayed;
         private HUDMapHandler mapHandler;
-        private Game1 myGame;
+        private IPlayer Link;
+        private HeadUpDisplay headUpDisplay;
 
 
-        public PlayerInfoHUD(Texture2D texture, Vector2 scale, MapHandler map, bool isDisplayed, SpriteFont font, CollisionHandler collisionHandler, Game1 myGame)
+        public PlayerInfoHUD(Texture2D texture, Vector2 scale, MapHandler map, SpriteFont font, CollisionHandler collisionHandler, IPlayer Link, HeadUpDisplay headUpDisplay)
         {
             this.texture = texture;
             this.scale = scale;
             this.font = font;
             this.collisionHandler = collisionHandler;
-            this.myGame = myGame;
+            this.Link = Link;
+            this.headUpDisplay = headUpDisplay;
 
             fullHeartSR = new Rectangle(645, 117, 8, 8);
             halfHeartSR = new Rectangle(636, 117, 8, 8);
@@ -59,12 +60,6 @@ namespace ZeldaGame.HUD
             heartRowsDR = new List<Rectangle>();
             heartRowsSR = new List<Rectangle>();
 
-            for (int i = 0; i < 2; i++) {
-                for (int j = 0; j < 8; j++) {
-                    heartRowsDR.Add(new Rectangle((int)((176 + (8 * j)) * scale.X), (int)((32 + (8 * i)) * scale.Y), (int)(8 * scale.X), (int)(8 * scale.Y)));
-                    heartRowsSR.Add(new Rectangle());
-                }
-            }
 
 			playerInfoSR = new Rectangle(258, 11, 256, 56);
             playerInfoDR = new Rectangle(0, 0, 0, 0);
@@ -75,78 +70,99 @@ namespace ZeldaGame.HUD
             bombBlankDR = new Rectangle(300, 125, 85, 25);
 
             itemActionHandler = collisionHandler.itemActionHandler;
-            this.isDisplayed = isDisplayed;
             mapHandler = new HUDMapHandler(texture, scale, map, collisionHandler);
         }
 
-        public void RubyCount(SpriteBatch spriteBatch)
+        public void RubyCount(SpriteBatch spriteBatch, int isDisplayed)
         {
             rubyCountInt = (ItemActionHandler.inventoryCounts[0] * 5) + ItemActionHandler.inventoryCounts[1];
             rubyCountString = "x" + rubyCountInt.ToString();
             spriteBatch.Draw(texture, rubyBlankDR, allBlankSR, Color.White);
-            spriteBatch.DrawString(font, rubyCountString, new Vector2(300, 50), Color.White);
+            if(isDisplayed == -1)
+                spriteBatch.DrawString(font, rubyCountString, new Vector2(300, 50), Color.White);
+            if(isDisplayed == 1)
+                spriteBatch.DrawString(font, rubyCountString, new Vector2(96 * scale.X, 192 * scale.Y), Color.White);
         }
 
-        public void KeyCount(SpriteBatch spriteBatch)
+        public void KeyCount(SpriteBatch spriteBatch, int isDisplayed)
         {
             keyCountInt = ItemActionHandler.inventoryCounts[2];
             keyCountString = "x" + keyCountInt.ToString();
             spriteBatch.Draw(texture, keyBlankDR, allBlankSR, Color.White);
-            spriteBatch.DrawString(font, keyCountString, new Vector2(300, 100), Color.White);
+            if(isDisplayed == -1)
+                spriteBatch.DrawString(font, keyCountString, new Vector2(300, 100), Color.White);
+            if(isDisplayed == 1)
+                spriteBatch.DrawString(font, keyCountString, new Vector2(96 * scale.X, 208 * scale.Y), Color.White);
         }
 
-        public void BombCount(SpriteBatch spriteBatch)
+        public void BombCount(SpriteBatch spriteBatch, int isDisplayed)
         {
             bombCountInt = ItemActionHandler.inventoryCounts[8];
             bombCountString = "x" + bombCountInt.ToString();
             spriteBatch.Draw(texture, bombBlankDR, allBlankSR, Color.White);
-            spriteBatch.DrawString(font, bombCountString, new Vector2(300, 125), Color.White);
+            if(isDisplayed == -1)
+                spriteBatch.DrawString(font, bombCountString, new Vector2(300, 125), Color.White);
+            if(isDisplayed == 1)
+                spriteBatch.DrawString(font, bombCountString, new Vector2(96 * scale.X, 216 * scale.Y), Color.White);
         }
 
-        public void Draw(SpriteBatch spriteBatch)
+        public void Draw(SpriteBatch spriteBatch, int isDisplayed)
         {
             playerInfoDR = new Rectangle(0, 0, (int)(playerInfoSR.Width * scale.X), (int)(playerInfoSR.Height * scale.Y));
+            
+            if (isDisplayed == -1)
+            {
+                spriteBatch.Draw(texture, playerInfoDR, playerInfoSR, Color.White);
+                mapHandler.Draw(spriteBatch, isDisplayed);
+                spriteBatch.Draw(texture, currentWeaponDR, headUpDisplay.HUDInventory.currentWeapon(), Color.White);
+                spriteBatch.Draw(texture, keyBlankDR, allBlankSR, Color.White);
+                spriteBatch.Draw(texture, bombBlankDR, allBlankSR, Color.White);
+            }
 
             rubyCountInt = (ItemActionHandler.inventoryCounts[0] * 5) + ItemActionHandler.inventoryCounts[1];
             rubyCountString = "x" + rubyCountInt.ToString();
 
-            spriteBatch.Draw(texture, playerInfoDR, playerInfoSR, Color.White);
-            spriteBatch.Draw(texture, currentWeaponDR, myGame.headUpDisplay.HUDInventory.currentWeapon(), Color.White);
-            spriteBatch.Draw(texture, keyBlankDR, allBlankSR, Color.White);
-            spriteBatch.Draw(texture, bombBlankDR, allBlankSR, Color.White);
-            RubyCount(spriteBatch);
-            KeyCount(spriteBatch);
-            BombCount(spriteBatch);
-
-            DrawHealth(spriteBatch);
-
-            if (!isDisplayed)
-                mapHandler.Draw(spriteBatch, -1);
+            RubyCount(spriteBatch, isDisplayed);
+            KeyCount(spriteBatch, isDisplayed);
+            BombCount(spriteBatch, isDisplayed);
+            DrawHealth(spriteBatch, isDisplayed);     
         }
 
-
-        public void Update()
+        public void SetHealthDR(int isDisplayed)
         {
-
+            heartRowsDR.Clear();
+            heartRowsSR.Clear();
+            for (int i = 0; i < 2; i++) {
+                for (int j = 0; j < 8; j++) {
+                    if(isDisplayed == -1)
+                        heartRowsDR.Add(new Rectangle((int)((176 + (8 * j)) * scale.X), (int)((32 + (8 * i)) * scale.Y), (int)(8 * scale.X), (int)(8 * scale.Y)));
+                    if(isDisplayed == 1)
+                        heartRowsDR.Add(new Rectangle((int)((176 + (8 * j)) * scale.X), (int)((208 + (8 * i)) * scale.Y), (int)(8 * scale.X), (int)(8 * scale.Y)));
+                    heartRowsSR.Add(new Rectangle());
+                }
+            }
         }
 
-        private void DrawHealth(SpriteBatch spriteBatch)
+        private void DrawHealth(SpriteBatch spriteBatch, int isDisplayed)
         {
+            SetHealthDR(isDisplayed);
             for (int i = 0; i < 16; i++) {
-                if (i >= myGame.Link.GetMaxHealth()) { //if index is greater than / equal to maxHealth
+                if (i >= Link.GetMaxHealth()) { //if index is greater than / equal to maxHealth
                     heartRowsSR[i] = noHeartSR;
                 }
-                else if (i >= myGame.Link.GetHealth()) { //if index is greater than / equal to currHealth
+                else if (i >= Link.GetHealth()) { //if index is greater than / equal to currHealth
                     heartRowsSR[i] = emptyHeartSR;
                 }
-                else if (i + 0.5f == myGame.Link.GetHealth()) { // if index equals currHealth
+                else if (i + 0.5f == Link.GetHealth()) { // if index equals currHealth
                     heartRowsSR[i] = halfHeartSR;
                 }
                 else {
                     heartRowsSR[i] = fullHeartSR;
                 }
-
-                spriteBatch.Draw(texture, heartRowsDR[i], heartRowsSR[i], Color.White);
+                if(isDisplayed == -1)
+                    spriteBatch.Draw(texture, heartRowsDR[i], heartRowsSR[i], Color.White);
+                if(isDisplayed == 1)
+                    spriteBatch.Draw(texture, heartRowsDR[i], heartRowsSR[i], Color.White);
             }
         }
     }

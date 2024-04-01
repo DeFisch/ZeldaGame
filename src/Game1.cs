@@ -101,10 +101,9 @@ namespace ZeldaGame
 			Texture2D[] enemy_texture = {Content.Load<Texture2D>("enemies"),Content.Load<Texture2D>("enemies_1")};
 			blockSpriteFactory = new BlockSpriteFactory(map_texture, mapScale,mapSize,Link,map);
 			itemFactory = new ItemSpriteFactory(Items, npcs, mapScale, Link, map);
-            NPCFactory = new NPCFactory(npcs, mapScale, font, map, itemFactory);
-            enemyFactory = new EnemyFactory(enemy_texture, mapScale, mapSize, itemFactory);
-			headUpDisplay = new HeadUpDisplay(HUD, mapScale, map, collisionHandler);
-			playerInfoHUD = new PlayerInfoHUD(HUD, mapScale, map, headUpDisplay.isVisible(), font, collisionHandler, this);
+			enemyFactory = new EnemyFactory(enemy_texture, mapScale, mapSize, itemFactory);
+			headUpDisplay = new HeadUpDisplay(HUD, mapScale, map, collisionHandler, Link, font);
+			playerInfoHUD = new PlayerInfoHUD(HUD, mapScale, map, font, collisionHandler, Link, headUpDisplay);
 		
 
             // Define the quadrants based on the map size
@@ -216,7 +215,7 @@ namespace ZeldaGame
 		protected override void Draw(GameTime gameTime) {
 			_spriteBatch.Begin();
             //Draws player info HUD
-            playerInfoHUD.Draw(_spriteBatch);
+            playerInfoHUD.Draw(_spriteBatch, -1);
             if (!Globals.gameStateScreenHandler.IsPlaying())
 			{
                 Globals.gameStateScreenHandler.Draw(_spriteBatch);

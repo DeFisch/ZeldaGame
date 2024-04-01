@@ -12,6 +12,7 @@ namespace ZeldaGame.HUD
         private HUDMapHandler HUDMapHandler;
         private CollisionHandler collision;
         public HUDInventory HUDInventory;
+        private PlayerInfoHUD playerInfoHUD;
         private Texture2D texture;
         private Vector2 scale;
         private Rectangle inventorySR;
@@ -22,11 +23,12 @@ namespace ZeldaGame.HUD
         private Rectangle playerInfoDR;
         private int isDisplayed = -1;
 
-        public HeadUpDisplay (Texture2D texture, Vector2 scale, MapHandler map, CollisionHandler collisionHandler)
+        public HeadUpDisplay (Texture2D texture, Vector2 scale, MapHandler map, CollisionHandler collisionHandler, IPlayer Link, SpriteFont font)
         {
             this.texture = texture;
             this.scale = scale;
             this.collision = collisionHandler;
+            playerInfoHUD = new PlayerInfoHUD(texture, scale, map, font, collisionHandler, Link, this);
             HUDInventory = new HUDInventory(texture, scale);
             HUDMapHandler = new HUDMapHandler(texture, scale, map, collisionHandler);
             inventorySR = new Rectangle(1, 11, 256, 88);
@@ -51,9 +53,11 @@ namespace ZeldaGame.HUD
                 spriteBatch.Draw(texture, playerInfoDR, playerInfoSR, Color.White);
                 DrawMapItem(spriteBatch);
                 DrawCompassItem(spriteBatch);
+                playerInfoHUD.Draw(spriteBatch, isDisplayed);
             }
             HUDMapHandler.Draw(spriteBatch, isDisplayed);
             HUDInventory.Draw(spriteBatch, isDisplayed);
+
         }
 
         public void Update ()
