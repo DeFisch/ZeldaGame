@@ -212,7 +212,9 @@ namespace ZeldaGame
 			// Checks if end game
             if (Globals.gameStateScreenHandler.GameOver())
                 Globals.gameStateScreenHandler.EndGame();
-
+				
+			//Use items based on current choice
+			keyboardController.RegisterPressKeySwitch(Keys.D1, new UseItemCommand(this, headUpDisplay.HUDInventory.currentWeaponIndex()));
             base.Update(gameTime);
 		}
 
