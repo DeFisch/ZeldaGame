@@ -79,7 +79,7 @@ namespace ZeldaGame.HUD
                             sRectangleList.Add(map.getSourceRectangle_B(mapList[j, i]));
                         isRoomVisited(i-1,j-2);
                         if(currentPosition[new Vector2(i-1,j-2)])
-                            playerPosition.Add("Top_Blue", new Rectangle((int)xPosition + 7, (int)yPosition, (int)(scale.X * 3), (int)(scale.Y * 3)));
+                            playerPosition.Add("Top_Blue", new Rectangle((int)xPosition + 6, (int)yPosition, (int)(scale.X * 3), (int)(scale.Y * 3)));
                     }
                     else if(map_name.Equals("Bottom_Blue"))
                     {
@@ -91,7 +91,7 @@ namespace ZeldaGame.HUD
                             sRectangleList.Add(map.getSourceRectangle_B(mapList[j, i]));
                         isRoomVisited(i-1,j-2);
                         if(currentPosition[new Vector2(i-1,j-2)])
-                            playerPosition.Add("Bottom_Blue", new Rectangle((int)xPosition + 7, (int)yPosition, (int)(scale.X * 3), (int)(scale.Y * 3)));
+                            playerPosition.Add("Bottom_Blue", new Rectangle((int)xPosition + 6, (int)yPosition, (int)(scale.X * 3), (int)(scale.Y * 3)));
                     }
                     dRectangleList.Add(new Rectangle((int)xPosition, (int)yPosition, (int)width, (int)height));
 
