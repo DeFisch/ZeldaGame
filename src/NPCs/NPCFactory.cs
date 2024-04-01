@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using ZeldaGame.Items;
 using ZeldaGame.Map;
 using ZeldaGame.Player;
 namespace ZeldaGame.NPCs;
@@ -18,7 +19,8 @@ public class NPCFactory
     private MapHandler mapHandler;
     private Vector2 dungeon;
 	private bool inDungeon;
-    public NPCFactory(Texture2D texture, Vector2 scale, SpriteFont font, MapHandler mapHandler)
+    private ItemSpriteFactory itemSpriteFactory;
+    public NPCFactory(Texture2D texture, Vector2 scale, SpriteFont font, MapHandler mapHandler, ItemSpriteFactory itemSpriteFactory)
 	{
 		npcList = new List<INPC>();
 		this.texture = texture;
@@ -28,6 +30,7 @@ public class NPCFactory
 		this.mapHandler = mapHandler;
         dungeon = new Vector2(0, 2);
 		inDungeon = false;
+        this.itemSpriteFactory = itemSpriteFactory;
     }
 
 	public void AddNPCs()
@@ -53,12 +56,15 @@ public class NPCFactory
                         {
                             case 0:
                                 npcList.Add(new Merchant(texture, position));
+                                itemSpriteFactory.AddItem("k", new Vector2(5, 4));
                                 break;
                             case 1:
                                 npcList.Add(new OldMan(texture, position));
+                                itemSpriteFactory.AddItem("ws", new Vector2(5, 4));
                                 break;
                             case 2:
                                 npcList.Add(new OldWoman(texture, position));
+                                itemSpriteFactory.AddItem("lp", new Vector2(5, 4));
                                 break;
                             case 3:
                                 npcList.Add(new Fairy(texture, position));

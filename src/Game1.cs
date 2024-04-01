@@ -100,9 +100,9 @@ namespace ZeldaGame
 			
 			Texture2D[] enemy_texture = {Content.Load<Texture2D>("enemies"),Content.Load<Texture2D>("enemies_1")};
 			blockSpriteFactory = new BlockSpriteFactory(map_texture, mapScale,mapSize,Link,map);
-            NPCFactory = new NPCFactory(npcs, mapScale, font, map);
 			itemFactory = new ItemSpriteFactory(Items, npcs, mapScale, Link, map);
-			enemyFactory = new EnemyFactory(enemy_texture, mapScale, mapSize, itemFactory);
+            NPCFactory = new NPCFactory(npcs, mapScale, font, map, itemFactory);
+            enemyFactory = new EnemyFactory(enemy_texture, mapScale, mapSize, itemFactory);
 			headUpDisplay = new HeadUpDisplay(HUD, mapScale, map, collisionHandler);
 			playerInfoHUD = new PlayerInfoHUD(HUD, mapScale, map, headUpDisplay.isVisible(), font, collisionHandler, this);
 		
@@ -112,12 +112,7 @@ namespace ZeldaGame
             Rectangle rightDoorQuadrant = new Rectangle((int)(3 * mapSize.X / 4), (int)((mapSize.Y / 4) + mapSize.Z), (int)(mapSize.X / 4), (int)(mapSize.Y / 2));
             Rectangle topDoorQuadrant = new Rectangle((int)(mapSize.X / 4), (int)(mapSize.Z), (int)(mapSize.X / 2), (int)(mapSize.Y / 4));
             Rectangle bottomDoorQuadrant = new Rectangle((int)(mapSize.X / 4), (int)((3 * mapSize.Y / 4) + mapSize.Z), (int)(mapSize.X / 2), (int)(mapSize.Y / 4));
-
-			//Add NPCs
-			if (NPCFactory.isInDungeon())
-			{
-				NPCFactory.AddNPCs();
-			}
+ 
             //Add Blocks
             blockSpriteFactory.AddBlock();
 			//Add items
