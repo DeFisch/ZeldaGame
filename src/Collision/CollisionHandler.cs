@@ -22,7 +22,7 @@ public class CollisionHandler {
         itemActionHandler = new ItemActionHandler(game);
     }
 
-    public void PlayerMapCollision()
+    private void PlayerMapCollision()
     {
         foreach (Rectangle box in game.map.getAllObjectRectangles())
         {
@@ -34,7 +34,7 @@ public class CollisionHandler {
         }
     }
 
-    public void PlayerProjectileMapCollision()
+    private void PlayerProjectileMapCollision()
     {
         Dictionary<IPlayerProjectile, Rectangle> activeProjectiles = game.Link.GetProjectileHitBoxes();
         foreach (Rectangle box in game.map.getAllObjectRectangles(includeWater: false))
@@ -59,7 +59,7 @@ public class CollisionHandler {
         }
     }
 
-    public void PlayerProjectileEnemyCollision()
+    private void PlayerProjectileEnemyCollision()
     {
         Dictionary<IPlayerProjectile, Rectangle> activeProjectiles = game.Link.GetProjectileHitBoxes();
         List<IEnemy> enemies = game.enemyFactory.GetAllEnemies();
@@ -72,7 +72,7 @@ public class CollisionHandler {
                 {
                     projectile.Collided();
                     if(enemy.TakeDamage(projectile.ProjectileDamage()))
-                        Globals.audioLoader.Play("LOZ_Enemy_Hit");
+                    Globals.audioLoader.Play("LOZ_Enemy_Hit");
                     shotEnemies.Add(enemy);
 					Debug.WriteLine("Player projectile collides with enemy.");
 				}
@@ -80,7 +80,7 @@ public class CollisionHandler {
         }
     }
 
-	public void EnemyPlayerCollision() {
+    private void EnemyPlayerCollision() {
 		foreach (IEnemy enemy in game.enemyFactory.GetAllEnemies()) {
 			if (enemy.GetRectangle().Intersects(game.Link.GetPlayerHitBox()) && !game.Link.isHurting()) {
 				Globals.audioLoader.Play("LOZ_Link_Hurt");
@@ -91,7 +91,21 @@ public class CollisionHandler {
 		}
 	}
 
-	public void EnemyProjectilePlayerCollision()
+    private void EnemyProjectileMapCollision()
+    {
+        foreach (IEnemyProjectile projectile in game.enemyFactory.GetAllProjectiles())
+        {
+            foreach (Rectangle box in game.map.getAllObjectRectangles())
+            {
+                if (projectile.GetRectangle().Intersects(box))
+                {
+                    projectile.Collided();
+                }
+            }
+        }
+    }
+
+    private void EnemyProjectilePlayerCollision()
     {
         foreach (IEnemyProjectile projectile in game.enemyFactory.GetAllProjectiles())
         {
@@ -105,7 +119,7 @@ public class CollisionHandler {
         }
     }
 
-    public void ItemPlayerCollision() {
+    private void ItemPlayerCollision() {
         foreach (IItemSprite item in game.itemFactory.GetAllItems().ToList()) {
             if (item.GetHitBox().Intersects(game.Link.GetPlayerHitBox())) {
                 itemActionHandler.InventoryCounts(item);
@@ -116,7 +130,7 @@ public class CollisionHandler {
         }
     }
 
-    public void PlayerDoorCollision(Vector3 map_size, IPlayer player, MapHandler map){
+    private void PlayerDoorCollision(Vector3 map_size, IPlayer player, MapHandler map){
         Rectangle playerHitBox = player.GetPlayerHitBox();
         Vector2 playerCenterpoint = new Vector2(playerHitBox.X + playerHitBox.Width/2, playerHitBox.Y + playerHitBox.Height/2);
         Rectangle up_door = new Rectangle((int)(0.46875*map_size.X), (int)(map_size.Z), (int)(0.0625*map_size.X), (int)(0.18*map_size.Y));
@@ -175,12 +189,12 @@ public class CollisionHandler {
         }
     }
 
-    public void EnemyObjectCollision()
+    private void EnemyObjectCollision()
     {
         enemyCollisionHandler.Update();
     }
 
-    public void PushableBlockCollision() 
+    private void PushableBlockCollision() 
     {
         Dictionary<IPlayerProjectile, Rectangle> activeProjectiles = game.Link.GetProjectileHitBoxes();
         List<IEnemy> enemies = game.enemyFactory.GetAllEnemies();
@@ -214,7 +228,7 @@ public class CollisionHandler {
         }
     }
 
-    public void BombBreakableWallCollision()
+    private void BombBreakableWallCollision()
     {
         Dictionary<string, Rectangle> door_type = new Dictionary<string, Rectangle>(){
             {"up", new Rectangle( (int)(game.mapSize.X * 0.46875), (int)((game.mapSize.Y * 0) + game.mapSize.Z), (int)(game.mapSize.X * 0.0625), (int)(game.mapSize.Y * 0.18))},
@@ -245,6 +259,7 @@ public class CollisionHandler {
         PlayerDoorCollision(game.mapSize, game.Link, game.map);
         PlayerNPCCollision();
 		EnemyPlayerCollision();
+        EnemyProjectileMapCollision();
         EnemyProjectilePlayerCollision();
         EnemyObjectCollision();
         PushableBlockCollision();
