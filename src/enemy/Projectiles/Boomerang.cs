@@ -18,6 +18,7 @@ namespace Enemy.Projectiles
         private SpriteEffects sprite_effect = SpriteEffects.None;
         private Rectangle sourceRectangle;
         private float damage = 0.5f;
+        private bool collided;
         
         public Boomerang(Texture2D texture, Vector2 location, Vector2 direction)
         {
@@ -26,15 +27,21 @@ namespace Enemy.Projectiles
             sourceRectangle = Boomerang_sprites[currentFrame];
             this.location -= sourceRectangle.Size.ToVector2() * scale / 2;
             this.texture = texture;
+            collided = false;
         }
 
         public bool Completed()
         {
-            if ( frameID > duration)
+            if (frameID > duration || collided)
             {
                 return true;
             }
             return false;
+        }
+
+        public void Collided()
+        {
+            collided = true;
         }
 
         public float DoDamage()

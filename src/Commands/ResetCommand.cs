@@ -17,6 +17,7 @@
             MyGame.enemyFactory.Reset();
             MyGame.headUpDisplay.Reset();
             MyGame.blockSpriteFactory.Reset();
+            MyGame.headUpDisplay.HUDInventory.Reset();
             MyGame.collisionHandler.itemActionHandler.Reset();
             Globals.audioLoader.Reset();
             Globals.gameStateScreenHandler.Reset();

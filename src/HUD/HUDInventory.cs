@@ -24,6 +24,7 @@ namespace ZeldaGame.HUD
         {
             this.texture = texture;
             this.scale = scale;
+            cycleIndex = 0;
             weaponSRList = new List<Rectangle>();
             weaponDRList = new List<Rectangle>();
             SetWeapen();
@@ -42,6 +43,8 @@ namespace ZeldaGame.HUD
         }
 
         public Rectangle currentWeapon() => weaponSRList[cycleIndex];
+
+        public int currentWeaponIndex() => cycleIndex;
 
         public void cycleList(int cycleDirection)
         {
@@ -118,6 +121,12 @@ namespace ZeldaGame.HUD
                 default:
                     return;
             }
+        }
+
+        public void Reset()
+        {
+            cycleIndex = 0;
+            SetSelection(cycleIndex);
         }
 
     }

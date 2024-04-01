@@ -51,6 +51,7 @@ namespace ZeldaGame.Items
                     inventoryCounts[5]++;
                     break;
                 case Triforce:
+                    Globals.gameStateScreenHandler.CurrentGameState = GameState.GameWin;
                     inventoryCounts[6]++;
                     break;
                 case Bow:

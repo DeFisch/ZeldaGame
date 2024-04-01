@@ -17,6 +17,7 @@ namespace Enemy.Projectiles
         private int frameID = 0;
         private Rectangle sourceRectangle;
         private float damage = 0.5f;
+        private bool collided;
         
         public FireBall(Texture2D texture, Vector2 location, Vector2 direction)
         {
@@ -25,15 +26,21 @@ namespace Enemy.Projectiles
             sourceRectangle = fireball_sprites[currentFrame];
             this.location -= sourceRectangle.Size.ToVector2() * scale / 2;
             this.texture = texture;
+            collided = false;
         }
 
         public bool Completed()
         {
-            if ( frameID > 1000)
+            if ( frameID > 1000 || collided)
             {
                 return true;
             }
             return false;
+        }
+
+        public void Collided()
+        {
+            collided = true;
         }
 
         public float DoDamage()
