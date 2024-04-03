@@ -30,9 +30,9 @@ namespace ZeldaGame.HUD
             SetWeapen();
         }
 
-        public void Draw(SpriteBatch spriteBatch, int isDisplayed)
+        public void Draw(SpriteBatch spriteBatch, bool isDisplayed)
         {
-            if (isDisplayed == 1)
+            if (isDisplayed)
             {
                 spriteBatch.Draw(texture, selectionDR, selectionSR, Color.White);
                 spriteBatch.Draw(texture, targetWeaponDRTop, weaponSRList[cycleIndex], Color.White);
@@ -50,13 +50,9 @@ namespace ZeldaGame.HUD
         {
             listLength = weaponSRList.Count;
             if (cycleDirection == 1)
-            {
                 cycleIndex = (cycleIndex + 1) % listLength;
-            }
             else if (cycleDirection == 0)
-            {
                 cycleIndex = (cycleIndex - 1 + listLength) % listLength;
-            }
             SetSelection(cycleIndex);
         }
 

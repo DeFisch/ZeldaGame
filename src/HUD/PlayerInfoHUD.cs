@@ -66,41 +66,11 @@ namespace ZeldaGame.HUD
             mapHandler = new HUDMapHandler(texture, scale, map, collisionHandler);
         }
 
-        public void RubyCount(SpriteBatch spriteBatch, int isDisplayed)
-        {
-            rubyCountInt = (ItemActionHandler.inventoryCounts[0] * 5) + ItemActionHandler.inventoryCounts[1];
-            rubyCountString = "x" + rubyCountInt.ToString();
-            if(isDisplayed == -1)
-                spriteBatch.DrawString(font, rubyCountString, new Vector2(300, 50), Color.White);
-            if(isDisplayed == 1)
-                spriteBatch.DrawString(font, rubyCountString, new Vector2(96 * scale.X, 192 * scale.Y), Color.White);
-        }
-
-        public void KeyCount(SpriteBatch spriteBatch, int isDisplayed)
-        {
-            keyCountInt = ItemActionHandler.inventoryCounts[2];
-            keyCountString = "x" + keyCountInt.ToString();
-            if(isDisplayed == -1)
-                spriteBatch.DrawString(font, keyCountString, new Vector2(300, 100), Color.White);
-            if(isDisplayed == 1)
-                spriteBatch.DrawString(font, keyCountString, new Vector2(96 * scale.X, 208 * scale.Y), Color.White);
-        }
-
-        public void BombCount(SpriteBatch spriteBatch, int isDisplayed)
-        {
-            bombCountInt = ItemActionHandler.inventoryCounts[8];
-            bombCountString = "x" + bombCountInt.ToString();
-            if(isDisplayed == -1)
-                spriteBatch.DrawString(font, bombCountString, new Vector2(300, 125), Color.White);
-            if(isDisplayed == 1)
-                spriteBatch.DrawString(font, bombCountString, new Vector2(96 * scale.X, 216 * scale.Y), Color.White);
-        }
-
-        public void Draw(SpriteBatch spriteBatch, int isDisplayed)
+        public void Draw(SpriteBatch spriteBatch, bool isDisplayed)
         {
             playerInfoDR = new Rectangle(0, 0, (int)(playerInfoSR.Width * scale.X), (int)(playerInfoSR.Height * scale.Y));
             
-            if (isDisplayed == -1)
+            if (!isDisplayed)
             {
                 spriteBatch.Draw(texture, playerInfoDR, playerInfoSR, Color.White);
                 mapHandler.Draw(spriteBatch, isDisplayed);
@@ -116,22 +86,52 @@ namespace ZeldaGame.HUD
             DrawHealth(spriteBatch, isDisplayed);     
         }
 
-        public void SetHealthDR(int isDisplayed)
+        public void RubyCount(SpriteBatch spriteBatch, bool isDisplayed)
+        {
+            rubyCountInt = (ItemActionHandler.inventoryCounts[0] * 5) + ItemActionHandler.inventoryCounts[1];
+            rubyCountString = "x" + rubyCountInt.ToString();
+            if(!isDisplayed)
+                spriteBatch.DrawString(font, rubyCountString, new Vector2(300, 50), Color.White);
+            if(isDisplayed)
+                spriteBatch.DrawString(font, rubyCountString, new Vector2(96 * scale.X, 192 * scale.Y), Color.White);
+        }
+
+        public void KeyCount(SpriteBatch spriteBatch, bool isDisplayed)
+        {
+            keyCountInt = ItemActionHandler.inventoryCounts[2];
+            keyCountString = "x" + keyCountInt.ToString();
+            if(!isDisplayed)
+                spriteBatch.DrawString(font, keyCountString, new Vector2(300, 100), Color.White);
+            if(isDisplayed)
+                spriteBatch.DrawString(font, keyCountString, new Vector2(96 * scale.X, 208 * scale.Y), Color.White);
+        }
+
+        public void BombCount(SpriteBatch spriteBatch, bool isDisplayed)
+        {
+            bombCountInt = ItemActionHandler.inventoryCounts[8];
+            bombCountString = "x" + bombCountInt.ToString();
+            if(!isDisplayed)
+                spriteBatch.DrawString(font, bombCountString, new Vector2(300, 125), Color.White);
+            if(isDisplayed)
+                spriteBatch.DrawString(font, bombCountString, new Vector2(96 * scale.X, 216 * scale.Y), Color.White);
+        }
+
+        public void SetHealthDR(bool isDisplayed)
         {
             heartRowsDR.Clear();
             heartRowsSR.Clear();
             for (int i = 0; i < 2; i++) {
                 for (int j = 0; j < 8; j++) {
-                    if(isDisplayed == -1)
+                    if(!isDisplayed)
                         heartRowsDR.Add(new Rectangle((int)((176 + (8 * j)) * scale.X), (int)((32 + (8 * i)) * scale.Y), (int)(8 * scale.X), (int)(8 * scale.Y)));
-                    if(isDisplayed == 1)
+                    if(isDisplayed)
                         heartRowsDR.Add(new Rectangle((int)((176 + (8 * j)) * scale.X), (int)((208 + (8 * i)) * scale.Y), (int)(8 * scale.X), (int)(8 * scale.Y)));
                     heartRowsSR.Add(new Rectangle());
                 }
             }
         }
 
-        private void DrawHealth(SpriteBatch spriteBatch, int isDisplayed)
+        private void DrawHealth(SpriteBatch spriteBatch, bool isDisplayed)
         {
             SetHealthDR(isDisplayed);
             for (int i = 0; i < 16; i++) {
@@ -147,9 +147,9 @@ namespace ZeldaGame.HUD
                 else {
                     heartRowsSR[i] = fullHeartSR;
                 }
-                if(isDisplayed == -1)
+                if(!isDisplayed)
                     spriteBatch.Draw(texture, heartRowsDR[i], heartRowsSR[i], Color.White);
-                if(isDisplayed == 1)
+                if(isDisplayed)
                     spriteBatch.Draw(texture, heartRowsDR[i], heartRowsSR[i], Color.White);
             }
         }

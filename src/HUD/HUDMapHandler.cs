@@ -28,17 +28,15 @@ namespace ZeldaGame.HUD
             mapType = new HUDMapType(scale, map, collisionHandler);
         }
 
-        public void Draw(SpriteBatch spriteBatch, int isDisplayed)
+        public void Draw(SpriteBatch spriteBatch, bool isDisplayed)
         {
-            if (isDisplayed == 1)
+            if (isDisplayed)
             {
                 DrawHUDMap("Bottom_Blue", spriteBatch);
                 DrawHUDMap("Orange", spriteBatch);
             }
-            if (isDisplayed == -1)
-            {
+            if (!isDisplayed)
                 DrawHUDMap("Top_Blue", spriteBatch);
-            }
         }
 
         public void DrawHUDMap(string map_name, SpriteBatch spriteBatch)
@@ -75,9 +73,6 @@ namespace ZeldaGame.HUD
                     mapType.isRoomVisited(i-1,j-2);
         }
 
-        public void Reset()
-        {
-            mapType.Reset();
-        }
+        public void Reset() => mapType.Reset();
     }
 }

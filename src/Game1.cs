@@ -216,7 +216,7 @@ namespace ZeldaGame
 		protected override void Draw(GameTime gameTime) {
 			_spriteBatch.Begin();
             //Draws player info HUD
-            playerInfoHUD.Draw(_spriteBatch, -1);
+            playerInfoHUD.Draw(_spriteBatch, false);
             if (!Globals.gameStateScreenHandler.IsPlaying())
 			{
                 Globals.gameStateScreenHandler.Draw(_spriteBatch);

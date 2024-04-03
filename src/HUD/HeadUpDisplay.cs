@@ -21,7 +21,7 @@ namespace ZeldaGame.HUD
         private Rectangle inventoryDR;
         private Rectangle mapDR;
         private Rectangle playerInfoDR;
-        private int isDisplayed = -1;
+        private bool isDisplayed = false;
 
         public HeadUpDisplay (Texture2D texture, Vector2 scale, MapHandler map, CollisionHandler collisionHandler, IPlayer Link, SpriteFont font)
         {
@@ -34,22 +34,17 @@ namespace ZeldaGame.HUD
             inventorySR = new Rectangle(1, 11, 256, 88);
             mapSR = new Rectangle(258, 112, 256, 88);
             playerInfoSR = new Rectangle(258, 11, 256, 56);
-            inventoryDR = new Rectangle(0, 0, 0, 0);
-            mapDR = new Rectangle(0, 0, 0, 0);
-            playerInfoDR = new Rectangle(0, 0, 0, 0);
+            inventoryDR = new Rectangle(0, 0, (int)(inventorySR.Width * scale.X), (int)(inventorySR.Height * scale.Y));;
+            mapDR = new Rectangle(0, (int)(inventorySR.Height * scale.Y), (int)(mapSR.Width * scale.X), (int)(mapSR.Height * scale.Y));
+            playerInfoDR = new Rectangle(0, (int)(inventorySR.Height * scale.Y) + (int)(mapSR.Height * scale.Y), (int)(playerInfoSR.Width * scale.X), (int)(playerInfoSR.Height * scale.Y));
         }
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            if (isDisplayed == 1) 
+            if (isDisplayed) 
             {
-                inventoryDR = new Rectangle(0, 0, (int)(inventorySR.Width * scale.X), (int)(inventorySR.Height * scale.Y));
                 spriteBatch.Draw(texture, inventoryDR, inventorySR, Color.White);
-
-                mapDR = new Rectangle(0, (int)(inventorySR.Height * scale.Y), (int)(mapSR.Width * scale.X), (int)(mapSR.Height * scale.Y));
                 spriteBatch.Draw(texture, mapDR, mapSR, Color.White);
-
-                playerInfoDR = new Rectangle(0, (int)(inventorySR.Height * scale.Y) + (int)(mapSR.Height * scale.Y), (int)(playerInfoSR.Width * scale.X), (int)(playerInfoSR.Height * scale.Y));
                 spriteBatch.Draw(texture, playerInfoDR, playerInfoSR, Color.White);
                 DrawMapItem(spriteBatch);
                 DrawCompassItem(spriteBatch);
@@ -60,20 +55,11 @@ namespace ZeldaGame.HUD
 
         }
 
-        public void Update ()
-        {
-            HUDMapHandler.Update();
-        }
+        public void Update () => HUDMapHandler.Update();
 
-        public void Display()
-        {
-            isDisplayed *= -1;
-        }
+        public void Display() => isDisplayed = !isDisplayed;
 
-        public bool isVisible()
-        {
-            return isDisplayed == 1;
-        }
+        public bool isVisible() => isDisplayed;
 
         public void DrawMapItem(SpriteBatch spriteBatch)
         {
@@ -98,7 +84,8 @@ namespace ZeldaGame.HUD
         public void Reset()
         {
             HUDMapHandler.Reset();
-            isDisplayed = -1;
+            HUDInventory.Reset();
+            isDisplayed = false;
         }
     }
 }
