@@ -397,3 +397,15 @@ FodyWeavers.xsd
 
 # JetBrains Rider
 *.sln.iml
+.DS_Store
+code_reviews/.DS_Store
+code_reviews/sprint2/.DS_Store
+code_reviews/sprint3/.DS_Store
+sprint_reflections/.DS_Store
+src/.DS_Store
+src/Content/.DS_Store
+src/Content/audio/.DS_Store
+src/Content/map_data/.DS_Store
+src/enemy/.DS_Store
+src/Map/.DS_Store
+src/Player/.DS_Store
