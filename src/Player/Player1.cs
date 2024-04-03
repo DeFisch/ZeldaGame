@@ -68,9 +68,33 @@ namespace ZeldaGame.Player {
 			currSword = sword;
 		}
 
+		public string GetDirection() {
+			string dirStr = "None";
+			switch (direction) {
+				case Direction.Up:
+					dirStr = "Up";
+					break;
+				case Direction.Down:
+					dirStr = "Down";
+					break;
+				case Direction.Left:
+					dirStr = "Left";
+					break;
+				case Direction.Right:
+					dirStr = "Right";
+					break;
+			}
+			return dirStr;
+		}
+
 		public void SetDirection(Direction direction) { // 0 = up, 1 = left, 2 = down, 3 = right
 			stateMachine.SetDirection(direction);
 			this.direction = direction;
+		}
+
+		public bool IsIdle() {
+			State state = stateMachine.GetState();
+			return state == State.Idle;
 		}
 
 		public void Idle() {
@@ -131,15 +155,15 @@ namespace ZeldaGame.Player {
 				{
                     weaponHandler.UseItem(item, position, stateMachine.GetDirection());
                 }
-
             }
 		}
 
 		public void Update()
 		{
 			// Animates attack or item use, then resets to idle
-			if (animTimer >= 0)
+			if (animTimer >= 0) {
 				animTimer--;
+			}
 			if (animTimer == 0) {
 				sprite = PlayerSpriteFactory.Instance.CreateWalkSprite(direction);
 				Idle();
@@ -225,6 +249,7 @@ namespace ZeldaGame.Player {
             movement = new Vector2(0, 0);
             animTimer = -1;
 			health = 3.0f;
+			maxHealth = 3.0f;
         }
     }
 }

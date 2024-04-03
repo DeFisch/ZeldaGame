@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using ZeldaGame.Items;
 using ZeldaGame.NPCs;
 using System.Linq;
+using Enemy;
 
 namespace ZeldaGame;
 
@@ -91,35 +92,48 @@ public class CollisionHandler {
 		}
 	}
 
-    private void EnemyProjectileMapCollision()
-    {
-        foreach (IEnemyProjectile projectile in game.enemyFactory.GetAllProjectiles())
-        {
-            foreach (Rectangle box in game.map.getAllObjectRectangles())
-            {
-                if (projectile.GetRectangle().Intersects(box))
-                {
-                    projectile.Collided();
-                }
-            }
-        }
-    }
+	public bool EnemyProjectileShieldCollision(IEnemyProjectile projectile) {
+        string projDirection = projectile.GetDirection();
+        string playerDirection = game.Link.GetDirection();
+        bool isShielded = false;
 
-    private void EnemyProjectilePlayerCollision()
-    {
-        foreach (IEnemyProjectile projectile in game.enemyFactory.GetAllProjectiles())
+		Debug.WriteLine("Enemy projectile facing " + projDirection + "hits player facing " + playerDirection + ".");
+		if (game.Link.IsIdle() == true && projDirection.Equals(playerDirection) == true) {
+			game.enemyFactory.enemyProjectileFactory.ClearProjectile(projectile);
+			Debug.WriteLine("Blocked projectile!");
+			isShielded = true;
+		}
+		projectile.Collided();
+		return isShielded;
+	}
+       
+	private void EnemyProjectilePlayerCollision() {
+        List<IEnemyProjectile> projectiles = game.enemyFactory.GetAllProjectiles();
+        for (int i = projectiles.Count - 1; i >= 0; i--)
         {
-            if (projectile.GetRectangle().Intersects(game.Link.GetPlayerHitBox()) && !game.Link.isHurting())
+            if (projectiles[i].GetRectangle().Intersects(game.Link.GetPlayerHitBox()) && !game.Link.isHurting())
             {
-                Globals.audioLoader.Play("LOZ_Link_Hurt");
-                game.Link.TakeDamage(projectile.DoDamage());
-                game.Link = new HurtPlayer(game.Link, game);
-				Debug.WriteLine("Enemy projectile collides with player.");
+                if (EnemyProjectileShieldCollision(projectiles[i]) == false) {
+
+                    Globals.audioLoader.Play("LOZ_Link_Hurt");
+                    game.Link.TakeDamage(projectiles[i].DoDamage());
+                    game.Link = new HurtPlayer(game.Link, game);
+                    Debug.WriteLine("Enemy projectile collides with player.");
+                }
 			}
         }
     }
+	private void EnemyProjectileMapCollision() {
+		foreach (IEnemyProjectile projectile in game.enemyFactory.GetAllProjectiles()) {
+			foreach (Rectangle box in game.map.getAllObjectRectangles()) {
+				if (projectile.GetRectangle().Intersects(box)) {
+					projectile.Collided();
+				}
+			}
+		}
+	}
 
-    private void ItemPlayerCollision() {
+	private void ItemPlayerCollision() {
         foreach (IItemSprite item in game.itemFactory.GetAllItems().ToList()) {
             if (item.GetHitBox().Intersects(game.Link.GetPlayerHitBox())) {
                 itemActionHandler.InventoryCounts(item);

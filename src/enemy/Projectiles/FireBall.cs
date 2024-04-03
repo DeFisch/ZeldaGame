@@ -59,7 +59,29 @@ namespace Enemy.Projectiles
         {
             return new Rectangle((int)location.X, (int)location.Y, fireball_sprites[currentFrame].Width * scale, fireball_sprites[currentFrame].Height * scale);
         }
-        public void Update()
+
+		public string GetDirection() {
+			string dirStr = "None";
+			Vector2 normDirection = direction;
+			normDirection.Normalize();
+			switch (normDirection) {
+				case Vector2(1, 0):
+					dirStr = "Left";
+					break;
+				case Vector2(-1, 0):
+					dirStr = "Right";
+					break;
+				case Vector2(0, 1):
+					dirStr = "Up";
+					break;
+				case Vector2(0, -1):
+					dirStr = "Down";
+					break;
+			}
+
+			return dirStr;
+		}
+		public void Update()
         {
             frameID++;
             if (frameID % 8 == 0)
