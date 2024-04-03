@@ -1,6 +1,6 @@
 ﻿
 
-namespace ZeldaGame;
+namespace ZeldaGame.Commands;
     public class StartGameCommand : ICommand
     {
         private Game1 myGame;

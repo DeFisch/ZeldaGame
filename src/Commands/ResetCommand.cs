@@ -1,25 +1,25 @@
-﻿namespace ZeldaGame
+﻿namespace ZeldaGame.Commands;
+
+public class ResetCommand: ICommand
 {
-    public class ResetCommand: ICommand
+    private Game1 MyGame;
+
+    public ResetCommand(Game1 game)
     {
-        private Game1 MyGame;
+        MyGame = game;
+    }
 
-        public ResetCommand(Game1 game)
-        {
-            MyGame = game;
-        }
-
-        public void Execute()
-        {
-            MyGame.map.Reset();
-            MyGame.Link.Reset();
-            MyGame.itemFactory.Reset();
-            MyGame.enemyFactory.Reset();
-            MyGame.headUpDisplay.Reset();
-            MyGame.blockSpriteFactory.Reset();
-            MyGame.collisionHandler.itemActionHandler.Reset();
-            Globals.audioLoader.Reset();
-            Globals.gameStateScreenHandler.Reset();
-        }
+    public void Execute()
+    {
+        MyGame.map.Reset();
+        MyGame.Link.Reset();
+        MyGame.itemFactory.Reset();
+        MyGame.enemyFactory.Reset();
+        MyGame.headUpDisplay.Reset();
+        MyGame.blockSpriteFactory.Reset();
+        MyGame.headUpDisplay.HUDInventory.Reset();
+        MyGame.collisionHandler.itemActionHandler.Reset();
+        Globals.audioLoader.Reset();
+        Globals.gameStateScreenHandler.Reset();
     }
 }

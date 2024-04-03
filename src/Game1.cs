@@ -3,6 +3,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using ZeldaGame.Block;
+using ZeldaGame.Commands;
 using ZeldaGame.Controllers;
 using ZeldaGame.Enemy;
 using ZeldaGame.HUD;
