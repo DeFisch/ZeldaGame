@@ -4,6 +4,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Enemy;
 using static System.Net.Mime.MediaTypeNames;
 using ZeldaGame.Player.Commands;
+using ZeldaGame.Items;
 namespace ZeldaGame.Enemy;
 
 public class Aquamentus : IEnemy {
@@ -47,8 +48,12 @@ public class Aquamentus : IEnemy {
 		}
         if (frameID % 17 == 0)
             currentFrame = (currentFrame + 1) % 4;
-        if (frameID % 37 == 0)
+		if (frameID % 37 == 0 && state != State.Idle)
             Attack();
+		if (ItemActionHandler.inventoryCounts[3] > 0)
+		{
+			state = State.Idle;
+		}
 		if (state == State.Walking)
 			Walk();
 		if (state == State.Dead)

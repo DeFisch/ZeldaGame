@@ -1,6 +1,7 @@
 using System;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using ZeldaGame.Items;
 using static System.Net.Mime.MediaTypeNames;
 
 namespace ZeldaGame.Enemy;
@@ -68,8 +69,13 @@ public class DarkNut : IEnemy {
 			sprite_id = 0; // switch to down sprite
         if (direction == Direction.Up)
             sprite_id = 2; // switch to up sprite
-            
-		if (state == State.Walking)
+
+        if (ItemActionHandler.inventoryCounts[3] != 0)
+        {
+            state = State.Idle;
+        }
+
+        if (state == State.Walking)
 			Walk();
 		if (state == State.Idle)
 			Idle();

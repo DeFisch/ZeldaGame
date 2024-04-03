@@ -1,6 +1,7 @@
 using System;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using ZeldaGame.Items;
 using static System.Net.Mime.MediaTypeNames;
 
 namespace ZeldaGame.Enemy;
@@ -55,7 +56,12 @@ public class Gibdo : IEnemy {
 			Idle();
 		if (state == State.Dead)
 			Dead();
-		frameID++;
+        if (ItemActionHandler.inventoryCounts[3] != 0)
+        {
+            state = State.Idle;
+        }
+
+        frameID++;
 	}
 
 	private void Idle() {

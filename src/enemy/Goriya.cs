@@ -2,6 +2,7 @@ using System;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Enemy;
+using ZeldaGame.Items;
 
 namespace ZeldaGame.Enemy;
 
@@ -62,10 +63,16 @@ public class Goriya : IEnemy {
         } else if ((frameID + rand_seed) / 60 % 3 == 1) {
             state = State.Idle;
         } else {
-            state = State.Attacking;
+			if (ItemActionHandler.inventoryCounts[3]! > 0)
+			{
+				state = State.Attacking;
+			}
         }
-
-		if (health <= 0){
+        if (ItemActionHandler.inventoryCounts[3] != 0)
+        {
+            state = State.Idle;
+        }
+        if (health <= 0){
 			state = State.Dead;
 		}
 

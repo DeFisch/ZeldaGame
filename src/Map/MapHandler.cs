@@ -5,6 +5,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using ZeldaGame.Player;
 using ZeldaGame.Enemy;
+using ZeldaGame.Items;
 
 namespace ZeldaGame.Map;
 
@@ -103,6 +104,7 @@ public class MapHandler {
             this.y = y;
             map = mapLoader.get_map_info();
             mapRectangles.SetLists(map_size); // update map rectangles
+            ItemActionHandler.inventoryCounts[3] = 0;
             return true;
         }
         return false;

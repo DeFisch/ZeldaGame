@@ -1,6 +1,7 @@
 using System;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using ZeldaGame.Items;
 using static System.Net.Mime.MediaTypeNames;
 
 namespace ZeldaGame.Enemy;
@@ -52,7 +53,16 @@ public class Keese : IEnemy {
 		if (health <= 0) {
 			state = State.Dead;
 		}
-		if (state == State.Walking)
+        if (ItemActionHandler.inventoryCounts[3] > 0)
+        {
+            state = State.Idle;
+        }
+        if (ItemActionHandler.inventoryCounts[3] == 0)
+        {
+            state = State.Walking;
+
+        }
+        if (state == State.Walking)
 			Walk();
 		if (state == State.Idle)
 			Idle();
