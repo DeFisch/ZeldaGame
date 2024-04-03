@@ -32,11 +32,19 @@ namespace ZeldaGame.Player {
 		public void UseItem(int item) {
 			decoratedPlayer.UseItem(item);
 		}
+
+		public string GetDirection() {
+			return decoratedPlayer.GetDirection();
+		}
 		public void SetDirection(Direction direction) {
 			decoratedPlayer.SetDirection(direction);
 		}
 		public bool isHurting() {
 			return true;
+		}
+
+		public bool IsIdle() {
+			return decoratedPlayer.IsIdle();
 		}
 		public void TakeDamage(float damage)
 		{

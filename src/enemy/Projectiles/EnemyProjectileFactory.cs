@@ -67,5 +67,9 @@ namespace Enemy
         {
             projectiles.Clear();
         }
+
+        public void ClearProjectile(IEnemyProjectile projectile) {
+            projectiles.Remove(projectile);
+        }
     }
 }

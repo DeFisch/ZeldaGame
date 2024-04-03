@@ -7,9 +7,11 @@ namespace ZeldaGame.Player {
 	public interface IPlayer {
 		public void Attack();
 		public void Idle();
+		public bool IsIdle();
 		public void OnCollision(Rectangle collision);
 		public void Walk();
 		public void UseItem(int item);
+		public string GetDirection();
 		public void SetDirection(Direction direction); 
 		public void Draw(SpriteBatch spriteBatch, Color color);
 		public void Update();

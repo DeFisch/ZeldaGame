@@ -1,4 +1,4 @@
-namespace ZeldaGame;
+namespace ZeldaGame.Commands;
 
 public class MuteCommand : ICommand
 {
