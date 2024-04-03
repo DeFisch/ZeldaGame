@@ -5,6 +5,8 @@ public class MoveRightCommand : ICommand {
         this.map = map;
     }
     public void Execute() {
-        map.move_right();
+        if (Globals.gameStateScreenHandler.CurrentGameState == GameState.Playing) {
+            map.move_right();
+        }
     }
 }

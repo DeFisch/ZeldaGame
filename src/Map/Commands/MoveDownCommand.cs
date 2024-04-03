@@ -5,6 +5,8 @@ public class MoveDownCommand : ICommand {
         this.map = map;
     }
     public void Execute() {
-        map.move_down();
+        if (Globals.gameStateScreenHandler.CurrentGameState == GameState.Playing) {
+            map.move_down();
+        }
     }
 }

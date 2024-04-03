@@ -5,6 +5,8 @@ public class MoveUpCommand : ICommand {
         this.map = map;
     }
     public void Execute() {
-        map.move_up();
+        if (Globals.gameStateScreenHandler.CurrentGameState == GameState.Playing) {
+            map.move_up();
+        }
     }
 }
