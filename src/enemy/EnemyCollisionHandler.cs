@@ -13,8 +13,8 @@ namespace ZeldaGame.Enemy {
             List<Rectangle> staticRectangles = game.map.getAllObjectRectangles();
             foreach (IEnemy enemy in enemyFactory.GetAllEnemies()) {
                 foreach(Rectangle rectangle in staticRectangles) {
-                    if(enemy.GetRectangle().Intersects(rectangle)) {
-                        enemy.Collide(Rectangle.Intersect(enemy.GetRectangle(), rectangle));
+                    if(enemy.GetHitBox().Intersects(rectangle)) {
+                        enemy.OnCollision(Rectangle.Intersect(enemy.GetHitBox(), rectangle));
                     }
                 }
             }

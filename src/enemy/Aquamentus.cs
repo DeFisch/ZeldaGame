@@ -60,7 +60,7 @@ public class Aquamentus : IEnemy {
 		Globals.audioLoader.Play("LOZ_MagicalRod");;
         Vector2[] directions = new Vector2[] { new Vector2(-0.894f, 0.447f), new Vector2(-0.894f, -0.447f), new Vector2(-1, 0) };
         foreach (Vector2 direction in directions) {
-            enemyProjectileFactory.CreateProjectile(EnemyProjectileFactory.ProjectileType.Fireball, new Vector2(GetRectangle().Center.X, GetRectangle().Center.Y), direction * projectile_speed);
+            enemyProjectileFactory.CreateProjectile(EnemyProjectileFactory.ProjectileType.Fireball, new Vector2(GetHitBox().Center.X, GetHitBox().Center.Y), direction * projectile_speed);
         }
     }
 
@@ -97,12 +97,12 @@ public class Aquamentus : IEnemy {
 		return health;
 	}
 
-	public Rectangle GetRectangle()
+	public Rectangle GetHitBox()
 	{
 		return new Rectangle((int)position.X, (int)position.Y, (int)(character_sprites[currentFrame, 2] * scale.X), (int)(character_sprites[currentFrame, 3] * scale.Y));
 	}
 
-	public void Collide(Rectangle rectangle)
+	public void OnCollision(Rectangle rectangle)
 	{
 		// Empty
 	}

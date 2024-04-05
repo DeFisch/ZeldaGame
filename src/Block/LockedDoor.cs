@@ -23,7 +23,7 @@ namespace ZeldaGame.Block {
         }
 
 		public void Update() {
-            if (isDrawn && player.GetPlayerHitBox().Intersects(destinationRectangle))
+            if (isDrawn && player.GetHitBox().Intersects(destinationRectangle))
                 player.OnCollision(destinationRectangle);
 		}
 

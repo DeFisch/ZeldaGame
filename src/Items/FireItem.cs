@@ -47,7 +47,7 @@ namespace ZeldaGame.Items {
             return destinationRectangle_1;
         }
 
-        public void ItemAction()
+        public void OnCollision(Rectangle intersect)
         {
 
         }

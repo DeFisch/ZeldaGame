@@ -128,12 +128,12 @@ public class Stalfos : IEnemy {
         return health;
     }
 
-    public Rectangle GetRectangle()
+    public Rectangle GetHitBox()
 	{
 		return new Rectangle((int)position.X, (int)position.Y, (int)(character_sprites[2] * scale.X), (int)(character_sprites[3] * scale.Y));
 	}
 
-	public void Collide(Rectangle rectangle)
+	public void OnCollision(Rectangle rectangle)
 	{
 		int dx = rectangle.Width;
 		int dy = rectangle.Height;

@@ -4,11 +4,11 @@ using System.Collections.Generic;
 using static ZeldaGame.Player.PlayerStateMachine;
 
 namespace ZeldaGame.Player {
-	public interface IPlayer {
+	public interface IPlayer : ICollidible {
 		public void Attack();
 		public void Idle();
 		public bool IsIdle();
-		public void OnCollision(Rectangle collision);
+		new public void OnCollision(Rectangle intersect);
 		public void Walk();
 		public void UseItem(int item);
 		public Direction GetDirection();
@@ -19,7 +19,7 @@ namespace ZeldaGame.Player {
 		public void Knockback();
 		public Vector2 GetPlayerPosition();
 		public void SetPlayerPosition(Vector2 position, bool offset = true);
-		public Rectangle GetPlayerHitBox();
+		new public Rectangle GetHitBox();
 		public Dictionary<IPlayerProjectile, Rectangle> GetProjectileHitBoxes();
 		public bool isHurting();
 		public void TakeDamage(float damage);

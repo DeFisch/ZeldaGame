@@ -124,7 +124,7 @@ public class WizzRobe : IEnemy {
 				projectile_direction = new Vector2(this.projectile_speed, 0);
 				break;
 		}
-		enemyProjectileFactory.CreateProjectile(EnemyProjectileFactory.ProjectileType.Fireball, new Vector2(GetRectangle().Center.X, GetRectangle().Center.Y), projectile_direction);
+		enemyProjectileFactory.CreateProjectile(EnemyProjectileFactory.ProjectileType.Fireball, new Vector2(GetHitBox().Center.X, GetHitBox().Center.Y), projectile_direction);
 	}
 
 	private void Idle() {
@@ -176,12 +176,12 @@ public class WizzRobe : IEnemy {
         return health;
     }
 
-    public Rectangle GetRectangle()
+    public Rectangle GetHitBox()
 	{
 		return new Rectangle((int)position.X, (int)position.Y, (int)(character_sprites[0, 2] * scale.X), (int)(character_sprites[0, 3] * scale.Y));
 	}
 
-	public void Collide(Rectangle rectangle)
+	public void OnCollision(Rectangle rectangle)
 	{
 		int dx = rectangle.Width;
 		int dy = rectangle.Height;

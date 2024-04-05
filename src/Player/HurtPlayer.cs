@@ -21,9 +21,9 @@ namespace ZeldaGame.Player {
 			decoratedPlayer.Attack();
 		}
 
-		public void OnCollision(Rectangle collision)
+		public void OnCollision(Rectangle intersect)
 		{
-            decoratedPlayer.OnCollision(collision);
+            decoratedPlayer.OnCollision(intersect);
         }
 		public void Idle() {
 			decoratedPlayer.Idle();
@@ -83,9 +83,9 @@ namespace ZeldaGame.Player {
             decoratedPlayer.SetPlayerPosition(position);
         }
 
-        public Rectangle GetPlayerHitBox()
+        public Rectangle GetHitBox()
         {
-            return decoratedPlayer.GetPlayerHitBox();
+            return decoratedPlayer.GetHitBox();
         }
 
         public Dictionary<IPlayerProjectile, Rectangle> GetProjectileHitBoxes()

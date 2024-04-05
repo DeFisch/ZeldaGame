@@ -53,7 +53,7 @@ namespace ZeldaGame.Player {
 			return weaponHandler.GetActiveHitBoxes();
 		}
 
-		public Rectangle GetPlayerHitBox()
+		public Rectangle GetHitBox()
 		{
 			Rectangle hitbox = sprite.GetHitBox();
 			hitbox.Inflate(-6, -8);
@@ -100,10 +100,10 @@ namespace ZeldaGame.Player {
 
 		public void OnCollision(Rectangle collision)
 		{
-            Rectangle collisionOverlap = Rectangle.Intersect(GetPlayerHitBox(), collision);
+            Rectangle collisionOverlap = Rectangle.Intersect(GetHitBox(), collision);
 
 			if (collisionOverlap.Width > collisionOverlap.Height){
-				if (collisionOverlap.Center.Y < GetPlayerHitBox().Center.Y)
+				if (collisionOverlap.Center.Y < GetHitBox().Center.Y)
 				{
 					position.Y += collisionOverlap.Height;
 					collisionDirection = Direction.Up;
@@ -114,7 +114,7 @@ namespace ZeldaGame.Player {
 					collisionDirection = Direction.Down;
                 }
 			} else {
-				if (collisionOverlap.Center.X < GetPlayerHitBox().Center.X)
+				if (collisionOverlap.Center.X < GetHitBox().Center.X)
 				{
 					position.X += collisionOverlap.Width;
 					collisionDirection = Direction.Left;

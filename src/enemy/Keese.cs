@@ -119,13 +119,13 @@ public class Keese : IEnemy {
         return health;
     }
 
-    public Rectangle GetRectangle()
+    public Rectangle GetHitBox()
 	{
 		int sprite_id = (frameID / 18) % 2;
 		return new Rectangle((int)position.X, (int)position.Y, (int)(character_sprites[sprite_id, 2] * scale.X), (int)(character_sprites[sprite_id, 3] * scale.Y));
 	}
 
-	public void Collide(Rectangle rectangle)
+	public void OnCollision(Rectangle rectangle)
 	{
 		// Intentionally left empty
 	}

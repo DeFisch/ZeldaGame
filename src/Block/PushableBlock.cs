@@ -58,7 +58,7 @@ namespace ZeldaGame.Block {
 
         public void PlayerIsPushing()
         {
-            Rectangle playerHitBox = player.GetPlayerHitBox();
+            Rectangle playerHitBox = player.GetHitBox();
             dx = playerHitBox.X - destinationRectangle.X;
             dy = playerHitBox.Y - destinationRectangle.Y;
             if(playerHitBox.Intersects(destinationRectangle)){
@@ -92,7 +92,7 @@ namespace ZeldaGame.Block {
         {
             if(pushed && !roomCheck().Equals(3))
             {
-                if (player.GetPlayerHitBox().Intersects(destinationRectangle))
+                if (player.GetHitBox().Intersects(destinationRectangle))
                     player.OnCollision(destinationRectangle);
             }
         }

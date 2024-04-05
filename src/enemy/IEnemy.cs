@@ -4,9 +4,9 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace ZeldaGame.Enemy;
 
-public interface IEnemy {
+public interface IEnemy : ICollidible {
 
-	public Rectangle GetRectangle();
+	new public Rectangle GetHitBox();
 	
 	public abstract void Update();
 
@@ -18,7 +18,7 @@ public interface IEnemy {
 
 	public int GetHealth();
 
-	public void Collide(Rectangle intersect);
+	new public void OnCollision(Rectangle intersect);
 
 	public bool IsFinished();
 }

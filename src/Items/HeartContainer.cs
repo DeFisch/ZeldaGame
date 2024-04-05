@@ -40,7 +40,7 @@ namespace ZeldaGame.Items {
 			return id;
 		}
 
-		public void ItemAction()
+		public void OnCollision(Rectangle intersect)
         {
 
         }

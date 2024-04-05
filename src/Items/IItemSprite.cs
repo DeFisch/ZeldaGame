@@ -8,14 +8,14 @@ using Microsoft.Xna.Framework;
 
 namespace ZeldaGame.Items
 {
-    public interface IItemSprite : ISprite
+    public interface IItemSprite : ICollidible, ISprite
     {
         new void Update();
         new void Draw(SpriteBatch spriteBatch, Vector2 location, Color color, Vector2 scale);
-        public Rectangle GetHitBox();
+        new public Rectangle GetHitBox();
 
         public String GetID();
 
-        public void ItemAction(); //Dictates what should happen to Link after collision
+        new public void OnCollision(Rectangle intersect); //Dictates what should happen to Link after collision
     }
 }

@@ -26,7 +26,7 @@ public class CollisionHandler {
     {
         foreach (Rectangle box in game.map.getAllObjectRectangles())
         {
-            if (game.Link.GetPlayerHitBox().Intersects(box))
+            if (game.Link.GetHitBox().Intersects(box))
             {
                 game.Link.OnCollision(box);
                 Debug.WriteLine("Player collides with wall."); 
@@ -77,7 +77,7 @@ public class CollisionHandler {
         {
             if(projectile.GetType() == typeof(BombSprite))
             {
-                if (activeProjectiles[projectile].Intersects(game.Link.GetPlayerHitBox()))
+                if (activeProjectiles[projectile].Intersects(game.Link.GetHitBox()))
                 {
                     game.Link.TakeDamage(projectile.ProjectileDamage());
                     game.Link = new HurtPlayer(game.Link, game);
@@ -98,7 +98,7 @@ public class CollisionHandler {
         {
             foreach (IPlayerProjectile projectile in activeProjectiles.Keys)
             {
-                if (activeProjectiles[projectile].Intersects(enemy.GetRectangle()))
+                if (activeProjectiles[projectile].Intersects(enemy.GetHitBox()))
                 {
                     // Keese can only be damaged by boomerang
                     if (enemy.GetType() == typeof(Keese) && projectile.GetType() != typeof(BoomerangSprite) && projectile.GetType() != typeof(BlueBoomerangSprite))
@@ -115,9 +115,9 @@ public class CollisionHandler {
 
     private void EnemyPlayerCollision() {
 		foreach (IEnemy enemy in game.enemyFactory.GetAllEnemies()) {
-			if (enemy.GetRectangle().Intersects(game.Link.GetPlayerHitBox()) && !game.Link.isHurting()) {
+			if (enemy.GetHitBox().Intersects(game.Link.GetHitBox()) && !game.Link.isHurting()) {
 				Globals.audioLoader.Play("LOZ_Link_Hurt");
-                game.Link.OnCollision(enemy.GetRectangle());
+                game.Link.OnCollision(enemy.GetHitBox());
                 game.Link.TakeDamage(enemy.DoDamage());
                 game.Link.Knockback();
                 game.Link = new HurtPlayer(game.Link, game);
@@ -145,7 +145,7 @@ public class CollisionHandler {
         List<IEnemyProjectile> projectiles = game.enemyFactory.GetAllProjectiles();
         for (int i = projectiles.Count - 1; i >= 0; i--)
         {
-            if (projectiles[i].GetRectangle().Intersects(game.Link.GetPlayerHitBox()) && !game.Link.isHurting())
+            if (projectiles[i].GetRectangle().Intersects(game.Link.GetHitBox()) && !game.Link.isHurting())
             {
                 if (EnemyProjectileShieldCollision(projectiles[i]) == false) {
 
@@ -171,7 +171,7 @@ public class CollisionHandler {
 
 	private void ItemPlayerCollision() {
         foreach (IItemSprite item in game.itemFactory.GetAllItems().ToList()) {
-            if (item.GetHitBox().Intersects(game.Link.GetPlayerHitBox())) {
+            if (item.GetHitBox().Intersects(game.Link.GetHitBox())) {
                 itemActionHandler.InventoryCounts(item);
                 Globals.audioLoader.Play("LOZ_Get_Item");
                 game.itemFactory.RemoveItem(item);
@@ -181,7 +181,7 @@ public class CollisionHandler {
     }
 
     private void PlayerDoorCollision(Vector3 map_size, IPlayer player, MapHandler map){
-        Rectangle playerHitBox = player.GetPlayerHitBox();
+        Rectangle playerHitBox = player.GetHitBox();
         Vector2 playerCenterpoint = new Vector2(playerHitBox.X + playerHitBox.Width/2, playerHitBox.Y + playerHitBox.Height/2);
         Rectangle up_door = new Rectangle((int)(0.46875*map_size.X), (int)(map_size.Z), (int)(0.0625*map_size.X), (int)(0.18*map_size.Y));
         Rectangle down_door = new Rectangle((int)(0.46875*map_size.X), (int)((0.82*map_size.Y) + map_size.Z), (int)(0.0625*map_size.X), (int)(0.18*map_size.Y));
@@ -253,8 +253,8 @@ public class CollisionHandler {
         foreach (PushableBlock block in pushableBlock)
         {
             foreach (IEnemy enemy in enemies)
-                if(enemy.GetRectangle().Intersects(block.GetRectangle()))
-                    enemy.Collide(Rectangle.Intersect(enemy.GetRectangle(), block.GetRectangle()));
+                if(enemy.GetHitBox().Intersects(block.GetRectangle()))
+                    enemy.OnCollision(Rectangle.Intersect(enemy.GetHitBox(), block.GetRectangle()));
             
             foreach (IPlayerProjectile projectile in activeProjectiles.Keys)
                 if (activeProjectiles[projectile].Intersects(block.GetRectangle()))
@@ -266,7 +266,7 @@ public class CollisionHandler {
     {
         if (game.NPCFactory.isInDungeon()) {
             List<INPC> npcList = game.NPCFactory.GetNPCList();
-            Rectangle playerHitBox = game.Link.GetPlayerHitBox();
+            Rectangle playerHitBox = game.Link.GetHitBox();
             for (int i = 0; i < npcList.Count; i++)
             {
                 if (npcList[i].GetNPCHitBox().Intersects(playerHitBox))
