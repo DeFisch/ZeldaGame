@@ -19,8 +19,11 @@ namespace ZeldaGame.Player {
 		private Vector2 resetPosition;
 		private bool isMoving;
 
-		private readonly int speed = 1;
+        private readonly float speed = 1.25f;
+		private int knockbackTimer = 10;
+		private readonly int knockbackScale = 8;
 		private Direction direction;
+		private Direction collisionDirection;
 		private Swords currSword;
 		private int animTimer;
         private ItemActionHandler itemActionHandler;
@@ -57,6 +60,15 @@ namespace ZeldaGame.Player {
 			return hitbox;
 		}
 
+		public void Knockback()
+		{
+			knockbackTimer = 10;
+        }
+
+		public Vector2 GetPlayerPosition()
+		{
+			return position;
+		}
 		public void SetPlayerPosition(Vector2 position, bool offset = true)
 		{
 			Rectangle sprite_hitbox = sprite.GetHitBox();
@@ -68,23 +80,8 @@ namespace ZeldaGame.Player {
 			currSword = sword;
 		}
 
-		public string GetDirection() {
-			string dirStr = "None";
-			switch (direction) {
-				case Direction.Up:
-					dirStr = "Up";
-					break;
-				case Direction.Down:
-					dirStr = "Down";
-					break;
-				case Direction.Left:
-					dirStr = "Left";
-					break;
-				case Direction.Right:
-					dirStr = "Right";
-					break;
-			}
-			return dirStr;
+		public Direction GetDirection() {
+			return direction;
 		}
 
 		public void SetDirection(Direction direction) { // 0 = up, 1 = left, 2 = down, 3 = right
@@ -107,19 +104,31 @@ namespace ZeldaGame.Player {
 
 			if (collisionOverlap.Width > collisionOverlap.Height){
 				if (collisionOverlap.Center.Y < GetPlayerHitBox().Center.Y)
+				{
 					position.Y += collisionOverlap.Height;
+					collisionDirection = Direction.Up;
+				}
 				else
-					position.Y -= collisionOverlap.Height;
+				{
+                    position.Y -= collisionOverlap.Height;
+					collisionDirection = Direction.Down;
+                }
 			} else {
 				if (collisionOverlap.Center.X < GetPlayerHitBox().Center.X)
+				{
 					position.X += collisionOverlap.Width;
+					collisionDirection = Direction.Left;
+				}
 				else
+				{
 					position.X -= collisionOverlap.Width;
+					collisionDirection = Direction.Right;
+				}
 			}
-		}
+            Debug.WriteLine(collisionDirection);
+        }
 
-		
-		public void Walk()
+        public void Walk()
 		{
 			if (animTimer < 0)
 			{
@@ -156,32 +165,6 @@ namespace ZeldaGame.Player {
                     weaponHandler.UseItem(item, position, stateMachine.GetDirection());
                 }
             }
-		}
-
-		public void Update()
-		{
-			// Animates attack or item use, then resets to idle
-			if (animTimer >= 0) {
-				animTimer--;
-			}
-			if (animTimer == 0) {
-				sprite = PlayerSpriteFactory.Instance.CreateWalkSprite(direction);
-				Idle();
-			}
-
-			// if player is moving, Walk() updates, otherwise Idle()
-            if (isMoving)
-			{
-				position += movement;
-				isMoving = false; // Set to false, will make Link idle if Walk() does not get called again
-			} else
-			{
-				Idle();
-			}
-
-			// Updates player sprite and weapon sprites
-			weaponHandler.Update();
-            sprite.Update();
 		}
 
 		public bool isHurting()
@@ -239,6 +222,52 @@ namespace ZeldaGame.Player {
                 default: break;
             }
 			movement *= scale;
+        }
+        private Vector2 KnockBackDirection()
+        {
+            return collisionDirection switch
+            {
+                Direction.Up => new Vector2(0, knockbackScale),
+                Direction.Down => new Vector2(0, -knockbackScale),
+                Direction.Left => new Vector2(knockbackScale, 0),
+                Direction.Right => new Vector2(-knockbackScale, 0),
+                _ => new Vector2(0, 0),
+            };
+        }
+
+        public void Update()
+        {
+            // Animates attack or item use, then resets to idle
+            if (animTimer >= 0)
+            {
+                animTimer--;
+            }
+            if (animTimer == 0)
+            {
+                sprite = PlayerSpriteFactory.Instance.CreateWalkSprite(direction);
+                Idle();
+            }
+
+			if (knockbackTimer > 0)
+			{
+				position += KnockBackDirection();
+				knockbackTimer--;
+			}
+
+            // if player is moving, Walk() updates, otherwise Idle()
+            if (isMoving)
+            {
+                position += movement;
+                isMoving = false; // Set to false, will make Link idle if Walk() does not get called again
+            }
+            else
+            {
+                Idle();
+            }
+
+            // Updates player sprite and weapon sprites
+            weaponHandler.Update();
+            sprite.Update();
         }
 
         public void Reset()

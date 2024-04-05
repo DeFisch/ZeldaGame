@@ -11,11 +11,13 @@ namespace ZeldaGame.Player {
 		public void OnCollision(Rectangle collision);
 		public void Walk();
 		public void UseItem(int item);
-		public string GetDirection();
+		public Direction GetDirection();
 		public void SetDirection(Direction direction); 
 		public void Draw(SpriteBatch spriteBatch, Color color);
 		public void Update();
 		public void Reset();
+		public void Knockback();
+		public Vector2 GetPlayerPosition();
 		public void SetPlayerPosition(Vector2 position, bool offset = true);
 		public Rectangle GetPlayerHitBox();
 		public Dictionary<IPlayerProjectile, Rectangle> GetProjectileHitBoxes();

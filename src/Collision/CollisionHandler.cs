@@ -10,6 +10,7 @@ using ZeldaGame.Items;
 using ZeldaGame.NPCs;
 using System.Linq;
 using Enemy;
+using static ZeldaGame.Player.PlayerStateMachine;
 
 namespace ZeldaGame;
 
@@ -97,7 +98,9 @@ public class CollisionHandler {
 		foreach (IEnemy enemy in game.enemyFactory.GetAllEnemies()) {
 			if (enemy.GetRectangle().Intersects(game.Link.GetPlayerHitBox()) && !game.Link.isHurting()) {
 				Globals.audioLoader.Play("LOZ_Link_Hurt");
+                game.Link.OnCollision(enemy.GetRectangle());
                 game.Link.TakeDamage(enemy.DoDamage());
+                game.Link.Knockback();
                 game.Link = new HurtPlayer(game.Link, game);
 				Debug.WriteLine("Enemy collides with player.");
 			}
@@ -106,7 +109,7 @@ public class CollisionHandler {
 
 	public bool EnemyProjectileShieldCollision(IEnemyProjectile projectile) {
         string projDirection = projectile.GetDirection();
-        string playerDirection = game.Link.GetDirection();
+        string playerDirection = game.Link.GetDirection().ToString();
         bool isShielded = false;
 
 		Debug.WriteLine("Enemy projectile facing " + projDirection + "hits player facing " + playerDirection + ".");
@@ -128,7 +131,9 @@ public class CollisionHandler {
                 if (EnemyProjectileShieldCollision(projectiles[i]) == false) {
 
                     Globals.audioLoader.Play("LOZ_Link_Hurt");
+                    game.Link.OnCollision(projectiles[i].GetRectangle());
                     game.Link.TakeDamage(projectiles[i].DoDamage());
+                    game.Link.Knockback();
                     game.Link = new HurtPlayer(game.Link, game);
                     Debug.WriteLine("Enemy projectile collides with player.");
                 }

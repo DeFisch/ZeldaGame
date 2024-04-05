@@ -1,14 +1,16 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System.Collections.Generic;
+using System.Diagnostics;
+using static System.Formats.Asn1.AsnWriter;
 using static ZeldaGame.Player.PlayerStateMachine;
 
 namespace ZeldaGame.Player {
 	public class HurtPlayer : IPlayer {
 		private Player1 decoratedPlayer;
 
-		Game1 game;
-		int timer = 50;
+		private readonly Game1 game;
+		private int timer = 50;
 
 		public HurtPlayer(IPlayer decoratedPlayer, Game1 game) {
 			this.decoratedPlayer = (Player1)decoratedPlayer;
@@ -33,7 +35,7 @@ namespace ZeldaGame.Player {
 			decoratedPlayer.UseItem(item);
 		}
 
-		public string GetDirection() {
+		public Direction GetDirection() {
 			return decoratedPlayer.GetDirection();
 		}
 		public void SetDirection(Direction direction) {
@@ -64,15 +66,40 @@ namespace ZeldaGame.Player {
 
 		public float GetMaxHealth() {
 			return decoratedPlayer.GetMaxHealth();
-		}
+        }
 
-		public void Update() {
+        public void Knockback()
+        {
+			decoratedPlayer.Knockback();
+        }
+
+        public Vector2 GetPlayerPosition()
+        {
+            return decoratedPlayer.GetPlayerPosition();
+        }
+
+        public void SetPlayerPosition(Vector2 position, bool offset = true)
+        {
+            decoratedPlayer.SetPlayerPosition(position);
+        }
+
+        public Rectangle GetPlayerHitBox()
+        {
+            return decoratedPlayer.GetPlayerHitBox();
+        }
+
+        public Dictionary<IPlayerProjectile, Rectangle> GetProjectileHitBoxes()
+        {
+            return decoratedPlayer.GetProjectileHitBoxes();
+        }
+
+        public void Update() {
 			timer--;
 			if (timer == 0) {
 				RemoveDecorator();
 			}
 
-			decoratedPlayer.Update();
+            decoratedPlayer.Update();
 		}
 		public void Reset() {
 			decoratedPlayer.Reset();
@@ -83,23 +110,8 @@ namespace ZeldaGame.Player {
 			decoratedPlayer.Draw(spriteBatch, Color.Red);
 		}
 
-		void RemoveDecorator() {
+		private void RemoveDecorator() {
 			game.Link = (Player1)decoratedPlayer;
 		}
-
-        public void SetPlayerPosition(Vector2 position, bool offset = true)
-        {
-			 decoratedPlayer.SetPlayerPosition(position);
-        }
-
-        public Rectangle GetPlayerHitBox()
-        {
-			return decoratedPlayer.GetPlayerHitBox();
-        }
-
-        public Dictionary<IPlayerProjectile, Rectangle> GetProjectileHitBoxes()
-        {
-            return decoratedPlayer.GetProjectileHitBoxes();
-        }
     }
 }
