@@ -80,9 +80,9 @@ public class CollisionHandler {
             {
                 if (activeProjectiles[projectile].Intersects(enemy.GetRectangle()))
                 {
-                    // // Keese can only be damaged by boomerang
-                    // if (enemy.GetType() == typeof(Keese) && projectile.GetType() != typeof(BoomerangSprite) && projectile.GetType() != typeof(BlueBoomerangSprite))
-                    //     continue;
+                    // Keese can only be damaged by boomerang
+                    if (enemy.GetType() == typeof(Keese) && projectile.GetType() != typeof(BoomerangSprite) && projectile.GetType() != typeof(BlueBoomerangSprite))
+                        continue;
                     projectile.Collided();
                     if(enemy.TakeDamage(projectile.ProjectileDamage()))
                         Globals.audioLoader.Play("LOZ_Enemy_Hit");
