@@ -50,9 +50,6 @@ public class Keese : IEnemy {
 	}
 
 	public void Update() {
-		if (health <= 0) {
-			state = State.Dead;
-		}
         if (ItemActionHandler.inventoryCounts[3] > 0)
         {
             state = State.Idle;
@@ -62,6 +59,9 @@ public class Keese : IEnemy {
             state = State.Walking;
 
         }
+		if (health <= 0) {
+			state = State.Dead;
+		}
         if (state == State.Walking)
 			Walk();
 		if (state == State.Idle)

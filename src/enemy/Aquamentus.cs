@@ -43,9 +43,6 @@ public class Aquamentus : IEnemy {
 	}
 
 	public void Update() {
-		if (health <= 0){
-			state = State.Dead;
-		}
         if (frameID % 17 == 0)
             currentFrame = (currentFrame + 1) % 4;
 		if (frameID % 37 == 0 && state != State.Idle)
@@ -53,6 +50,9 @@ public class Aquamentus : IEnemy {
 		if (ItemActionHandler.inventoryCounts[3] > 0)
 		{
 			state = State.Idle;
+		}
+		if (health <= 0){
+			state = State.Dead;
 		}
 		if (state == State.Walking)
 			Walk();

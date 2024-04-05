@@ -47,13 +47,13 @@ public class Stalfos : IEnemy {
 	}
 
 	public void Update() {
-		if (health <= 0){
-			state = State.Dead;
-		}
         if (ItemActionHandler.inventoryCounts[3] != 0)
         {
             state = State.Idle;
         }
+		if (health <= 0){
+			state = State.Dead;
+		}
 	
         if (state == State.Walking)
 			Walk();

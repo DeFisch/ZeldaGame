@@ -47,6 +47,10 @@ public class Gibdo : IEnemy {
 	}
 
 	public void Update() {
+        if (ItemActionHandler.inventoryCounts[3] != 0)
+        {
+            state = State.Idle;
+        }
 		if (health <= 0){
 			state = State.Dead;
 		}
@@ -56,10 +60,6 @@ public class Gibdo : IEnemy {
 			Idle();
 		if (state == State.Dead)
 			Dead();
-        if (ItemActionHandler.inventoryCounts[3] != 0)
-        {
-            state = State.Idle;
-        }
 
         frameID++;
 	}
