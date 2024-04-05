@@ -55,6 +55,11 @@ public class DarkNut : IEnemy {
 	}
 
 	public void Update() {
+		if (ItemActionHandler.inventoryCounts[3] != 0)
+		{
+			state = State.Idle;
+		} else
+		 	state = State.Walking;
 		if (health <= 0){
 			state = State.Dead;
 		}
@@ -69,11 +74,6 @@ public class DarkNut : IEnemy {
 			sprite_id = 0; // switch to down sprite
         if (direction == Direction.Up)
             sprite_id = 2; // switch to up sprite
-
-        if (ItemActionHandler.inventoryCounts[3] != 0)
-        {
-            state = State.Idle;
-        }
 
         if (state == State.Walking)
 			Walk();

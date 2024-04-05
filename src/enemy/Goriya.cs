@@ -58,19 +58,12 @@ public class Goriya : IEnemy {
 	}
 
 	public void Update() {
-        if ((frameID + rand_seed) / 60 % 3 == 0) {
+        if ((frameID + rand_seed) / 60 % 2 == 0) {
             state = State.Walking;
-        } else if ((frameID + rand_seed) / 60 % 3 == 1) {
-            state = State.Idle;
+			if (ItemActionHandler.inventoryCounts[3] != 0)
+				state = State.Idle;
         } else {
-			if (ItemActionHandler.inventoryCounts[3]! > 0)
-			{
-				state = State.Attacking;
-			}
-        }
-        if (ItemActionHandler.inventoryCounts[3] != 0)
-        {
-            state = State.Idle;
+			state = State.Attacking;
         }
         if (health <= 0){
 			state = State.Dead;

@@ -50,9 +50,7 @@ public class Stalfos : IEnemy {
         if (ItemActionHandler.inventoryCounts[3] != 0)
         {
             state = State.Idle;
-        }
-		else
-		{
+        } else {
 			state = State.Walking;
 		}
 		if (health <= 0){

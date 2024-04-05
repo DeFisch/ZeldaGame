@@ -50,11 +50,8 @@ public class Gibdo : IEnemy {
         if (ItemActionHandler.inventoryCounts[3] != 0)
         {
             state = State.Idle;
-        }
-		else if (state != State.Dead)
-		{
-			state = State.Walking;
-        }
+        } else
+		 	state = State.Walking;
 		if (health <= 0){
 			state = State.Dead;
 		}

@@ -53,9 +53,7 @@ public class Keese : IEnemy {
         if (ItemActionHandler.inventoryCounts[3] > 0)
         {
             state = State.Idle;
-        }
-        if (ItemActionHandler.inventoryCounts[3] == 0)
-        {
+        }else {
             state = State.Walking;
 
         }
