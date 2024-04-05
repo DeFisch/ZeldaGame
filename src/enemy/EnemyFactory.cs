@@ -34,6 +34,9 @@ public class EnemyFactory {
 		float height = map_size.Y / 11;
 		for (int i = 0; i < map.GetLength(0); i++) {
 			for (int j = 0; j < map.GetLength(1); j++) {
+				if ((j == 5 && i == 6) || (j == 6 && i == 6) || (j == 5 && i == 0) || (j == 6 && i == 0)
+				|| (j == 0 && i == 3) || (j == 11 && i == 3)) // Don't spawn enemies in front of doors
+					continue;
 				if (map[i, j] == "-") {
 					available_locations.Add(new Vector2(j, i));
 				}
