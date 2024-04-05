@@ -70,9 +70,13 @@ public class DarkNut : IEnemy {
         if (direction == Direction.Up)
             sprite_id = 2; // switch to up sprite
 
-        if (ItemActionHandler.inventoryCounts[3] != 0)
+        if (ItemActionHandler.inventoryCounts[3] != 0 && state != State.Dead)
         {
             state = State.Idle;
+        }
+        else if (state != State.Dead)
+        {
+            state = State.Walking;
         }
 
         if (state == State.Walking)
