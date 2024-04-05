@@ -27,7 +27,8 @@ public class KeyboardController : IController
 
 	public void RegisterPressKeySwitch(Keys key, ICommand command)
 	{
-		pressKeys.Remove(key);
+		if(pressKeys.ContainsKey(key))
+		    pressKeys.Remove(key);
 		pressKeys.Add(key,command);
 	}
 
