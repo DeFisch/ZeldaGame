@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using System;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using static ZeldaGame.Player.PlayerStateMachine;
 
@@ -32,7 +33,7 @@ public class ArrowHorizontalSprite : IPlayerProjectile {
     public Rectangle GetHitBox()
     {
         Rectangle hitBox = destinationRectangle;
-        hitBox.Inflate(-8, -8);
+        hitBox.Inflate(-8, -25);
         return hitBox;
     }
 

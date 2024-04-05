@@ -34,7 +34,7 @@ public class ArrowVerticalSprite : IPlayerProjectile
     public Rectangle GetHitBox()
     {
         Rectangle hitBox = destinationRectangle;
-        hitBox.Inflate(-8, -8);
+        hitBox.Inflate(-17, -8);
         return hitBox;
     }
 
