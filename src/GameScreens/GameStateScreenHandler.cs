@@ -72,7 +72,7 @@ public class GameStateScreenHandler
 
     public bool GameOver()
     {
-        return myGame.Link.GetHealth() == 0;
+        return myGame.Link.GetHealth() <= 0;
     }
 
     public void EndGame()
