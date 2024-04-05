@@ -42,6 +42,15 @@ public class CollisionHandler {
         {
             foreach (IPlayerProjectile projectile in activeProjectiles.Keys)
             {
+                if(projectile.GetType() == typeof(BoomerangSprite) || projectile.GetType() == typeof(BlueBoomerangSprite))
+                    continue; // Boomerang can pass through walls
+                {
+                    if (activeProjectiles[projectile].Intersects(box))
+                    {
+                        projectile.Collided();
+                        Debug.WriteLine("Projectile collides with wall.");
+                    }
+                }
                 if (activeProjectiles[projectile].Intersects(box))
                 {
                     projectile.Collided();
@@ -73,7 +82,7 @@ public class CollisionHandler {
                 {
                     projectile.Collided();
                     if(enemy.TakeDamage(projectile.ProjectileDamage()))
-                    Globals.audioLoader.Play("LOZ_Enemy_Hit");
+                        Globals.audioLoader.Play("LOZ_Enemy_Hit");
                     shotEnemies.Add(enemy);
 					Debug.WriteLine("Player projectile collides with enemy.");
 				}

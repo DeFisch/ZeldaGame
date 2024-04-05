@@ -31,10 +31,10 @@ namespace ZeldaGame.Items
             switch (item)
             {
                 case BlueRuby:
-                    inventoryCounts[0]++;
+                    inventoryCounts[1]++;
                     break;
                 case YellowRuby:
-                    inventoryCounts[1]++;
+                    inventoryCounts[1]+=5;
                     break;
                 case Key:
                     inventoryCounts[2]++;

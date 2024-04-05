@@ -22,6 +22,11 @@ public class WeaponHandler {
 	}
 
 	public void UseItem(int item, Vector2 location, Direction direction) {
+		if(item < 2){
+			if(ItemActionHandler.inventoryCounts[1] - item*2-1 < 0)
+				return;
+			ItemActionHandler.inventoryCounts[1]-=item*2+1;
+		}
 		if (cooldown == 0) {
 			IPlayerProjectile weapon = PlayerItemSpriteFactory.Instance.CreateItemSprite(direction, item, location);
 			activeProjectiles.Add(weapon);

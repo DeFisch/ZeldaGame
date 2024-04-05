@@ -14,7 +14,7 @@ public class ArrowHorizontalSprite : IPlayerProjectile {
 	private Vector2 position;
     private Vector2 projectileMovement;
     private readonly int projectileSpeed = 6;
-    private readonly int damage = 2;
+    private readonly int damage = 3;
     private readonly int expirationTimer = 10;
     private int expirationCounter;
 
