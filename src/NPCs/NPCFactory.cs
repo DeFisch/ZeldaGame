@@ -17,9 +17,10 @@ public class NPCFactory
 	private int listLength;
 	private SpriteFont font;
     private MapHandler mapHandler;
-    private Vector2 dungeon;
-	private bool inDungeon;
+    private Vector2 npcRoom;
+	private bool inNPCRoom;
     private ItemSpriteFactory itemSpriteFactory;
+    private Vector2 itemPosition;
     public NPCFactory(Texture2D texture, Vector2 scale, SpriteFont font, MapHandler mapHandler, ItemSpriteFactory itemSpriteFactory)
 	{
 		npcList = new List<INPC>();
@@ -28,9 +29,10 @@ public class NPCFactory
 		this.scale = scale;
 		this.font = font;
 		this.mapHandler = mapHandler;
-        dungeon = new Vector2(0, 2);
-		inDungeon = false;
+        npcRoom = new Vector2(0, 2);
+		inNPCRoom = false;
         this.itemSpriteFactory = itemSpriteFactory;
+        itemPosition = new Vector2(5, 4);
     }
 
 	public void AddNPCs()
@@ -56,15 +58,24 @@ public class NPCFactory
                         {
                             case 0:
                                 npcList.Add(new Merchant(texture, position));
-                                itemSpriteFactory.AddItem("k", new Vector2(5, 4));
+                                if (itemSpriteFactory.IsMapChanged())
+                                {
+                                    itemSpriteFactory.AddItem("k", itemPosition);
+                                }
                                 break;
                             case 1:
                                 npcList.Add(new OldMan(texture, position));
-                                itemSpriteFactory.AddItem("ws", new Vector2(5, 4));
+                                if (itemSpriteFactory.IsMapChanged())
+                                {
+                                    itemSpriteFactory.AddItem("ws", itemPosition);
+                                }
                                 break;
                             case 2:
                                 npcList.Add(new OldWoman(texture, position));
-                                itemSpriteFactory.AddItem("lp", new Vector2(5, 4));
+                                if (itemSpriteFactory.IsMapChanged())
+                                {
+                                    itemSpriteFactory.AddItem("lp", itemPosition);
+                                }
                                 break;
                             case 3:
                                 npcList.Add(new Fairy(texture, position));
@@ -98,21 +109,21 @@ public class NPCFactory
             npcList[i].Update();
         }
     }
-	public bool isInDungeon()
+	public bool IsInNPCRoom()
 	{
         Vector2 currentMapXY = mapHandler.getMapXY();
 
-        if (currentMapXY.Equals(dungeon) && !inDungeon)
+        if (currentMapXY.Equals(npcRoom) && !inNPCRoom)
 		{
-			inDungeon = true;
+			inNPCRoom = true;
 			AddNPCs();
 		}
-        else if (!currentMapXY.Equals(dungeon) && inDungeon)
+        else if (!currentMapXY.Equals(npcRoom) && inNPCRoom)
         {
             Globals.audioLoader.StopSingleton("LOZ_Text");
-            inDungeon = false;
+            inNPCRoom = false;
         }
-        return inDungeon;
+        return inNPCRoom;
 	}
     private Vector2 GetNewScaledPosition(int x, int y)
     {

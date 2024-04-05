@@ -193,7 +193,7 @@ namespace ZeldaGame
 			//Updates blocks
 			blockSpriteFactory.Update();
 			// Updates npc's
-			if (NPCFactory.isInDungeon()) { 
+			if (NPCFactory.IsInNPCRoom()) { 
 				NPCFactory.Update();
 			}
 			// Updates Link
@@ -235,7 +235,7 @@ namespace ZeldaGame
             // Draws enemies
             enemyFactory.Draw(_spriteBatch);
 			//Draws NPCs
-			if (NPCFactory.isInDungeon())
+			if (NPCFactory.IsInNPCRoom())
 			{
 				NPCFactory.Draw(_spriteBatch);
 			}
