@@ -20,7 +20,7 @@ namespace ZeldaGame.Player {
 		private bool isMoving;
 
         private readonly float speed = 1.25f;
-		private int knockbackTimer = 10;
+		private int knockbackTimer = 0;
 		private readonly int knockbackScale = 8;
 		private Direction direction;
 		private Direction collisionDirection;
@@ -125,7 +125,6 @@ namespace ZeldaGame.Player {
 					collisionDirection = Direction.Right;
 				}
 			}
-            Debug.WriteLine(collisionDirection);
         }
 
         public void Walk()
@@ -279,6 +278,7 @@ namespace ZeldaGame.Player {
             animTimer = -1;
 			health = 3.0f;
 			maxHealth = 3.0f;
+			knockbackTimer = 0;
         }
     }
 }

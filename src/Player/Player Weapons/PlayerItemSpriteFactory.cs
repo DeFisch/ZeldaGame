@@ -7,8 +7,6 @@ using static ZeldaGame.Player.PlayerStateMachine;
 namespace ZeldaGame.Player;
 public class PlayerItemSpriteFactory {
 	private Texture2D playerTexture;
-	private List<IPlayerProjectile> projectiles;
-	private List<IPlayerProjectile> swords;
 
 	private static PlayerItemSpriteFactory instance = new PlayerItemSpriteFactory();
 
