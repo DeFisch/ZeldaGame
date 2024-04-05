@@ -20,7 +20,7 @@ namespace ZeldaGame.Items
         private readonly int heartHealing = 1;
 
         public ItemActionHandler(Game1 game) {
-            inventoryCounts = new int[9];
+            inventoryCounts = new int[10];
             inventoryCounts[8] = 8;
             getMap = false;
             getCompass = false;
@@ -66,6 +66,10 @@ namespace ZeldaGame.Items
                     {
                         inventoryCounts[8] = 8;
                     }
+                    break;
+                case LifePotion:
+                    game.Link.GainMaxHealth(heartHealing);
+                    inventoryCounts[9]++; 
                     break;
                 case Map:
                     getMap = true;

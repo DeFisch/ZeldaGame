@@ -51,6 +51,10 @@ public class Stalfos : IEnemy {
         {
             state = State.Idle;
         }
+		else
+		{
+			state = State.Walking;
+		}
 		if (health <= 0){
 			state = State.Dead;
 		}

@@ -51,6 +51,10 @@ public class Gibdo : IEnemy {
         {
             state = State.Idle;
         }
+		else if (state != State.Dead)
+		{
+			state = State.Walking;
+        }
 		if (health <= 0){
 			state = State.Dead;
 		}
