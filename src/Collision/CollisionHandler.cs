@@ -9,8 +9,6 @@ using System.Collections.Generic;
 using ZeldaGame.Items;
 using ZeldaGame.NPCs;
 using System.Linq;
-using Enemy;
-using static ZeldaGame.Player.PlayerStateMachine;
 
 namespace ZeldaGame;
 
@@ -128,7 +126,7 @@ public class CollisionHandler {
 		}
 	}
 
-	public bool EnemyProjectileShieldCollision(IEnemyProjectile projectile) {
+	private bool EnemyProjectileShieldCollision(IEnemyProjectile projectile) {
         string projDirection = projectile.GetDirection();
         string playerDirection = game.Link.GetDirection().ToString();
         bool isShielded = false;
