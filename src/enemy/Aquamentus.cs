@@ -47,10 +47,6 @@ public class Aquamentus : IEnemy {
             currentFrame = (currentFrame + 1) % 4;
 		if (frameID % 37 == 0 && state != State.Idle)
             Attack();
-		if (ItemActionHandler.inventoryCounts[3] > 0)
-		{
-			state = State.Idle;
-		}
 		if (health <= 0){
 			state = State.Dead;
 		}
