@@ -69,6 +69,27 @@ public class CollisionHandler {
         }
     }
 
+    private void PlayerBombCollision()
+    {
+        if (game.Link.isHurting())
+            return;
+        Dictionary<IPlayerProjectile, Rectangle> activeProjectiles = game.Link.GetProjectileHitBoxes();
+        foreach(IPlayerProjectile projectile in activeProjectiles.Keys)
+        {
+            if(projectile.GetType() == typeof(BombSprite))
+            {
+                if (activeProjectiles[projectile].Intersects(game.Link.GetPlayerHitBox()))
+                {
+                    game.Link.TakeDamage(projectile.ProjectileDamage());
+                    game.Link = new HurtPlayer(game.Link, game);
+                    Globals.audioLoader.Play("LOZ_Link_Hurt");
+                    projectile.Collided();
+                    Debug.WriteLine("Player collides with bomb.");
+                }
+            }
+        }
+    }
+
     private void PlayerProjectileEnemyCollision()
     {
         Dictionary<IPlayerProjectile, Rectangle> activeProjectiles = game.Link.GetProjectileHitBoxes();
@@ -289,5 +310,6 @@ public class CollisionHandler {
         EnemyProjectilePlayerCollision();
         EnemyObjectCollision();
         PushableBlockCollision();
+        PlayerBombCollision();
     }
 }
