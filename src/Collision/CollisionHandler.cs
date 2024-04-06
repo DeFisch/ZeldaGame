@@ -264,7 +264,7 @@ public class CollisionHandler {
 
     private void PlayerNPCCollision()
     {
-        if (game.NPCFactory.IsInNPCRoom()) {
+        if (game.NPCFactory.IsInNPCRoom(game.map.getMapXY())) {
             List<INPC> npcList = game.NPCFactory.GetNPCList();
             Rectangle playerHitBox = game.Link.GetHitBox();
             for (int i = 0; i < npcList.Count; i++)

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -17,20 +18,21 @@ public class NPCFactory
 	private int listLength;
 	private SpriteFont font;
     private MapHandler mapHandler;
-    private Vector2 npcRoom;
-	private bool inNPCRoom;
+    private List<Vector2> npcRooms;
+	private bool inRoom;
     private ItemSpriteFactory itemSpriteFactory;
     private Vector2 itemPosition;
     public NPCFactory(Texture2D texture, Vector2 scale, SpriteFont font, MapHandler mapHandler, ItemSpriteFactory itemSpriteFactory)
 	{
 		npcList = new List<INPC>();
+		npcRooms = new List<Vector2>();
+        npcRooms.Add(new Vector2(0, 2));
 		this.texture = texture;
 		listLength = 0;
 		this.scale = scale;
 		this.font = font;
 		this.mapHandler = mapHandler;
-        npcRoom = new Vector2(0, 2);
-		inNPCRoom = false;
+		inRoom = false;
         this.itemSpriteFactory = itemSpriteFactory;
         itemPosition = new Vector2(5, 4);
     }
@@ -109,28 +111,24 @@ public class NPCFactory
             npcList[i].Update();
         }
     }
-	public bool IsInNPCRoom()
+	public bool IsInNPCRoom(Vector2 mapXY)
 	{
-        Vector2 currentMapXY = mapHandler.getMapXY();
-
-        if (currentMapXY.Equals(npcRoom) && !inNPCRoom)
-		{
-			inNPCRoom = true;
-			AddNPCs();
-		}
-        else if (!currentMapXY.Equals(npcRoom) && inNPCRoom)
-        {
-            Globals.audioLoader.StopSingleton("LOZ_Text");
-            inNPCRoom = false;
+        if (npcRooms.Contains(mapXY)) {
+            inRoom = true;
+            AddNPCs();
         }
-        return inNPCRoom;
+        else if (!npcRooms.Contains(mapXY)) {
+            Globals.audioLoader.StopSingleton("LOZ_Text");
+            inRoom = false;
+        }
+        return inRoom;
 	}
     private Vector2 GetNewScaledPosition(int x, int y)
     {
-        float width = scale.X/2;
-        float height = scale.Y/2;
-        return new Vector2(width + (x * 75), height + (y * 70) + 175);// +175: moves NPC downward 
-    }
+		int scaled_x = ((int)(scale.X * (16 * x + 32)));
+		int scaled_y = ((int)(scale.Y * (16 * y + 32 + 56)));
+		return new Vector2(scaled_x, scaled_y);
+	}
 
     public List<INPC> GetNPCList()
     {

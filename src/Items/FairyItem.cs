@@ -23,12 +23,15 @@ namespace ZeldaGame.Items {
 		}
 
 		public void Draw(SpriteBatch spriteBatch, Vector2 location, Color color, Vector2 scale) {
+			int scaled_x = ((int)(scale.X * (16 * pos.X + 32)));
+			int scaled_y = ((int)(scale.Y * (16 * pos.Y + 32 + 56)));
+
 
 			sourceRectangle_1 = new Rectangle(39, 0, 9, 16);
-			destinationRectangle_1 = new Rectangle((int)pos.X, (int)pos.Y, (int)(sourceRectangle_1.Width * scale.X), (int)(sourceRectangle_1.Height * scale.Y));
+			destinationRectangle_1 = new Rectangle(scaled_x, scaled_y, (int)(sourceRectangle_1.Width * scale.X), (int)(sourceRectangle_1.Height * scale.Y));
 
 			sourceRectangle_2 = new Rectangle(47, 0, 9, 16);
-			destinationRectangle_2 = new Rectangle((int)pos.X, (int)pos.Y, (int)(sourceRectangle_2.Width * scale.X), (int)(sourceRectangle_2.Height * scale.Y));
+			destinationRectangle_2 = new Rectangle(scaled_x, scaled_y, (int)(sourceRectangle_2.Width * scale.X), (int)(sourceRectangle_2.Height * scale.Y));
 
 			if (counter <= 10) {
 				counter++;

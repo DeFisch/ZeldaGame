@@ -20,8 +20,8 @@ namespace ZeldaGame.Items {
 		}
 
 		public void Draw(SpriteBatch spriteBatch, Vector2 location, Color color, Vector2 scale) {
-            int scaled_x = 113 + ((int)pos.X * 49);
-            int scaled_y = 113 + ((int)pos.Y * 49) + 175;
+			int scaled_x = ((int)(scale.X * (16 * pos.X + 32)));
+            int scaled_y = ((int)(scale.Y * (16 * pos.Y + 32 + 56))); //16 * pos.Y - each box is 16 pixels long, +32 - wall pixels, +56 - HUD pixels
             sourceRectangle = new Rectangle(24, 1, 14, 14);
 			destinationRectangle = new Rectangle(scaled_x, scaled_y, (int)(sourceRectangle.Width * scale.X), (int)(sourceRectangle.Height * scale.Y));
 			spriteBatch.Draw(texture, destinationRectangle, sourceRectangle, color);

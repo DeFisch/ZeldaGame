@@ -23,6 +23,8 @@ namespace ZeldaGame.Items {
 		}
 
 		public void Draw(SpriteBatch spriteBatch, Vector2 location, Color color, Vector2 scale) {
+			int scaled_x = ((int)(scale.X * (16 * pos.X + 32)));
+			int scaled_y = ((int)(scale.Y * (16 * pos.Y + 32 + 56)));
 
 			sourceRectangle_1 = new Rectangle(52, 11, 16, 16);
 			destinationRectangle_1 = new Rectangle((int)pos.X, (int)pos.Y, (int)(sourceRectangle_1.Width * scale.X), (int)(sourceRectangle_1.Height * scale.Y));
