@@ -3,17 +3,17 @@ using Microsoft.Xna.Framework.Graphics;
 using System.Collections.Generic;
 using System.Diagnostics;
 using static System.Formats.Asn1.AsnWriter;
-using static ZeldaGame.Player.PlayerStateMachine;
+using static ZeldaGame.Player.PlayerActionHandler;
 
 namespace ZeldaGame.Player {
-	public class HurtPlayer : IPlayer {
-		private Player1 decoratedPlayer;
+	public class PlayerHurt : IPlayer {
+		private PlayerMain decoratedPlayer;
 
 		private readonly Game1 game;
 		private int timer = 50;
 
-		public HurtPlayer(IPlayer decoratedPlayer, Game1 game) {
-			this.decoratedPlayer = (Player1)decoratedPlayer;
+		public PlayerHurt(IPlayer decoratedPlayer, Game1 game) {
+			this.decoratedPlayer = (PlayerMain)decoratedPlayer;
 			this.game = game;
 		}
 
@@ -116,7 +116,7 @@ namespace ZeldaGame.Player {
 		}
 
 		private void RemoveDecorator() {
-			game.Link = (Player1)decoratedPlayer;
+			game.Link = (PlayerMain)decoratedPlayer;
 		}
     }
 }

@@ -2,7 +2,7 @@
 using Microsoft.Xna.Framework;
 
 namespace ZeldaGame.Player {
-	public class PlayerStateMachine {
+	public class PlayerActionHandler {
 		public enum Direction { Up, Left, Down, Right };
 		public enum State {Idle, Walk, Attack, UseItem}
 		public Direction direction;
@@ -10,7 +10,7 @@ namespace ZeldaGame.Player {
 		public State state;
 		private IPlayerSprite sprite;
 
-		public PlayerStateMachine(IPlayerSprite sprite) {
+		public PlayerActionHandler(IPlayerSprite sprite) {
 			direction = Direction.Down;
 			this.sprite = sprite;
 			this.state = State.Idle;

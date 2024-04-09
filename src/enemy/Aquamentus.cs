@@ -1,7 +1,7 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Enemy;
-using static ZeldaGame.Player.PlayerStateMachine;
+using static ZeldaGame.Player.PlayerActionHandler;
 namespace ZeldaGame.Enemy;
 
 public class Aquamentus : IEnemy {
@@ -11,9 +11,6 @@ public class Aquamentus : IEnemy {
 	private Vector2 position;
 	private State state;
 	private Vector2 scale;
-    private Vector2 knockback;
-    private int knockbackTimer;
-    private readonly int knockbackScale = 8;
     private static int[,] character_sprites = new int[,] { { 1, 11, 24, 32 }, { 26, 11, 24, 32 }, { 51, 11, 24, 32 }, { 76, 11, 24, 32 } }; // x, y, width, height
 	private int currentFrame = 0;
 	private int speed = 2;
@@ -38,18 +35,7 @@ public class Aquamentus : IEnemy {
 
     public void Knockback(Direction knockbackDirection)
     {
-        switch (knockbackDirection)
-        {
-            case Direction.Up:
-                knockback = new Vector2(0, -knockbackScale); break;
-            case Direction.Down:
-                knockback = new Vector2(0, knockbackScale); break;
-            case Direction.Left:
-                knockback = new Vector2(-knockbackScale, 0); break;
-            case Direction.Right:
-                knockback = new Vector2(knockbackScale, 0); break;
-        }
-        knockbackTimer = 2;
+        // No knockback on Aquamentus
     }
 
     public void Draw(SpriteBatch spriteBatch) {
@@ -71,13 +57,6 @@ public class Aquamentus : IEnemy {
 		if (state == State.Dead)
 			Dead();
 		frameID++;
-
-        // Knockback enemy
-        if (knockbackTimer > 0)
-        {
-            position += knockback;
-            knockbackTimer--;
-        }
     }
     private void Attack() {
 		Globals.audioLoader.Play("LOZ_MagicalRod");;

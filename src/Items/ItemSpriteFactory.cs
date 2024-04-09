@@ -15,7 +15,7 @@ namespace ZeldaGame.Items {
 		List<IItemSprite> objectList;
 		Texture2D texture;
 		Texture2D texture2;
-		Player1 player;
+		PlayerMain player;
 		Vector2 pos;
 		Vector2 scale;
 		private int k = 0;
@@ -33,7 +33,7 @@ namespace ZeldaGame.Items {
 			objectList = new List<IItemSprite>();
 			this.texture = texture;
 			this.texture2 = texture2;
-			this.player = (Player1)player;
+			this.player = (PlayerMain)player;
 			pos = new Vector2(300, 150);
 			this.scale = scale;
 			this.mapHandler = mapHandler;

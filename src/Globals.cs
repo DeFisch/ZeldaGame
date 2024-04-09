@@ -5,5 +5,9 @@ namespace ZeldaGame{
     public static class Globals {
         public static AudioLoader audioLoader;
         public static GameStateScreenHandler gameStateScreenHandler;
+
+        /*public enum Direction { Up, Down, Left, Right }*/
+        public enum PlayerProjectiles { WoodenArrow, BlueArrow, Boomerang, BlueBoomerang, Bomb, Fireball }
+        public enum PlayerSwords {  WoodSword, MagicSword, WhiteSword }
     }
 }

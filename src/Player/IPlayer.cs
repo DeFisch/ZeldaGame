@@ -1,7 +1,7 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System.Collections.Generic;
-using static ZeldaGame.Player.PlayerStateMachine;
+using static ZeldaGame.Player.PlayerActionHandler;
 
 namespace ZeldaGame.Player {
 	public interface IPlayer : ICollidible {

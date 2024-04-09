@@ -1,6 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using static ZeldaGame.Player.PlayerStateMachine;
+using static ZeldaGame.Player.PlayerActionHandler;
 
 namespace ZeldaGame.Player;
 public class WhiteSwordHorizontalSprite : IPlayerProjectile {
