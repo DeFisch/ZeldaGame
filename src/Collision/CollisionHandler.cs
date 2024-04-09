@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using ZeldaGame.Items;
 using ZeldaGame.NPCs;
 using System.Linq;
+using static ZeldaGame.Globals;
 
 namespace ZeldaGame;
 

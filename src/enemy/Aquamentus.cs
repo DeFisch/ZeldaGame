@@ -1,9 +1,9 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Enemy;
-using static ZeldaGame.Player.PlayerActionHandler;
-namespace ZeldaGame.Enemy;
+using static ZeldaGame.Globals;
 
+namespace ZeldaGame.Enemy;
 public class Aquamentus : IEnemy {
 	enum State { Idle, Walking, Attacking, Dead };
 	private int frameID = 0;

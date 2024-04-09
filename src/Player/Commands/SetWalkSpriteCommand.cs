@@ -1,4 +1,4 @@
-﻿using static ZeldaGame.Player.PlayerActionHandler;
+﻿using static ZeldaGame.Globals;
 
 namespace ZeldaGame.Player.Commands {
 	public class SetWalkSpriteCommand : ICommand {

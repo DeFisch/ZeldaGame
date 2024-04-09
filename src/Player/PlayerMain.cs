@@ -183,7 +183,7 @@ namespace ZeldaGame.Player {
 			}
 		}
 
-		public void GainMaxHealth(float hearts) {
+		public void IncreaseMaxHealth(float hearts) {
 			maxHealth += hearts;
 			if (maxHealth > 16.0f) {
 				maxHealth = 16.0f;
@@ -194,6 +194,7 @@ namespace ZeldaGame.Player {
 		{
 			return health;
 		}
+
 		public float GetMaxHealth() {
 			return maxHealth;
 		}

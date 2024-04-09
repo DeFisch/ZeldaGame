@@ -3,7 +3,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Enemy;
 using ZeldaGame.Items;
-using static ZeldaGame.Player.PlayerActionHandler;
+using static ZeldaGame.Globals;
 
 
 namespace ZeldaGame.Enemy;

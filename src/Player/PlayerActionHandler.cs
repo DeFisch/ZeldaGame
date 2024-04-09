@@ -1,9 +1,7 @@
-﻿using System.Diagnostics;
-using Microsoft.Xna.Framework;
+﻿using static ZeldaGame.Globals;
 
 namespace ZeldaGame.Player {
 	public class PlayerActionHandler {
-		public enum Direction { Up, Left, Down, Right };
 		public enum State {Idle, Walk, Attack, UseItem}
 		public Direction direction;
 		public Direction prevDirection;

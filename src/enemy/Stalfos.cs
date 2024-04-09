@@ -2,8 +2,7 @@ using System;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using ZeldaGame.Items;
-using static System.Net.Mime.MediaTypeNames;
-using static ZeldaGame.Player.PlayerActionHandler;
+using static ZeldaGame.Globals;
 
 
 namespace ZeldaGame.Enemy;

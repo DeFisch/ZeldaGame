@@ -17,15 +17,16 @@ namespace ZeldaGame.Items
         private bool getMap;
         private bool getCompass;
         private Game1 game;
-        private readonly int heartHealing = 1;
+        private readonly int heart = 1;
 
         public ItemActionHandler(Game1 game) {
-            inventoryCounts = new int[10];
+            inventoryCounts = new int[9];
             inventoryCounts[8] = 8;
             getMap = false;
             getCompass = false;
             this.game = game;
         }  
+
         public void InventoryCounts(IItemSprite item)
         {
             switch (item)
@@ -43,11 +44,11 @@ namespace ZeldaGame.Items
                     inventoryCounts[3]++;
                     break;
                 case Heart:
-                    game.Link.GainHealth(heartHealing);
+                    game.Link.GainHealth(heart);
                     inventoryCounts[4]++;
                     break;
                 case HeartContainer:
-                    game.Link.GainMaxHealth(heartHealing);
+                    game.Link.IncreaseMaxHealth(heart);
                     inventoryCounts[5]++;
                     break;
                 case Triforce:
@@ -59,17 +60,12 @@ namespace ZeldaGame.Items
                     break;
                 case Bomb:
                     if (inventoryCounts[8] + 4 < 8)
-                    {
                         inventoryCounts[8] = inventoryCounts[8] + 4;
-                    }
                     else
-                    {
                         inventoryCounts[8] = 8;
-                    }
                     break;
                 case LifePotion:
-                    game.Link.GainMaxHealth(heartHealing);
-                    inventoryCounts[9]++; 
+                    game.Link.GainHealth(game.Link.GetMaxHealth());
                     break;
                 case Map:
                     getMap = true;
@@ -79,9 +75,7 @@ namespace ZeldaGame.Items
                     break;
                 default:
                     break;
-
             }
-
         }
 
         public bool isMapObtained() => getMap;
@@ -94,6 +88,5 @@ namespace ZeldaGame.Items
             getMap = false;
             getCompass = false;
         }
-
     }
 }

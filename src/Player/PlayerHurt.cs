@@ -1,7 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System.Collections.Generic;
-using static ZeldaGame.Player.PlayerActionHandler;
 using static ZeldaGame.Globals;
 
 namespace ZeldaGame.Player {
@@ -55,8 +54,8 @@ namespace ZeldaGame.Player {
 		{
 			decoratedPlayer.GainHealth(heal);
 		}
-		public void GainMaxHealth(float hearts) {
-			decoratedPlayer.GainMaxHealth(hearts);
+		public void IncreaseMaxHealth(float hearts) {
+			decoratedPlayer.IncreaseMaxHealth(hearts);
 		}
 		public float GetHealth()
 		{
