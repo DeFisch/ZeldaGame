@@ -9,6 +9,7 @@ using ZeldaGame.Items;
 using ZeldaGame.NPCs;
 using System.Linq;
 using static ZeldaGame.Globals;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace ZeldaGame;
 
@@ -175,7 +176,20 @@ public class CollisionHandler {
             if (item.GetHitBox().Intersects(game.Link.GetHitBox())) {
                 itemActionHandler.InventoryCounts(item);
                 Globals.audioLoader.Play("LOZ_Get_Item");
-                game.itemFactory.RemoveItem(item);
+                if (ItemActionHandler.inventoryCounts[9] != 0) { 
+                    if (ItemActionHandler.inventoryCounts[1] >= 5)
+                    {
+                        ItemActionHandler.inventoryCounts[9] = 0;
+                        ItemActionHandler.inventoryCounts[1] = ItemActionHandler.inventoryCounts[1] - 5;
+                        game.Link.GainHealth(game.Link.GetMaxHealth());
+                        game.itemFactory.RemoveItem(item);
+                    }
+                    ItemActionHandler.inventoryCounts[9] = 0;
+                }
+                else
+                {
+                    game.itemFactory.RemoveItem(item);
+                }
 				Debug.WriteLine("Player picks up item \"" + item.GetID() + "\".");
 			} 
         }
