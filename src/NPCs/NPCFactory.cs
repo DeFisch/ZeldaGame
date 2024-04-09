@@ -22,6 +22,7 @@ public class NPCFactory
 	private bool inRoom;
     private ItemSpriteFactory itemSpriteFactory;
     private Vector2 itemPosition;
+    private bool NPCAdded = false;
     public NPCFactory(Texture2D texture, Vector2 scale, SpriteFont font, MapHandler mapHandler, ItemSpriteFactory itemSpriteFactory)
 	{
 		npcList = new List<INPC>();
@@ -39,6 +40,8 @@ public class NPCFactory
 
 	public void AddNPCs()
 	{
+        if (NPCAdded) return;
+        NPCAdded = true;
         Random random = new Random();
         string[,] mapInfo = mapHandler.get_map_info();
         string npc;
