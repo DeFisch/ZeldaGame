@@ -20,10 +20,14 @@ public class WeaponHandler {
 	}
 
 	public void UseItem(PlayerProjectiles item, Vector2 location, Direction direction) {
-		if (item == PlayerProjectiles.WoodenArrow && ItemActionHandler.inventoryCounts[1] >= 1)
-			ItemActionHandler.inventoryCounts[1]--;
-        if (item == PlayerProjectiles.BlueArrow && ItemActionHandler.inventoryCounts[1] >= 3)
-            ItemActionHandler.inventoryCounts[1]-=3;
+		if (item == PlayerProjectiles.WoodenArrow || item == PlayerProjectiles.BlueArrow)
+		{
+			if (item == PlayerProjectiles.WoodenArrow && ItemActionHandler.inventoryCounts[1] >= 1)
+				ItemActionHandler.inventoryCounts[1]--;
+			else if (item == PlayerProjectiles.BlueArrow && ItemActionHandler.inventoryCounts[1] >= 3)
+				ItemActionHandler.inventoryCounts[1] -= 3;
+			else return;
+        }
 
         if (cooldown == 0) {
 			IPlayerProjectile weapon = PlayerItemSpriteFactory.Instance.CreateItemSprite(direction, item, location);
