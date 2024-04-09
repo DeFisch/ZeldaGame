@@ -5,7 +5,7 @@ using ZeldaGame.Player;
 using System.Data.Common;
 
 namespace ZeldaGame.Block {
-	public class LockedDoor {
+	public class LockedDoor : IBlock {
 		private Vector2 position;
         private PushableBlock pushableBlock;
         private MapHandler map;

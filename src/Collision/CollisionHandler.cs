@@ -249,7 +249,7 @@ public class CollisionHandler {
     {
         Dictionary<IPlayerProjectile, Rectangle> activeProjectiles = game.Link.GetProjectileHitBoxes();
         List<IEnemy> enemies = game.enemyFactory.GetAllEnemies();
-        List<PushableBlock> pushableBlock = game.blockSpriteFactory.GetPushableBlocksList();
+        List<PushableBlock> pushableBlock = game.pushableBlockHandler.GetPushableBlocksList();
 
         foreach (PushableBlock block in pushableBlock)
         {

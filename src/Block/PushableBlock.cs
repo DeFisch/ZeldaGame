@@ -5,7 +5,7 @@ using ZeldaGame.Map;
 using System;
 
 namespace ZeldaGame.Block {
-	public class PushableBlock {
+	public class PushableBlock : IBlock {
         private MapHandler map;
         private IPlayer player;
         private Vector2 room;

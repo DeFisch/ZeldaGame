@@ -3,13 +3,13 @@ using Microsoft.Xna.Framework.Graphics;
 using static ZeldaGame.Player.PlayerActionHandler;
 
 namespace ZeldaGame.Player;
-public interface IPlayerSprite : ISprite
+public interface IPlayerSprite
 {
     public Rectangle GetHitBox();
 
-    new void Update();
+    public void Update();
 
-    new void Draw(SpriteBatch spriteBatch, Vector2 location, Color color, Vector2 scale);
+    public void Draw(SpriteBatch spriteBatch, Vector2 location, Color color, Vector2 scale);
 
     public void Pause();
 

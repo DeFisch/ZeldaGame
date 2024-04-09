@@ -30,8 +30,10 @@ public class WhiteSwordHorizontalProjectileSprite : IPlayerProjectile {
 	}
 
 	public Rectangle GetHitBox() {
-		return destinationRectangle;
-	}
+        Rectangle hitBox = destinationRectangle;
+        hitBox.Inflate(-8, -25);
+        return hitBox;
+    }
 
 	public int ProjectileDamage() {
 		return damage;

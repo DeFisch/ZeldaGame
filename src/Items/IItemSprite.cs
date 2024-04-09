@@ -8,10 +8,10 @@ using Microsoft.Xna.Framework;
 
 namespace ZeldaGame.Items
 {
-    public interface IItemSprite : ICollidible, ISprite
+    public interface IItemSprite : ICollidible
     {
-        new void Update();
-        new void Draw(SpriteBatch spriteBatch, Vector2 location, Color color, Vector2 scale);
+        public void Update();
+        public void Draw(SpriteBatch spriteBatch, Vector2 location, Color color, Vector2 scale);
         new public Rectangle GetHitBox();
 
         public String GetID();

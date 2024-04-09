@@ -5,7 +5,7 @@ using static ZeldaGame.Globals;
 
 namespace ZeldaGame.Player {
 	public class PlayerHurt : IPlayer {
-		private PlayerMain decoratedPlayer;
+		private readonly PlayerMain decoratedPlayer;
 
 		private readonly Game1 game;
 		private int timer = 50;
