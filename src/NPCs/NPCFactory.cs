@@ -22,7 +22,6 @@ public class NPCFactory
 	private bool inRoom;
     private ItemSpriteFactory itemSpriteFactory;
     private Vector2 itemPosition;
-    private bool NPCAdded = false;
     public NPCFactory(Texture2D texture, Vector2 scale, SpriteFont font, MapHandler mapHandler, ItemSpriteFactory itemSpriteFactory)
 	{
 		npcList = new List<INPC>();
@@ -40,8 +39,6 @@ public class NPCFactory
 
 	public void AddNPCs()
 	{
-        if (NPCAdded) return;
-        NPCAdded = true;
         Random random = new Random();
         string[,] mapInfo = mapHandler.get_map_info();
         string npc;
@@ -116,11 +113,11 @@ public class NPCFactory
     }
 	public bool IsInNPCRoom(Vector2 mapXY)
 	{
-        if (npcRooms.Contains(mapXY)) {
+        if (npcRooms.Contains(mapXY) && !inRoom) {
             inRoom = true;
             AddNPCs();
         }
-        else if (!npcRooms.Contains(mapXY)) {
+        else if (!npcRooms.Contains(mapXY) && inRoom) {
             Globals.audioLoader.StopSingleton("LOZ_Text");
             inRoom = false;
         }
