@@ -1,9 +1,11 @@
-﻿namespace ZeldaGame.Player.Commands {
+﻿using static ZeldaGame.Globals;
+
+namespace ZeldaGame.Player.Commands {
 	public class UseItemCommand : ICommand {
 		private Game1 MyGame;
-		private int item;   // integer value indicates what item to use, starting with index 0
+		private PlayerProjectiles item;   // integer value indicates what item to use, starting with index 0
 
-		public UseItemCommand(Game1 myGame, int item) {
+		public UseItemCommand(Game1 myGame, PlayerProjectiles item) {
 			MyGame = myGame;
 			this.item = item;
 		}

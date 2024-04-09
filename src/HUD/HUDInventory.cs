@@ -1,9 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using Enemy.Projectiles;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using ZeldaGame.Player;
-using ZeldaGame.Map;
+using ZeldaGame.Items;
+using static ZeldaGame.Globals;
 
 namespace ZeldaGame.HUD
 {
@@ -19,6 +19,10 @@ namespace ZeldaGame.HUD
         private Rectangle selectionDR;
         private Rectangle targetWeaponDRTop;
         private Rectangle targetWeaponDRBottom;
+        private List<PlayerProjectiles> weapons = new() 
+        {   PlayerProjectiles.WoodenArrow, PlayerProjectiles.BlueArrow, PlayerProjectiles.Boomerang, 
+            PlayerProjectiles.BlueBoomerang, PlayerProjectiles.Bomb, PlayerProjectiles.Fireball };
+
 
         public HUDInventory(Texture2D texture, Vector2 scale)
         {
@@ -42,11 +46,11 @@ namespace ZeldaGame.HUD
             }
         }
 
-        public Rectangle currentWeapon() => weaponSRList[cycleIndex];
+        public Rectangle CurrentWeaponSprite() => weaponSRList[cycleIndex];
 
-        public int currentWeaponIndex() => cycleIndex;
+        public PlayerProjectiles CurrentWeapon() => weapons[cycleIndex];
 
-        public void cycleList(int cycleDirection)
+        public void CycleList(int cycleDirection)
         {
             listLength = weaponSRList.Count;
             if (cycleDirection == 1)

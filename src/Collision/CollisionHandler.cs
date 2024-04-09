@@ -1,5 +1,4 @@
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
 using ZeldaGame.Block;
 using System.Diagnostics;
 using ZeldaGame.Map;
@@ -80,7 +79,7 @@ public class CollisionHandler {
                 if (activeProjectiles[projectile].Intersects(game.Link.GetHitBox()))
                 {
                     game.Link.TakeDamage(projectile.ProjectileDamage());
-                    game.Link = new HurtPlayer(game.Link, game);
+                    game.Link = new PlayerHurt(game.Link, game);
                     Globals.audioLoader.Play("LOZ_Link_Hurt");
                     projectile.Collided();
                     Debug.WriteLine("Player collides with bomb.");
@@ -104,7 +103,7 @@ public class CollisionHandler {
                     if (enemy.GetType() == typeof(Keese) && projectile.GetType() != typeof(BoomerangSprite) && projectile.GetType() != typeof(BlueBoomerangSprite))
                         continue;
                     projectile.Collided();
-                    enemy.Knockback(game.Link.GetDirection()); // multiply by -1 to flip direciton of knockback
+                    enemy.Knockback(game.Link.GetDirection());
                     if(enemy.TakeDamage(projectile.ProjectileDamage()))
                         Globals.audioLoader.Play("LOZ_Enemy_Hit");
                     shotEnemies.Add(enemy);
@@ -121,7 +120,7 @@ public class CollisionHandler {
                 game.Link.OnCollision(enemy.GetHitBox());
                 game.Link.TakeDamage(enemy.DoDamage());
                 game.Link.Knockback();
-                game.Link = new HurtPlayer(game.Link, game);
+                game.Link = new PlayerHurt(game.Link, game);
 				Debug.WriteLine("Enemy collides with player.");
 			}
 		}
@@ -154,7 +153,7 @@ public class CollisionHandler {
                     game.Link.OnCollision(projectiles[i].GetRectangle());
                     game.Link.TakeDamage(projectiles[i].DoDamage());
                     game.Link.Knockback();
-                    game.Link = new HurtPlayer(game.Link, game);
+                    game.Link = new PlayerHurt(game.Link, game);
                     Debug.WriteLine("Enemy projectile collides with player.");
                 }
 			}

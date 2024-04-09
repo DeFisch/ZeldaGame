@@ -19,7 +19,7 @@ namespace ZeldaGame.HUD
         public void Execute()
         {
             if (MyGame.headUpDisplay.isVisible())
-                MyGame.headUpDisplay.HUDInventory.cycleList(next);
+                MyGame.headUpDisplay.HUDInventory.CycleList(next);
         }
 
     }

@@ -1,16 +1,15 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Input;
 using System.Collections.Generic;
 using System.Diagnostics;
 using ZeldaGame.Items;
-using static ZeldaGame.Player.PlayerStateMachine;
-using static ZeldaGame.Player.WeaponHandler;
+using static ZeldaGame.Player.PlayerActionHandler;
+using static ZeldaGame.Globals;
 
 namespace ZeldaGame.Player {
-	public class Player1 : IPlayer
+	public class PlayerMain : IPlayer
 	{
-		private PlayerStateMachine stateMachine;
+		private PlayerActionHandler actionHandler;
 		private readonly WeaponHandler weaponHandler;
 		private IPlayerSprite sprite;
 		private Vector2 position;
@@ -29,11 +28,11 @@ namespace ZeldaGame.Player {
         private static float health = 3.0f;
 		private float maxHealth = 3f;
 
-		public Player1(Vector2 position, Vector2 scale, Game1 game)
+		public PlayerMain(Vector2 position, Vector2 scale, Game1 game)
 		{
 			direction = Direction.Down;
 			sprite = PlayerSpriteFactory.Instance.CreateWalkSprite(direction);
-			stateMachine = new PlayerStateMachine(sprite);
+            actionHandler = new PlayerActionHandler(sprite);
 			weaponHandler = new WeaponHandler();
 
 			currSword = weaponHandler.currSword;
@@ -63,11 +62,6 @@ namespace ZeldaGame.Player {
 			knockbackTimer = 10;	// Initiates countdown in Update() that pushes player position back
         }
 
-		public Vector2 GetKnockback()
-		{
-			return knockback;
-		}
-
 		public Vector2 GetPlayerPosition()
 		{
 			return position;
@@ -88,17 +82,17 @@ namespace ZeldaGame.Player {
 		}
 
 		public void SetDirection(Direction direction) { // 0 = up, 1 = left, 2 = down, 3 = right
-			stateMachine.SetDirection(direction);
+			actionHandler.SetDirection(direction);
 			this.direction = direction;
 		}
 
 		public bool IsIdle() {
-			State state = stateMachine.GetState();
+			State state = actionHandler.GetState();
 			return state == State.Idle;
 		}
 
 		public void Idle() {
-			stateMachine.Idle();
+			actionHandler.Idle();
 		}
 
 		public void OnCollision(Rectangle collision)
@@ -136,7 +130,7 @@ namespace ZeldaGame.Player {
 			if (animTimer < 0)
 			{
 				UpdateMovementVector();
-				sprite = stateMachine.Walk();
+				sprite = actionHandler.Walk();
 				isMoving = true;
 			}
 		}
@@ -145,27 +139,27 @@ namespace ZeldaGame.Player {
 		{
 			if (animTimer < 0 && currSword != Swords.None) {
 				animTimer = 16;
-				sprite = stateMachine.Attack();
-				weaponHandler.UseSword((int)currSword, position, stateMachine.GetDirection(), health, maxHealth);
+				sprite = actionHandler.Attack();
+				weaponHandler.UseSword(currSword, position, actionHandler.GetDirection(), health, maxHealth);
 			}
 		}
 
-		public void UseItem(int item)
+		public void UseItem(PlayerProjectiles item)
 		{
 			if (animTimer < 0) {
 				animTimer = 15;
-				sprite = stateMachine.UseItem();
-                if (item == 4)
+				sprite = actionHandler.UseItem();
+                if (item == PlayerProjectiles.Bomb)
                 {
 					if (ItemActionHandler.inventoryCounts[8] > 0)
 					{
-						weaponHandler.UseItem(item, position, stateMachine.GetDirection());
+						weaponHandler.UseItem(item, position, actionHandler.GetDirection());
 						ItemActionHandler.inventoryCounts[8]--;
 					}
                 }
 				else
 				{
-                    weaponHandler.UseItem(item, position, stateMachine.GetDirection());
+                    weaponHandler.UseItem(item, position, actionHandler.GetDirection());
                 }
             }
 		}
@@ -187,8 +181,6 @@ namespace ZeldaGame.Player {
 			if (health > maxHealth) {
 				health = maxHealth;
 			}
-
-			Debug.WriteLine("Health: " + health);
 		}
 
 		public void GainMaxHealth(float hearts) {
@@ -196,8 +188,6 @@ namespace ZeldaGame.Player {
 			if (maxHealth > 16.0f) {
 				maxHealth = 16.0f;
 			}
-
-			Debug.WriteLine("Max Health: " + maxHealth);
 		}
 
 		public float GetHealth()
@@ -266,7 +256,7 @@ namespace ZeldaGame.Player {
         public void Reset()
         {
             sprite = PlayerSpriteFactory.Instance.CreateWalkSprite(Direction.Down);
-            stateMachine = new PlayerStateMachine(sprite);
+            actionHandler = new PlayerActionHandler(sprite);
             position = resetPosition;
             movement = new Vector2(0, 0);
             animTimer = -1;

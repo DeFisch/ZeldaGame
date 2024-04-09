@@ -13,6 +13,7 @@ using ZeldaGame.Map.Commands;
 using ZeldaGame.NPCs;
 using ZeldaGame.Player;
 using ZeldaGame.Player.Commands;
+using static ZeldaGame.Globals;
 
 namespace ZeldaGame
 {
@@ -96,7 +97,7 @@ namespace ZeldaGame
 			// Initializes item classes
 			PlayerSpriteFactory.Instance.LoadAllTextures(Content);
 			PlayerItemSpriteFactory.Instance.LoadAllTextures(Content);
-            Link = new Player1(new Vector2(mapSize.X / 2, (mapSize.X / 2) + mapSize.Z), mapScale, this);
+            Link = new PlayerMain(new Vector2(mapSize.X / 2, (mapSize.X / 2) + mapSize.Z), mapScale, this);
 
 			
 			Texture2D[] enemy_texture = {Content.Load<Texture2D>("enemies"),Content.Load<Texture2D>("enemies_1")};
@@ -136,12 +137,12 @@ namespace ZeldaGame
 			keyboardController.RegisterPressKey(Keys.N, new AttackCommand(this));
 
 			// Use items
-			keyboardController.RegisterPressKey(Keys.D1, new UseItemCommand(this, 0));
-			keyboardController.RegisterPressKey(Keys.D2, new UseItemCommand(this, 1));
-			keyboardController.RegisterPressKey(Keys.D3, new UseItemCommand(this, 2));
-			keyboardController.RegisterPressKey(Keys.D4, new UseItemCommand(this, 3));
-			keyboardController.RegisterPressKey(Keys.D5, new UseItemCommand(this, 4));
-			keyboardController.RegisterPressKey(Keys.D6, new UseItemCommand(this, 5));
+			keyboardController.RegisterPressKey(Keys.D1, new UseItemCommand(this, PlayerProjectiles.WoodenArrow));
+			keyboardController.RegisterPressKey(Keys.D2, new UseItemCommand(this, PlayerProjectiles.BlueArrow));
+			keyboardController.RegisterPressKey(Keys.D3, new UseItemCommand(this, PlayerProjectiles.Boomerang));
+			keyboardController.RegisterPressKey(Keys.D4, new UseItemCommand(this, PlayerProjectiles.BlueBoomerang));
+			keyboardController.RegisterPressKey(Keys.D5, new UseItemCommand(this, PlayerProjectiles.Bomb));
+			keyboardController.RegisterPressKey(Keys.D6, new UseItemCommand(this, PlayerProjectiles.Fireball));
 
 			//Registers commands with Keys for Reset
 			keyboardController.RegisterPressKey(Keys.R, new ResetCommand(this));
@@ -210,7 +211,7 @@ namespace ZeldaGame
                 Globals.gameStateScreenHandler.EndGame();
 				
 			//Use items based on current choice
-			keyboardController.RegisterPressKeySwitch(Keys.B, new UseItemCommand(this, headUpDisplay.HUDInventory.currentWeaponIndex()));
+			keyboardController.RegisterPressKeySwitch(Keys.B, new UseItemCommand(this, headUpDisplay.HUDInventory.CurrentWeapon()));
             base.Update(gameTime);
 		}
 

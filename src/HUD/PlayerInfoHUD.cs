@@ -74,7 +74,7 @@ namespace ZeldaGame.HUD
             {
                 spriteBatch.Draw(texture, playerInfoDR, playerInfoSR, Color.White);
                 mapHandler.Draw(spriteBatch, isDisplayed);
-                spriteBatch.Draw(texture, currentWeaponDR, headUpDisplay.HUDInventory.currentWeapon(), Color.White);
+                spriteBatch.Draw(texture, currentWeaponDR, headUpDisplay.HUDInventory.CurrentWeaponSprite(), Color.White);
             }
 
             rubyCountInt = (ItemActionHandler.inventoryCounts[0] * 5) + ItemActionHandler.inventoryCounts[1];

@@ -1,9 +1,8 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System.Collections.Generic;
-using System.Diagnostics;
-using static System.Formats.Asn1.AsnWriter;
 using static ZeldaGame.Player.PlayerActionHandler;
+using static ZeldaGame.Globals;
 
 namespace ZeldaGame.Player {
 	public class PlayerHurt : IPlayer {
@@ -31,7 +30,7 @@ namespace ZeldaGame.Player {
 		public void Walk() {
 			decoratedPlayer.Walk();
 		}
-		public void UseItem(int item) {
+		public void UseItem(PlayerProjectiles item) {
 			decoratedPlayer.UseItem(item);
 		}
 
@@ -72,11 +71,6 @@ namespace ZeldaGame.Player {
         {
 			decoratedPlayer.Knockback();
         }
-
-		public Vector2 GetKnockback()
-		{
-			return decoratedPlayer.GetKnockback();
-		}
 
         public Vector2 GetPlayerPosition()
         {

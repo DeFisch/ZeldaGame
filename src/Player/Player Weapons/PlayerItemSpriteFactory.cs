@@ -1,13 +1,14 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
-using static ZeldaGame.Player.PlayerStateMachine;
+using static ZeldaGame.Player.PlayerActionHandler;
+using static ZeldaGame.Globals;
 
 namespace ZeldaGame.Player;
 public class PlayerItemSpriteFactory {
 	private Texture2D playerTexture;
 
-	private static PlayerItemSpriteFactory instance = new PlayerItemSpriteFactory();
+	private static readonly PlayerItemSpriteFactory instance = new();
 
 	public static PlayerItemSpriteFactory Instance {
 		get {
@@ -22,47 +23,47 @@ public class PlayerItemSpriteFactory {
 		playerTexture = content.Load<Texture2D>("Link");
 	}
 
-	public IPlayerProjectile CreateItemSprite(Direction direction, int item, Vector2 position) {
+	public IPlayerProjectile CreateItemSprite(Direction direction, PlayerProjectiles item, Vector2 position) {
 		switch (item) {
-			case 0:
+			case PlayerProjectiles.WoodenArrow:
 				return CreateArrowSprite(direction, position);
-			case 1:
+			case PlayerProjectiles.BlueArrow:
 				return CreateBlueArrowSprite(direction, position);
-			case 2:
+			case PlayerProjectiles.Boomerang:
 				return CreateBoomerangSprite(direction, position);
-			case 3:
+			case PlayerProjectiles.BlueBoomerang:
 				return CreateBlueBoomerangSprite(direction, position);
-			case 4:
+			case PlayerProjectiles.Bomb:
 				return CreateBombSprite(direction, position);
-			case 5:
+			case PlayerProjectiles.Fireball:
 				return CreateFireballSprite(direction, position);
 			default:
 				return null;
 		}
 	}
 
-	public IPlayerProjectile CreateSwordSprite(Direction direction, int sword, Vector2 position) {
+	public IPlayerProjectile CreateSwordSprite(Direction direction, Swords sword, Vector2 position) {
 		Globals.audioLoader.Play("LOZ_Sword_Slash");
 		switch (sword) {
-			case 0:
+			case Swords.Wood:
 				return CreateWoodSwordSprite(direction, position);
-			case 1:
+			case Swords.White:
 				return CreateWhiteSwordSprite(direction, position);
-			case 2:
+			case Swords.Magic:
 				return CreateMagicSwordSprite(direction, position);
 			default:
 				return null;
 		}
 	}
 
-	public IPlayerProjectile CreateSwordProjectileSprite(Direction direction, int sword, Vector2 position) {
+	public IPlayerProjectile CreateSwordProjectileSprite(Direction direction, Swords sword, Vector2 position) {
 		Globals.audioLoader.Play("LOZ_Sword_Shoot");
 		switch (sword) {
-			case 0:
+			case Swords.Wood:
 				return CreateWoodSwordProjectileSprite(direction, position);
-			case 1:
+			case Swords.White:
 				return CreateWhiteSwordProjectileSprite(direction, position);
-			case 2:
+			case Swords.Magic:
 				return CreateMagicSwordProjectileSprite(direction, position);
 			default:
 				return null;

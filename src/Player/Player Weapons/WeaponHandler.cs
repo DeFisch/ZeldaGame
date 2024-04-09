@@ -2,11 +2,11 @@
 using Microsoft.Xna.Framework.Graphics;
 using System.Collections.Generic;
 using ZeldaGame.Items;
-using static ZeldaGame.Player.PlayerStateMachine;
+using static ZeldaGame.Player.PlayerActionHandler;
+using static ZeldaGame.Globals;
 
 namespace ZeldaGame.Player;
 public class WeaponHandler {
-	public enum Swords {Wood, White, Magic, None};
 	private readonly List<IPlayerProjectile> activeProjectiles;
 	private readonly List<IPlayerProjectile> expiredProjectiles;
 
@@ -19,20 +19,20 @@ public class WeaponHandler {
 		currSword = Swords.Wood; //later, the default will be no sword
 	}
 
-	public void UseItem(int item, Vector2 location, Direction direction) {
-		if(item < 2){
-			if(ItemActionHandler.inventoryCounts[1] - item*2-1 < 0)
-				return;
-			ItemActionHandler.inventoryCounts[1]-=item*2+1;
-		}
-		if (cooldown == 0) {
+	public void UseItem(PlayerProjectiles item, Vector2 location, Direction direction) {
+		if (item == PlayerProjectiles.WoodenArrow && ItemActionHandler.inventoryCounts[1] >= 1)
+			ItemActionHandler.inventoryCounts[1]--;
+        if (item == PlayerProjectiles.BlueArrow && ItemActionHandler.inventoryCounts[1] >= 3)
+            ItemActionHandler.inventoryCounts[1]-=3;
+
+        if (cooldown == 0) {
 			IPlayerProjectile weapon = PlayerItemSpriteFactory.Instance.CreateItemSprite(direction, item, location);
 			activeProjectiles.Add(weapon);
 			cooldown = 20;
         }
 	}
 
-	public void UseSword(int sword, Vector2 location, Direction direction, float currHealth, float maxHealth) {
+	public void UseSword(Swords sword, Vector2 location, Direction direction, float currHealth, float maxHealth) {
 		IPlayerProjectile weapon = PlayerItemSpriteFactory.Instance.CreateSwordSprite(direction, sword, location);
 		activeProjectiles.Add(weapon);
 

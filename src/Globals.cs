@@ -8,6 +8,6 @@ namespace ZeldaGame{
 
         /*public enum Direction { Up, Down, Left, Right }*/
         public enum PlayerProjectiles { WoodenArrow, BlueArrow, Boomerang, BlueBoomerang, Bomb, Fireball }
-        public enum PlayerSwords {  WoodSword, MagicSword, WhiteSword }
+        public enum Swords {  Wood, Magic, White, None }
     }
 }
