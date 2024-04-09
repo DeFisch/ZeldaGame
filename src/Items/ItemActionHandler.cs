@@ -83,7 +83,7 @@ namespace ZeldaGame.Items
 
         public void Reset()
         {
-            inventoryCounts = new int[9];
+            inventoryCounts = new int[10];
             inventoryCounts[8] = 8;
             getMap = false;
             getCompass = false;
