@@ -2,20 +2,23 @@ using System;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using ZeldaGame.Items;
-using static System.Net.Mime.MediaTypeNames;
+using static ZeldaGame.Player.PlayerStateMachine;
+
 
 namespace ZeldaGame.Enemy;
 
 public class Gibdo : IEnemy {
 	enum State { Idle, Walking, Attacking, Dead };
-	enum Direction { Up, Down, Left, Right };
 	private int frameID = 0;
 	private Texture2D texture;
 	private Vector2 position;
 	private State state;
 	private Direction direction;
 	private Vector2 scale;
-	private static int[] character_sprites = new int[] { 90, 90, 16, 16 }; // x, y, width, height
+    private Vector2 knockback;
+    private int knockbackTimer;
+    private readonly int knockbackScale = 8;
+    private static int[] character_sprites = new int[] { 90, 90, 16, 16 }; // x, y, width, height
 	private int speed = 2;
 	private int health = 3;
 	private int dead_timer = 0;
@@ -33,6 +36,22 @@ public class Gibdo : IEnemy {
     public float DoDamage()
     {
         return damage;
+    }
+
+    public void Knockback(Direction knockbackDirection)
+    {
+        switch (knockbackDirection)
+        {
+            case Direction.Up:
+                knockback = new Vector2(0, -knockbackScale); break;
+            case Direction.Down:
+                knockback = new Vector2(0, knockbackScale); break;
+            case Direction.Left:
+                knockback = new Vector2(-knockbackScale, 0); break;
+            case Direction.Right:
+                knockback = new Vector2(knockbackScale, 0); break;
+        }
+        knockbackTimer = 10;
     }
 
     public void Draw(SpriteBatch spriteBatch) {
@@ -61,9 +80,15 @@ public class Gibdo : IEnemy {
 			Idle();
 		if (state == State.Dead)
 			Dead();
-
         frameID++;
-	}
+
+        // Knockback enemy
+        if (knockbackTimer > 0)
+        {
+            position += knockback;
+            knockbackTimer--;
+        }
+    }
 
 	private void Idle() {
 		if (frameID / 60 == 0)
@@ -135,24 +160,25 @@ public class Gibdo : IEnemy {
 
 	public void OnCollision(Rectangle rectangle)
 	{
-		int dx = rectangle.Width;
-		int dy = rectangle.Height;
-		switch(direction){
-			case Direction.Up:
-				position.Y += dy;
-				break;
-			case Direction.Down:
-				position.Y -= dy;
-				break;
-			case Direction.Left:
-				position.X += dx;
-				break;
-			case Direction.Right:
-				position.X -= dx;
-				break;
-		}
-		Direction old_direction = direction;
-		while (direction == old_direction)
-			direction = (Direction)(new Random().Next(0, 4));
-	}
+        Rectangle collisionOverlap = Rectangle.Intersect(GetHitBox(), rectangle);
+
+        if (collisionOverlap.Width > collisionOverlap.Height)
+        {
+            if (collisionOverlap.Center.Y < GetHitBox().Center.Y)
+                position.Y += collisionOverlap.Height;
+            else
+                position.Y -= collisionOverlap.Height;
+        }
+        else
+        {
+            if (collisionOverlap.Center.X < GetHitBox().Center.X)
+                position.X += collisionOverlap.Width;
+            else
+                position.X -= collisionOverlap.Width;
+        }
+
+        Direction old_direction = direction;
+        while (direction == old_direction)
+            direction = (Direction)(new Random().Next(0, 4));
+    }
 }

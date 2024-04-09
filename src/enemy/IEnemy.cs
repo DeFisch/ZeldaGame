@@ -1,12 +1,15 @@
 
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using static ZeldaGame.Player.PlayerStateMachine;
 
 namespace ZeldaGame.Enemy;
 
 public interface IEnemy : ICollidible {
 
 	new public Rectangle GetHitBox();
+
+	public void Knockback(Direction knockbackDirection);
 	
 	public abstract void Update();
 

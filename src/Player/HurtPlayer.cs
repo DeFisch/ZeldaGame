@@ -73,6 +73,11 @@ namespace ZeldaGame.Player {
 			decoratedPlayer.Knockback();
         }
 
+		public Vector2 GetKnockback()
+		{
+			return decoratedPlayer.GetKnockback();
+		}
+
         public Vector2 GetPlayerPosition()
         {
             return decoratedPlayer.GetPlayerPosition();

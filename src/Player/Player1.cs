@@ -23,10 +23,9 @@ namespace ZeldaGame.Player {
 		private int knockbackTimer = 0;
 		private readonly int knockbackScale = 8;
 		private Direction direction;
-		private Direction collisionDirection;
+		private Vector2 knockback;
 		private Swords currSword;
 		private int animTimer;
-        private ItemActionHandler itemActionHandler;
         private static float health = 3.0f;
 		private float maxHealth = 3f;
 
@@ -36,7 +35,6 @@ namespace ZeldaGame.Player {
 			sprite = PlayerSpriteFactory.Instance.CreateWalkSprite(direction);
 			stateMachine = new PlayerStateMachine(sprite);
 			weaponHandler = new WeaponHandler();
-			itemActionHandler = new ItemActionHandler(game);
 
 			currSword = weaponHandler.currSword;
 			this.position = position;
@@ -62,8 +60,13 @@ namespace ZeldaGame.Player {
 
 		public void Knockback()
 		{
-			knockbackTimer = 10;
+			knockbackTimer = 10;	// Initiates countdown in Update() that pushes player position back
         }
+
+		public Vector2 GetKnockback()
+		{
+			return knockback;
+		}
 
 		public Vector2 GetPlayerPosition()
 		{
@@ -106,25 +109,26 @@ namespace ZeldaGame.Player {
 				if (collisionOverlap.Center.Y < GetHitBox().Center.Y)
 				{
 					position.Y += collisionOverlap.Height;
-					collisionDirection = Direction.Up;
+					knockback = new Vector2(0, knockbackScale);	   // Sets a directional Vector2 that will knockback player
 				}
 				else
 				{
                     position.Y -= collisionOverlap.Height;
-					collisionDirection = Direction.Down;
+					knockback = new Vector2(0, -knockbackScale);
                 }
 			} else {
 				if (collisionOverlap.Center.X < GetHitBox().Center.X)
 				{
 					position.X += collisionOverlap.Width;
-					collisionDirection = Direction.Left;
+					knockback = new Vector2(knockbackScale, 0);
 				}
 				else
 				{
 					position.X -= collisionOverlap.Width;
-					collisionDirection = Direction.Right;
-				}
-			}
+                    knockback = new Vector2(-knockbackScale, 0);
+
+                }
+            }
         }
 
         public void Walk()
@@ -222,17 +226,6 @@ namespace ZeldaGame.Player {
             }
 			movement *= scale;
         }
-        private Vector2 KnockBackDirection()
-        {
-            return collisionDirection switch
-            {
-                Direction.Up => new Vector2(0, knockbackScale),
-                Direction.Down => new Vector2(0, -knockbackScale),
-                Direction.Left => new Vector2(knockbackScale, 0),
-                Direction.Right => new Vector2(-knockbackScale, 0),
-                _ => new Vector2(0, 0),
-            };
-        }
 
         public void Update()
         {
@@ -247,9 +240,10 @@ namespace ZeldaGame.Player {
                 Idle();
             }
 
+			// Knockback player
 			if (knockbackTimer > 0)
 			{
-				position += KnockBackDirection();
+				position += knockback;
 				knockbackTimer--;
 			}
 

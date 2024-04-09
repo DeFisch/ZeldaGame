@@ -104,6 +104,7 @@ public class CollisionHandler {
                     if (enemy.GetType() == typeof(Keese) && projectile.GetType() != typeof(BoomerangSprite) && projectile.GetType() != typeof(BlueBoomerangSprite))
                         continue;
                     projectile.Collided();
+                    enemy.Knockback(game.Link.GetDirection()); // multiply by -1 to flip direciton of knockback
                     if(enemy.TakeDamage(projectile.ProjectileDamage()))
                         Globals.audioLoader.Play("LOZ_Enemy_Hit");
                     shotEnemies.Add(enemy);

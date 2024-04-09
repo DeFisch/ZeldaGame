@@ -18,7 +18,6 @@ public class WeaponHandler {
 		activeProjectiles = new List<IPlayerProjectile>();
 		expiredProjectiles = new List<IPlayerProjectile>();
 		currSword = Swords.Wood; //later, the default will be no sword
-
 	}
 
 	public void UseItem(int item, Vector2 location, Direction direction) {

@@ -1,10 +1,7 @@
-
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Enemy;
-using static System.Net.Mime.MediaTypeNames;
-using ZeldaGame.Player.Commands;
-using ZeldaGame.Items;
+using static ZeldaGame.Player.PlayerStateMachine;
 namespace ZeldaGame.Enemy;
 
 public class Aquamentus : IEnemy {
@@ -14,7 +11,10 @@ public class Aquamentus : IEnemy {
 	private Vector2 position;
 	private State state;
 	private Vector2 scale;
-	private static int[,] character_sprites = new int[,] { { 1, 11, 24, 32 }, { 26, 11, 24, 32 }, { 51, 11, 24, 32 }, { 76, 11, 24, 32 } }; // x, y, width, height
+    private Vector2 knockback;
+    private int knockbackTimer;
+    private readonly int knockbackScale = 8;
+    private static int[,] character_sprites = new int[,] { { 1, 11, 24, 32 }, { 26, 11, 24, 32 }, { 51, 11, 24, 32 }, { 76, 11, 24, 32 } }; // x, y, width, height
 	private int currentFrame = 0;
 	private int speed = 2;
     private int projectile_speed = 4;
@@ -36,6 +36,22 @@ public class Aquamentus : IEnemy {
         return damage;
     }
 
+    public void Knockback(Direction knockbackDirection)
+    {
+        switch (knockbackDirection)
+        {
+            case Direction.Up:
+                knockback = new Vector2(0, -knockbackScale); break;
+            case Direction.Down:
+                knockback = new Vector2(0, knockbackScale); break;
+            case Direction.Left:
+                knockback = new Vector2(-knockbackScale, 0); break;
+            case Direction.Right:
+                knockback = new Vector2(knockbackScale, 0); break;
+        }
+        knockbackTimer = 2;
+    }
+
     public void Draw(SpriteBatch spriteBatch) {
 		Rectangle sourceRectangle = new Rectangle(character_sprites[currentFrame, 0], character_sprites[currentFrame, 1], character_sprites[currentFrame, 2], character_sprites[currentFrame, 3]);
 		Rectangle destinationRectangle = new Rectangle((int)position.X, (int)position.Y, (int)(character_sprites[currentFrame, 2] * scale.X), (int)(character_sprites[currentFrame, 3] * scale.Y));
@@ -55,7 +71,14 @@ public class Aquamentus : IEnemy {
 		if (state == State.Dead)
 			Dead();
 		frameID++;
-	}
+
+        // Knockback enemy
+        if (knockbackTimer > 0)
+        {
+            position += knockback;
+            knockbackTimer--;
+        }
+    }
     private void Attack() {
 		Globals.audioLoader.Play("LOZ_MagicalRod");;
         Vector2[] directions = new Vector2[] { new Vector2(-0.894f, 0.447f), new Vector2(-0.894f, -0.447f), new Vector2(-1, 0) };

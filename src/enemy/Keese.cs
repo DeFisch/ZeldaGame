@@ -2,7 +2,7 @@ using System;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using ZeldaGame.Items;
-using static System.Net.Mime.MediaTypeNames;
+using static ZeldaGame.Player.PlayerStateMachine;
 
 namespace ZeldaGame.Enemy;
 
@@ -13,7 +13,10 @@ public class Keese : IEnemy {
 	private Vector2 position;
 	private State state;
 	private Vector2 scale;
-	private int[,] character_sprites = new int[,] { { 183, 11, 16, 16 }, { 200, 11, 16, 16 } }; // x, y, width, height
+    private Vector2 knockback;
+    private int knockbackTimer;
+    private readonly int knockbackScale = 8;
+    private int[,] character_sprites = new int[,] { { 183, 11, 16, 16 }, { 200, 11, 16, 16 } }; // x, y, width, height
 	private Vector3 map_size;
 	private double speedX = 0;
 	private double speedY = 0;
@@ -42,6 +45,22 @@ public class Keese : IEnemy {
         return damage;
     }
 
+    public void Knockback(Direction knockbackDirection)
+    {
+        switch (knockbackDirection)
+        {
+            case Direction.Up:
+                knockback = new Vector2(0, -knockbackScale); break;
+            case Direction.Down:
+                knockback = new Vector2(0, knockbackScale); break;
+            case Direction.Left:
+                knockback = new Vector2(-knockbackScale, 0); break;
+            case Direction.Right:
+                knockback = new Vector2(knockbackScale, 0); break;
+        }
+        knockbackTimer = 10;
+    }
+
     public void Draw(SpriteBatch spriteBatch) {
 		int sprite_id = (frameID / 18) % 2;
 		Rectangle sourceRectangle = new Rectangle(character_sprites[sprite_id, 0], character_sprites[sprite_id, 1], character_sprites[sprite_id, 2], character_sprites[sprite_id, 3]);
@@ -67,7 +86,14 @@ public class Keese : IEnemy {
 		if (state == State.Dead)
 			Dead();
 		frameID++;
-	}
+
+        // Knockback enemy
+        if (knockbackTimer > 0)
+        {
+            position += knockback;
+            knockbackTimer--;
+        }
+    }
 
 	private void Dead() {
 		float vel = -7.81f;

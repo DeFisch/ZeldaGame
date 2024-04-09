@@ -17,6 +17,8 @@ namespace ZeldaGame.Player {
 		public void Update();
 		public void Reset();
 		public void Knockback();
+
+		public Vector2 GetKnockback();
 		public Vector2 GetPlayerPosition();
 		public void SetPlayerPosition(Vector2 position, bool offset = true);
 		new public Rectangle GetHitBox();
