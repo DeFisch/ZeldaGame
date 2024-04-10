@@ -11,6 +11,7 @@ public class ResetCommand: ICommand
 
     public void Execute()
     {
+        MyGame.Link.Reset();
         MyGame.map.Reset();
         MyGame.Link.Reset();
         MyGame.itemFactory.Reset();

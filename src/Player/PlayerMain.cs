@@ -256,6 +256,7 @@ namespace ZeldaGame.Player {
 
         public void Reset()
         {
+			weaponHandler.Reset();
             sprite = PlayerSpriteFactory.Instance.CreateWalkSprite(Direction.Down);
             actionHandler = new PlayerActionHandler(sprite);
             position = resetPosition;

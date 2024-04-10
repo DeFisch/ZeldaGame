@@ -88,5 +88,10 @@ public class WeaponHandler {
 			projectile.Draw(spriteBatch, scale);
 		}
     }
+
+	public void Reset() {
+		activeProjectiles.Clear();
+		expiredProjectiles.Clear();
+	}
 }
 
