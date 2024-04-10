@@ -50,7 +50,9 @@ namespace ZeldaGame.Items {
             }
         }
 
+#pragma warning disable CA1822 // Mark members as static
 		public string[] GetAvailableItems()
+#pragma warning restore CA1822 // Mark members as static
 		{
 			return new string[] { "br", "yr", "cl", "h", "bm"};
 		}
@@ -116,7 +118,7 @@ namespace ZeldaGame.Items {
 			map = mapHandler.get_map_info();
 			initx = mapHandler.x;
 			inity = mapHandler.y;
-			if (arrayOfLists[initx, inity].Count() != 0)
+			if (arrayOfLists[initx, inity].Count != 0)
 			{
 				objectList = arrayOfLists[initx, inity];
 

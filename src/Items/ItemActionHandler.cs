@@ -13,7 +13,9 @@ namespace ZeldaGame.Items
 {
     public class ItemActionHandler
     {
+#pragma warning disable CA2211 // Non-constant fields should not be visible
         public static int[] inventoryCounts;
+#pragma warning restore CA2211 // Non-constant fields should not be visible
         private bool getMap;
         private bool getCompass;
         private Game1 game;

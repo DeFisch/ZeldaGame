@@ -105,7 +105,7 @@ public class Keese : IEnemy {
 		return dead_timer > 60;
 	}
 
-	private void Idle() {
+	static private void Idle() {
 		// Empty
 	}
 
@@ -150,7 +150,9 @@ public class Keese : IEnemy {
 		return new Rectangle((int)position.X, (int)position.Y, (int)(character_sprites[sprite_id, 2] * scale.X), (int)(character_sprites[sprite_id, 3] * scale.Y));
 	}
 
+#pragma warning disable CA1822 // Mark members as static
 	public void OnCollision(Rectangle rectangle)
+#pragma warning restore CA1822 // Mark members as static
 	{
 		// Intentionally left empty
 	}

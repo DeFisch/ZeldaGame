@@ -195,7 +195,7 @@ public class CollisionHandler {
         }
     }
 
-    private void PlayerDoorCollision(Vector3 map_size, IPlayer player, MapHandler map){
+    static private void PlayerDoorCollision(Vector3 map_size, IPlayer player, MapHandler map){
         Rectangle playerHitBox = player.GetHitBox();
         Vector2 playerCenterpoint = new Vector2(playerHitBox.X + playerHitBox.Width/2, playerHitBox.Y + playerHitBox.Height/2);
         Rectangle up_door = new Rectangle((int)(0.46875*map_size.X), (int)(map_size.Z), (int)(0.0625*map_size.X), (int)(0.18*map_size.Y));
