@@ -1,0 +1,8 @@
+Author: Zhiyang Xu
+Date: March 8, 2024
+Sprint number: 3
+Name of the .cs file being reviewed: NPCs classes/GameScreens classes
+Number of minutes taken for the review: 15 mins
+
+All parts are named concisely and meaningfully.The logic for displaying NPCs' texts is straightforward and easy to follow. 
+Each game screen is organized into its own class, promoting a modular and maintainable code structure. Those methods are short and well-written, enhancing readability and comprehension.

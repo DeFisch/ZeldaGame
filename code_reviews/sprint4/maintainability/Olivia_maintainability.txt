@@ -1,0 +1,13 @@
+Author: Zhiyang Xu
+Date: March 8, 2024
+Sprint number: 3
+Name of the .cs file being reviewed: ItemActionHandler/playInfoHUD/Item class/Enemy class
+Author of the .cs files being reviewed: Olivia Maynard
+Number of minutes taken for the review: 20 mins
+
+Comments: 
+The ItemActionHandler class efficiently manages all items, facilitating easy access and modification. It effectively updates the item counts displayed on the playinfoHUD. 
+The functionality for clocks and potions is well implemented.
+ 
+Suggestions:
+One suggestion is to instantiate an ItemActionHandler object within either the main class or an item class instead of the collisionHandler class. This approach might be helpful for classes that solely need access to the item counts.

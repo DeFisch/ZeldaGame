@@ -57,7 +57,6 @@ namespace ZeldaGame.HUD
             heartRowsDR = new List<Rectangle>();
             heartRowsSR = new List<Rectangle>();
 
-
 			playerInfoSR = new Rectangle(258, 11, 256, 56);
             playerInfoDR = new Rectangle(0, 0, 0, 0);
             currentWeaponDR = new Rectangle((int)(128 * scale.X), (int)(24 * scale.Y), (int)(8 * scale.X), (int)(16 * scale.Y));
