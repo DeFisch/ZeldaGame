@@ -38,6 +38,7 @@ namespace ZeldaGame
 		private FlashlightOverlay flashlight;
 		public HeadUpDisplay headUpDisplay;
 		public PlayerInfoHUD playerInfoHUD;
+		public bool flashlightMode = true;
 
 		private KeyboardController keyboardController;
 		private MouseController mouseController;
@@ -164,7 +165,7 @@ namespace ZeldaGame
             mouseController.RegisterQuadrant(bottomDoorQuadrant, new MoveDownCommand(map));
 
 			//Registers commands with Keys for turning debug mode on and off
-			keyboardController.RegisterPressKey(Keys.F, new DebugCommand(map));
+			keyboardController.RegisterPressKey(Keys.F, new FlashlightCommand(this));
 
 			//Registers commands with Keys for muting and unmuting the audio
 			keyboardController.RegisterPressKey(Keys.M, new MuteCommand(Globals.audioLoader));
@@ -222,7 +223,7 @@ namespace ZeldaGame
 				// this rendertarget will hold a black rectangle that gets masked with alphaMask
 				RenderTarget2D darkness = new RenderTarget2D(GraphicsDevice, (int)windowSize.X, (int)windowSize.Y);
 
-				if (gameStateScreenHandler.IsPlaying()) {
+				if (gameStateScreenHandler.IsPlaying() && flashlightMode) {
 
 				// prepare the darkness
 				GraphicsDevice.SetRenderTarget(darkness);
