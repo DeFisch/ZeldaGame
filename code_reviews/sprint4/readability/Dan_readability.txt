@@ -1,0 +1,8 @@
+Author: Daniel Feng
+Date: Apr 9th, 2024
+Sprint: 4
+.cs files reviewed: Player/Enemies knockback @ CollisionHandler.cs, heart HUD display @ src/HUD/PlayerInfoHUD.cs 
+minutes to review: 10
+Specific comments:
+The implementation of Player/Enemies knockback are pretty intuitive, as once the player/enemy's knockback timer is not 0, we add an extra knockback velocity on top of the player/enemies movements. The heart container however, gives a more difficult time to understand. Even though there are comments explaining in DrawHealth() function, the logic and the functionality of SetHealthDR() is not as intuitive as other functions are. Maybe add a small description in the function header will help.
+
