@@ -12,7 +12,7 @@ public class FireballSprite : IPlayerProjectile {
     private Vector2 position;
     private Vector2 projectileMovement;
     private readonly float projectileSpeed = 3.5f;
-    private readonly int damage = 2;
+    private readonly int damage = 0;
 
     private int currentFrame;
 	private readonly int totalFrames = 4;
