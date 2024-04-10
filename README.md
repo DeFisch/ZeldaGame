@@ -21,17 +21,16 @@ OSU CSE 3902 Zelda Game Project
 - Player Controls
   - "wasd" or arrow keys for movements
   - "z" or "n" for sword attack
+  - "b" to use an inventory item (arrows, boomerang, bomb, candle/flames)
   - Walk through doors using arrow keys to walk through the corresponding rooms
 - Other
   - "q" to quit, "r" to reset the game
   - "h" to go to the inventory
-  - "b" to use an inventory item (arrows, boomerang, bomb, candle/flames)
   - Spacebar to start the game and return to the game from the inventory
   - "p" to pause/unpause
   - "m" to mute/unmute
 - Controls for Testing
   - Click on doors to move through the corresponding rooms
-  - "1,2,3,4,5,6" for different weapons (1,2 for arrows, 3,4 for boomerang, 5 for bombs, 6 for flames)
 
 ## Items:
 - Bomb
@@ -53,6 +52,13 @@ OSU CSE 3902 Zelda Game Project
 - Life Potion
   - The Life Potion can only be purchased, for 5 rubies, from a particular NPC in the NPC room. If Link doesn't have at least five rubies, he'll simply walk over the item and not be able to purchase it. The Life Potion restores all of Link's lives upon purchase.
 
+## Player Weapons Mannual
+- Orange Arrow: cost 1 ruby, deals 2 damage
+- Blue Arrow: cost 3 ruby, deals 3 damage
+- Orange/Blue Boomerang: 0 cost, fly through wall, only weapon that can kill Keese (flying bats)
+- Bomb: 2 damage, can damage/kill player
+- Flame: 0 damage, purely cosmetic (has knockback) 
+
 ## Updates:
 - Arrow and Sword Mechanics Updates
   - Using normal arrows costs one ruby each when used. Magical arrows cost three rubies each when used.
@@ -60,32 +66,3 @@ OSU CSE 3902 Zelda Game Project
 - Inventory
   - To change the item in Link's offhand, go to the inventory by pressing "h". Use the mouse keys to pick Link's offhand item, press space to exit the inventory, and then use "b" to use that item. 
 
-## GitHub basic commands:
-a. Download the repository to your local machine
-```shell
-git clone https://github.com/DeFisch/ZeldaGame.git
-```
-b. Update the remote changes of the repository to your local machine
-```shell
-git pull
-```
-c. Check the changes you made since last commit/pull
-```shell
-git status
-```
-d. Record your changes of the file
-```shell
-git add [filename]
-```
-or alternatively, record all the changes you made to the repository
-```shell
-git add *
-```
-e. Gather all your record of changes to a single commit, commit message usually explains what functionality you adds in these changes
-```shell
-git commit -m "[your commit message here]"
-```
-g. Update all your local commits to the GitHub repo so everyone can access it
-```shell
-git push
-```
