@@ -21,18 +21,19 @@ OSU CSE 3902 Zelda Game Project
 - Player Controls
   - "wasd" or arrow keys for movements
   - "z" or "n" for sword attack
-  - "1,2,3,4,5,6" for different weapons (1,2 for arrows, 3,4 for boomerang, 5 for bombs, 6 for flames)
   - Walk through doors using arrow keys to walk through the corresponding rooms
 - Other
   - "q" to quit, "r" to reset the game
   - "h" to go to the inventory
+  - "b" to use an inventory item (arrows, boomerang, bomb, candle/flames)
   - Spacebar to start the game and return to the game from the inventory
   - "p" to pause/unpause
   - "m" to mute/unmute
-- Mouse
+- Controls for Testing
   - Click on doors to move through the corresponding rooms
+  - "1,2,3,4,5,6" for different weapons (1,2 for arrows, 3,4 for boomerang, 5 for bombs, 6 for flames)
 
-## Updates and Items:
+## Items:
 - Bomb
   - The player starts with eight bombs, and each time a bomb is thrown one bomb is used up. When a bomb is picked up after an enemy drop, four bombs are placed in Link's inventory. Link can carry no more than eight bombs at a time.
 - Map
@@ -51,9 +52,13 @@ OSU CSE 3902 Zelda Game Project
   - The Triforce is located in the last room of the dungeon, past the final boss. Picking up the Triforce triggers the Game Win screen.
 - Life Potion
   - The Life Potion can only be purchased, for 5 rubies, from a particular NPC in the NPC room. If Link doesn't have at least five rubies, he'll simply walk over the item and not be able to purchase it. The Life Potion restores all of Link's lives upon purchase.
-  - Arrow and Sword Mechanics
-    - Using normal arrows costs one ruby each when used. Magical arrows cost three rubies each when used.
-    - When Link has full health, the sword is able to shoot out as an exploding projectile! 
+
+## Updates:
+- Arrow and Sword Mechanics Updates
+  - Using normal arrows costs one ruby each when used. Magical arrows cost three rubies each when used.
+  - When Link has full health, the sword is able to shoot out as an exploding projectile!
+- Inventory
+  - To change the item in Link's offhand, go to the inventory by pressing "h". Use the mouse keys to pick Link's offhand item, press space to exit the inventory, and then use "b" to use that item. 
 
 ## GitHub basic commands:
 a. Download the repository to your local machine
