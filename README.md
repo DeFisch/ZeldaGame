@@ -19,11 +19,16 @@ OSU CSE 3902 Zelda Game Project
 
 ## Key and Mouse Mappings:
 - Player Controls
-  - "wasd" or arrow keysfor movements
+  - "wasd" or arrow keys for movements
   - "z" or "n" for sword attack
   - "1,2,3,4,5,6" for different weapons (1,2 for arrows, 3,4 for boomerang, 5 for bombs, 6 for flames)
+  - Walk through doors using arrow keys to walk through the corresponding rooms
 - Other
   - "q" to quit, "r" to reset the game
+  - "h" to go to the inventory
+  - Spacebar to start the game and return to the game from the inventory
+  - "p" to pause/unpause
+  - "m" to mute/unmute
 - Mouse
   - Click on doors to move through the corresponding rooms
 
@@ -46,6 +51,9 @@ OSU CSE 3902 Zelda Game Project
   - The Triforce is located in the last room of the dungeon, past the final boss. Picking up the Triforce triggers the Game Win screen.
 - Life Potion
   - The Life Potion can only be purchased, for 5 rubies, from a particular NPC in the NPC room. If Link doesn't have at least five rubies, he'll simply walk over the item and not be able to purchase it. The Life Potion restores all of Link's lives upon purchase.
+  - Arrow and Sword Mechanics
+    - Using normal arrows costs one ruby each when used. Magical arrows cost three rubies each when used.
+    - When Link has full health, the sword is able to shoot out as an exploding projectile! 
 
 ## GitHub basic commands:
 a. Download the repository to your local machine
