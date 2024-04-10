@@ -64,7 +64,6 @@ public class CollisionHandler {
         {
             if (activeProjectiles[projectile].Width < -15)
                 continue;
-            Console.WriteLine(activeProjectiles[projectile].Y);
             if (activeProjectiles[projectile].X < 0 || activeProjectiles[projectile].X > game.windowSize.X || activeProjectiles[projectile].Y < 150 || activeProjectiles[projectile].Y > game.windowSize.Y)
             {
                 projectile.Collided();

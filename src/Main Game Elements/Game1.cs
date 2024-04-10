@@ -135,13 +135,13 @@ namespace ZeldaGame
 			keyboardController.RegisterPressKey(Keys.Z, new AttackCommand(this));
 			keyboardController.RegisterPressKey(Keys.N, new AttackCommand(this));
 
-			// Use items
-			keyboardController.RegisterPressKey(Keys.D1, new UseItemCommand(this, PlayerProjectiles.WoodenArrow));
-			keyboardController.RegisterPressKey(Keys.D2, new UseItemCommand(this, PlayerProjectiles.BlueArrow));
-			keyboardController.RegisterPressKey(Keys.D3, new UseItemCommand(this, PlayerProjectiles.Boomerang));
-			keyboardController.RegisterPressKey(Keys.D4, new UseItemCommand(this, PlayerProjectiles.BlueBoomerang));
-			keyboardController.RegisterPressKey(Keys.D5, new UseItemCommand(this, PlayerProjectiles.Bomb));
-			keyboardController.RegisterPressKey(Keys.D6, new UseItemCommand(this, PlayerProjectiles.Fireball));
+			// // Use items
+			// keyboardController.RegisterPressKey(Keys.D1, new UseItemCommand(this, PlayerProjectiles.WoodenArrow));
+			// keyboardController.RegisterPressKey(Keys.D2, new UseItemCommand(this, PlayerProjectiles.BlueArrow));
+			// keyboardController.RegisterPressKey(Keys.D3, new UseItemCommand(this, PlayerProjectiles.Boomerang));
+			// keyboardController.RegisterPressKey(Keys.D4, new UseItemCommand(this, PlayerProjectiles.BlueBoomerang));
+			// keyboardController.RegisterPressKey(Keys.D5, new UseItemCommand(this, PlayerProjectiles.Bomb));
+			// keyboardController.RegisterPressKey(Keys.D6, new UseItemCommand(this, PlayerProjectiles.Fireball));
 
 			//Registers commands with Keys for Reset
 			keyboardController.RegisterPressKey(Keys.R, new ResetCommand(this));
