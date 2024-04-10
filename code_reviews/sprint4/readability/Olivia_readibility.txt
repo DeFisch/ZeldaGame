@@ -1,1 +1,10 @@
-
+Author: Dan Perry
+Date: April 9, 2024
+Sprint number: 3
+Name of the .cs file being reviewed: ItemActionHandler.cs, HUD classes (worked with Zhiyang)
+Author of the .cs files being reviewed: Olivia Maynard
+Number of minutes taken for the review: 15 mins
+Comments: As I said last sprint, a big strength of code for you is your simplicity and length. The classes are readable and organized and
+were easy for me to go back and edit when I was trying to implement the hearts. When it comes to readability, however, you do tend to have a lot
+of lines that I feel could be condensed or not necessary, typically in declaration. Sometimes it is a necessary evil, but I do think there are ways
+you could have avoided it in a couple repetitive declaration sequences in the HUD classes.
