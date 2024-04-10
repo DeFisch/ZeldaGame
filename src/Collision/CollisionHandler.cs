@@ -175,19 +175,20 @@ public class CollisionHandler {
         foreach (IItemSprite item in game.itemFactory.GetAllItems().ToList()) {
             if (item.GetHitBox().Intersects(game.Link.GetHitBox())) {
                 itemActionHandler.InventoryCounts(item);
-                Globals.audioLoader.Play("LOZ_Get_Item");
                 if (ItemActionHandler.inventoryCounts[9] != 0) { 
                     if (ItemActionHandler.inventoryCounts[1] >= 5)
                     {
                         ItemActionHandler.inventoryCounts[9] = 0;
                         ItemActionHandler.inventoryCounts[1] = ItemActionHandler.inventoryCounts[1] - 5;
                         game.Link.GainHealth(game.Link.GetMaxHealth());
+                        audioLoader.Play("LOZ_Get_Item");
                         game.itemFactory.RemoveItem(item);
                     }
                     ItemActionHandler.inventoryCounts[9] = 0;
                 }
                 else
                 {
+                    audioLoader.Play("LOZ_Get_Item");
                     game.itemFactory.RemoveItem(item);
                 }
 				Debug.WriteLine("Player picks up item \"" + item.GetID() + "\".");
