@@ -62,15 +62,10 @@ public class NPCFactory
                                 if (itemSpriteFactory.IsMapChanged())
                                 {
                                     itemSpriteFactory.AddItem("k", itemPosition);
-                                    itemSpriteFactory.AddItem("bm", itemPosition2);
                                 }
                                 break;
                             case 1:
                                 npcList.Add(new OldMan(texture, position));
-                                if (itemSpriteFactory.IsMapChanged())
-                                {
-                                    itemSpriteFactory.AddItem("ws", itemPosition);
-                                }
                                 break;
                             case 2:
                                 npcList.Add(new OldWoman(texture, position));
@@ -81,6 +76,11 @@ public class NPCFactory
                                 break;
                             case 3:
                                 npcList.Add(new Fairy(texture, position));
+                                if (itemSpriteFactory.IsMapChanged())
+                                {
+                                    itemSpriteFactory.AddItem("h", itemPosition);
+                                    itemSpriteFactory.AddItem("h", itemPosition2);
+                                }
                                 break;
                             case 4:
                                 npcList.Add(new Zelda(texture, position));
