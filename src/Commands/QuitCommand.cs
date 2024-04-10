@@ -8,6 +8,7 @@ public class QuitCommand : ICommand
     }
     public void Execute()
     {
+        myGame.GraphicsDevice.SetRenderTarget(null);
         myGame.Exit();
     }
 }

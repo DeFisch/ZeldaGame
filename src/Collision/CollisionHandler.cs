@@ -42,9 +42,10 @@ public class CollisionHandler {
             foreach (IPlayerProjectile projectile in activeProjectiles.Keys)
             {
                 if (projectile.GetType() == typeof(BoomerangSprite) || projectile.GetType() == typeof(BlueBoomerangSprite)
+                    || projectile.GetType() == typeof(FireballSprite)
                     || ((projectile.GetType() == typeof(WoodSwordHorizontalProjectileSprite)
                     || projectile.GetType() == typeof(WoodSwordVerticalProjectileSprite)) && projectile.HasCollided()))
-                    continue; // Boomerang can pass through walls
+                    continue; // Boomerang and flame can pass through walls
                 {
                     if (activeProjectiles[projectile].Intersects(box))
                     {
@@ -311,7 +312,7 @@ public class CollisionHandler {
         PlayerDoorCollision(game.mapSize, game.Link, game.map);
         PlayerNPCCollision();
 		EnemyPlayerCollision();
-        EnemyProjectileMapCollision();
+        // EnemyProjectileMapCollision();
         EnemyProjectilePlayerCollision();
         EnemyObjectCollision();
         PushableBlockCollision();

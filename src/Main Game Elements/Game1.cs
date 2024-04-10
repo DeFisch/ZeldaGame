@@ -35,6 +35,7 @@ namespace ZeldaGame
 		public CollisionHandler collisionHandler;
 
 		public Texture2D HUD;
+		private FlashlightOverlay flashlight;
 		public HeadUpDisplay headUpDisplay;
 		public PlayerInfoHUD playerInfoHUD;
 
@@ -99,6 +100,9 @@ namespace ZeldaGame
 			PlayerItemSpriteFactory.Instance.LoadAllTextures(Content);
             Link = new PlayerMain(new Vector2(mapSize.X / 2, (mapSize.X / 2) + mapSize.Z), mapScale, this);
 
+			// the stuff we mask out of darkness, essentially this texture defines our lights
+			Texture2D alphaMask = Content.Load<Texture2D>("light");
+			flashlight = new FlashlightOverlay(this, alphaMask);
 			
 			Texture2D[] enemy_texture = {Content.Load<Texture2D>("enemies"),Content.Load<Texture2D>("enemies_1")};
             pushableBlockHandler = new PushableBlockHandler(map_texture, mapScale,mapSize,Link,map);
@@ -215,9 +219,28 @@ namespace ZeldaGame
 		}
 
 		protected override void Draw(GameTime gameTime) {
+				// this rendertarget will hold a black rectangle that gets masked with alphaMask
+				RenderTarget2D darkness = new RenderTarget2D(GraphicsDevice, (int)windowSize.X, (int)windowSize.Y);
+
+				if (gameStateScreenHandler.IsPlaying()) {
+
+				// prepare the darkness
+				GraphicsDevice.SetRenderTarget(darkness);
+				GraphicsDevice.Clear(new Color(0 ,0 ,0 ,250)); // the 120 here is the darkness "intensity"
+
+				var blend = new BlendState();
+				blend.AlphaSourceBlend = Blend.Zero;
+				blend.AlphaDestinationBlend = Blend.InverseSourceColor;
+				blend.ColorSourceBlend = Blend.Zero;
+				blend.ColorDestinationBlend = Blend.InverseSourceColor;
+				_spriteBatch.Begin(blendState: blend);
+				flashlight.Draw(_spriteBatch);
+				_spriteBatch.End();
+				GraphicsDevice.SetRenderTarget(null);
+			}
+
+
 			_spriteBatch.Begin();
-            //Draws player info HUD
-            playerInfoHUD.Draw(_spriteBatch, false);
             if (!gameStateScreenHandler.IsPlaying())
 			{
                 gameStateScreenHandler.Draw(_spriteBatch);
@@ -249,8 +272,15 @@ namespace ZeldaGame
 
 			if (Globals.gameStateScreenHandler.GameOver())
                 GraphicsDevice.Clear(Color.Black);
+			if (gameStateScreenHandler.IsPlaying())
 
-            _spriteBatch.End();
+			// draw the masked darkness!
+			_spriteBatch.Draw(darkness, Vector2.Zero, Color.White);
+
+
+            //Draws player info HUD
+            playerInfoHUD.Draw(_spriteBatch, false);
+			_spriteBatch.End();
 
 			base.Draw(gameTime);
 		}
