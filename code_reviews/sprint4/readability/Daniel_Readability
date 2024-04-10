@@ -1,0 +1,10 @@
+Author: Olivia Maynard
+Date: April 9, 2024
+Reviewing code in: AudioLoader
+Reviewing code of: Daniel Feng
+
+Comments: This is a great and really readable class! All of the variable names and method names have appropriate
+naming conventions. In addition, all the lines are as concise and clean as possible. There is an appropriate level
+of iterative complexity in loops. Important variables are clean and abstracted neatly. The class is a little bit long, but
+it is understandable since there's a lot of information for the loading of audio based on the platform/OS. Overall
+great readability!
