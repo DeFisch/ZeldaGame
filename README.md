@@ -9,13 +9,13 @@ OSU CSE 3902 Zelda Game Project
 - Daniel Feng     feng.1270@osu.edu
 - Zhiyang Xu      xu.4082@osu.edu
 
-## Sprint 2 Task Distribution:
-- Enemy: Daniel
-- Item: Olivia
-- Player Movement: Olu
-- Player Interactions: Dan
+## Sprint 4 Task Distribution:
+- Enemies, audio: Daniel
+- Item and in-game HUD: Olivia
+- Item/bug fixes: Olu
+- Player/Weapon: Dan
 - NPC: Leslie
-- Obstacle: Zhiyang
+- Separate screen HUD, item swapping: Zhiyang
 
 ## Key and Mouse Mappings:
 - Player Controls
@@ -26,6 +26,26 @@ OSU CSE 3902 Zelda Game Project
   - "q" to quit, "r" to reset the game
 - Mouse
   - Click on doors to move through the corresponding rooms
+
+## Updates and Items:
+- Bomb
+  - The player starts with eight bombs, and each time a bomb is thrown one bomb is used up. When a bomb is picked up after an enemy drop, four bombs are placed in Link's inventory. Link can carry no more than eight bombs at a time.
+- Map
+  - When the Map is picked up, the HUD displays the total layout of the dungeon in green in the upper left corner.
+- Compass
+  - When the Compass is picked up, the HUD displays the location of the final boss in red, in the map area in the upper left.
+- Blue Rubies and Yellow Rubies
+  - Blue rubies increment Link's total number of rubies by 5, and yellow (flashing yellow/blue) rubies increment Link's total number of rubies by 1.
+- Clock
+  - If an enemy drops a Clock on a screen after being killed, when Link picks it up, the enemies on the screen will stop moving. This effect only lasts while Link is on that particular screen, so when he leaves the effect in that room ends.
+- Heart
+  - Picking up a Heart allows Link to restore one of his life hearts, shown in the upper right corner of the HUD.
+- Heart Container
+  - Picking up a Heart Container gives Link one extra spot to store life hearts, increasing his maximum health.
+- Triforce
+  - The Triforce is located in the last room of the dungeon, past the final boss. Picking up the Triforce triggers the Game Win screen.
+- Life Potion
+  - The Life Potion can only be purchased, for 5 rubies, from a particular NPC in the NPC room. If Link doesn't have at least five rubies, he'll simply walk over the item and not be able to purchase it. The Life Potion restores all of Link's lives upon purchase.
 
 ## GitHub basic commands:
 a. Download the repository to your local machine
