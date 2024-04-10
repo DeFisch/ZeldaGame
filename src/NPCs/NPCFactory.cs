@@ -1,12 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Runtime.CompilerServices;
-using System.Runtime.InteropServices;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using ZeldaGame.Items;
 using ZeldaGame.Map;
-using ZeldaGame.Player;
 namespace ZeldaGame.NPCs;
 
 public class NPCFactory
@@ -15,26 +12,28 @@ public class NPCFactory
 	private Texture2D texture;
 	private Vector2 position;
 	private Vector2 scale;
-	private int listLength;
+	private int npclistLength;
 	private SpriteFont font;
     private MapHandler mapHandler;
     private List<Vector2> npcRooms;
 	private bool inRoom;
-    private ItemSpriteFactory itemSpriteFactory;
     private Vector2 itemPosition;
+    private Vector2 itemPosition2;
+    private ItemSpriteFactory itemSpriteFactory;
     public NPCFactory(Texture2D texture, Vector2 scale, SpriteFont font, MapHandler mapHandler, ItemSpriteFactory itemSpriteFactory)
 	{
 		npcList = new List<INPC>();
 		npcRooms = new List<Vector2>();
         npcRooms.Add(new Vector2(0, 2));
 		this.texture = texture;
-		listLength = 0;
+		npclistLength = 0;
 		this.scale = scale;
 		this.font = font;
 		this.mapHandler = mapHandler;
 		inRoom = false;
+        itemPosition = new Vector2(5, 5);
+        itemPosition2 = new Vector2(7, 5);
         this.itemSpriteFactory = itemSpriteFactory;
-        itemPosition = new Vector2(5, 4);
     }
 
 	public void AddNPCs()
@@ -63,6 +62,7 @@ public class NPCFactory
                                 if (itemSpriteFactory.IsMapChanged())
                                 {
                                     itemSpriteFactory.AddItem("k", itemPosition);
+                                    itemSpriteFactory.AddItem("bm", itemPosition2);
                                 }
                                 break;
                             case 1:
@@ -94,19 +94,19 @@ public class NPCFactory
                 }
             }
         }
-        listLength = npcList.Count;
+        npclistLength = npcList.Count;
     }
 
 	public void Draw(SpriteBatch spriteBatch)
 	{
-        for (int i = 0; i < listLength; i++)
+        for (int i = 0; i < npclistLength; i++)
         {
             npcList[i].Draw(spriteBatch, scale, font);
         }
     }
 	public void Update()
 	{
-        for (int i = 0; i < listLength; i++)
+        for (int i = 0; i < npclistLength; i++)
         {
             npcList[i].Update();
         }
@@ -119,6 +119,7 @@ public class NPCFactory
         }
         else if (!npcRooms.Contains(mapXY) && inRoom) {
             Globals.audioLoader.StopSingleton("LOZ_Text");
+            itemSpriteFactory.GetAllItems().Clear();
             inRoom = false;
         }
         return inRoom;
