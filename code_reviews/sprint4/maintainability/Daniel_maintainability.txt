@@ -1,1 +1,14 @@
-
+Author: Dan Perry
+Date: April 9, 2024
+Sprint number: 4
+Name of the .cs file being reviewed: CollisionHandler.cs, GameState classes, Enemy classes
+Author of the .cs files being reviewed: Daniel Feng
+Number of minutes taken for the review: 15 mins
+Comments: The CollisionHandler that the two of us worked on I would deem as well organized in different methods and very maintainable; maybe some
+of the better maintainability we have in our code. The class is long, but that is a necessary evil, because you did an excellent job of refactoring all
+the collision code into that class. This all made it easy to locate collision detection and quick to narrow down where a change needed to be made. Similar
+things can be said about teh Game State classes, but not too much maintainability was needed because they were short and effective classes. However, once
+we got to the collision methods, some of the logic got confusing in a bunch of if statements here and there, and they grew to be quite long, possibly making them
+more buggy. I'm not sure if there was a way around this, or maybe break them up into different methods, but I struggled to deal with a couple collision changes.
+Otherwise, your code is amazing, I was able to do what I needed with enemies almost as if I had wrote the classes because they were that well organized and created.
+Great work!
