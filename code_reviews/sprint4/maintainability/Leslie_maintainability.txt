@@ -1,0 +1,7 @@
+Author: Daniel Feng
+Date: April 9th, 2024
+Sprint number: 4
+Name of the .cs file being reviewed: NPCs classes/GameScreens classes
+Number of minuteos taken for the review: 15 mins
+Specific Comments:
+The gamescreen interface and class designs are very well done, with a consistant coding style and short and concise functions. Overall there's no issues on maintainability, and it is fairly easy to change the behavior of different game screens once the change is required in the future.
