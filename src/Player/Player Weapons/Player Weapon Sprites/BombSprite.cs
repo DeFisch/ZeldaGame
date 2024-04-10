@@ -66,6 +66,11 @@ public class BombSprite : IPlayerProjectile {
         return isActive;
     }
 
+    public bool HasCollided()
+    {
+        return exploded;
+    }
+
     public void Collided()
     {
         //isActive = false;

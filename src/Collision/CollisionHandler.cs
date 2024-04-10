@@ -13,7 +13,6 @@ using Microsoft.Xna.Framework.Graphics;
 using System;
 
 namespace ZeldaGame;
-
 public class CollisionHandler {
     private readonly Game1 game;
     private readonly EnemyCollisionHandler enemyCollisionHandler;
@@ -31,7 +30,6 @@ public class CollisionHandler {
             if (game.Link.GetHitBox().Intersects(box))
             {
                 game.Link.OnCollision(box);
-                Debug.WriteLine("Player collides with wall."); 
             }
         }
     }
@@ -43,20 +41,16 @@ public class CollisionHandler {
         {
             foreach (IPlayerProjectile projectile in activeProjectiles.Keys)
             {
-                if(projectile.GetType() == typeof(BoomerangSprite) || projectile.GetType() == typeof(BlueBoomerangSprite))
+                if (projectile.GetType() == typeof(BoomerangSprite) || projectile.GetType() == typeof(BlueBoomerangSprite)
+                    || ((projectile.GetType() == typeof(WoodSwordHorizontalProjectileSprite)
+                    || projectile.GetType() == typeof(WoodSwordVerticalProjectileSprite)) && projectile.HasCollided()))
                     continue; // Boomerang can pass through walls
                 {
                     if (activeProjectiles[projectile].Intersects(box))
                     {
                         projectile.Collided();
-                        Debug.WriteLine("Projectile collides with wall.");
                     }
                 }
-                if (activeProjectiles[projectile].Intersects(box))
-                {
-                    projectile.Collided();
-					Debug.WriteLine("Projectile collides with wall.");
-				}
             }
         }
         // Check if projectile collides with window boundaries
@@ -67,7 +61,6 @@ public class CollisionHandler {
             if (activeProjectiles[projectile].X < 0 || activeProjectiles[projectile].X > game.windowSize.X || activeProjectiles[projectile].Y < 150 || activeProjectiles[projectile].Y > game.windowSize.Y)
             {
                 projectile.Collided();
-                Debug.WriteLine("Projectile collides with window boundary.");
             }
         }
     }
@@ -87,7 +80,6 @@ public class CollisionHandler {
                     game.Link = new PlayerHurt(game.Link, game);
                     Globals.audioLoader.Play("LOZ_Link_Hurt");
                     projectile.Collided();
-                    Debug.WriteLine("Player collides with bomb.");
                 }
             }
         }
@@ -107,12 +99,14 @@ public class CollisionHandler {
                     // Keese can only be damaged by boomerang
                     if (enemy.GetType() == typeof(Keese) && projectile.GetType() != typeof(BoomerangSprite) && projectile.GetType() != typeof(BlueBoomerangSprite))
                         continue;
-                    projectile.Collided();
-                    enemy.Knockback(game.Link.GetDirection());
+                    // If not colliding with sword explosion, do Collided()
+                    if (!((projectile.GetType() == typeof(WoodSwordHorizontalProjectileSprite)
+                    || projectile.GetType() == typeof(WoodSwordVerticalProjectileSprite)) && projectile.HasCollided()))
+                        projectile.Collided();
+                    enemy.Knockback(projectile.GetDirection());
                     if(enemy.TakeDamage(projectile.ProjectileDamage()))
                         Globals.audioLoader.Play("LOZ_Enemy_Hit");
                     shotEnemies.Add(enemy);
-					Debug.WriteLine("Player projectile collides with enemy.");
 				}
             }
         }
@@ -126,7 +120,6 @@ public class CollisionHandler {
                 game.Link.TakeDamage(enemy.DoDamage());
                 game.Link.Knockback();
                 game.Link = new PlayerHurt(game.Link, game);
-				Debug.WriteLine("Enemy collides with player.");
 			}
 		}
 	}
@@ -136,10 +129,8 @@ public class CollisionHandler {
         string playerDirection = game.Link.GetDirection().ToString();
         bool isShielded = false;
 
-		Debug.WriteLine("Enemy projectile facing " + projDirection + "hits player facing " + playerDirection + ".");
 		if (game.Link.IsIdle() == true && projDirection.Equals(playerDirection) == true) {
 			game.enemyFactory.enemyProjectileFactory.ClearProjectile(projectile);
-			Debug.WriteLine("Blocked projectile!");
 			isShielded = true;
 		}
 		projectile.Collided();
@@ -159,7 +150,6 @@ public class CollisionHandler {
                     game.Link.TakeDamage(projectiles[i].DoDamage());
                     game.Link.Knockback();
                     game.Link = new PlayerHurt(game.Link, game);
-                    Debug.WriteLine("Enemy projectile collides with player.");
                 }
 			}
         }
@@ -194,7 +184,6 @@ public class CollisionHandler {
                     audioLoader.Play("LOZ_Get_Item");
                     game.itemFactory.RemoveItem(item);
                 }
-				Debug.WriteLine("Player picks up item \"" + item.GetID() + "\".");
 			} 
         }
     }
@@ -209,22 +198,18 @@ public class CollisionHandler {
         if (up_door.Contains(playerCenterpoint)){
             map.move_up();
             player.SetPlayerPosition(new Vector2((int)(map_size.X/2), (int)((0.8*map_size.Y) + map_size.Z)));
-			Debug.WriteLine("Player enters top door.");
 		}
 		else if (down_door.Contains(playerCenterpoint)){
             map.move_down();
             player.SetPlayerPosition(new Vector2((int)(map_size.X/2), (int)((0.2*map_size.Y) + map_size.Z)));
-			Debug.WriteLine("Player enters bottom door.");
 		}
 		else if (left_door.Contains(playerCenterpoint)){
             map.move_left();
             player.SetPlayerPosition(new Vector2((int)(0.85*map_size.X), (int)((map_size.Y/2) + map_size.Z)));
-			Debug.WriteLine("Player enters left door.");
 		}
 		else if (right_door.Contains(playerCenterpoint)){
             map.move_right();
             player.SetPlayerPosition(new Vector2((int)(0.15*map_size.X), (int)((map_size.Y/2) + map_size.Z)));
-			Debug.WriteLine("Player enters right door.");
 		}
 
         //Room_0_1 Stair collision
@@ -238,7 +223,6 @@ public class CollisionHandler {
                 map.x = 0;
                 map.y = 0;
                 player.SetPlayerPosition(new Vector2(175, 415));
-                Debug.WriteLine("Player enters stairs.");
             }
         }
 
@@ -253,7 +237,6 @@ public class CollisionHandler {
                 map.x = 1;
                 map.y = 0;
                 player.SetPlayerPosition(new Vector2(375,480));
-				Debug.WriteLine("Player enters invisible door.");
 			}
         }
     }

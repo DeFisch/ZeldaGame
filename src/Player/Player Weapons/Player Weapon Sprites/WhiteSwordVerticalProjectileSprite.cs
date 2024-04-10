@@ -47,7 +47,12 @@ public class WhiteSwordVerticalProjectileSprite : IPlayerProjectile {
 		return isActive;
 	}
 
-	public void Collided() {
+    public bool HasCollided()
+    {
+        return collided;
+    }
+
+    public void Collided() {
 		sourceRectangle = new Rectangle(62, 154, 8, 16);
 		collided = true;
 	}

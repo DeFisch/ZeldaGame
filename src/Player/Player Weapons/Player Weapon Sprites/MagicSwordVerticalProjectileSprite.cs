@@ -48,7 +48,12 @@ public class MagicSwordVerticalProjectileSprite : IPlayerProjectile {
 		return isActive;
 	}
 
-	public void Collided() {
+    public bool HasCollided()
+    {
+        return collided;
+    }
+
+    public void Collided() {
 		sourceRectangle = new Rectangle(97, 154, 8, 16);
 		collided = true;
 	}

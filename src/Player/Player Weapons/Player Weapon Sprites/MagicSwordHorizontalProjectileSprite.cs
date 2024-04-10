@@ -50,6 +50,11 @@ public class MagicSwordHorizontalProjectileSprite : IPlayerProjectile {
         return isActive;
     }
 
+    public bool HasCollided()
+    {
+        return collided;
+    }
+
     public void Collided()
     {
 		sourceRectangle = new Rectangle(97, 154, 8, 16);

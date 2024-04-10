@@ -46,6 +46,11 @@ public class MagicSwordHorizontalSprite : IPlayerProjectile {
         return isActive;
     }
 
+	public bool HasCollided()
+    {
+        throw new System.NotImplementedException();
+    }
+
     public void Collided()
     {
         //isActive = false;

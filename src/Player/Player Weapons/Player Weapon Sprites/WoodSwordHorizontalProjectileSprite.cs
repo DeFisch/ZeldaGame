@@ -15,13 +15,16 @@ public class WoodSwordHorizontalProjectileSprite : IPlayerProjectile {
 	private Vector2 projectileMovement;
 	private readonly int projectileSpeed = 6;
 	private readonly int damage = 1;
-	private readonly int expirationTimer = 10;
+	private readonly int expirationTimer = 20;
 	private int expirationCounter;
 
 	private Rectangle destinationRectangle;
 	private Rectangle sourceRectangle;
 
-	public WoodSwordHorizontalProjectileSprite(Texture2D sprite, Direction direction, Vector2 position) {
+	SwordProjectileExplosion swordExplosion;
+
+
+    public WoodSwordHorizontalProjectileSprite(Texture2D sprite, Direction direction, Vector2 position) {
 		isActive = true;
 		Sprite = sprite;
 		effect = SpriteEffects.None;
@@ -32,9 +35,14 @@ public class WoodSwordHorizontalProjectileSprite : IPlayerProjectile {
 	}
 
 	public Rectangle GetHitBox() {
-        Rectangle hitBox = destinationRectangle;
-        hitBox.Inflate(-8, -25);
-        return hitBox;
+		if (collided)
+			return swordExplosion.GetHitBox();
+		else
+		{
+            Rectangle hitBox = destinationRectangle;
+            hitBox.Inflate(-8, -25);
+            return hitBox;
+        }
     }
 
 	public int ProjectileDamage() {
@@ -49,8 +57,16 @@ public class WoodSwordHorizontalProjectileSprite : IPlayerProjectile {
 		return isActive;
 	}
 
-	public void Collided() {
-		sourceRectangle = new Rectangle(27, 154, 8, 16);
+    public bool HasCollided()
+    {
+        return collided;
+    }
+
+    public void Collided() {
+		if (direction == Direction.Right)
+            swordExplosion = new(Sprite, position + new Vector2(60, 0));
+		else if (direction == Direction.Left)
+			swordExplosion = new(Sprite, position - new Vector2(20, 0));
 		collided = true;
 	}
 
@@ -77,7 +93,11 @@ public class WoodSwordHorizontalProjectileSprite : IPlayerProjectile {
 		if (direction == Direction.Left) {
 			effect = SpriteEffects.FlipHorizontally;
 		}
-		spriteBatch.Draw(Sprite, destinationRectangle, sourceRectangle, Color.White, rotation: 0, new Vector2(0, 0), effects: effect, 1);
+
+		if (!collided)
+			spriteBatch.Draw(Sprite, destinationRectangle, sourceRectangle, Color.White, rotation: 0, new Vector2(0, 0), effects: effect, 1);
+		else
+            swordExplosion.Draw(spriteBatch, scale);
 	}
 
 	public void Update() {
@@ -105,6 +125,8 @@ public class WoodSwordHorizontalProjectileSprite : IPlayerProjectile {
 				isActive = false;
 			}
 		}
-	}
 
+		if (collided)
+            swordExplosion.Update();
+	}
 }

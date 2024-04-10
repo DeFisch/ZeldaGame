@@ -50,6 +50,11 @@ public class BlueArrowVerticalSprite : IPlayerProjectile {
         return isActive;
     }
 
+    public bool HasCollided()
+    {
+        return collided;
+    }
+
     public void Collided()
     {
         sourceRectangle = new Rectangle(53, 185, 8, 15);

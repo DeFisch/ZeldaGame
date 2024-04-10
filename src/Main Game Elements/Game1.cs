@@ -183,9 +183,9 @@ namespace ZeldaGame
 			foreach (IController controller in controllers) {
 				controller.Update();
 			}
-			if (!Globals.gameStateScreenHandler.IsPlaying())
+			if (!gameStateScreenHandler.IsPlaying())
 			{
-				Globals.gameStateScreenHandler.Update();
+				gameStateScreenHandler.Update();
 				return;
 			}
             // Updates enemies
@@ -206,8 +206,8 @@ namespace ZeldaGame
 			headUpDisplay.Update();
 
 			// Checks if end game
-            if (Globals.gameStateScreenHandler.GameOver())
-                Globals.gameStateScreenHandler.EndGame();
+            if (gameStateScreenHandler.GameOver())
+                gameStateScreenHandler.EndGame();
 				
 			//Use items based on current choice
 			keyboardController.RegisterPressKeySwitch(Keys.B, new UseItemCommand(this, headUpDisplay.HUDInventory.CurrentWeapon()));
@@ -218,9 +218,9 @@ namespace ZeldaGame
 			_spriteBatch.Begin();
             //Draws player info HUD
             playerInfoHUD.Draw(_spriteBatch, false);
-            if (!Globals.gameStateScreenHandler.IsPlaying())
+            if (!gameStateScreenHandler.IsPlaying())
 			{
-                Globals.gameStateScreenHandler.Draw(_spriteBatch);
+                gameStateScreenHandler.Draw(_spriteBatch);
                 //Draws HUD
                 if (headUpDisplay.isVisible())
 					headUpDisplay.Draw(_spriteBatch);

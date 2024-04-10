@@ -12,6 +12,7 @@ public interface IPlayerProjectile {
 
 	public bool IsActive();
 
+	public bool HasCollided();
 	public void Collided();
 
 	public void Update();

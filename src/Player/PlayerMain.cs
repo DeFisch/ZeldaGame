@@ -172,7 +172,6 @@ namespace ZeldaGame.Player {
 		public void TakeDamage(float damage)
 		{
 			health -= damage;
-			Debug.WriteLine("Health: " + health);
 		}
 
 		public void GainHealth(float heal)
