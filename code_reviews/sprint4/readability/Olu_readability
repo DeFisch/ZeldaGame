@@ -1,0 +1,9 @@
+Author: Olivia Maynard
+Date: April 9, 2024
+Reviewing code in: ItemActionHandler
+Reviewing code of: Olu Fasoro
+
+Comments: I like that the additions to the Heart and Heart Container were done in single line statements and were easy to read. 
+However, a potential weakness is having the health in the "Globals" section and not implemented in an easier
+manner like just a static variable in the Player class or something passed in - it makes it a little bit terse to read. Nice work by connecting a lot of different
+classes and areas together in a way that decreased coupling a lot and was easy to read!

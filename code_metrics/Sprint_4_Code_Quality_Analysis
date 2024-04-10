@@ -1,0 +1,12 @@
+CA1822: Member PlayerDoorCollision does not access instance data and can be marked as static. 
+  Fixed
+CA1822: Member “Idle” does not access instance data and can be marked as static 
+  Fixed
+CA1822: Member “OnCollision” does not access instance data and can be marked as static
+	Suppressed because it doesn’t allow access from IEnemy/would require excessive refactoring
+CA1822: Member “GetAvailableItems” does not access instance data and can be marked as static
+	Suppressed because it doesn’t allow access from IItem/would require excessive refactoring
+CA2211: Non-constant fields should not be visible for inventoryCounts[]
+	Suppressed because 1. inventoryCounts is accessed throughout the program and it’s made static to avoid overexcessive refactoring and high coupling throughout a lot of classes and 2. The concern is because a visible nonconstant field isn’t thread safe, but we don’t have that issue due to the linear/atomic state nature of our code
+CA1829: Use the “Count” property instead of Enumerable.Count() Fixed
+

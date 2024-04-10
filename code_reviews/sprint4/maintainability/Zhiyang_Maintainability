@@ -1,0 +1,9 @@
+Author: Olivia Maynard
+Date: April 9, 2024
+Reviewing: HeadUpDisplay.cs
+Author of code: Zhiyang Xu
+
+Really maintainable and great code! There's relatively low coupling throughout this class and all the methods are as short/efficient as possible. 
+Using the "=>" operator on several of the methods really makes them clear, concise, and easy to understand and maintain. 
+The class as a whole is very cohesive and useful for only one of the two HUDs, performing exactly what it needs to and nothing more or less. 
+In addition, the code is clean and well-organized, which makes it easy to both maintain and read. 
