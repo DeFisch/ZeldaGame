@@ -79,7 +79,7 @@ public class NPCFactory
                                 if (itemSpriteFactory.IsMapChanged())
                                 {
                                     itemSpriteFactory.AddItem("h", itemPosition);
-                                    itemSpriteFactory.AddItem("h", itemPosition2);
+                                    itemSpriteFactory.AddItem("hc", itemPosition2);
                                 }
                                 break;
                             case 4:
