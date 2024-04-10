@@ -1,0 +1,8 @@
+Author: Daniel Feng
+Date: Apr 9th, 2024
+Sprint: 4
+.cs files reviewed: Player/Enemies knockback @ CollisionHandler.cs, heart HUD display @ src/HUD/PlayerInfoHUD.cs 
+minutes to review: 10
+Specific comments:
+Overall the knockbacks and heart display code are pretty well written and takes little efforts to maintain in the future. The only thing I can see is the knockbacks of the enemies are scattered across 10 different classes, which will make future maintainance a bit more difficult. However, this is due the poor design of the enemy classes but not because of Dan's code. So overall I would say Dan did a 10/10 job on sprint4.
+
