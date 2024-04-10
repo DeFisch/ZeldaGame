@@ -1,0 +1,8 @@
+Author: Leslie Cobbold
+Date: April 9, 2024
+Sprint number: 4
+Name of the .cs file being reviewed: Files in the HUD folder
+Number of minutes taken for the review: 20 mins
+
+Comments:
+Excellent work with all the elements related to the HUD. The HeadUpDisplay class is easily readable and understandable as it draws items and info on the HUD texture. Variable names are also detailed to know what it stores/does. Nice idea to bring back some code from beginning sprints to cycle through the weapon inventory on the HUD. It shows the reuseability of previous codes. Overall, given the difficulty of this task to work on the HUD elements, you were able make the code very easy to read and understand. Great work!

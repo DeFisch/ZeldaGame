@@ -1,0 +1,10 @@
+Author: Leslie Cobbold
+Date: April 9, 2024
+Sprint number: 4
+Name of the .cs file being reviewed: PlayerInfoHUD, ICollidible, CollisionHandler, Projectiles
+Author of the .cs files being reviewed: Olu Fasoro
+Number of minutes taken for the review: 20 mins
+
+Comments: 
+Great work in refactoring the playerInfoHUD for the player health. Its very maintainable as it relates to the methods to get link's health status and calculates whether its full heart, empty or half heart based on the links collisions. Also great idea to refactor all the code to have all collidable objects follow an interface. It makes it easy to add addtional collidable type methods in the future. Overall, most of the code were refactored well to make it easy to read, follow the same patterns and easily maintainable in the future.
+ 
