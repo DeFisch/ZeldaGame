@@ -1,5 +1,9 @@
 ﻿
 
+using Microsoft.Xna.Framework.Input;
+using ZeldaGame.Player;
+using ZeldaGame.Player.Commands;
+
 namespace ZeldaGame.Commands;
     public class StartGameCommand : ICommand
     {
@@ -14,6 +18,10 @@ namespace ZeldaGame.Commands;
             {
                 Globals.gameStateScreenHandler.CurrentGameState = GameState.Playing;
                 Globals.audioLoader.PlayBGM();
+                myGame.keyboardController.UnregisterPressKey(Keys.Up);
+                myGame.keyboardController.UnregisterPressKey(Keys.Down);
+                // myGame.keyboardController.RegisterHoldKey(Keys.Up, new SetWalkSpriteCommand(myGame, 0));
+                // myGame.keyboardController.RegisterHoldKey(Keys.Down, new SetWalkSpriteCommand(myGame, 2));
             }else if (Globals.gameStateScreenHandler.CurrentGameState == GameState.HUD)
             {
                 Globals.gameStateScreenHandler.ResumeGame();

@@ -89,7 +89,7 @@ public class MapHandler {
             door_record[this.y, this.x] = (true, door_type_old);
             game.enemyFactory.ClearEnemies();
             if (!enemy_record[y, x].Item1) { // if player haven't been to this room
-                foreach (string enemy in mapLoader.get_enemies()) {
+                foreach (string enemy in mapLoader.get_enemies(game.level)) {
                     game.enemyFactory.AddEnemy(enemy, map);
                 }
             } else {

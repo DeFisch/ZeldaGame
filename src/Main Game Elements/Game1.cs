@@ -40,7 +40,7 @@ namespace ZeldaGame
 		public PlayerInfoHUD playerInfoHUD;
 		public bool flashlightMode = true;
 
-		private KeyboardController keyboardController;
+		public KeyboardController keyboardController;
 		private MouseController mouseController;
 		private List<IController> controllers;
 		public MapHandler map;
@@ -48,6 +48,7 @@ namespace ZeldaGame
 		public Vector2 mapScale;
 		public Vector2 windowSize;
 		public SpriteFont font;
+		public int level = 0;
 
         public Game1() {
 			_graphics = new GraphicsDeviceManager(this);
@@ -221,10 +222,10 @@ namespace ZeldaGame
 
 		protected override void Draw(GameTime gameTime) {
 				// this rendertarget will hold a black rectangle that gets masked with alphaMask
-				RenderTarget2D darkness = new RenderTarget2D(GraphicsDevice, (int)windowSize.X, (int)windowSize.Y);
+				RenderTarget2D darkness = null;
 
 				if (gameStateScreenHandler.IsPlaying() && flashlightMode) {
-
+				darkness = new RenderTarget2D(GraphicsDevice, (int)windowSize.X, (int)windowSize.Y);
 				// prepare the darkness
 				GraphicsDevice.SetRenderTarget(darkness);
 				GraphicsDevice.Clear(new Color(0 ,0 ,0 ,250)); // the 120 here is the darkness "intensity"
@@ -276,6 +277,7 @@ namespace ZeldaGame
 			if (gameStateScreenHandler.IsPlaying())
 
 			// draw the masked darkness!
+			if (flashlightMode)
 			_spriteBatch.Draw(darkness, Vector2.Zero, Color.White);
 
 

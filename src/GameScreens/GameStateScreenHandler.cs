@@ -85,6 +85,7 @@ public class GameStateScreenHandler
     public void Reset()
     {
        currentGameState = GameState.TitleScreen;
+       AddScreen(GameState.TitleScreen, new TitleScreen(myGame.Content.Load<Texture2D>("TitleScreen"), myGame));
        gameOverScreen.Reset();
     }
 }
