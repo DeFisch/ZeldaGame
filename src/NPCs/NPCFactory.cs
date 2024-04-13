@@ -66,7 +66,10 @@ public class NPCFactory
                                 break;
                             case 1:
                                 npcList.Add(new OldMan(texture, position));
-                                break;
+								if (itemSpriteFactory.IsMapChanged()) {
+									itemSpriteFactory.AddItem("ms", itemPosition);
+								}
+								break;
                             case 2:
                                 npcList.Add(new OldWoman(texture, position));
                                 if (itemSpriteFactory.IsMapChanged())

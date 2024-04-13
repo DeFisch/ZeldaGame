@@ -100,7 +100,10 @@ namespace ZeldaGame.Items {
 				case "ws":
 					objectList.Add(new WoodSword(this.texture, pos));
 					break;
-                case "lp":
+				case "ms":
+					objectList.Add(new MagicSword(this.texture, pos));
+					break;
+				case "lp":
                     objectList.Add(new LifePotion(this.texture, pos));
                     break;
                 default:

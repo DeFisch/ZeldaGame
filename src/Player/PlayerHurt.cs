@@ -32,7 +32,12 @@ namespace ZeldaGame.Player {
 		public void UseItem(PlayerProjectiles item) {
 			decoratedPlayer.UseItem(item);
 		}
-
+		public Swords GetSword() {
+			return decoratedPlayer.GetSword();
+		}
+		public void SetSword(Swords newSword) {
+			decoratedPlayer.SetSword(newSword);
+		}
 		public Direction GetDirection() {
 			return decoratedPlayer.GetDirection();
 		}

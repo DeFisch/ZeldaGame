@@ -75,6 +75,9 @@ namespace ZeldaGame.Items
                 case Compass:
                     getCompass = true;
                     break;
+                case MagicSword:
+                    game.Link. SetSword(Globals.Swords.Magic);
+                    break;
                 default:
                     break;
             }

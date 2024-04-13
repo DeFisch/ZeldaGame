@@ -6,12 +6,14 @@ namespace ZeldaGame.Player {
 		public Direction direction;
 		public Direction prevDirection;
 		public State state;
+		public Swords sword;
 		private IPlayerSprite sprite;
 
 		public PlayerActionHandler(IPlayerSprite sprite) {
 			direction = Direction.Down;
 			this.sprite = sprite;
 			this.state = State.Idle;
+			this.sword = Swords.Wood;
 		}
 
 		public Direction GetDirection() {
@@ -21,6 +23,16 @@ namespace ZeldaGame.Player {
 		public void SetDirection(Direction direction) {
 			prevDirection = this.direction;
 			this.direction = direction;
+		}
+
+		public Swords GetSword() {
+			return sword;
+		}
+
+		public void SetSword(Swords newSword) {
+			if (newSword >= sword) {
+				sword = newSword;
+			}
 		}
 
 		public State GetState() {
