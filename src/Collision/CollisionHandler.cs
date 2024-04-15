@@ -164,28 +164,50 @@ public class CollisionHandler {
 			}
 		}
 	}
-
-	private void ItemPlayerCollision() {
-        foreach (IItemSprite item in game.itemFactory.GetAllItems().ToList()) {
-            if (item.GetHitBox().Intersects(game.Link.GetHitBox())) {
+    private void ItemPlayerCollision()
+    {
+        foreach (IItemSprite item in game.itemFactory.GetAllItems().ToList())
+        {
+            if (item.GetHitBox().Intersects(game.Link.GetHitBox()))
+            {
                 itemActionHandler.InventoryCounts(item);
-                if (ItemActionHandler.inventoryCounts[9] != 0) { 
-                    if (ItemActionHandler.inventoryCounts[1] >= 5)
-                    {
-                        ItemActionHandler.inventoryCounts[9] = 0;
-                        ItemActionHandler.inventoryCounts[1] = ItemActionHandler.inventoryCounts[1] - 5;
-                        game.Link.GainHealth(game.Link.GetMaxHealth());
-                        audioLoader.Play("LOZ_Get_Item");
-                        game.itemFactory.RemoveItem(item);
-                    }
-                    ItemActionHandler.inventoryCounts[9] = 0;
+
+                if (game.NPCFactory.IsInNPCRoom(game.map.getMapXY()) && ItemActionHandler.inventoryCounts[1] < 2 && item is Key)
+                {
+                    Debug.WriteLine("Cannot buy Key as you don't have enough rupees.");
+                }
+                else if (game.NPCFactory.IsInNPCRoom(game.map.getMapXY()) && ItemActionHandler.inventoryCounts[1] < 5 && item is LifePotion)
+                {
+                    Debug.WriteLine("Cannot buy Life Potion as you don't have enough rupees.");
                 }
                 else
                 {
-                    audioLoader.Play("LOZ_Get_Item");
-                    game.itemFactory.RemoveItem(item);
+                    switch (item)
+                    {
+                        case Key keyItem when game.NPCFactory.IsInNPCRoom(game.map.getMapXY()) && ItemActionHandler.inventoryCounts[1] >= 2:
+                            ItemActionHandler.inventoryCounts[1] -= 2;
+                            ItemActionHandler.inventoryCounts[2] += 0;
+                            audioLoader.Play("LOZ_Get_Item");
+                            game.itemFactory.RemoveItem(keyItem);
+                            Debug.WriteLine("Bought 1 key using 2 rupees.");
+                            break;
+
+                        case LifePotion lifePotion when game.NPCFactory.IsInNPCRoom(game.map.getMapXY()) && ItemActionHandler.inventoryCounts[1] >= 5:
+                            ItemActionHandler.inventoryCounts[9] = 0;
+                            ItemActionHandler.inventoryCounts[1] -= 5;
+                            game.Link.GainHealth(game.Link.GetMaxHealth());
+                            audioLoader.Play("LOZ_Get_Item");
+                            game.itemFactory.RemoveItem(lifePotion);
+                            Debug.WriteLine("Bought life potion using 5 rupees.");
+                            break;
+
+                        default:
+                            audioLoader.Play("LOZ_Get_Item");
+                            game.itemFactory.RemoveItem(item);
+                            break;
+                    }
                 }
-			} 
+            }
         }
     }
 

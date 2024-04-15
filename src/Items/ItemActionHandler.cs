@@ -40,7 +40,13 @@ namespace ZeldaGame.Items
                     inventoryCounts[1]+=5;
                     break;
                 case Key:
-                    inventoryCounts[2]++;
+                    if(game.NPCFactory.IsInNPCRoom(game.map.getMapXY()) && ItemActionHandler.inventoryCounts[1] < 2){
+                        inventoryCounts[2] +=0;
+                    }
+                    else
+                    {
+                        inventoryCounts[2]++;
+                    }
                     break;
                 case Clock:
                     inventoryCounts[3]++;
@@ -76,7 +82,7 @@ namespace ZeldaGame.Items
                     getCompass = true;
                     break;
                 case MagicSword:
-                    game.Link. SetSword(Globals.Swords.Magic);
+                    game.Link.SetSword(Globals.Swords.Magic);
                     break;
                 default:
                     break;
