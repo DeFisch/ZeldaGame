@@ -9,7 +9,6 @@ namespace ZeldaGame.HUD
 {
     public class HUDInventory
     {
-        private int listLength;
         private List<Rectangle> weaponSRList;
         private List<Rectangle> weaponDRList;
         private int cycleIndex;
@@ -52,7 +51,7 @@ namespace ZeldaGame.HUD
 
         public void CycleList(int cycleDirection)
         {
-            listLength = weaponSRList.Count;
+            int listLength = weaponSRList.Count;
             if (cycleDirection == 1)
                 cycleIndex = (cycleIndex + 1) % listLength;
             else if (cycleDirection == 0)
