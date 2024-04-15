@@ -43,6 +43,7 @@ namespace ZeldaGame.HUD
         public List<Rectangle> getDestinationRectangleList() => dRectangleList;
         public List<Rectangle> getSourceRectangleList() => sRectangleList;
         public Dictionary<string, Rectangle> playerCurrentPosition() => playerPosition;
+        public Dictionary<Vector2, bool> getRoomVisited() => isVisited;
 
         public void SetLists(string map_name)
         {

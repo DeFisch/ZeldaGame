@@ -180,8 +180,10 @@ namespace ZeldaGame
 			//Registers commands with Keys for HUD weapon selection
             keyboardController.RegisterPressKey(Keys.A, new HUDInventoryCommandLast(this));
             keyboardController.RegisterPressKey(Keys.D, new HUDInventoryCommandNext(this));
-            keyboardController.RegisterPressKey(Keys.Left, new HUDInventoryCommandLast(this));
-            keyboardController.RegisterPressKey(Keys.Right, new HUDInventoryCommandNext(this));
+
+			//Registers commands with keys for HUD map teleport
+            keyboardController.RegisterPressKey(Keys.Left, new HUDTeleportCommandLast(this));
+            keyboardController.RegisterPressKey(Keys.Right, new HUDTeleportCommandNext(this));
         }
 
         protected override void Update(GameTime gameTime) {

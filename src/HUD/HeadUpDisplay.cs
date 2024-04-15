@@ -9,7 +9,7 @@ namespace ZeldaGame.HUD
 {
     public class HeadUpDisplay
     {
-        private HUDMapHandler HUDMapHandler;
+        public HUDMapHandler HUDMapHandler;
         private CollisionHandler collision;
         public HUDInventory HUDInventory;
         private PlayerInfoHUD playerInfoHUD;

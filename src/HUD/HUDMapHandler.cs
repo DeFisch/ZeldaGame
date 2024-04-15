@@ -3,6 +3,7 @@ using Microsoft.Xna.Framework.Graphics;
 using System.Collections;
 using System.Collections.Generic;
 using System.Reflection.Metadata.Ecma335;
+using System.Runtime.CompilerServices;
 using ZeldaGame.Map;
 
 namespace ZeldaGame.HUD
@@ -10,6 +11,7 @@ namespace ZeldaGame.HUD
     public class HUDMapHandler
     {
         private HUDMapType mapType;
+        public HUDMapTeleport mapTeleport;
         private Texture2D texture;
         private List<Rectangle> sourceRectangle;
         private List<Rectangle> targetRectangle;
@@ -26,6 +28,7 @@ namespace ZeldaGame.HUD
             targetRectangle = new List<Rectangle>();
             playerPosition = new Dictionary<string, Rectangle>();
             mapType = new HUDMapType(scale, map, collisionHandler);
+            mapTeleport = new HUDMapTeleport(mapType);
         }
 
         public void Draw(SpriteBatch spriteBatch, bool isDisplayed)
@@ -49,6 +52,8 @@ namespace ZeldaGame.HUD
                 spriteBatch.Draw(texture, targetRectangle[i], sourceRectangle[i], Color.White);
             if(!map_name.Equals("Orange"))
                 DrawFinalRoom(map_name, spriteBatch);
+            else
+                mapTeleport.Draw(texture, spriteBatch);
             spriteBatch.Draw(texture, playerPosition[map_name], new Rectangle(519, 126, 3, 3), Color.White);
         }
 
