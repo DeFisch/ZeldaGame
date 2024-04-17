@@ -203,6 +203,7 @@ public class CollisionHandler {
 
                         default:
                             audioLoader.Play("LOZ_Get_Item");
+                            Debug.WriteLine("Obtained Item \"" + item.GetID() + "\"");
                             game.itemFactory.RemoveItem(item);
                             break;
                     }

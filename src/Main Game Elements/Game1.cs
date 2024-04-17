@@ -39,7 +39,7 @@ namespace ZeldaGame
 		private FlashlightOverlay flashlight;
 		public HeadUpDisplay headUpDisplay;
 		public PlayerInfoHUD playerInfoHUD;
-		public bool flashlightMode = true;
+		public bool flashlightMode = false;
 
 		public KeyboardController keyboardController;
 		private MouseController mouseController;
@@ -222,7 +222,7 @@ namespace ZeldaGame
                 gameStateScreenHandler.EndGame();
 				
 			//Use items based on current choice
-			keyboardController.RegisterPressKeySwitch(Keys.B, new UseItemCommand(this, headUpDisplay.HUDInventory.CurrentWeapon()));
+			keyboardController.RegisterPressKeySwitch(Keys.B, new UseItemCommand(this, headUpDisplay.HUDInventory.CurrentEquip()));
             base.Update(gameTime);
 		}
 

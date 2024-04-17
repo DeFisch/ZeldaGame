@@ -29,7 +29,7 @@ namespace ZeldaGame.HUD
             this.scale = scale;
             this.collision = collisionHandler;
             playerInfoHUD = new PlayerInfoHUD(texture, scale, map, font, collisionHandler, Link, this);
-            HUDInventory = new HUDInventory(texture, scale);
+            HUDInventory = new HUDInventory(texture, scale, Link);
             HUDMapHandler = new HUDMapHandler(texture, scale, map, collisionHandler);
             inventorySR = new Rectangle(1, 11, 256, 88);
             mapSR = new Rectangle(258, 112, 256, 88);

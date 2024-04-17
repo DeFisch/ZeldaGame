@@ -69,7 +69,7 @@ public class NPCFactory
                             case 1:
                                 npcList.Add(new OldMan(npcTexture, position));
 								if (itemSpriteFactory.IsMapChanged()) {
-									itemSpriteFactory.AddItem("ms", itemPosition);
+									itemSpriteFactory.AddItem("2s", itemPosition);
 								}
 								break;
                             case 2:
