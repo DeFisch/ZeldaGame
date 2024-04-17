@@ -4,13 +4,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ZeldaGame.HUD
+namespace ZeldaGame.HUD.Commands
 {
-    public class HUDTeleportCommand : ICommand
+    public class HUDCommandNextRoom : ICommand
     {
         private Game1 MyGame;
+        private int next = 1;
 
-        public HUDTeleportCommand(Game1 myGame)
+        public HUDCommandNextRoom(Game1 myGame)
         {
             MyGame = myGame;
         }
@@ -18,7 +19,7 @@ namespace ZeldaGame.HUD
         public void Execute()
         {
             if (MyGame.headUpDisplay.isVisible())
-                MyGame.headUpDisplay.HUDMapHandler.mapTeleport.Teleport();
+                MyGame.headUpDisplay.HUDMapHandler.mapTeleport.CycleList(next);
         }
 
     }

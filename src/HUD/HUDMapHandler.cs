@@ -80,6 +80,10 @@ namespace ZeldaGame.HUD
             mapTeleport.Update();
         }
 
-        public void Reset() => mapType.Reset();
+        public void Reset()
+        {
+            mapType.Reset();
+            mapTeleport.Reset();
+        } 
     }
 }

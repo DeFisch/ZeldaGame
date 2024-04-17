@@ -7,6 +7,7 @@ using ZeldaGame.Commands;
 using ZeldaGame.Controllers;
 using ZeldaGame.Enemy;
 using ZeldaGame.HUD;
+using ZeldaGame.HUD.Commands;
 using ZeldaGame.Items;
 using ZeldaGame.Map;
 using ZeldaGame.Map.Commands;

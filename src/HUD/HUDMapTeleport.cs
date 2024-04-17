@@ -81,5 +81,16 @@ namespace ZeldaGame.HUD
             }
             map.switch_map((int)targetRoom.Y, (int)targetRoom.X);
         }
+
+        public void Reset()
+        {
+            cycleIndex = 0;
+            roomVisitedIndex = new List<int>();
+            mapType.SetLists("Orange");
+            roomVisited = mapType.getRoomVisited();
+            roomDRList = mapType.getDestinationRectangleList();
+            SetSelection();
+            selectionDR = roomDRList[roomVisitedIndex[cycleIndex]];
+        }
     }
 }
