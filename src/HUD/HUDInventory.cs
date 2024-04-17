@@ -3,6 +3,7 @@ using Enemy.Projectiles;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using ZeldaGame.Items;
+using System.Diagnostics;
 using static ZeldaGame.Globals;
 
 namespace ZeldaGame.HUD

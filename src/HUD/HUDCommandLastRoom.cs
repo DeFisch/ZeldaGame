@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 
 namespace ZeldaGame.HUD
 {
-    public class HUDTeleportCommandNext : ICommand
+    public class HUDCommandLastRoom : ICommand
     {
         private Game1 MyGame;
-        private int next = 1;
+        private int last = 0;
 
-        public HUDTeleportCommandNext(Game1 myGame)
+        public HUDCommandLastRoom(Game1 myGame)
         {
             MyGame = myGame;
         }
@@ -19,7 +19,7 @@ namespace ZeldaGame.HUD
         public void Execute()
         {
             if (MyGame.headUpDisplay.isVisible())
-                MyGame.headUpDisplay.HUDMapHandler.mapTeleport.CycleList(next);
+                MyGame.headUpDisplay.HUDMapHandler.mapTeleport.CycleList(last);
         }
 
     }

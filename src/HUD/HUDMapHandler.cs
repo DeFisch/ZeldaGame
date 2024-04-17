@@ -28,7 +28,7 @@ namespace ZeldaGame.HUD
             targetRectangle = new List<Rectangle>();
             playerPosition = new Dictionary<string, Rectangle>();
             mapType = new HUDMapType(scale, map, collisionHandler);
-            mapTeleport = new HUDMapTeleport(mapType);
+            mapTeleport = new HUDMapTeleport(mapType, map);
         }
 
         public void Draw(SpriteBatch spriteBatch, bool isDisplayed)
@@ -76,6 +76,8 @@ namespace ZeldaGame.HUD
             for (int i = 0; i < 8; i++)
                 for (int j = 0; j < 8; j++)
                     mapType.isRoomVisited(i-1,j-2);
+
+            mapTeleport.Update();
         }
 
         public void Reset() => mapType.Reset();

@@ -117,32 +117,4 @@ public class HUDMapLoader
         }
         return sourceRectangle;
     }
-
-    public List<Vector2> getMapRoomNumber()
-    {
-        Vector2 roomNumber = new Vector2();
-        List<Vector2> room = new List<Vector2>();
-        int room_x = 0;
-        int room_y = 0;
-        int row = -1;
-
-        for(int i = 0; i < map.GetLength(0); i++)
-        {
-            room_x = 0;
-            room_y = 0;
-            for(int j = 0; j < map.GetLength(1); j++)
-            {
-                if (!map[i, j].Equals("-"))
-                {
-                    roomNumber = new Vector2(room_x,room_y);
-                    room_y++;
-                    row = i;
-                }
-            }
-            
-            if(row == i)
-                room_x++;
-        }
-        return room;
-    }
 }
