@@ -110,7 +110,7 @@ namespace ZeldaGame
 			Texture2D[] enemy_texture = {Content.Load<Texture2D>("enemies"),Content.Load<Texture2D>("enemies_1")};
             pushableBlockHandler = new PushableBlockHandler(map_texture, mapScale,mapSize,Link,map);
 			itemFactory = new ItemSpriteFactory(Items, npcs, mapScale, Link, map);
-            NPCFactory = new NPCFactory(npcs, mapScale, font, map, itemFactory);
+            NPCFactory = new NPCFactory(npcs, Items, mapScale, font, map, itemFactory);
             enemyFactory = new EnemyFactory(enemy_texture, mapScale, mapSize, itemFactory);
             headUpDisplay = new HeadUpDisplay(HUD, mapScale, map, collisionHandler, Link, font);
 			playerInfoHUD = new PlayerInfoHUD(HUD, mapScale, map, font, collisionHandler, Link, headUpDisplay);
