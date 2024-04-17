@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using System.Collections.Generic;
 
 namespace ZeldaGame.NPCs;
 
@@ -17,8 +18,7 @@ public class Merchant : INPC {
 		this.texture = texture;
 		this.position = position;
 		npcQuote = "BUY SOMETHIN' WILL YA!";
-
-    }
+}
 
 	public void Draw(SpriteBatch spriteBatch, Vector2 scale, SpriteFont font) {
 		sourceRectangle = new Rectangle(126, 11, 16, 16);
