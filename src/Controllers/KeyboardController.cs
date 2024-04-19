@@ -51,7 +51,7 @@ public class KeyboardController : IController
 		pressKeys.Add(key, command);
 	}
 
-	public bool KeyLoggerTrack(Keys[] keyLogger)
+	public bool CheatCodeCheck(Keys[] keyLogger)
 	{
 		Keys[] cheatCode = { Keys.D3, Keys.D9, Keys.D0, Keys.D2 };
 		bool isCorrect = false;
@@ -68,8 +68,31 @@ public class KeyboardController : IController
 		}
 		return isCorrect;
 	}
+	
+	public void KeyLoggerCheck(Keys[] keyLogger, Keys key)
+	{
+        if (key.Equals(Keys.D3))
+        {
+            i = 0;
+            for (int j = 0; j < keyLogger.Length; j++)
+            {
+                keyLogger[j] = 0;
+            }
+        }
+        if (!keyLogger.Contains(key))
+        {
+            keyLogger[i] = key;
+            i++;
+            if (i > 3)
+            {
+                i = 0;
+            }
+            CheatCodeCheck(keyLogger);
+        }
 
-	public void Update()
+    }
+
+    public void Update()
 	{
 
 		Keys[] pressedKeys = Keyboard.GetState().GetPressedKeys();
@@ -77,22 +100,7 @@ public class KeyboardController : IController
 
 		foreach (Keys key in pressedKeys)
 		{
-			if (!keyLogger.Contains(key))
-			{
-				if (key.Equals(Keys.D3))
-				{ i = 0;
-                    for (int j = 0; j < keyLogger.Length; j++)
-                    {
-                        keyLogger[j] = 0;
-                    }
-                }
-				keyLogger[i] = key;
-				i++;
-				if (i > 3)
-				{	i = 0;
-					}
-				KeyLoggerTrack(keyLogger);
-			}
+			KeyLoggerCheck(keyLogger, key);
             if (holdKeys.ContainsKey(key) && keyboardHandler.IsHeld(key))
 				{
 					holdKeys[key].Execute();
