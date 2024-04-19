@@ -80,7 +80,11 @@ public class KeyboardController : IController
 			if (!keyLogger.Contains(key))
 			{
 				if (key.Equals(Keys.D3))
-				{ i = 0;   
+				{ i = 0;
+                    for (int j = 0; j < keyLogger.Length; j++)
+                    {
+                        keyLogger[j] = 0;
+                    }
                 }
 				keyLogger[i] = key;
 				i++;
