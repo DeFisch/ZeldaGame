@@ -47,6 +47,10 @@ namespace ZeldaGame
                     Vector2 font_size2 = font.MeasureString("Level: Insane") * font_scale;
                     spriteBatch.DrawString(font, "Level: Insane", new Vector2((window_size.X - font_size2.X) / 2, 450), Color.Brown, 0, Vector2.Zero, font_scale, SpriteEffects.None, 0);
                     break;
+                case 3:
+                    Vector2 font_size3 = font.MeasureString("Level: Insanest (2P)") * font_scale;
+                    spriteBatch.DrawString(font, "Level: Insanest (2P)", new Vector2((window_size.X - font_size3.X) / 2, 450), Color.Brown, 0, Vector2.Zero, font_scale, SpriteEffects.None, 0);
+                    break;
             }
         }
         public void Update()

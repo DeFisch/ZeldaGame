@@ -155,15 +155,17 @@ public class CollisionHandler {
 			}
         }
     }
-	private void EnemyProjectileMapCollision() {
-		foreach (IEnemyProjectile projectile in game.enemyFactory.GetAllProjectiles()) {
-			foreach (Rectangle box in game.map.getAllObjectRectangles()) {
-				if (projectile.GetRectangle().Intersects(box)) {
-					projectile.Collided();
-				}
-			}
-		}
-	}
+
+    private void EnemyPlayerToPlayerCollision()
+    {
+        if (game.Link.GetHitBox().Intersects(game.playerEnemy.GetHitBox()) && !game.Link.isHurting())
+        {
+            game.Link.OnCollision(game.playerEnemy.GetHitBox());
+            game.Link.Knockback();
+            game.playerEnemy.OnCollision(game.Link.GetHitBox());
+        }
+    }
+
     private void ItemPlayerCollision()
     {
         foreach (IItemSprite item in game.itemFactory.GetAllItems().ToList())
@@ -212,7 +214,7 @@ public class CollisionHandler {
         }
     }
 
-    static private void PlayerDoorCollision(Vector3 map_size, IPlayer player, MapHandler map){
+    static private void PlayerDoorCollision(Vector3 map_size, IPlayer player, PlayerEnemy enemy, MapHandler map){
         Rectangle playerHitBox = player.GetHitBox();
         Vector2 playerCenterpoint = new Vector2(playerHitBox.X + playerHitBox.Width/2, playerHitBox.Y + playerHitBox.Height/2);
         Rectangle up_door = new Rectangle((int)(0.46875*map_size.X), (int)(map_size.Z), (int)(0.0625*map_size.X), (int)(0.18*map_size.Y));
@@ -222,18 +224,22 @@ public class CollisionHandler {
         if (up_door.Contains(playerCenterpoint)){
             map.move_up();
             player.SetPlayerPosition(new Vector2((int)(map_size.X/2), (int)((0.8*map_size.Y) + map_size.Z)));
+            enemy.SetEnemyPlayerPosition(new Vector2((int)(map_size.X / 2), (int)((0.2 * map_size.Y) + map_size.Z)));
 		}
 		else if (down_door.Contains(playerCenterpoint)){
             map.move_down();
             player.SetPlayerPosition(new Vector2((int)(map_size.X/2), (int)((0.2*map_size.Y) + map_size.Z)));
-		}
+            enemy.SetEnemyPlayerPosition(new Vector2((int)(map_size.X/ 2), (int)((0.8 * map_size.Y) + map_size.Z)));
+        }
 		else if (left_door.Contains(playerCenterpoint)){
             map.move_left();
             player.SetPlayerPosition(new Vector2((int)(0.85*map_size.X), (int)((map_size.Y/2) + map_size.Z)));
+            enemy.SetEnemyPlayerPosition(new Vector2((int)(0.15 * map_size.X), (int)((map_size.Y / 2) + map_size.Z)));
 		}
 		else if (right_door.Contains(playerCenterpoint)){
             map.move_right();
             player.SetPlayerPosition(new Vector2((int)(0.15*map_size.X), (int)((map_size.Y/2) + map_size.Z)));
+            enemy.SetEnemyPlayerPosition(new Vector2((int)(0.85 * map_size.X), (int)((map_size.Y / 2) + map_size.Z)));
 		}
 
         //Room_0_1 Stair collision
@@ -332,10 +338,10 @@ public class CollisionHandler {
 		PlayerProjectileEnemyCollision();
         PlayerProjectileMapCollision();
         PlayerMapCollision();
-        PlayerDoorCollision(game.mapSize, game.Link, game.map);
+        PlayerDoorCollision(game.mapSize, game.Link, game.playerEnemy, game.map);
         PlayerNPCCollision();
 		EnemyPlayerCollision();
-        // EnemyProjectileMapCollision();
+        EnemyPlayerToPlayerCollision();
         EnemyProjectilePlayerCollision();
         EnemyObjectCollision();
         PushableBlockCollision();

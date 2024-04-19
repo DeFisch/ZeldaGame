@@ -23,6 +23,7 @@ namespace ZeldaGame
 		private SpriteBatch _spriteBatch;
 
 		public IPlayer Link;
+		public PlayerEnemy playerEnemy;
 		public PlayerSpriteFactory playerFactory;
 
 		public Texture2D npcs;
@@ -43,6 +44,7 @@ namespace ZeldaGame
 
 		public KeyboardController keyboardController;
 		private MouseController mouseController;
+		private EnemyController enemyController;
 		private List<IController> controllers;
 		public MapHandler map;
 		public Vector3 mapSize;
@@ -62,7 +64,8 @@ namespace ZeldaGame
             // Initialize controllers
             keyboardController = new KeyboardController();
             mouseController = new MouseController();
-			controllers = new List<IController> { keyboardController, mouseController };
+			enemyController = new EnemyController();
+			controllers = new List<IController> { keyboardController, mouseController, enemyController };
 
 			// set fixed window size and map size
 			windowSize = new Vector2(800, 725);
@@ -101,10 +104,11 @@ namespace ZeldaGame
 			// Initializes item classes
 			PlayerSpriteFactory.Instance.LoadAllTextures(Content);
 			PlayerItemSpriteFactory.Instance.LoadAllTextures(Content);
-            Link = new PlayerMain(new Vector2(mapSize.X / 2, (mapSize.X / 2) + mapSize.Z), mapScale, this);
+            Link = new PlayerMain(new Vector2(mapSize.X / 2, (mapSize.X / 2) + mapSize.Z), mapScale);
+            playerEnemy = new PlayerEnemy(Content.Load<Texture2D>("enemies"), new Vector2(375, 275), mapScale);
 
-			// the stuff we mask out of darkness, essentially this texture defines our lights
-			Texture2D alphaMask = Content.Load<Texture2D>("light");
+            // the stuff we mask out of darkness, essentially this texture defines our lights
+            Texture2D alphaMask = Content.Load<Texture2D>("light");
 			flashlight = new FlashlightOverlay(this, alphaMask);
 			
 			Texture2D[] enemy_texture = {Content.Load<Texture2D>("enemies"),Content.Load<Texture2D>("enemies_1")};
@@ -188,6 +192,14 @@ namespace ZeldaGame
 
 			//Registers commands with keys for HUD teleport
 			keyboardController.RegisterPressKey(Keys.Enter, new HUDTeleportCommand(this));
+
+			// Register enemy to controller
+			enemyController.RegisterPlayer(playerEnemy);
+			// Register Keys for enemy player
+			enemyController.RegisterMovementKey(Keys.I, new Vector2(0, -1));
+            enemyController.RegisterMovementKey(Keys.K, new Vector2(0, 1));
+            enemyController.RegisterMovementKey(Keys.J, new Vector2(-1, 0));
+            enemyController.RegisterMovementKey(Keys.L, new Vector2(1, 0));
         }
 
         protected override void Update(GameTime gameTime) {
@@ -210,6 +222,7 @@ namespace ZeldaGame
 			}
 			// Updates Link
             Link.Update();
+			if (level == 3) playerEnemy.Update();
 
 			// Handles collisions
 			collisionHandler.Update();
@@ -275,8 +288,9 @@ namespace ZeldaGame
 			{
 				itemFactory.Draw(_spriteBatch);
 			}
-			// Draws player
+			// Draws players
 			Link.Draw(_spriteBatch, Color.White);
+			if (level == 3) playerEnemy.Draw(_spriteBatch, Color.White);
 
 			if (Globals.gameStateScreenHandler.GameOver())
                 GraphicsDevice.Clear(Color.Black);

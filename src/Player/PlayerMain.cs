@@ -28,7 +28,7 @@ namespace ZeldaGame.Player {
         private static float health = 3.0f;
 		private float maxHealth = 3f;
 
-		public PlayerMain(Vector2 position, Vector2 scale, Game1 game)
+		public PlayerMain(Vector2 position, Vector2 scale)
 		{
 			direction = Direction.Down;
 			sprite = PlayerSpriteFactory.Instance.CreateWalkSprite(direction);
