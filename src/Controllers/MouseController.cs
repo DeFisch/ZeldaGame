@@ -3,6 +3,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 
 namespace ZeldaGame.Controllers;
 public enum MouseButtons { Left, Right };
@@ -37,6 +38,10 @@ public class MouseController : IController {
     public void Update()
     {
 		mouseHandler.Update();
+        if (mouseHandler.IsPressed(MouseButtons.Left))
+        {
+            Debug.WriteLine("Mouse clicked at: " + Mouse.GetState().Position);
+        }
 		foreach (var quadrant in quadrants.Keys)
         {
             // Checks if the mouse is in the quadrant and the left button is pressed

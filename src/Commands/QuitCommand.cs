@@ -1,4 +1,6 @@
-﻿namespace ZeldaGame.Commands;
+﻿using System;
+
+namespace ZeldaGame.Commands;
 
 public class QuitCommand : ICommand
 {
@@ -8,7 +10,9 @@ public class QuitCommand : ICommand
     }
     public void Execute()
     {
-        myGame.GraphicsDevice.SetRenderTarget(null);
+        if (myGame.GraphicsDevice.GetRenderTargets().Length > 0)
+            myGame.GraphicsDevice.SetRenderTarget(null);
+        Globals.audioLoader.Reset();
         myGame.Exit();
     }
 }

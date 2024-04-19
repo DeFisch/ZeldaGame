@@ -90,7 +90,8 @@ public class MapLoader {
                             break;
                         case "enemy":
                             for (int j = 1; j < line_data.Length; j++) {
-                                enemies.Add(line_data[j]);
+                                if(line_data[j] != "")
+                                    enemies.Add(line_data[j]);
                             }
                             break;
                     }
@@ -101,7 +102,15 @@ public class MapLoader {
         return false;
     }
 
-    public List<string> get_enemies() {
+    public List<string> get_enemies(int level) {
+        // get enemies based on level
+        int num_enemies = enemies.Count;
+        num_enemies = (int)Math.Ceiling(num_enemies / 3.0 * (level+1));
+        int remove_num = enemies.Count - num_enemies;
+        for (int i = 0; i < remove_num; i++) {
+            // remove enemies at Random
+            enemies.RemoveAt(new Random().Next(0, enemies.Count));
+        }
         return enemies;
     }
 

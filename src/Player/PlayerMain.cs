@@ -73,8 +73,13 @@ namespace ZeldaGame.Player {
 			if (offset) this.position = position - sprite_size / 2;
 		}
 
-		public void SetSword(Swords sword) {
-			currSword = sword;
+		public Swords GetSword() {
+			return currSword;
+		}
+
+		public void SetSword(Swords newSword) {
+			actionHandler.SetSword(newSword);
+			currSword = actionHandler.GetSword();
 		}
 
 		public Direction GetDirection() {

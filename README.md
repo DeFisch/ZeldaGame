@@ -26,6 +26,9 @@ OSU CSE 3902 Zelda Game Project
 - Other
   - "q" to quit, "r" to reset the game
   - "h" to go to the inventory
+  - "a/d" to select inventory items
+  - "</>" arrow keys to select room
+  - Enterbar to teleport to the selected room
   - Spacebar to start the game and return to the game from the inventory
   - "p" to pause/unpause
   - "m" to mute/unmute

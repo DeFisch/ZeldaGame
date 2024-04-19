@@ -7,6 +7,5 @@ namespace ZeldaGame.NPCs {
 
 		void Draw(SpriteBatch spriteBatch, Vector2 scale, SpriteFont font);
         public Rectangle GetNPCHitBox();
-
     }
 }

@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
 
-namespace ZeldaGame.HUD
+namespace ZeldaGame.HUD.Commands
 {
     public class DisplayHUDCommand : ICommand
     {

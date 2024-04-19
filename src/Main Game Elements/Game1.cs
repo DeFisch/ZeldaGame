@@ -7,6 +7,7 @@ using ZeldaGame.Commands;
 using ZeldaGame.Controllers;
 using ZeldaGame.Enemy;
 using ZeldaGame.HUD;
+using ZeldaGame.HUD.Commands;
 using ZeldaGame.Items;
 using ZeldaGame.Map;
 using ZeldaGame.Map.Commands;
@@ -38,9 +39,9 @@ namespace ZeldaGame
 		private FlashlightOverlay flashlight;
 		public HeadUpDisplay headUpDisplay;
 		public PlayerInfoHUD playerInfoHUD;
-		public bool flashlightMode = true;
+		public bool flashlightMode = false;
 
-		private KeyboardController keyboardController;
+		public KeyboardController keyboardController;
 		private MouseController mouseController;
 		private List<IController> controllers;
 		public MapHandler map;
@@ -48,6 +49,7 @@ namespace ZeldaGame
 		public Vector2 mapScale;
 		public Vector2 windowSize;
 		public SpriteFont font;
+		public int level = 0;
 
         public Game1() {
 			_graphics = new GraphicsDeviceManager(this);
@@ -108,7 +110,7 @@ namespace ZeldaGame
 			Texture2D[] enemy_texture = {Content.Load<Texture2D>("enemies"),Content.Load<Texture2D>("enemies_1")};
             pushableBlockHandler = new PushableBlockHandler(map_texture, mapScale,mapSize,Link,map);
 			itemFactory = new ItemSpriteFactory(Items, npcs, mapScale, Link, map);
-            NPCFactory = new NPCFactory(npcs, mapScale, font, map, itemFactory);
+            NPCFactory = new NPCFactory(npcs, Items, mapScale, font, map, itemFactory);
             enemyFactory = new EnemyFactory(enemy_texture, mapScale, mapSize, itemFactory);
             headUpDisplay = new HeadUpDisplay(HUD, mapScale, map, collisionHandler, Link, font);
 			playerInfoHUD = new PlayerInfoHUD(HUD, mapScale, map, font, collisionHandler, Link, headUpDisplay);
@@ -179,8 +181,13 @@ namespace ZeldaGame
 			//Registers commands with Keys for HUD weapon selection
             keyboardController.RegisterPressKey(Keys.A, new HUDInventoryCommandLast(this));
             keyboardController.RegisterPressKey(Keys.D, new HUDInventoryCommandNext(this));
-            keyboardController.RegisterPressKey(Keys.Left, new HUDInventoryCommandLast(this));
-            keyboardController.RegisterPressKey(Keys.Right, new HUDInventoryCommandNext(this));
+
+			//Registers commands with keys for HUD room selection
+            keyboardController.RegisterPressKey(Keys.Left, new HUDCommandLastRoom(this));
+            keyboardController.RegisterPressKey(Keys.Right, new HUDCommandNextRoom(this));
+
+			//Registers commands with keys for HUD teleport
+			keyboardController.RegisterPressKey(Keys.Enter, new HUDTeleportCommand(this));
         }
 
         protected override void Update(GameTime gameTime) {
@@ -215,16 +222,16 @@ namespace ZeldaGame
                 gameStateScreenHandler.EndGame();
 				
 			//Use items based on current choice
-			keyboardController.RegisterPressKeySwitch(Keys.B, new UseItemCommand(this, headUpDisplay.HUDInventory.CurrentWeapon()));
+			keyboardController.RegisterPressKeySwitch(Keys.B, new UseItemCommand(this, headUpDisplay.HUDInventory.CurrentEquip()));
             base.Update(gameTime);
 		}
 
 		protected override void Draw(GameTime gameTime) {
 				// this rendertarget will hold a black rectangle that gets masked with alphaMask
-				RenderTarget2D darkness = new RenderTarget2D(GraphicsDevice, (int)windowSize.X, (int)windowSize.Y);
+				RenderTarget2D darkness = null;
 
 				if (gameStateScreenHandler.IsPlaying() && flashlightMode) {
-
+				darkness = new RenderTarget2D(GraphicsDevice, (int)windowSize.X, (int)windowSize.Y);
 				// prepare the darkness
 				GraphicsDevice.SetRenderTarget(darkness);
 				GraphicsDevice.Clear(new Color(0 ,0 ,0 ,250)); // the 120 here is the darkness "intensity"
@@ -276,6 +283,7 @@ namespace ZeldaGame
 			if (gameStateScreenHandler.IsPlaying())
 
 			// draw the masked darkness!
+			if (flashlightMode)
 			_spriteBatch.Draw(darkness, Vector2.Zero, Color.White);
 
 

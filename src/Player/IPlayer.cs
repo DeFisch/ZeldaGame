@@ -13,7 +13,9 @@ namespace ZeldaGame.Player {
 		public void Walk();
 		public void UseItem(PlayerProjectiles item);
 		public Direction GetDirection();
-		public void SetDirection(Direction direction); 
+		public void SetDirection(Direction direction);
+		public Swords GetSword();
+		public void SetSword(Swords sword);
 		public void Draw(SpriteBatch spriteBatch, Color color);
 		public void Update();
 		public void Reset();

@@ -25,9 +25,10 @@ namespace ZeldaGame.HUD
 
 		private Rectangle playerInfoSR;
         private Rectangle playerInfoDR;
-        private Rectangle currentWeaponDR;
+        private Rectangle currentEquipDR;
+		private Rectangle currentSwordDR;
 
-        private int rubyCountInt;
+		private int rubyCountInt;
         private string rubyCountString;
         private int keyCountInt;
         private string keyCountString;
@@ -59,9 +60,10 @@ namespace ZeldaGame.HUD
 
 			playerInfoSR = new Rectangle(258, 11, 256, 56);
             playerInfoDR = new Rectangle(0, 0, 0, 0);
-            currentWeaponDR = new Rectangle((int)(128 * scale.X), (int)(24 * scale.Y), (int)(8 * scale.X), (int)(16 * scale.Y));
+            currentEquipDR = new Rectangle((int)(128 * scale.X), (int)(24 * scale.Y), (int)(8 * scale.X), (int)(16 * scale.Y));
+			currentSwordDR = new Rectangle((int)(152 * scale.X), (int)(24 * scale.Y), (int)(8 * scale.X), (int)(16 * scale.Y));
 
-            itemActionHandler = collisionHandler.itemActionHandler;
+			itemActionHandler = collisionHandler.itemActionHandler;
             mapHandler = new HUDMapHandler(texture, scale, map, collisionHandler);
         }
 
@@ -73,7 +75,8 @@ namespace ZeldaGame.HUD
             {
                 spriteBatch.Draw(texture, playerInfoDR, playerInfoSR, Color.White);
                 mapHandler.Draw(spriteBatch, isDisplayed);
-                spriteBatch.Draw(texture, currentWeaponDR, headUpDisplay.HUDInventory.CurrentWeaponSprite(), Color.White);
+                spriteBatch.Draw(texture, currentEquipDR, headUpDisplay.HUDInventory.CurrentEquipSprite(), Color.White);
+                spriteBatch.Draw(texture, currentSwordDR, headUpDisplay.HUDInventory.CurrentSwordSprite(), Color.White);
             }
 
             rubyCountInt = (ItemActionHandler.inventoryCounts[0] * 5) + ItemActionHandler.inventoryCounts[1];

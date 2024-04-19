@@ -9,8 +9,9 @@ namespace ZeldaGame.NPCs;
 public class NPCFactory
 {
 	private List<INPC> npcList;
-	private Texture2D texture;
-	private Vector2 position;
+	private Texture2D npcTexture;
+    private Texture2D itemsTexture;
+    private Vector2 position;
 	private Vector2 scale;
 	private int npclistLength;
 	private SpriteFont font;
@@ -20,13 +21,14 @@ public class NPCFactory
     private Vector2 itemPosition;
     private Vector2 itemPosition2;
     private ItemSpriteFactory itemSpriteFactory;
-    public NPCFactory(Texture2D texture, Vector2 scale, SpriteFont font, MapHandler mapHandler, ItemSpriteFactory itemSpriteFactory)
+    public NPCFactory(Texture2D npcTexture, Texture2D itemsTexture, Vector2 scale, SpriteFont font, MapHandler mapHandler, ItemSpriteFactory itemSpriteFactory)
 	{
 		npcList = new List<INPC>();
 		npcRooms = new List<Vector2>();
         npcRooms.Add(new Vector2(0, 2));
-		this.texture = texture;
-		npclistLength = 0;
+		this.npcTexture = npcTexture;
+        this.itemsTexture = itemsTexture;
+        npclistLength = 0;
 		this.scale = scale;
 		this.font = font;
 		this.mapHandler = mapHandler;
@@ -51,31 +53,34 @@ public class NPCFactory
                 switch (npc)
                 {
                     case "fl":
-                        npcList.Add(new Flame(texture, position));
+                        npcList.Add(new Flame(npcTexture, position));
                         break;
                     case "rnd":
                         int randomNumber = random.Next(5);
                         switch (randomNumber)
                         {
                             case 0:
-                                npcList.Add(new Merchant(texture, position));
+                                npcList.Add(new Merchant(npcTexture, position));
                                 if (itemSpriteFactory.IsMapChanged())
                                 {
                                     itemSpriteFactory.AddItem("k", itemPosition);
                                 }
                                 break;
                             case 1:
-                                npcList.Add(new OldMan(texture, position));
-                                break;
+                                npcList.Add(new OldMan(npcTexture, position));
+								if (itemSpriteFactory.IsMapChanged()) {
+									itemSpriteFactory.AddItem("2s", itemPosition);
+								}
+								break;
                             case 2:
-                                npcList.Add(new OldWoman(texture, position));
+                                npcList.Add(new OldWoman(npcTexture, position));
                                 if (itemSpriteFactory.IsMapChanged())
                                 {
                                     itemSpriteFactory.AddItem("lp", itemPosition);
                                 }
                                 break;
                             case 3:
-                                npcList.Add(new Fairy(texture, position));
+                                npcList.Add(new Fairy(npcTexture, position));
                                 if (itemSpriteFactory.IsMapChanged())
                                 {
                                     itemSpriteFactory.AddItem("h", itemPosition);
@@ -83,7 +88,7 @@ public class NPCFactory
                                 }
                                 break;
                             case 4:
-                                npcList.Add(new Zelda(texture, position));
+                                npcList.Add(new Zelda(npcTexture, position));
                                 break;
                             default:
                                 break;
@@ -102,6 +107,15 @@ public class NPCFactory
         for (int i = 0; i < npclistLength; i++)
         {
             npcList[i].Draw(spriteBatch, scale, font);
+
+            if (npcList[i] is Merchant)
+            {
+                DisplayCost(spriteBatch, itemPosition, 2);
+            }
+            else if (npcList[i] is OldWoman)
+            {
+                DisplayCost(spriteBatch, itemPosition, 5);
+            }
         }
     }
 	public void Update()
@@ -134,5 +148,17 @@ public class NPCFactory
     public List<INPC> GetNPCList()
     {
         return npcList;
+    }
+    public void DisplayCost(SpriteBatch spriteBatch, Vector2 position, int cost)
+    {
+        Vector2 costPosition = new Vector2(GetNewScaledPosition((int)position.X, (int)position.Y).X, GetNewScaledPosition((int)position.X, (int)position.Y).Y + 55);
+
+        spriteBatch.DrawString(font, cost.ToString(), costPosition, Color.White);
+
+        
+        Rectangle sourceRectangle = new Rectangle(72, 16, 8, 16);
+        Rectangle destinationRectangle = new Rectangle((int)costPosition.X - 200, (int)costPosition.Y - 20, (int)(sourceRectangle.Width * scale.X), (int)(sourceRectangle.Height * scale.Y));
+        spriteBatch.Draw(itemsTexture, destinationRectangle, sourceRectangle, Color.White);
+        spriteBatch.DrawString(font, "X", new Vector2 (destinationRectangle.X + 30,costPosition.Y), Color.White);
     }
 }

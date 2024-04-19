@@ -5,6 +5,7 @@
     numbers and letters : different type of map block
 */
 using System;
+using System.Collections.Generic;
 using System.IO;
 using Microsoft.Xna.Framework;
 
