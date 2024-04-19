@@ -16,7 +16,7 @@ public class DifficultyDownCommand : ICommand
         game.level--;
         if (game.level < 0)
         {
-            game.level = 3;
+            game.level = 4;
         }
     }
 }

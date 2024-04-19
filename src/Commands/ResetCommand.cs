@@ -11,9 +11,9 @@ public class ResetCommand: ICommand
 
     public void Execute()
     {
+        MyGame.playerEnemy.Reset();
         MyGame.Link.Reset();
         MyGame.map.Reset();
-        MyGame.Link.Reset();
         MyGame.itemFactory.Reset();
         MyGame.enemyFactory.Reset();
         MyGame.headUpDisplay.Reset();

@@ -222,7 +222,8 @@ namespace ZeldaGame
 			}
 			// Updates Link
             Link.Update();
-			if (level == 3) playerEnemy.Update();
+			if (level == 3) playerEnemy.UpdateAI(Link.GetPlayerPosition());
+			else if (level == 4) playerEnemy.Update();
 
 			// Handles collisions
 			collisionHandler.Update();
@@ -290,7 +291,7 @@ namespace ZeldaGame
 			}
 			// Draws players
 			Link.Draw(_spriteBatch, Color.White);
-			if (level == 3) playerEnemy.Draw(_spriteBatch, Color.White);
+			if (level >= 3) playerEnemy.Draw(_spriteBatch, Color.White);
 
 			if (Globals.gameStateScreenHandler.GameOver())
                 GraphicsDevice.Clear(Color.Black);

@@ -7,6 +7,7 @@ public class EnemyController : IController
 {
     private readonly Dictionary<Keys, Vector2> movementKeys;
     private PlayerEnemy playerEnemy;
+
     public EnemyController()
     {
         movementKeys = new Dictionary<Keys, Vector2>();
