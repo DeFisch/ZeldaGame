@@ -203,6 +203,9 @@ namespace ZeldaGame
         }
 
         protected override void Update(GameTime gameTime) {
+			// Toggles controllerAI for playerEnemy
+			if (level == 3) enemyController.ToggleAI(true);
+			else enemyController.ToggleAI(false);
 			// Updates controllers
 			foreach (IController controller in controllers) {
 				controller.Update();
