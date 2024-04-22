@@ -27,8 +27,8 @@ OSU CSE 3902 Zelda Game Project
   - "q" to quit, "r" to reset the game
   - "h" to go to the inventory
   - "a/d" to select inventory items
-  - "</>" arrow keys to select room
-  - Enterbar to teleport to the selected room
+  - "<-", "->" arrow keys to select room
+  - Enter to teleport to the selected room
   - Spacebar to start the game and return to the game from the inventory
   - "p" to pause/unpause
   - "m" to mute/unmute
@@ -61,6 +61,9 @@ OSU CSE 3902 Zelda Game Project
 - Orange/Blue Boomerang: 0 cost, fly through wall, only weapon that can kill Keese (flying bats)
 - Bomb: 2 damage, can damage/kill player
 - Flame: 0 damage, purely cosmetic (has knockback) 
+
+## Curse of Darkness Game Mode
+
 
 ## Updates:
 - Arrow and Sword Mechanics Updates
