@@ -1,0 +1,7 @@
+Author: Dan Perry
+Date: April 22, 2024
+Sprint number: 5
+Name of the .cs file being reviewed: KeyboardController.cs modifications
+Author of the .cs files being reviewed: Olivia Maynard
+Number of minutes taken for the review: 15 mins
+Comments: Reviewing for the added cheat code, the code is short and simple to look at. Breaking up the methods also helped separate what you were checking for, making it easier to read. Now to be completely frank, I'm not 100% sure what the code is doing, or what certain checks are for. CheatCodeCheck() is intuitive and easy to understand, check for key, if it's right return true and if wrong return false (and add your 1000 gems.). KeyLoggerCheck(), however, is slightly confusing. I know you had a weird issue with the 3 key, but I'm still unsure what the check is for if Key == D3, and why it sets an array of KeyCode's to 0. A few comments above the if conditionals would make it clearer of what is happening and make it easier to understand. Final note, I'm unsure of why the i counter is a global variable. Otherwise, it was implemented very well and works like a charm!
