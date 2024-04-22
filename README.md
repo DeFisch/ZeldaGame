@@ -63,7 +63,7 @@ OSU CSE 3902 Zelda Game Project
 - Flame: 0 damage, purely cosmetic (has knockback) 
 
 ## Curse of Darkness Game Mode
-
+![curse of darkness visual](https://github.com/DeFisch/ZeldaGame/blob/main/README_img/darkness.png)
 
 ## Updates:
 - Arrow and Sword Mechanics Updates
