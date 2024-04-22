@@ -1,9 +1,10 @@
 ﻿w,w,w,w,w,-,-,w,w,w,w,w
-w,-,-,-,w,-,-,-,-,w,-,w
+w,-,-,-,w,-,-,k,-,w,-,w
 w,-,w,-,w,-,w,w,-,w,-,w
 -,-,w,-,w,-,-,w,-,w,-,-
 w,-,w,-,w,w,-,w,-,w,-,w
 w,-,w,-,-,-,-,w,-,-,-,w
 w,w,w,w,w,-,-,w,w,w,w,w
-door,up,down,,,,,,,,,
+door,down,,,,,,,,,,
 enemy,Stalfos,Stalfos,Stalfos,,,,,,,,
+keyedDoor,up,,,,,,,,,,

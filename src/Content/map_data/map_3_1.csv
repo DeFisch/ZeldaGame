@@ -5,5 +5,6 @@
 -,-,-,-,-,b,b,-,-,-,-,-
 -,-,-,-,-,-,-,-,-,-,-,-
 -,-,-,-,-,-,-,-,-,-,-,-
-door,up,right,,,,,,,,,
+door,right,right,,,,,,,,,
 enemy,Keese,Keese,Keese,Keese,Keese,DarkNut,DarkNut,DarkNut,,,
+keyedDoor,up,,,,,,,,,,

@@ -5,6 +5,7 @@
 -,-,-,-,-,-,-,-,-,-,-,-
 -,b,b,-,-,-,-,-,-,b,b,-
 -,-,-,-,-,-,-,-,-,-,-,-
-door,up,left,right,,,,,,,,
+door,up,left,,,,,,,,,
 breakable,down,,,,,,,,,,
 enemy,Goriya,Goriya,Goriya,Goriya,Goriya,,,,,,
+keyedDoor,right,,,,,,,,,,

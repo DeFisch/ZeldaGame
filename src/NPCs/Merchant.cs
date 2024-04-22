@@ -18,7 +18,7 @@ public class Merchant : INPC {
 		this.texture = texture;
 		this.position = position;
 		npcQuote = "BUY SOMETHIN' WILL YA!";
-}
+    }
 
 	public void Draw(SpriteBatch spriteBatch, Vector2 scale, SpriteFont font) {
 		sourceRectangle = new Rectangle(126, 11, 16, 16);

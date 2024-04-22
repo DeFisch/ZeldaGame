@@ -5,5 +5,5 @@
 -,w,-,-,-,-,-,-,-,-,w,-
 -,w,w,w,-,-,-,-,w,w,w,-
 -,-,-,-,-,-,-,-,-,-,-,-
-door,left,down,,,,,,,,,
+keyedDoor,left,down,,,,,,,,,
 enemy,Goriya,Goriya,Goriya,,,,,,,,

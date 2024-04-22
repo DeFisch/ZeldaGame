@@ -5,6 +5,7 @@
 -,-,b,-,-,-,-,-,-,b,-,-
 -,-,-,-,-,-,-,-,-,-,-,-
 -,-,-,-,-,-,-,-,-,-,-,-
-door,left,right,,,,,,,,,
+door,right,,,,,,,,,,
 breakable,down,,,,,,,,,,
 enemy,Goriya,Goriya,WizzRobe,WizzRobe,,,,,,,
+keyedDoor,left,,,,,,,,,,

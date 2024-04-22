@@ -123,6 +123,10 @@ public class MapHandler {
             if(mapLoader.door_type[key] == 2){
                 DrawWallOnHole(spriteBatch, key, map_size);
             }
+            else if (mapLoader.door_type[key] == 3)
+            {
+                DrawKeyedDoorOnHole(spriteBatch, key, map_size);
+            }
         }
         if (debug){
             for (int i = 0; i < dlist.Count; i++)
@@ -135,6 +139,16 @@ public class MapHandler {
 
     public bool BreakWall(string pos){
         if(mapLoader.door_type[pos] == 2){
+            mapLoader.door_type[pos] = 1;
+            mapRectangles.SetLists(map_size); //refresh the map boundaries
+            return true;
+        }
+        return false;
+    }
+    public bool UnlockDoor(string pos)
+    {
+        if (mapLoader.door_type[pos] == 3)
+        {
             mapLoader.door_type[pos] = 1;
             mapRectangles.SetLists(map_size); //refresh the map boundaries
             return true;
@@ -163,6 +177,34 @@ public class MapHandler {
             spriteBatch.Draw(map_texture, destRect, srcRect, Color.White, 0, new Vector2(0, 0), SpriteEffects.FlipVertically, 0);
         else
             spriteBatch.Draw(map_texture, destRect, srcRect, Color.White);
+    }
+
+    public void DrawKeyedDoorOnHole(SpriteBatch spriteBatch, string pos, Vector3 map_size)
+    {
+        Rectangle leftKeyedDoorSrcRect = new Rectangle(324, 241, 32, 32);
+        Rectangle rightKeyedDoorSrcRect = new Rectangle(324, 274, 32, 32);
+        Rectangle upKeyedDoorSrcRect = new Rectangle(324, 208, 32, 32);
+        Rectangle downKeyedDoorSrcRect = new Rectangle(324, 307, 32, 32);
+        Rectangle destRect = new Rectangle(0, 0, 0, 0);
+        switch (pos)
+        {
+            case "up":
+                destRect = new Rectangle((int)(map_size.X * 0.43875), (int)(map_size.Z + 1.5), (int)upKeyedDoorSrcRect.Width * (int)GetWindowScale(map_size).X, (int)upKeyedDoorSrcRect.Height * (int)GetWindowScale(map_size).Y);
+                spriteBatch.Draw(map_texture, destRect, upKeyedDoorSrcRect, Color.White);
+                break;
+            case "down":
+                destRect = new Rectangle((int)(map_size.X * 0.43875), (int)(map_size.Y + 70), (int)downKeyedDoorSrcRect.Width * (int)GetWindowScale(map_size).X, (int)downKeyedDoorSrcRect.Height * (int)GetWindowScale(map_size).Y);
+                spriteBatch.Draw(map_texture, destRect, downKeyedDoorSrcRect, Color.White);
+                break;
+            case "left":
+                destRect = new Rectangle(0, (int)((map_size.Y * 0.43875) + map_size.Z - 15), (int)leftKeyedDoorSrcRect.Width * (int)GetWindowScale(map_size).X, (int)leftKeyedDoorSrcRect.Height * (int)GetWindowScale(map_size).Y);
+                spriteBatch.Draw(map_texture, destRect, leftKeyedDoorSrcRect, Color.White);
+                break;
+            case "right":
+                destRect = new Rectangle((int)(map_size.X - (int)(rightKeyedDoorSrcRect.Width * GetWindowScale(map_size).X)), (int)((map_size.Y * 0.43875) + map_size.Z - 15), (int)rightKeyedDoorSrcRect.Width * (int)GetWindowScale(map_size).X, (int)rightKeyedDoorSrcRect.Height * (int)GetWindowScale(map_size).Y);
+                spriteBatch.Draw(map_texture, destRect, rightKeyedDoorSrcRect, Color.White);
+                break;
+        }       
     }
     public List<Rectangle> getAllObjectRectangles(bool includeWater = true){
         if (!includeWater)

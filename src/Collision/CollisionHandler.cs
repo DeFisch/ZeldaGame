@@ -71,9 +71,9 @@ public class CollisionHandler {
         if (game.Link.isHurting())
             return;
         Dictionary<IPlayerProjectile, Rectangle> activeProjectiles = game.Link.GetProjectileHitBoxes();
-        foreach(IPlayerProjectile projectile in activeProjectiles.Keys)
+        foreach (IPlayerProjectile projectile in activeProjectiles.Keys)
         {
-            if(projectile.GetType() == typeof(BombSprite))
+            if (projectile.GetType() == typeof(BombSprite))
             {
                 if (activeProjectiles[projectile].Intersects(game.Link.GetHitBox()))
                 {
@@ -105,40 +105,40 @@ public class CollisionHandler {
                     || projectile.GetType() == typeof(WoodSwordVerticalProjectileSprite)) && projectile.HasCollided()))
                         projectile.Collided();
                     enemy.Knockback(projectile.GetDirection());
-                    if(enemy.TakeDamage(projectile.ProjectileDamage()))
+                    if (enemy.TakeDamage(projectile.ProjectileDamage()))
                         Globals.audioLoader.Play("LOZ_Enemy_Hit");
                     shotEnemies.Add(enemy);
-				}
+                }
             }
         }
     }
 
     private void EnemyPlayerCollision() {
-		foreach (IEnemy enemy in game.enemyFactory.GetAllEnemies()) {
-			if (enemy.GetHitBox().Intersects(game.Link.GetHitBox()) && !game.Link.isHurting()) {
-				Globals.audioLoader.Play("LOZ_Link_Hurt");
+        foreach (IEnemy enemy in game.enemyFactory.GetAllEnemies()) {
+            if (enemy.GetHitBox().Intersects(game.Link.GetHitBox()) && !game.Link.isHurting()) {
+                Globals.audioLoader.Play("LOZ_Link_Hurt");
                 game.Link.OnCollision(enemy.GetHitBox());
                 game.Link.TakeDamage(enemy.DoDamage());
                 game.Link.Knockback();
                 game.Link = new PlayerHurt(game.Link, game);
-			}
-		}
-	}
+            }
+        }
+    }
 
-	private bool EnemyProjectileShieldCollision(IEnemyProjectile projectile) {
+    private bool EnemyProjectileShieldCollision(IEnemyProjectile projectile) {
         string projDirection = projectile.GetDirection();
         string playerDirection = game.Link.GetDirection().ToString();
         bool isShielded = false;
 
-		if (game.Link.IsIdle() == true && projDirection.Equals(playerDirection) == true) {
-			game.enemyFactory.enemyProjectileFactory.ClearProjectile(projectile);
-			isShielded = true;
-		}
-		projectile.Collided();
-		return isShielded;
-	}
-       
-	private void EnemyProjectilePlayerCollision() {
+        if (game.Link.IsIdle() == true && projDirection.Equals(playerDirection) == true) {
+            game.enemyFactory.enemyProjectileFactory.ClearProjectile(projectile);
+            isShielded = true;
+        }
+        projectile.Collided();
+        return isShielded;
+    }
+
+    private void EnemyProjectilePlayerCollision() {
         List<IEnemyProjectile> projectiles = game.enemyFactory.GetAllProjectiles();
         for (int i = projectiles.Count - 1; i >= 0; i--)
         {
@@ -152,18 +152,18 @@ public class CollisionHandler {
                     game.Link.Knockback();
                     game.Link = new PlayerHurt(game.Link, game);
                 }
-			}
+            }
         }
     }
-	private void EnemyProjectileMapCollision() {
-		foreach (IEnemyProjectile projectile in game.enemyFactory.GetAllProjectiles()) {
-			foreach (Rectangle box in game.map.getAllObjectRectangles()) {
-				if (projectile.GetRectangle().Intersects(box)) {
-					projectile.Collided();
-				}
-			}
-		}
-	}
+    private void EnemyProjectileMapCollision() {
+        foreach (IEnemyProjectile projectile in game.enemyFactory.GetAllProjectiles()) {
+            foreach (Rectangle box in game.map.getAllObjectRectangles()) {
+                if (projectile.GetRectangle().Intersects(box)) {
+                    projectile.Collided();
+                }
+            }
+        }
+    }
     private void ItemPlayerCollision()
     {
         foreach (IItemSprite item in game.itemFactory.GetAllItems().ToList())
@@ -212,29 +212,29 @@ public class CollisionHandler {
         }
     }
 
-    static private void PlayerDoorCollision(Vector3 map_size, IPlayer player, MapHandler map){
+    static private void PlayerDoorCollision(Vector3 map_size, IPlayer player, MapHandler map) {
         Rectangle playerHitBox = player.GetHitBox();
-        Vector2 playerCenterpoint = new Vector2(playerHitBox.X + playerHitBox.Width/2, playerHitBox.Y + playerHitBox.Height/2);
-        Rectangle up_door = new Rectangle((int)(0.46875*map_size.X), (int)(map_size.Z), (int)(0.0625*map_size.X), (int)(0.18*map_size.Y));
-        Rectangle down_door = new Rectangle((int)(0.46875*map_size.X), (int)((0.82*map_size.Y) + map_size.Z), (int)(0.0625*map_size.X), (int)(0.18*map_size.Y));
-        Rectangle left_door = new Rectangle(0, (int)((0.45*map_size.Y) + map_size.Z), (int)(0.125*map_size.X), (int)(0.1*map_size.Y));
-        Rectangle right_door = new Rectangle((int)(0.875*map_size.X), (int)((0.45*map_size.Y) + map_size.Z), (int)(0.125*map_size.X), (int)(0.1*map_size.Y));
-        if (up_door.Contains(playerCenterpoint)){
+        Vector2 playerCenterpoint = new Vector2(playerHitBox.X + playerHitBox.Width / 2, playerHitBox.Y + playerHitBox.Height / 2);
+        Rectangle up_door = new Rectangle((int)(0.46875 * map_size.X), (int)(map_size.Z), (int)(0.0625 * map_size.X), (int)(0.18 * map_size.Y));
+        Rectangle down_door = new Rectangle((int)(0.46875 * map_size.X), (int)((0.82 * map_size.Y) + map_size.Z), (int)(0.0625 * map_size.X), (int)(0.18 * map_size.Y));
+        Rectangle left_door = new Rectangle(0, (int)((0.45 * map_size.Y) + map_size.Z), (int)(0.125 * map_size.X), (int)(0.1 * map_size.Y));
+        Rectangle right_door = new Rectangle((int)(0.875 * map_size.X), (int)((0.45 * map_size.Y) + map_size.Z), (int)(0.125 * map_size.X), (int)(0.1 * map_size.Y));
+        if (up_door.Contains(playerCenterpoint)) {
             map.move_up();
-            player.SetPlayerPosition(new Vector2((int)(map_size.X/2), (int)((0.8*map_size.Y) + map_size.Z)));
-		}
-		else if (down_door.Contains(playerCenterpoint)){
+            player.SetPlayerPosition(new Vector2((int)(map_size.X / 2), (int)((0.8 * map_size.Y) + map_size.Z)));
+        }
+        else if (down_door.Contains(playerCenterpoint)) {
             map.move_down();
-            player.SetPlayerPosition(new Vector2((int)(map_size.X/2), (int)((0.2*map_size.Y) + map_size.Z)));
-		}
-		else if (left_door.Contains(playerCenterpoint)){
+            player.SetPlayerPosition(new Vector2((int)(map_size.X / 2), (int)((0.2 * map_size.Y) + map_size.Z)));
+        }
+        else if (left_door.Contains(playerCenterpoint)) {
             map.move_left();
-            player.SetPlayerPosition(new Vector2((int)(0.85*map_size.X), (int)((map_size.Y/2) + map_size.Z)));
-		}
-		else if (right_door.Contains(playerCenterpoint)){
+            player.SetPlayerPosition(new Vector2((int)(0.85 * map_size.X), (int)((map_size.Y / 2) + map_size.Z)));
+        }
+        else if (right_door.Contains(playerCenterpoint)) {
             map.move_right();
-            player.SetPlayerPosition(new Vector2((int)(0.15*map_size.X), (int)((map_size.Y/2) + map_size.Z)));
-		}
+            player.SetPlayerPosition(new Vector2((int)(0.15 * map_size.X), (int)((map_size.Y / 2) + map_size.Z)));
+        }
 
         //Room_0_1 Stair collision
         Rectangle stair = new Rectangle((int)(map_size.X / 2), (int)((map_size.Y / 11 * 5) + map_size.Z), (int)(map_size.X / 16), (int)(map_size.Y / 11));
@@ -260,8 +260,8 @@ public class CollisionHandler {
                 map.switch_map(0, 1);
                 map.x = 1;
                 map.y = 0;
-                player.SetPlayerPosition(new Vector2(375,480));
-			}
+                player.SetPlayerPosition(new Vector2(375, 480));
+            }
         }
     }
 
@@ -270,7 +270,7 @@ public class CollisionHandler {
         enemyCollisionHandler.Update();
     }
 
-    private void PushableBlockCollision() 
+    private void PushableBlockCollision()
     {
         Dictionary<IPlayerProjectile, Rectangle> activeProjectiles = game.Link.GetProjectileHitBoxes();
         List<IEnemy> enemies = game.enemyFactory.GetAllEnemies();
@@ -279,9 +279,9 @@ public class CollisionHandler {
         foreach (PushableBlock block in pushableBlock)
         {
             foreach (IEnemy enemy in enemies)
-                if(enemy.GetHitBox().Intersects(block.GetRectangle()))
+                if (enemy.GetHitBox().Intersects(block.GetRectangle()))
                     enemy.OnCollision(Rectangle.Intersect(enemy.GetHitBox(), block.GetRectangle()));
-            
+
             foreach (IPlayerProjectile projectile in activeProjectiles.Keys)
                 if (activeProjectiles[projectile].Intersects(block.GetRectangle()))
                     projectile.Collided();
@@ -314,7 +314,7 @@ public class CollisionHandler {
         };
         foreach (IPlayerProjectile projectile in game.Link.GetProjectileHitBoxes().Keys)
         {
-           if (projectile.GetType() == typeof(BombSprite)){
+            if (projectile.GetType() == typeof(BombSprite)) {
                 foreach (string key in door_type.Keys)
                 {
                     if (door_type[key].Intersects(projectile.GetHitBox()))
@@ -322,10 +322,27 @@ public class CollisionHandler {
                         game.map.BreakWall(key);
                     }
                 }
-           }
+            }
         }
     }
-
+    private void PlayerKeyedDoorCollision(IPlayer player, MapHandler map)
+    {
+        Rectangle playerHitBox = player.GetHitBox();
+        Dictionary<string, Rectangle> door_type = new Dictionary<string, Rectangle>(){
+            {"up", new Rectangle((int)(game.mapSize.X * 0.43875), (int)(game.mapSize.Z + 1.5), 32 * (int)map.GetWindowScale(game.mapSize).X, 32 * (int)map.GetWindowScale(game.mapSize).Y)},
+            {"down", new Rectangle((int)(game.mapSize.X * 0.43875), (int)(game.mapSize.Y + 70), 32 * (int)map.GetWindowScale(game.mapSize).X, 32 * (int)map.GetWindowScale(game.mapSize).Y)},
+            {"left", new Rectangle(0, (int)((game.mapSize.X * 0.43875) + game.mapSize.Z - 15), 32 * (int)map.GetWindowScale(game.mapSize).X, 32 * (int)map.GetWindowScale(game.mapSize).Y)},
+            {"right", new Rectangle((int)(game.mapSize.X - (32 * map.GetWindowScale(game.mapSize).X)), (int)((game.mapSize.Y * 0.43875) + game.mapSize.Z - 15), 32 * (int)map.GetWindowScale(game.mapSize).X, 32 * (int)map.GetWindowScale(game.mapSize).Y)}
+        };
+        foreach (string key in door_type.Keys)
+        {
+            if (door_type[key].Intersects(playerHitBox) && ItemActionHandler.inventoryCounts[2] >= 1)
+            {
+                game.map.UnlockDoor(key);
+                ItemActionHandler.inventoryCounts[2]--;
+            }
+        }
+    }
     public void Update() {
         ItemPlayerCollision();
 		BombBreakableWallCollision();
@@ -340,5 +357,6 @@ public class CollisionHandler {
         EnemyObjectCollision();
         PushableBlockCollision();
         PlayerBombCollision();
+        PlayerKeyedDoorCollision(game.Link, game.map);
     }
 }

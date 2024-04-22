@@ -4,6 +4,7 @@
 -,b,-,b,-,b,b,-,b,-,b,-
 -,-,-,-,-,-,-,-,-,-,-,-
 -,b,-,b,-,b,b,-,b,-,b,-
--,-,-,-,-,-,-,-,-,-,-,-
-door,left,up,,,,,,,,,
+-,-,-,-,-,-,-,-,k,-,-,-
+door,left,,,,,,,,,,
 enemy,DarkNut,DarkNut,DarkNut,DarkNut,DarkNut,,,,,,
+keyedDoor,up,,,,,,,,,,

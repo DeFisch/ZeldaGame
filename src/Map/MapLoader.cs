@@ -8,7 +8,6 @@
 */
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.IO;
 
 namespace ZeldaGame.Map;
@@ -22,7 +21,7 @@ public class MapLoader {
         {"down", 0},
         {"left", 0},
         {"right", 0}
-    }; // 0: no door, 1: door, 2: breakable wall
+    }; // 0: no door, 1: door, 2: breakable wall, 3: keyed door
     public MapLoader() {
         // set map path based on OS platform
         var pid = Environment.OSVersion.Platform;
@@ -86,6 +85,12 @@ public class MapLoader {
                         case "breakable":
                             for (int j = 1; j < line_data.Length; j++) {
                                 if(door_type.ContainsKey(line_data[j]))door_type[line_data[j]] = 2;
+                            }
+                            break;
+                        case "keyedDoor":
+                            for (int j = 1; j < line_data.Length; j++)
+                            {
+                                if (door_type.ContainsKey(line_data[j])) door_type[line_data[j]] = 3;
                             }
                             break;
                         case "enemy":
