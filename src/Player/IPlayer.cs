@@ -1,8 +1,10 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System.Collections.Generic;
+using ZeldaGame.Collision;
 using static ZeldaGame.Player.PlayerActionHandler;
 using static ZeldaGame.Globals;
+using ZeldaGame.Items;
 
 namespace ZeldaGame.Player {
 	public interface IPlayer : ICollidible {
@@ -12,6 +14,7 @@ namespace ZeldaGame.Player {
 		new public void OnCollision(Rectangle intersect);
 		public void Walk();
 		public void UseItem(PlayerProjectiles item);
+		public void GetItem();
 		public Direction GetDirection();
 		public void SetDirection(Direction direction);
 		public Swords GetSword();

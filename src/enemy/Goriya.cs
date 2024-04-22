@@ -1,10 +1,9 @@
 using System;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Enemy;
 using ZeldaGame.Items;
 using static ZeldaGame.Globals;
-
+using ZeldaGame.Enemy.Projectiles;
 
 namespace ZeldaGame.Enemy;
 
@@ -16,7 +15,6 @@ public class Goriya : IEnemy {
 	private State state;
 	private Direction direction;
     private EnemyProjectileFactory enemyProjectileFactory;
-	private Vector2 scale;
     private Vector2 knockback;
     private int knockbackTimer;
     private readonly int knockbackScale = 8;
@@ -29,7 +27,7 @@ public class Goriya : IEnemy {
 	private int dead_timer = 0;
 	private int iFrame = -100;
 	private float damage = 0.5f;
-	public Goriya(Texture2D texture, Vector2 position, EnemyProjectileFactory enemyProjectileFactory, string color, Vector2 scale) {
+	public Goriya(Texture2D texture, Vector2 position, EnemyProjectileFactory enemyProjectileFactory, string color) {
 		this.texture = texture;
 		this.position = position;
 		state = State.Walking;
@@ -42,7 +40,6 @@ public class Goriya : IEnemy {
             character_sprites[2, 1] = 28;
             character_sprites[3, 1] = 28;
         }
-		this.scale = scale;
 	}
 
     public float DoDamage()

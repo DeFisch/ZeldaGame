@@ -3,6 +3,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using ZeldaGame.Block;
+using ZeldaGame.Collision;
 using ZeldaGame.Commands;
 using ZeldaGame.Controllers;
 using ZeldaGame.Enemy;
@@ -20,7 +21,7 @@ namespace ZeldaGame
 {
     public class Game1 : Game {
 		private GraphicsDeviceManager _graphics;
-		private SpriteBatch _spriteBatch;
+		public SpriteBatch _spriteBatch;
 
 		public IPlayer Link;
 		public PlayerEnemy playerEnemy;
@@ -99,25 +100,25 @@ namespace ZeldaGame
 			// Load default map
 			Texture2D map_texture = Content.Load<Texture2D>("Level1_Map");
 			map = new MapHandler(map_texture, this);
-			mapScale = map.GetWindowScale(mapSize);
+			map.GetWindowScale(mapSize);
 
 			// Initializes item classes
 			PlayerSpriteFactory.Instance.LoadAllTextures(Content);
 			PlayerItemSpriteFactory.Instance.LoadAllTextures(Content);
-            Link = new PlayerMain(new Vector2(mapSize.X / 2, (mapSize.X / 2) + mapSize.Z), mapScale);
-            playerEnemy = new PlayerEnemy(Content.Load<Texture2D>("enemies"), new Vector2(375, 275), mapScale);
+            Link = new PlayerMain(new Vector2(mapSize.X / 2, (mapSize.X / 2) + mapSize.Z), scale);
+            playerEnemy = new PlayerEnemy(Content.Load<Texture2D>("enemies"), new Vector2(375, 275), scale);
 
             // the stuff we mask out of darkness, essentially this texture defines our lights
             Texture2D alphaMask = Content.Load<Texture2D>("light");
 			flashlight = new FlashlightOverlay(this, alphaMask);
 			
 			Texture2D[] enemy_texture = {Content.Load<Texture2D>("enemies"),Content.Load<Texture2D>("enemies_1")};
-            pushableBlockHandler = new PushableBlockHandler(map_texture, mapScale,mapSize,Link,map);
-			itemFactory = new ItemSpriteFactory(Items, npcs, mapScale, Link, map);
-            NPCFactory = new NPCFactory(npcs, Items, mapScale, font, map, itemFactory);
-            enemyFactory = new EnemyFactory(enemy_texture, mapScale, mapSize, itemFactory);
-            headUpDisplay = new HeadUpDisplay(HUD, mapScale, map, collisionHandler, Link, font);
-			playerInfoHUD = new PlayerInfoHUD(HUD, mapScale, map, font, collisionHandler, Link, headUpDisplay);
+            pushableBlockHandler = new PushableBlockHandler(map_texture, scale,mapSize,Link,map);
+			itemFactory = new ItemSpriteFactory(Items, npcs, scale, Link, map);
+            NPCFactory = new NPCFactory(npcs, Items, scale, font, map, itemFactory);
+            enemyFactory = new EnemyFactory(enemy_texture, mapSize, itemFactory);
+            headUpDisplay = new HeadUpDisplay(HUD, scale, map, collisionHandler, Link, font);
+			playerInfoHUD = new PlayerInfoHUD(HUD, scale, map, font, collisionHandler, Link, headUpDisplay);
 		
 
             // Define the quadrants based on the map size

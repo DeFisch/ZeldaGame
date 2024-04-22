@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static ZeldaGame.Globals;
 
 namespace ZeldaGame.Items {
 	public class HeartContainer : IItemSprite {
@@ -19,7 +20,7 @@ namespace ZeldaGame.Items {
 			this.id = "HeartContainer";
 		}
 
-		public void Draw(SpriteBatch spriteBatch, Vector2 location, Color color, Vector2 scale) {
+		public void Draw(SpriteBatch spriteBatch, Vector2 location, Color color) {
 			int scaled_x = ((int)(scale.X * (16 * pos.X + 32)));
             int scaled_y = ((int)(scale.Y * (16 * pos.Y + 32 + 56))); //16 * pos.Y - each box is 16 pixels long, +32 - wall pixels, +56 - HUD pixels
             sourceRectangle = new Rectangle(24, 1, 14, 14);

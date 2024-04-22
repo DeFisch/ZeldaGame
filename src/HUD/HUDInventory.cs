@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using Enemy.Projectiles;
+using ZeldaGame.Enemy.Projectiles;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using ZeldaGame.Items;

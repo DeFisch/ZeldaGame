@@ -24,10 +24,10 @@ public class EnemyPlayerSprite
         return destRectangle;
     }
 
-    public void Draw(SpriteBatch spriteBatch, Vector2 location, Color color, Vector2 scale)
+    public void Draw(SpriteBatch spriteBatch, Vector2 location, Color color)
     {
         srcRectangle = new Rectangle(423 + (17 * currentFrame), 194, 16, 16);
-        destRectangle = new Rectangle((int)location.X, (int)location.Y, (int)(srcRectangle.Width * scale.X), (int)(srcRectangle.Height * scale.Y));
+        destRectangle = new Rectangle((int)location.X, (int)location.Y, (int)(srcRectangle.Width * Globals.scale.X), (int)(srcRectangle.Height * Globals.scale.Y));
         SpriteEffects effect = SpriteEffects.None;
 
         spriteBatch.Draw(texture, destRectangle, srcRectangle, color, rotation: 0, new Vector2(0, 0), effects: effect, 1);

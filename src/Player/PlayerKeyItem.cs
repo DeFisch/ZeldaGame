@@ -1,17 +1,18 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System.Collections.Generic;
+using System.Diagnostics;
 using ZeldaGame.Items;
 using static ZeldaGame.Globals;
 
 namespace ZeldaGame.Player {
-	public class PlayerHurt : IPlayer {
+	public class PlayerKeyItem : IPlayer {
 		private readonly PlayerMain decoratedPlayer;
 
 		private readonly Game1 game;
-		private int timer = 50;
+		private int timer = 64;
 
-		public PlayerHurt(IPlayer decoratedPlayer, Game1 game) {
+		public PlayerKeyItem(IPlayer decoratedPlayer, Game1 game) {
 			this.decoratedPlayer = (PlayerMain)decoratedPlayer;
 			this.game = game;
 		}
@@ -50,7 +51,7 @@ namespace ZeldaGame.Player {
 			decoratedPlayer.SetDirection(direction);
 		}
 		public bool isHurting() {
-			return true;
+			return decoratedPlayer.isHurting();
 		}
 
 		public bool IsIdle() {
@@ -93,7 +94,7 @@ namespace ZeldaGame.Player {
 
         public Rectangle GetHitBox()
         {
-            return decoratedPlayer.GetHitBox();
+			return new Rectangle(0,0,0,0);
         }
 
         public Dictionary<IPlayerProjectile, Rectangle> GetProjectileHitBoxes()
@@ -115,7 +116,7 @@ namespace ZeldaGame.Player {
 		}
 
 		public void Draw(SpriteBatch spriteBatch, Color color) {
-			decoratedPlayer.Draw(spriteBatch, Color.Red);
+			decoratedPlayer.Draw(spriteBatch, Color.White);
 		}
 
 		private void RemoveDecorator() {

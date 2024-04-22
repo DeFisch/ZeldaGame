@@ -1,6 +1,7 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using static ZeldaGame.Globals;
+using ZeldaGame.Collision;
 
 namespace ZeldaGame.Enemy;
 public interface IEnemy : ICollidible {

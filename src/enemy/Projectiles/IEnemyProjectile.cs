@@ -1,5 +1,6 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+namespace ZeldaGame.Enemy.Projectiles;
 public interface IEnemyProjectile
 {
     string GetDirection();

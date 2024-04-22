@@ -74,7 +74,7 @@ public class PlayerEnemy
 
     public void Draw(SpriteBatch spriteBatch, Color color)
     {
-        sprite.Draw(spriteBatch, position, color, scale);
+        sprite.Draw(spriteBatch, position, color);
     }
 
     public void Update()

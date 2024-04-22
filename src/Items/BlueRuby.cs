@@ -21,11 +21,11 @@ namespace ZeldaGame.Items {
 			this.id = "BlueRuby";
 		}
 
-		public void Draw(SpriteBatch spriteBatch, Vector2 location, Color color, Vector2 scale) {
-			int scaled_x = ((int)(scale.X * (16 * pos.X + 32)));
-			int scaled_y = ((int)(scale.Y * (16 * pos.Y + 32 + 56)));
+		public void Draw(SpriteBatch spriteBatch, Vector2 location, Color color) {
+			int scaled_x = ((int)(Globals.scale.X * (16 * pos.X + 32)));
+			int scaled_y = ((int)(Globals.scale.Y * (16 * pos.Y + 32 + 56)));
 			sourceRectangle = new Rectangle(72, 16, 8, 16);
-			destinationRectangle = new Rectangle(scaled_x, scaled_y, (int)(sourceRectangle.Width * scale.X), (int)(sourceRectangle.Height * scale.Y));
+			destinationRectangle = new Rectangle(scaled_x, scaled_y, (int)(sourceRectangle.Width * Globals.scale.X), (int)(sourceRectangle.Height * Globals.scale.Y));
 			spriteBatch.Draw(texture, destinationRectangle, sourceRectangle, color);
 		}
 

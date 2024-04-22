@@ -16,10 +16,10 @@ public class UseItemRightSprite : PlayerSprite {
 		timesLooped = 0;
 	}
 
-    public override void Draw(SpriteBatch spriteBatch, Vector2 location, Color color, Vector2 scale) {
+    public override void Draw(SpriteBatch spriteBatch, Vector2 location, Color color) {
 
 		Rectangle sourceRectangle = new Rectangle(124, 11, 16, 16);
-		destRectangle = new Rectangle((int)location.X, (int)location.Y, (int)(sourceRectangle.Width * scale.X), (int)(sourceRectangle.Height * scale.Y));
+		destRectangle = new Rectangle((int)location.X, (int)location.Y, (int)(sourceRectangle.Width * Globals.scale.X), (int)(sourceRectangle.Height * Globals.scale.Y));
 		SpriteEffects effect = SpriteEffects.None;
 		spriteBatch.Draw(Sprite, destRectangle, sourceRectangle, color, rotation: 0, new Vector2(0, 0), effects: effect, 1);
 	}

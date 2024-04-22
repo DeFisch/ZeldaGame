@@ -14,7 +14,6 @@ public class Stalfos : IEnemy {
 	private Vector2 position;
 	private State state;
 	private Direction direction;
-	private Vector2 scale;
 	private Vector2 knockback;
 	private int knockbackTimer;
 	private readonly int knockbackScale = 8;
@@ -25,12 +24,11 @@ public class Stalfos : IEnemy {
 	private int iFrame = -100;
     private float damage = 0.5f;
 
-    public Stalfos(Texture2D texture, Vector2 position, Vector2 scale) {
+    public Stalfos(Texture2D texture, Vector2 position) {
 		this.texture = texture;
 		this.position = position;
 		state = State.Walking;
 		direction = Direction.Down;
-		this.scale = scale;
 		knockbackTimer = 0;
     }
 

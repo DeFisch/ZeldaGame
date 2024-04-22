@@ -5,13 +5,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
+using ZeldaGame.Collision;
 
 namespace ZeldaGame.Items
 {
     public interface IItemSprite : ICollidible
     {
         public void Update();
-        public void Draw(SpriteBatch spriteBatch, Vector2 location, Color color, Vector2 scale);
+        public void Draw(SpriteBatch spriteBatch, Vector2 location, Color color);
         new public Rectangle GetHitBox();
 
         public String GetID();

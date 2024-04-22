@@ -63,28 +63,28 @@ public class NPCFactory
                                 npcList.Add(new Merchant(npcTexture, position));
                                 if (itemSpriteFactory.IsMapChanged())
                                 {
-                                    itemSpriteFactory.AddItem("k", itemPosition);
+                                    itemSpriteFactory.AddItem("Key", itemPosition);
                                 }
                                 break;
                             case 1:
                                 npcList.Add(new OldMan(npcTexture, position));
 								if (itemSpriteFactory.IsMapChanged()) {
-									itemSpriteFactory.AddItem("2s", itemPosition);
+									itemSpriteFactory.AddItem("WhiteSword", itemPosition);
 								}
 								break;
                             case 2:
                                 npcList.Add(new OldWoman(npcTexture, position));
                                 if (itemSpriteFactory.IsMapChanged())
                                 {
-                                    itemSpriteFactory.AddItem("lp", itemPosition);
+                                    itemSpriteFactory.AddItem("LifePotion", itemPosition);
                                 }
                                 break;
                             case 3:
                                 npcList.Add(new Fairy(npcTexture, position));
                                 if (itemSpriteFactory.IsMapChanged())
                                 {
-                                    itemSpriteFactory.AddItem("h", itemPosition);
-                                    itemSpriteFactory.AddItem("hc", itemPosition2);
+                                    itemSpriteFactory.AddItem("Heart", itemPosition);
+                                    itemSpriteFactory.AddItem("HeartContainer", itemPosition2);
                                 }
                                 break;
                             case 4:

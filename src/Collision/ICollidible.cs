@@ -1,7 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace ZeldaGame;
+namespace ZeldaGame.Collision;
 /*
  * Interface for ICollibilde
  */

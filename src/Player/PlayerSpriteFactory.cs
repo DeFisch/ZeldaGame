@@ -50,4 +50,8 @@ public class PlayerSpriteFactory {
 				return null;
 		}
 	}
+
+	public IPlayerSprite CreateGetItemSprite() {
+		return new GetItemSprite(playerTexture);
+	}
 }

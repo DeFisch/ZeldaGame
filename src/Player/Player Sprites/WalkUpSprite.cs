@@ -16,10 +16,10 @@ public class WalkUpSprite : PlayerSprite {
 		this.sprite = sprite;
     }
 
-	public override void Draw(SpriteBatch spriteBatch, Vector2 location, Color color, Vector2 scale)
+	public override void Draw(SpriteBatch spriteBatch, Vector2 location, Color color)
     {
         Rectangle srcRectangle = new Rectangle(69 + (17 * currentFrame), 11, 16, 16);
-        destRectangle = new Rectangle((int)location.X, (int)location.Y, (int)(srcRectangle.Width * scale.X), (int)(srcRectangle.Height * scale.Y));
+        destRectangle = new Rectangle((int)location.X, (int)location.Y, (int)(srcRectangle.Width * Globals.scale.X), (int)(srcRectangle.Height * Globals.scale.Y));
 		SpriteEffects effect = SpriteEffects.None;
 
 		spriteBatch.Draw(sprite, destRectangle, srcRectangle, color, rotation: 0, new Vector2(0, 0), effects: effect, 1);

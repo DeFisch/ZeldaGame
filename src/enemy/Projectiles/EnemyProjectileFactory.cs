@@ -1,75 +1,73 @@
 using System.Collections.Generic;
 using Microsoft.Xna.Framework;
-using Enemy.Projectiles;
 using Microsoft.Xna.Framework.Graphics;
-namespace Enemy
+namespace ZeldaGame.Enemy.Projectiles;
+
+public class EnemyProjectileFactory
 {
-    public class EnemyProjectileFactory
+    public enum ProjectileType
     {
-        public enum ProjectileType
-        {
-            Fireball,
-            Boomerang
-        }
-        private List<IEnemyProjectile> projectiles;
-        private Texture2D[] texture;
+        Fireball,
+        Boomerang
+    }
+    private List<IEnemyProjectile> projectiles;
+    private Texture2D[] texture;
 
-        public EnemyProjectileFactory(Texture2D[] texture)
-        {
-            this.texture = texture;
-            projectiles = new List<IEnemyProjectile>();
-        }
+    public EnemyProjectileFactory(Texture2D[] texture)
+    {
+        this.texture = texture;
+        projectiles = new List<IEnemyProjectile>();
+    }
 
-        public void CreateProjectile(ProjectileType projectile, Vector2 location, Vector2 direction)
+    public void CreateProjectile(ProjectileType projectile, Vector2 location, Vector2 direction)
+    {
+        switch (projectile)
         {
-            switch (projectile)
-            {
-                case ProjectileType.Fireball:
-                    projectiles.Add(new FireBall(texture[1], location, direction));
-                    break;
-                case ProjectileType.Boomerang:
-                    projectiles.Add(new Boomerang(texture[0], location, direction));
-                    break;
-            }
+            case ProjectileType.Fireball:
+                projectiles.Add(new FireBall(texture[1], location, direction));
+                break;
+            case ProjectileType.Boomerang:
+                projectiles.Add(new Boomerang(texture[0], location, direction));
+                break;
         }
+    }
 
-        public void UpdateProjectiles()
+    public void UpdateProjectiles()
+    {
+        // Update all the enemy projectiles
+        foreach (IEnemyProjectile projectile in projectiles)
         {
-            // Update all the enemy projectiles
-            foreach (IEnemyProjectile projectile in projectiles)
-            {
-                projectile.Update();
-            }
-            ClearCompletedProjetiles();
+            projectile.Update();
         }
+        ClearCompletedProjetiles();
+    }
 
-        public void ClearCompletedProjetiles()
+    public void ClearCompletedProjetiles()
+    {
+        // Remove all the completed projectiles
+        projectiles.RemoveAll(p => p.Completed());
+    }
+
+    public void DrawProjectiles(SpriteBatch spriteBatch)
+    {
+        // Draw all the enemy projectiles
+        foreach (IEnemyProjectile projectile in projectiles)
         {
-            // Remove all the completed projectiles
-            projectiles.RemoveAll(p => p.Completed());
+            projectile.Draw(spriteBatch);
         }
+    }
 
-        public void DrawProjectiles(SpriteBatch spriteBatch)
-        {
-            // Draw all the enemy projectiles
-            foreach (IEnemyProjectile projectile in projectiles)
-            {
-                projectile.Draw(spriteBatch);
-            }
-        }
+    public List<IEnemyProjectile> GetProjectiles()
+    {
+        return projectiles;
+    }
 
-        public List<IEnemyProjectile> GetProjectiles()
-        {
-            return projectiles;
-        }
+    public void ClearAllProjectiles()
+    {
+        projectiles.Clear();
+    }
 
-        public void ClearAllProjectiles()
-        {
-            projectiles.Clear();
-        }
-
-        public void ClearProjectile(IEnemyProjectile projectile) {
-            projectiles.Remove(projectile);
-        }
+    public void ClearProjectile(IEnemyProjectile projectile) {
+        projectiles.Remove(projectile);
     }
 }
