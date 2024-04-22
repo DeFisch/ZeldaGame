@@ -1,0 +1,7 @@
+Author: Daniel Feng
+Date: Apr 22nd, 2024
+Sprint: 5
+.cs files reviewed: src/Controllers/EnemyController.cs, src/Player/PlayerEnemy.cs
+Time taken to review: 15 mins
+Comments:
+EnemyController is mostly short and concise, and since it has a similar functionality as the more general KeyboardController, all the functions are easy to maintain. Some might argue the implementation of 2 controllers is a bit redundant, but haveing 2 controllers ensures that we do not have conflicted inputs when both player 1 and player 2 are holding buttons at the same time. The PlayerEnemy class since it implements the IPlayer and have low coupling with other classes, it's also very easy to maintain.
