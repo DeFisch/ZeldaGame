@@ -348,8 +348,10 @@ public class CollisionHandler {
         {
             if (door_type[key].Intersects(playerHitBox) && ItemActionHandler.inventoryCounts[2] >= 1)
             {
-                if(game.map.UnlockDoor(key))
+                if(game.map.UnlockDoor(key)){
+                    Globals.audioLoader.Play("LOZ_Door_Unlock");
                     ItemActionHandler.inventoryCounts[2]--;
+                }
             }
         }
     }
