@@ -17,6 +17,7 @@ public class ResetCommand: ICommand
         MyGame.itemFactory.Reset();
         MyGame.enemyFactory.Reset();
         MyGame.headUpDisplay.Reset();
+        MyGame.pushableBlockHandler.Reset();
         MyGame.headUpDisplay.HUDInventory.Reset();
         MyGame.collisionHandler.itemActionHandler.Reset();
         Globals.audioLoader.Reset();
