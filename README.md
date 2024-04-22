@@ -63,6 +63,7 @@ OSU CSE 3902 Zelda Game Project
 - Flame: 0 damage, purely cosmetic (has knockback) 
 
 ## Curse of Darkness Game Mode
+Try the challenging curse of Darkness game mode in our Zelda game! In this game mode, you can only see a small area around yourself, while the flame weapon and bombs can help you illuminate a bigger area! Activate this game mode with button "F", have fun!
 ![curse of darkness visual](https://github.com/DeFisch/ZeldaGame/blob/main/README_img/darkness.png)
 
 ## Updates:
