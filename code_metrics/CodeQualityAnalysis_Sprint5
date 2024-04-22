@@ -1,0 +1,12 @@
+CA1822: Member ‘CheatCodeCheck’ does not access instance data and can be marked as static
+-	Fixed
+IDE0044: Make field readonly (multiple occurrences)
+-	Fixed
+-	Exception: ItemSpriteFactory.pos is modified later on in the class
+IDE0090: ‘new’ expression can be simplified (multiple occurrences)
+-	All fixed
+-	Specification that doesn’t require type specification if the constructor already knows the type
+IDE0066: Use switch expression
+-	Suppressed, because it doesn’t make sense to refactor and in my opinion the switch statement is more clear than the expression.
+IDE0017: Use object initializer, on BlendState object in Game1.cs
+-	Fixed
