@@ -344,8 +344,8 @@ public class CollisionHandler {
         {
             if (door_type[key].Intersects(playerHitBox) && ItemActionHandler.inventoryCounts[2] >= 1)
             {
-                game.map.UnlockDoor(key);
-                ItemActionHandler.inventoryCounts[2]--;
+                if(game.map.UnlockDoor(key))
+                    ItemActionHandler.inventoryCounts[2]--;
             }
         }
     }

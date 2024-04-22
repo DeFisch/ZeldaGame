@@ -147,11 +147,49 @@ public class MapHandler {
     }
     public bool UnlockDoor(string pos)
     {
-        if (mapLoader.door_type[pos] == 3)
-        {
-            mapLoader.door_type[pos] = 1;
-            mapRectangles.SetLists(map_size); //refresh the map boundaries
-            return true;
+        int orig_y = y;
+        int orig_x = x;
+        switch(pos){
+            case "up":
+                if(mapLoader.door_type["up"] == 3){
+                    mapLoader.door_type["up"] = 1;
+                    this.switch_map(orig_y - 1, orig_x);
+                    mapLoader.door_type["down"] = 1;
+                    this.switch_map(orig_y, orig_x);
+                    mapRectangles.SetLists(map_size);
+                    return true;
+                }
+                break;
+            case "down":
+                if(mapLoader.door_type["down"] == 3){
+                    mapLoader.door_type["down"] = 1;
+                    this.switch_map(orig_y + 1, orig_x);
+                    mapLoader.door_type["up"] = 1;
+                    this.switch_map(orig_y, orig_x);
+                    mapRectangles.SetLists(map_size);
+                    return true;
+                }
+                break;
+            case "left":
+                if(mapLoader.door_type["left"] == 3){
+                    mapLoader.door_type["left"] = 1;
+                    this.switch_map(orig_y, orig_x - 1);
+                    mapLoader.door_type["right"] = 1;
+                    this.switch_map(orig_y, orig_x);
+                    mapRectangles.SetLists(map_size);
+                    return true;
+                }
+                break;
+            case "right":
+                if(mapLoader.door_type["right"] == 3){
+                    mapLoader.door_type["right"] = 1;
+                    this.switch_map(orig_y, orig_x + 1);
+                    mapLoader.door_type["left"] = 1;
+                    this.switch_map(orig_y, orig_x);
+                    mapRectangles.SetLists(map_size);
+                    return true;
+                }
+                break;
         }
         return false;
     }
