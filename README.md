@@ -14,7 +14,7 @@ OSU CSE 3902 Zelda Game Project
 - Item and in-game HUD: Olivia
 - Item/bug fixes: Olu
 - Player/Weapon: Dan
-- NPC: Leslie
+- NPC/Game screens: Leslie
 - Separate screen HUD, item swapping: Zhiyang
 
 ## Key and Mouse Mappings:
@@ -54,8 +54,10 @@ OSU CSE 3902 Zelda Game Project
   - The Triforce is located in the last room of the dungeon, past the final boss. Picking up the Triforce triggers the Game Win screen.
 - Life Potion
   - The Life Potion can only be purchased, for 5 rubies, from a particular NPC in the NPC room. If Link doesn't have at least five rubies, he'll simply walk over the item and not be able to purchase it. The Life Potion restores all of Link's lives upon purchase.
+  - Key
+  - Keys are needed to unlock locked doors. In certain rooms with locked doors and enemies, killing an enemy will yield a key to unlock the door. One key can also be bought for two rubies from a particular NPC in the NPC room as well.
 
-## Player Weapons Mannual
+## Player Weapons Manual
 - Orange Arrow: cost 1 ruby, deals 2 damage
 - Blue Arrow: cost 3 ruby, deals 3 damage
 - Orange/Blue Boomerang: 0 cost, fly through wall, only weapon that can kill Keese (flying bats)
