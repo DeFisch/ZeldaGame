@@ -1,0 +1,7 @@
+Author: Daniel Feng
+Date: Apr 22nd, 2024
+Sprint: 5
+.cs files reviewed: src/Controllers/EnemyController.cs, src/Player/PlayerEnemy.cs
+Time taken to review: 15 mins
+Comments:
+EnemyController is really easy to read as each of its functions are short and the naming of the function is intuitive. PlayerEnemy also has mostly short and easy to understand functions. However, it would be appreciated if the OnCollision() have some comments on how the collision of player with the hand is handled, but overall very good codes! 
