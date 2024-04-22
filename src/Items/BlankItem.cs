@@ -17,7 +17,7 @@ namespace ZeldaGame.Items {
 			this.id = "Blank";
 		}
 
-		public void Draw(SpriteBatch spriteBatch, Vector2 location, Color color) {
+		public void Draw(SpriteBatch spriteBatch, Vector2 location, Color color, Vector2 scale) {
 
 		}
 

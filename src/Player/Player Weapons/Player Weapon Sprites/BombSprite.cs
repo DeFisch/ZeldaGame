@@ -76,7 +76,7 @@ public class BombSprite : IPlayerProjectile {
         //isActive = false;
     }
 
-    public void Draw(SpriteBatch spriteBatch) {
+    public void Draw(SpriteBatch spriteBatch, Vector2 scale) {
 		if (currentFrame == 0)
 		{
             sourceRectangle = new Rectangle(129, 185, 8, 16);

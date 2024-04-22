@@ -17,7 +17,7 @@ namespace ZeldaGame.HUD
         private readonly List<Rectangle> equipDRList;
 		private readonly List<Rectangle> swordSRList;
 		private int cycleIndex;
-        private readonly Texture2D texture;
+        private Texture2D texture;
         private Vector2 scale;
         private Rectangle equipSelectionSR;
         private Rectangle equipSelectionDR;
@@ -27,10 +27,11 @@ namespace ZeldaGame.HUD
         {   PlayerProjectiles.WoodenArrow, PlayerProjectiles.BlueArrow, PlayerProjectiles.Boomerang, 
             PlayerProjectiles.BlueBoomerang, PlayerProjectiles.Bomb, PlayerProjectiles.Fireball };
 
-        public HUDInventory(Texture2D texture, IPlayer player)
+        public HUDInventory(Texture2D texture, Vector2 scale, IPlayer player)
         {
             this.player = player;
             this.texture = texture;
+            this.scale = scale;
             cycleIndex = 0;
             equipSRList = new List<Rectangle>();
             equipDRList = new List<Rectangle>();

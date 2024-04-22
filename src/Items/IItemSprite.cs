@@ -11,7 +11,7 @@ namespace ZeldaGame.Items
     public interface IItemSprite : ICollidible
     {
         public void Update();
-        public void Draw(SpriteBatch spriteBatch, Vector2 location, Color color);
+        public void Draw(SpriteBatch spriteBatch, Vector2 location, Color color, Vector2 scale);
         new public Rectangle GetHitBox();
 
         public String GetID();

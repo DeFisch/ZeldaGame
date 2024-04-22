@@ -2,7 +2,7 @@ using Microsoft.Xna.Framework;
 using System.Collections.Generic;
 using System.Diagnostics;
 using ZeldaGame.Map;
-using static ZeldaGame.Globals;
+
 
 namespace ZeldaGame.HUD
 {
@@ -15,6 +15,7 @@ namespace ZeldaGame.HUD
         private Dictionary<Vector2,bool> isVisited;
         private Dictionary<Vector2,bool> currentPosition;
         private Dictionary<Vector2,bool> defaultRoomCheck;
+        private Vector2 scale;
         private List<Rectangle> dRectangleList;
         private List<Rectangle> sRectangleList;
         private Dictionary<string, Rectangle> playerPosition;
@@ -23,8 +24,9 @@ namespace ZeldaGame.HUD
         private bool isMapObtained;
         private CollisionHandler collisionHandler;
 
-        public HUDMapType(MapHandler mapHandler, CollisionHandler collisionHandler)
+        public HUDMapType(Vector2 scale, MapHandler mapHandler, CollisionHandler collisionHandler)
         {
+            this.scale = scale;
             this.map = new HUDMapLoader();
             this.mapHandler = mapHandler;
             this.roomPosition = mapHandler.getMapXY();

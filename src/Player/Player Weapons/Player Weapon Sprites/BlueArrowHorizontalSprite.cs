@@ -64,7 +64,7 @@ public class BlueArrowHorizontalSprite : IPlayerProjectile
         collided = true;
     }
 
-    public void Draw(SpriteBatch spriteBatch)
+    public void Draw(SpriteBatch spriteBatch, Vector2 scale)
     {
         if (!collided)
         {

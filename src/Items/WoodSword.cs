@@ -1,7 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
-using static ZeldaGame.Globals;
 
 namespace ZeldaGame.Items {
 	public class WoodSword : IItemSprite {
@@ -17,7 +16,7 @@ namespace ZeldaGame.Items {
 			this.id = "WoodSword";
 		}
 
-		public void Draw(SpriteBatch spriteBatch, Vector2 location, Color color) {
+		public void Draw(SpriteBatch spriteBatch, Vector2 location, Color color, Vector2 scale) {
 			int scaled_x = ((int)(scale.X * (16 * pos.X + 32)));
 			int scaled_y = ((int)(scale.Y * (16 * pos.Y + 32 + 56)));
 			sourceRectangle = new Rectangle(104, 0, 8, 16);

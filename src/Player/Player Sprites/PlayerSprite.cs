@@ -16,7 +16,7 @@ public abstract class PlayerSprite : IPlayerSprite
 
     public abstract void Update();
 
-    public abstract void Draw(SpriteBatch spriteBatch, Vector2 location, Color color);
+    public abstract void Draw(SpriteBatch spriteBatch, Vector2 location, Color color, Vector2 scale);
 
     public Rectangle GetHitBox()
     {

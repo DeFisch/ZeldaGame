@@ -1,7 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using static ZeldaGame.Game1;
-using static ZeldaGame.Globals;
 
 namespace ZeldaGame.Player;
 public class UseItemDownSprite : PlayerSprite {
@@ -15,7 +14,7 @@ public class UseItemDownSprite : PlayerSprite {
 		totalFrames = 12;
 	}
 
-    public override void Draw(SpriteBatch spriteBatch, Vector2 location, Color color) {
+    public override void Draw(SpriteBatch spriteBatch, Vector2 location, Color color, Vector2 scale) {
 
 		Rectangle sourceRectangle = new Rectangle(107, 11, 16, 16);
 		destRectangle = new Rectangle((int)location.X, (int)location.Y, (int)(sourceRectangle.Width * scale.X), (int)(sourceRectangle.Height * scale.Y));

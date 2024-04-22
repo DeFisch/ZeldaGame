@@ -6,15 +6,17 @@ public class PlayerEnemy
     private EnemyPlayerSprite sprite;
     private Vector2 position;
     private Vector2 resetPosition;
+    private Vector2 scale;
     private bool isActive;
 
     private readonly float speedPlayer = 3f;
     private readonly float speedAI = 1.5f;
 
-    public PlayerEnemy(Texture2D texture, Vector2 position)
+    public PlayerEnemy(Texture2D texture, Vector2 position, Vector2 scale)
     {
         this.position = position;
         resetPosition = position;
+        this.scale = scale;
         sprite = new EnemyPlayerSprite(texture);
     }
 
@@ -80,7 +82,7 @@ public class PlayerEnemy
     public void Draw(SpriteBatch spriteBatch, Color color)
     {
         isActive = true;    // If being drawn, means it is active
-        sprite.Draw(spriteBatch, position, color);
+        sprite.Draw(spriteBatch, position, color, scale);
     }
 
     public void Update()

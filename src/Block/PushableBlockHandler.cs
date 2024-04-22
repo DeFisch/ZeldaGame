@@ -10,16 +10,18 @@ namespace ZeldaGame.Block
     {
         private Texture2D texture;
         private Vector2 position;
+        private Vector2 scale;
         private Vector3 map_size;
         private Vector2 resetPosition;
         private PushableBlock pushableBlock1;
         private PushableBlock pushableBlock2;
         private List<PushableBlock> pushableBlockList;
         private LockedDoor lockedDoor;
-        public PushableBlockHandler(Texture2D texture, Vector3 map_size, IPlayer player, MapHandler map)
+        public PushableBlockHandler(Texture2D texture, Vector2 scale, Vector3 map_size, IPlayer player, MapHandler map)
         {
             pushableBlockList = new List<PushableBlock>();
             this.texture = texture;
+            this.scale = scale;
             this.pushableBlock1 = new PushableBlock(map, player, new Vector2(6, 5));
             this.pushableBlock2 = new PushableBlock(map, player, new Vector2(7, 5));
             this.lockedDoor = new LockedDoor(pushableBlock2, map, player, new Vector2(map_size.X / 16, (map_size.Y / 11 * 5) + map_size.Z));
@@ -38,9 +40,9 @@ namespace ZeldaGame.Block
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            pushableBlock1.Draw(spriteBatch, texture, map_size);
-            pushableBlock2.Draw(spriteBatch, texture, map_size);
-            lockedDoor.Draw(spriteBatch, texture);
+            pushableBlock1.Draw(spriteBatch, texture, map_size, scale);
+            pushableBlock2.Draw(spriteBatch, texture, map_size, scale);
+            lockedDoor.Draw(spriteBatch, texture, scale);
         }
 
         public void Update()

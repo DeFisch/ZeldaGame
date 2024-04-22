@@ -57,7 +57,7 @@ public class WhiteSwordVerticalSprite : IPlayerProjectile {
         //isActive = false;
     }
 
-    public void Draw(SpriteBatch spriteBatch) {
+    public void Draw(SpriteBatch spriteBatch, Vector2 scale) {
 
 		switch (currFrames) {
 			case 0:

@@ -76,7 +76,7 @@ public class BoomerangSprite : IPlayerProjectile
         collided = true;
     }
 
-    public void Draw(SpriteBatch spriteBatch)
+    public void Draw(SpriteBatch spriteBatch, Vector2 scale)
     {
         if (!collided)
             sourceRectangle = new Rectangle(64 + (currentFrame * 9), 185, 8, 16);

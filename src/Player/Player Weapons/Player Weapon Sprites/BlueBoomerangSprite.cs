@@ -73,7 +73,7 @@ public class BlueBoomerangSprite : IPlayerProjectile {
         collided = true;
     }
 
-    public void Draw(SpriteBatch spriteBatch) {
+    public void Draw(SpriteBatch spriteBatch, Vector2 scale) {
         if (!collided) 
 		    sourceRectangle = new Rectangle(91 + (currentFrame * 9), 185, 8, 16);
 	    destinationRectangle = new Rectangle((int)position.X + 8, (int)position.Y, (int)(sourceRectangle.Width * scale.X), (int)(sourceRectangle.Height * scale.Y));

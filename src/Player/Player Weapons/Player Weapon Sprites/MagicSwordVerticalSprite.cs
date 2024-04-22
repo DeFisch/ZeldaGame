@@ -56,7 +56,7 @@ public class MagicSwordVerticalSprite : IPlayerProjectile {
         //isActive = false;
     }
 
-    public void Draw(SpriteBatch spriteBatch) {
+    public void Draw(SpriteBatch spriteBatch, Vector2 scale) {
 
 		switch (currFrames) {
 			case 0:

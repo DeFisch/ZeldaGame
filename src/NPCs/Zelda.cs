@@ -2,7 +2,7 @@
 using Microsoft.Xna.Framework.Graphics;
 using System.Collections.Generic;
 using System;
-using static ZeldaGame.Globals;
+
 
 namespace ZeldaGame.NPCs;
 
@@ -26,7 +26,7 @@ public class Zelda : INPC {
         npcQuote = "I AM ZELDA, PRINCESS OF HYRULE.";
     }
 
-	public void Draw(SpriteBatch spriteBatch, SpriteFont font) {
+	public void Draw(SpriteBatch spriteBatch, Vector2 scale, SpriteFont font) {
 		int sprite_id = currentFrame % 2;
 		sourceRectangle = new Rectangle(character_sprites[sprite_id, 0], character_sprites[sprite_id, 1], character_sprites[sprite_id, 2], character_sprites[sprite_id, 3]);
 		destinationRectangle = new Rectangle((int)position.X, (int)position.Y, (int)(sourceRectangle.Width * scale.X), (int)(sourceRectangle.Height * scale.Y));

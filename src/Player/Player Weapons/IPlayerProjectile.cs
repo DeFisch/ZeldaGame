@@ -17,5 +17,5 @@ public interface IPlayerProjectile {
 
 	public void Update();
 
-	public void Draw(SpriteBatch spriteBatch);
+	public void Draw(SpriteBatch spriteBatch, Vector2 scale);
 }

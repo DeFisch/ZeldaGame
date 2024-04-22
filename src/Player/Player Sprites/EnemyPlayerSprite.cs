@@ -1,7 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using ZeldaGame;
-using static ZeldaGame.Globals;
 
 public class EnemyPlayerSprite
 {
@@ -25,7 +24,7 @@ public class EnemyPlayerSprite
         return destRectangle;
     }
 
-    public void Draw(SpriteBatch spriteBatch, Vector2 location, Color color)
+    public void Draw(SpriteBatch spriteBatch, Vector2 location, Color color, Vector2 scale)
     {
         srcRectangle = new Rectangle(423 + (17 * currentFrame), 194, 16, 16);
         destRectangle = new Rectangle((int)location.X, (int)location.Y, (int)(srcRectangle.Width * scale.X), (int)(srcRectangle.Height * scale.Y));

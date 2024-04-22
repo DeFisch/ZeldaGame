@@ -2,7 +2,6 @@ using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Enemy.Projectiles;
 using Microsoft.Xna.Framework.Graphics;
-
 namespace Enemy
 {
     public class EnemyProjectileFactory

@@ -54,7 +54,7 @@ public class SwordProjectileExplosion : IPlayerProjectile
         return damage;
     }
 
-    public void Draw(SpriteBatch spriteBatch)
+    public void Draw(SpriteBatch spriteBatch, Vector2 scale)
     {
         sourceRectangle = new Rectangle(27, 154, 8, 16);
         for (int i = 0; i < destinationRectangles.Count; i++)

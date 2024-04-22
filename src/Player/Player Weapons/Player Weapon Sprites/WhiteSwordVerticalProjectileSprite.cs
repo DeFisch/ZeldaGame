@@ -57,7 +57,7 @@ public class WhiteSwordVerticalProjectileSprite : IPlayerProjectile {
 		collided = true;
 	}
 
-	public void Draw(SpriteBatch spriteBatch) {
+	public void Draw(SpriteBatch spriteBatch, Vector2 scale) {
 		if (!collided) {
 			sourceRectangle = new Rectangle(36, 154, 8, 16);
 			destinationRectangle = new Rectangle((int)position.X, (int)position.Y, (int)(sourceRectangle.Width * scale.X), (int)(sourceRectangle.Height * scale.Y));

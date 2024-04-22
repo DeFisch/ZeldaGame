@@ -3,7 +3,6 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using ZeldaGame.Player;
 using static System.Net.Mime.MediaTypeNames;
-using static ZeldaGame.Globals;
 
 namespace Enemy.Projectiles
 {
@@ -13,6 +12,7 @@ namespace Enemy.Projectiles
         private Vector2 direction;
         private Vector2 location;
         private Texture2D texture;
+        private int scale = 4;
         private int currentFrame = 0;
         private int frameID = 0;
         private Rectangle sourceRectangle;
@@ -51,13 +51,13 @@ namespace Enemy.Projectiles
         public void Draw(SpriteBatch spriteBatch)
         {
             sourceRectangle = fireball_sprites[currentFrame];
-            Rectangle destinationRectangle = new Rectangle((int)location.X, (int)location.Y, (int)(sourceRectangle.Width * scale.X), (int)(sourceRectangle.Height * scale.Y));
+            Rectangle destinationRectangle = new Rectangle((int)location.X, (int)location.Y, sourceRectangle.Width * scale, sourceRectangle.Height * scale);
             spriteBatch.Draw(texture, destinationRectangle, sourceRectangle, Color.White);
         }
 
         public Rectangle GetRectangle()
         {
-            return new Rectangle((int)location.X, (int)location.Y, (int)(fireball_sprites[currentFrame].Width * scale.X), (int)(fireball_sprites[currentFrame].Height * scale.Y));
+            return new Rectangle((int)location.X, (int)location.Y, fireball_sprites[currentFrame].Width * scale, fireball_sprites[currentFrame].Height * scale);
         }
 
 		public string GetDirection() {

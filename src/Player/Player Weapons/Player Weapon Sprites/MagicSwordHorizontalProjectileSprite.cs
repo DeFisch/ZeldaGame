@@ -61,7 +61,7 @@ public class MagicSwordHorizontalProjectileSprite : IPlayerProjectile {
 		collided = true;
 	}
 
-    public void Draw(SpriteBatch spriteBatch) {
+    public void Draw(SpriteBatch spriteBatch, Vector2 scale) {
 		if (!collided)
         {
             sourceRectangle = new Rectangle(80, 154, 16, 16);

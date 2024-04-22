@@ -14,6 +14,7 @@ namespace ZeldaGame.Player {
 		private IPlayerSprite sprite;
 		private Vector2 position;
 		private Vector2 movement;
+		public Vector2 scale;
 		private Vector2 resetPosition;
 		private bool isMoving;
 
@@ -27,7 +28,7 @@ namespace ZeldaGame.Player {
         private static float health = 3.0f;
 		private float maxHealth = 3f;
 
-		public PlayerMain(Vector2 position)
+		public PlayerMain(Vector2 position, Vector2 scale)
 		{
 			direction = Direction.Down;
 			sprite = PlayerSpriteFactory.Instance.CreateWalkSprite(direction);
@@ -38,6 +39,7 @@ namespace ZeldaGame.Player {
 			this.position = position;
 			resetPosition = position;
 			movement = new Vector2(0, 0);
+			this.scale = scale;
 			animTimer = -1;
 
 			isMoving = false;
@@ -203,8 +205,8 @@ namespace ZeldaGame.Player {
 
 		public void Draw(SpriteBatch spriteBatch, Color color)
 		{
-			weaponHandler.Draw(spriteBatch);
-			sprite.Draw(spriteBatch, position, color);
+			weaponHandler.Draw(spriteBatch, scale);
+			sprite.Draw(spriteBatch, position, color, scale);
 		}
 
         private void UpdateMovementVector()
