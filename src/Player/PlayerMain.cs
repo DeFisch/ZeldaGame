@@ -67,7 +67,7 @@ namespace ZeldaGame.Player {
 		public void SetPlayerPosition(Vector2 position, bool offset = true)
 		{
 			Rectangle sprite_hitbox = sprite.GetHitBox();
-			Vector2 sprite_size = new Vector2(sprite_hitbox.Width, sprite_hitbox.Height);
+			Vector2 sprite_size = new (sprite_hitbox.Width, sprite_hitbox.Height);
 			if (offset) this.position = position - sprite_size / 2;
 		}
 

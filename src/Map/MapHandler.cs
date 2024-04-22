@@ -15,16 +15,16 @@ public class MapHandler {
         Note here x denotes the row and y denotes the column
     */
     private bool debug = false;
-    private MapLoader mapLoader;
+    private readonly MapLoader mapLoader;
     private string[,] map;
-    private Texture2D map_texture;
+    private readonly Texture2D map_texture;
     private Vector3 map_size;
     private Vector2 room_size;
     public int x = 2, y = 5; // default map //Olivia modified this 
-    private MapStaticRectangles mapRectangles;
-    private Game1 game;
-    private (bool, Dictionary<string, int>)[,] door_record = new (bool, Dictionary<string, int>)[7,12];
-    private (bool, List<IEnemy>)[,] enemy_record = new (bool, List<IEnemy>)[7,12];
+    private readonly MapStaticRectangles mapRectangles;
+    private readonly Game1 game;
+    private readonly  (bool, Dictionary<string, int>)[,] door_record = new (bool, Dictionary<string, int>)[7,12];
+    private readonly (bool, List<IEnemy>)[,] enemy_record = new (bool, List<IEnemy>)[7,12];
 
     public MapHandler(Texture2D map_texture, Game1 game) {
         mapLoader = new MapLoader();
@@ -125,7 +125,7 @@ public class MapHandler {
 
     public void Draw(SpriteBatch spriteBatch){
         Rectangle mapSourceRectangle = get_map_location(x, y);
-        Rectangle mapTargetRectangle = new Rectangle(0, (int)map_size.Z, (int)map_size.X, (int)map_size.Y);
+        Rectangle mapTargetRectangle = new (0, (int)map_size.Z, (int)map_size.X, (int)map_size.Y);
         spriteBatch.Draw(map_texture, mapTargetRectangle, mapSourceRectangle, Color.White);
         List<Rectangle> sList = mapRectangles.getSourceRectangleList();
         List<Rectangle> dlist = mapRectangles.getDestinationRectangleList();
@@ -244,8 +244,8 @@ public class MapHandler {
     }
 
     public void DrawWallOnHole(SpriteBatch spriteBatch, string pos, Vector3 map_size){
-        Rectangle srcRect = new Rectangle(1527, 0, 16, 32);
-        Rectangle destRect = new Rectangle(0, 0, 0, 0);
+        Rectangle srcRect = new (1527, 0, 16, 32);
+        Rectangle destRect = new (0, 0, 0, 0);
         switch(pos){
             case "up":
                 destRect = new Rectangle((int)(map_size.X*0.46875), (int)(map_size.Z), (int)(map_size.X*0.0625), (int)(map_size.Y*0.18));
@@ -268,12 +268,12 @@ public class MapHandler {
 
     public void DrawKeyedDoorOnHole(SpriteBatch spriteBatch, string pos, Vector3 map_size)
     {
-        Rectangle leftKeyedDoorSrcRect = new Rectangle(324, 241, 32, 32);
-        Rectangle rightKeyedDoorSrcRect = new Rectangle(324, 274, 32, 32);
-        Rectangle upKeyedDoorSrcRect = new Rectangle(324, 208, 32, 32);
-        Rectangle downKeyedDoorSrcRect = new Rectangle(324, 307, 32, 32);
+        Rectangle leftKeyedDoorSrcRect = new (324, 241, 32, 32);
+        Rectangle rightKeyedDoorSrcRect = new (324, 274, 32, 32);
+        Rectangle upKeyedDoorSrcRect = new (324, 208, 32, 32);
+        Rectangle downKeyedDoorSrcRect = new (324, 307, 32, 32);
         Rectangle srcRect = Rectangle.Empty;
-        Rectangle destRect = new Rectangle(0, 0, 0, 0);
+        Rectangle destRect = new (0, 0, 0, 0);
        switch(pos){
             case "up":
                 srcRect = upKeyedDoorSrcRect;

@@ -12,17 +12,18 @@ namespace ZeldaGame.HUD
     public class HUDInventory
     {
         
-        private IPlayer player;
-        private List<Rectangle> equipSRList;
-        private List<Rectangle> equipDRList;
-		private List<Rectangle> swordSRList;
+        private readonly IPlayer player;
+        private readonly List<Rectangle> equipSRList;
+        private readonly List<Rectangle> equipDRList;
+		private readonly List<Rectangle> swordSRList;
 		private int cycleIndex;
-        private Texture2D texture;
+        private readonly Texture2D texture;
+        private Vector2 scale;
         private Rectangle equipSelectionSR;
         private Rectangle equipSelectionDR;
 		private Rectangle targetEquipDRTop;
         private Rectangle targetEquipDRBottom;
-		private List<PlayerProjectiles> equips = new() 
+		private readonly List<PlayerProjectiles> equips = new() 
         {   PlayerProjectiles.WoodenArrow, PlayerProjectiles.BlueArrow, PlayerProjectiles.Boomerang, 
             PlayerProjectiles.BlueBoomerang, PlayerProjectiles.Bomb, PlayerProjectiles.Fireball };
 
@@ -67,19 +68,19 @@ namespace ZeldaGame.HUD
 
         public void SetEquip()
         {
-            Rectangle ArrowSR = new Rectangle(615, 137, 8, 16);
-            Rectangle BlueArrowSR = new Rectangle(624, 137, 8, 16);
-            Rectangle BoomerangSR = new Rectangle(584, 137, 8, 16);
-            Rectangle BlueBoomerangSR = new Rectangle(593, 137, 8, 16);
-            Rectangle BombSR = new Rectangle(604, 137, 8, 16);
-            Rectangle FireballSR = new Rectangle(653, 137, 8, 16);
+            Rectangle ArrowSR = new (615, 137, 8, 16);
+            Rectangle BlueArrowSR = new (624, 137, 8, 16);
+            Rectangle BoomerangSR = new (584, 137, 8, 16);
+            Rectangle BlueBoomerangSR = new(593, 137, 8, 16);
+            Rectangle BombSR = new (604, 137, 8, 16);
+            Rectangle FireballSR = new (653, 137, 8, 16);
 
-            Rectangle ArrowDR = new Rectangle((int)(132 * scale.X), (int)(48 * scale.Y), (int)(8 * scale.X), (int)(16 * scale.Y));
-            Rectangle BlueArrowDR = new Rectangle((int)(156 * scale.X), (int)(48 * scale.Y), (int)(8 * scale.X), (int)(16 * scale.Y));
-            Rectangle BoomerangDR = new Rectangle((int)(180 * scale.X), (int)(48 * scale.Y), (int)(8 * scale.X), (int)(16 * scale.Y));
-            Rectangle BlueBoomerangDR = new Rectangle((int)(204 * scale.X), (int)(48 * scale.Y), (int)(8 * scale.X), (int)(16 * scale.Y));
-            Rectangle BombDR = new Rectangle((int)(132 * scale.X), (int)(64 * scale.Y), (int)(8 * scale.X), (int)(16 * scale.Y));
-            Rectangle FireballDR = new Rectangle((int)(156 * scale.X), (int)(64 * scale.Y), (int)(8 * scale.X), (int)(16 * scale.Y));
+            Rectangle ArrowDR = new ((int)(132 * scale.X), (int)(48 * scale.Y), (int)(8 * scale.X), (int)(16 * scale.Y));
+            Rectangle BlueArrowDR = new ((int)(156 * scale.X), (int)(48 * scale.Y), (int)(8 * scale.X), (int)(16 * scale.Y));
+            Rectangle BoomerangDR = new ((int)(180 * scale.X), (int)(48 * scale.Y), (int)(8 * scale.X), (int)(16 * scale.Y));
+            Rectangle BlueBoomerangDR = new ((int)(204 * scale.X), (int)(48 * scale.Y), (int)(8 * scale.X), (int)(16 * scale.Y));
+            Rectangle BombDR = new ((int)(132 * scale.X), (int)(64 * scale.Y), (int)(8 * scale.X), (int)(16 * scale.Y));
+            Rectangle FireballDR = new ((int)(156 * scale.X), (int)(64 * scale.Y), (int)(8 * scale.X), (int)(16 * scale.Y));
 
             targetEquipDRTop = new Rectangle((int)(68 * scale.X), (int)(48 * scale.Y), (int)(8 * scale.X), (int)(16 * scale.Y));
             targetEquipDRBottom = new Rectangle((int)(128 * scale.X), (int)(200 * scale.Y), (int)(8 * scale.X), (int)(16 * scale.Y));
@@ -102,10 +103,10 @@ namespace ZeldaGame.HUD
         }
 
         public void SetSword() {
-            Rectangle NoSwordSR = new Rectangle(410, 35, 8, 16);
-			Rectangle WoodSwordSR = new Rectangle(555, 137, 8, 16);
-			Rectangle WhiteSwordSR = new Rectangle(564, 137, 8, 16);
-			Rectangle MagicSwordSR = new Rectangle(573, 137, 8, 16);
+            Rectangle NoSwordSR = new (410, 35, 8, 16);
+			Rectangle WoodSwordSR = new (555, 137, 8, 16);
+			Rectangle WhiteSwordSR = new (564, 137, 8, 16);
+			Rectangle MagicSwordSR = new (573, 137, 8, 16);
 
             swordSRList.Add(NoSwordSR);
             swordSRList.Add(WoodSwordSR);

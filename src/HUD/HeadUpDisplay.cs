@@ -11,10 +11,11 @@ namespace ZeldaGame.HUD
     public class HeadUpDisplay
     {
         public HUDMapHandler HUDMapHandler;
-        private CollisionHandler collision;
+        private readonly CollisionHandler collision;
         public HUDInventory HUDInventory;
-        private PlayerInfoHUD playerInfoHUD;
-        private Texture2D texture;
+        private readonly PlayerInfoHUD playerInfoHUD;
+        private readonly Texture2D texture;
+        private Vector2 scale;
         private Rectangle inventorySR;
         private Rectangle mapSR;
         private Rectangle playerInfoSR;
@@ -64,8 +65,8 @@ namespace ZeldaGame.HUD
         {
             if(collision.itemActionHandler.isMapObtained())
             {
-                Rectangle mapItemSR = new Rectangle(601, 156, 8, 16);
-                Rectangle mapItemDR = new Rectangle((int)(48 * scale.X), (int)(112 * scale.Y), (int)(mapItemSR.Width * scale.X), (int)(mapItemSR.Height * scale.Y));
+                Rectangle mapItemSR = new (601, 156, 8, 16);
+                Rectangle mapItemDR = new ((int)(48 * scale.X), (int)(112 * scale.Y), (int)(mapItemSR.Width * scale.X), (int)(mapItemSR.Height * scale.Y));
                 spriteBatch.Draw(texture, mapItemDR, mapItemSR, Color.White);
             }
         }
@@ -74,8 +75,8 @@ namespace ZeldaGame.HUD
         {
             if(collision.itemActionHandler.isCompassObtained())
             {
-                Rectangle compassItemSR = new Rectangle(612, 156, 15, 15);
-                Rectangle compassItemDR = new Rectangle((int)(44 * scale.X), (int)(152 * scale.Y), (int)(compassItemSR.Width * scale.X), (int)(compassItemSR.Height * scale.Y));
+                Rectangle compassItemSR = new (612, 156, 15, 15);
+                Rectangle compassItemDR = new ((int)(44 * scale.X), (int)(152 * scale.Y), (int)(compassItemSR.Width * scale.X), (int)(compassItemSR.Height * scale.Y));
                 spriteBatch.Draw(texture, compassItemDR, compassItemSR, Color.White);
             }
         }

@@ -8,9 +8,9 @@ namespace ZeldaGame.Controllers;
 public class KeyboardController : IController
 {
 	private readonly KeyboardHandler keyboardHandler;
-	private Dictionary<Keys, ICommand> holdKeys;
-	private Dictionary<Keys, ICommand> pressKeys;
-	private Keys[] keyLogger;
+	private readonly Dictionary<Keys, ICommand> holdKeys;
+	private readonly Dictionary<Keys, ICommand> pressKeys;
+	private readonly Keys[] keyLogger;
 	int i;
 
 	public KeyboardController()
@@ -51,9 +51,8 @@ public class KeyboardController : IController
 		pressKeys.Add(key, command);
 	}
 
-	public bool CheatCodeCheck(Keys[] keyLogger)
+	public static bool CheatCodeCheck(Keys[] keyLogger)
 	{
-		Keys[] cheatCode = { Keys.D3, Keys.D9, Keys.D0, Keys.D2 };
 		bool isCorrect = false;
 
 

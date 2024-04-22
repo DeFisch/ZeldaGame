@@ -120,10 +120,10 @@ namespace ZeldaGame
 		
 
             // Define the quadrants based on the map size
-            Rectangle leftDoorQuadrant = new Rectangle(0, (int)((mapSize.Y / 4) + mapSize.Z), (int)(mapSize.X / 4), (int)(mapSize.Y / 2));
-            Rectangle rightDoorQuadrant = new Rectangle((int)(3 * mapSize.X / 4), (int)((mapSize.Y / 4) + mapSize.Z), (int)(mapSize.X / 4), (int)(mapSize.Y / 2));
-            Rectangle topDoorQuadrant = new Rectangle((int)(mapSize.X / 4), (int)(mapSize.Z), (int)(mapSize.X / 2), (int)(mapSize.Y / 4));
-            Rectangle bottomDoorQuadrant = new Rectangle((int)(mapSize.X / 4), (int)((3 * mapSize.Y / 4) + mapSize.Z), (int)(mapSize.X / 2), (int)(mapSize.Y / 4));
+            Rectangle leftDoorQuadrant = new (0, (int)((mapSize.Y / 4) + mapSize.Z), (int)(mapSize.X / 4), (int)(mapSize.Y / 2));
+            Rectangle rightDoorQuadrant = new ((int)(3 * mapSize.X / 4), (int)((mapSize.Y / 4) + mapSize.Z), (int)(mapSize.X / 4), (int)(mapSize.Y / 2));
+            Rectangle topDoorQuadrant = new ((int)(mapSize.X / 4), (int)(mapSize.Z), (int)(mapSize.X / 2), (int)(mapSize.Y / 4));
+            Rectangle bottomDoorQuadrant = new ((int)(mapSize.X / 4), (int)((3 * mapSize.Y / 4) + mapSize.Z), (int)(mapSize.X / 2), (int)(mapSize.Y / 4));
 
             //Add Blocks
             pushableBlockHandler.AddBlock();
@@ -252,11 +252,8 @@ namespace ZeldaGame
 				GraphicsDevice.SetRenderTarget(darkness);
 				GraphicsDevice.Clear(new Color(0 ,0 ,0 ,250)); // the 120 here is the darkness "intensity"
 
-				var blend = new BlendState();
-				blend.AlphaSourceBlend = Blend.Zero;
-				blend.AlphaDestinationBlend = Blend.InverseSourceColor;
-				blend.ColorSourceBlend = Blend.Zero;
-				blend.ColorDestinationBlend = Blend.InverseSourceColor;
+				var blend = new BlendState() { AlphaSourceBlend = Blend.Zero, AlphaDestinationBlend = Blend.InverseSourceColor, ColorSourceBlend = Blend.Zero, 
+					ColorDestinationBlend = Blend.InverseSourceColor };
 				_spriteBatch.Begin(blendState: blend);
 				flashlight.Draw(_spriteBatch);
 				_spriteBatch.End();

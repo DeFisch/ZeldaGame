@@ -13,10 +13,10 @@ using System.IO;
 namespace ZeldaGame.Map;
 
 public class MapLoader {
-    private string map_path;
-    private string[,] map = new string[7, 12];
-    private List<string> enemies = new List<string>();
-    public Dictionary<string, int> door_type = new Dictionary<string, int>(){
+    private readonly string map_path;
+    private readonly string[,] map = new string[7, 12];
+    private readonly List<string> enemies = new ();
+    public Dictionary<string, int> door_type = new(){
         {"up", 0},
         {"down", 0},
         {"left", 0},
@@ -25,6 +25,7 @@ public class MapLoader {
     public MapLoader() {
         // set map path based on OS platform
         var pid = Environment.OSVersion.Platform;
+#pragma warning disable IDE0066
         switch (pid) {
             case PlatformID.Win32NT:
 			case PlatformID.Win32S:
@@ -40,6 +41,7 @@ public class MapLoader {
                 map_path = "../../../Content/map_data/";
                 break;
         }
+#pragma warning restore IDE0066
         if (!load_map(2, 5)) { // default map
             throw new FileNotFoundException("Map file not found");
         }

@@ -14,19 +14,19 @@ using static ZeldaGame.Globals;
 namespace ZeldaGame.Items {
 	public class ItemSpriteFactory {
 		List<IItemSprite> objectList;
-		Texture2D texture;
-		Texture2D texture2;
-		PlayerMain player;
+		readonly Texture2D texture;
+		readonly Texture2D texture2;
+		readonly PlayerMain player;
 		Vector2 pos;
 		private int k = 0;
 		private List<int> collCheck;
 		private int switchCheck;
         private string [,] map;
-		private MapHandler mapHandler;
+		private readonly MapHandler mapHandler;
         private string item_char;
 		private int initx;
 		private int inity;
-		List<IItemSprite>[,] arrayOfLists;
+		readonly List<IItemSprite>[,] arrayOfLists;
 
 
         public ItemSpriteFactory(Texture2D texture, Texture2D texture2, IPlayer player, MapHandler mapHandler) {
