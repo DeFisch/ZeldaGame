@@ -23,7 +23,6 @@ namespace ZeldaGame.Player {
 		private readonly int knockbackScale = 8;
 		private Direction direction;
 		private Vector2 knockback;
-		private Swords currSword;
 		private int animTimer;
         private static float health = 3.0f;
 		private float maxHealth = 3f;
@@ -35,7 +34,6 @@ namespace ZeldaGame.Player {
             actionHandler = new PlayerActionHandler(sprite);
 			weaponHandler = new WeaponHandler();
 
-			currSword = weaponHandler.currSword;
 			this.position = position;
 			resetPosition = position;
 			movement = new Vector2(0, 0);
@@ -74,12 +72,12 @@ namespace ZeldaGame.Player {
 		}
 
 		public Swords GetSword() {
-			return currSword;
+			return weaponHandler.currSword;
 		}
 
 		public void SetSword(Swords newSword) {
 			actionHandler.SetSword(newSword);
-			currSword = actionHandler.GetSword();
+			weaponHandler.currSword = actionHandler.GetSword();
 		}
 
 		public Direction GetDirection() {
@@ -142,10 +140,10 @@ namespace ZeldaGame.Player {
 
 		public void Attack()
 		{
-			if (animTimer < 0 && currSword != Swords.None) {
+			if (animTimer < 0 && weaponHandler.currSword != Swords.None) {
 				animTimer = 16;
 				sprite = actionHandler.Attack();
-				weaponHandler.UseSword(currSword, position, actionHandler.GetDirection(), health, maxHealth);
+				weaponHandler.UseSword(weaponHandler.currSword, position, actionHandler.GetDirection(), health, maxHealth);
 			}
 		}
 

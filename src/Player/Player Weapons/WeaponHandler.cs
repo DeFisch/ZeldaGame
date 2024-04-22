@@ -90,6 +90,7 @@ public class WeaponHandler {
     }
 
 	public void Reset() {
+		currSword = Swords.Wood;
 		activeProjectiles.Clear();
 		expiredProjectiles.Clear();
 	}
