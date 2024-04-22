@@ -1,0 +1,8 @@
+Author: Zhiyang Xu
+Date: April 22, 2024
+Sprint number: 5
+Name of the .cs file being reviewed: cheat code feature in keyboardController.cs
+Author of the .cs files being reviewed: Olivia Maynard
+Number of minutes taken for the review: 15 mins
+
+A very straightforward implementation of CheatCodeCheck. The KeyLoggerCheck function works pretty well for checking codes with a length of 4. All methods are concise and maintainable. One suggestion is to create a separate class for cheat codes to make it more manageable.

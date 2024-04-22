@@ -1,0 +1,8 @@
+Author: Zhiyang Xu
+Date: April 22, 2024
+Sprint number: 5
+Name of the .cs file being reviewed: NPC shop in NPCFactory,cs/keyed doors in MapHandler.cs/collisionHandler.cs
+Number of minutes taken for the review: 15 mins
+
+All parts are named concisely and meaningfully.The logic for displaying items' cost in NPC room is straightforward and easy to follow. 
+The keyed door implementation followed the previous code design, promoting a modular and maintainable code structure. Also, those methods are short and well-written, enhancing readability and comprehension.
