@@ -4,7 +4,7 @@ using Microsoft.Xna.Framework.Graphics;
 using ZeldaGame.Player;
 using static System.Net.Mime.MediaTypeNames;
 
-namespace ZeldaGame.Enemy.Projectiles
+namespace Enemy.Projectiles
 {
     public class FireBall : IEnemyProjectile
     {
@@ -12,6 +12,7 @@ namespace ZeldaGame.Enemy.Projectiles
         private Vector2 direction;
         private Vector2 location;
         private Texture2D texture;
+        private int scale = 4;
         private int currentFrame = 0;
         private int frameID = 0;
         private Rectangle sourceRectangle;
@@ -23,7 +24,7 @@ namespace ZeldaGame.Enemy.Projectiles
             this.direction = direction;
             this.location = location;
             sourceRectangle = fireball_sprites[currentFrame];
-            this.location -= sourceRectangle.Size.ToVector2() * Globals.scale / 2;
+            this.location -= sourceRectangle.Size.ToVector2() * scale / 2;
             this.texture = texture;
             collided = false;
         }
@@ -50,13 +51,13 @@ namespace ZeldaGame.Enemy.Projectiles
         public void Draw(SpriteBatch spriteBatch)
         {
             sourceRectangle = fireball_sprites[currentFrame];
-            Rectangle destinationRectangle = new Rectangle((int)location.X, (int)location.Y, (int)(sourceRectangle.Width * Globals.scale.X), (int)(sourceRectangle.Height * Globals.scale.Y));
+            Rectangle destinationRectangle = new Rectangle((int)location.X, (int)location.Y, sourceRectangle.Width * scale, sourceRectangle.Height * scale);
             spriteBatch.Draw(texture, destinationRectangle, sourceRectangle, Color.White);
         }
 
         public Rectangle GetRectangle()
         {
-            return new Rectangle((int)location.X, (int)location.Y, (int)(fireball_sprites[currentFrame].Width * Globals.scale.X), (int)(fireball_sprites[currentFrame].Height * Globals.scale.Y));
+            return new Rectangle((int)location.X, (int)location.Y, fireball_sprites[currentFrame].Width * scale, fireball_sprites[currentFrame].Height * scale);
         }
 
 		public string GetDirection() {

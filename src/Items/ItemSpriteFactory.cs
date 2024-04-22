@@ -54,7 +54,7 @@ namespace ZeldaGame.Items {
 		public string[] GetAvailableItems()
 #pragma warning restore CA1822 // Mark members as static
 		{
-			return new string[] { "BlueRuby", "YellowRuby", "Clock", "Heart", "Bomb"};
+			return new string[] { "br", "yr", "cl", "h", "bm"};
 		}
 
 		public List<IItemSprite> GetAllItems() {
@@ -64,49 +64,49 @@ namespace ZeldaGame.Items {
 		public void AddItem(string item_char, Vector2 pos) {
 			switch (item_char)
 			{
-				case "BlueRuby":
+				case "br":
 					objectList.Add(new BlueRuby(this.texture, pos));
 					break;
-				case "YellowRuby":
+				case "yr":
 					objectList.Add(new YellowRuby(this.texture, pos));
 					break;
-				case "Key":
+				case "k":
 					objectList.Add(new Key(this.texture, pos));
 					break;
-				case "Clock":
+				case "cl":
 					objectList.Add(new Clock(this.texture, pos));
 					break;
-				case "Compass":
+				case "co":
 					objectList.Add(new Compass(this.texture, pos));
 					break;
-				case "Heart":
+				case "h":
 					objectList.Add(new Heart(this.texture, pos));
 					break;
-				case "HeartContainer":
+				case "hc":
 					objectList.Add(new HeartContainer(this.texture, pos));
 					break;
-				case "Triforce":
+				case "tr":
 					objectList.Add(new Triforce(this.texture, pos));
 					break;
-				case "Bow":
+				case "bo":
 					objectList.Add(new Bow(this.texture, pos));
 					break;
-				case "Bomb":
+				case "bm":
 					objectList.Add(new Bomb(this.texture, pos));
 					break;
-				case "Map":
+				case "mp":
 				    objectList.Add(new Map(this.texture, pos));
 					break;
-				case "WoodSword":
+				case "1s":
 					objectList.Add(new WoodSword(this.texture, pos));
 					break;
-				case "WhiteSword":
+				case "2s":
 					objectList.Add(new WhiteSword(this.texture, pos));
 					break;
-				case "MagicSword":
+				case "3s":
 					objectList.Add(new MagicSword(this.texture, pos));
 					break;
-				case "LifePotion":
+				case "lp":
                     objectList.Add(new LifePotion(this.texture, pos));
                     break;
                 default:
@@ -152,7 +152,7 @@ namespace ZeldaGame.Items {
 			{
 				for (k = 0; k < count; k++)
 				{
-						objectList[k].Draw(spriteBatch, pos, Color.White);
+						objectList[k].Draw(spriteBatch, pos, Color.White, scale);
 				}
 			}
         }

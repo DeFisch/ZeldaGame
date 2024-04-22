@@ -1,9 +1,9 @@
 using System;
+using Enemy;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using ZeldaGame.Items;
 using static ZeldaGame.Globals;
-using ZeldaGame.Enemy.Projectiles;
 
 namespace ZeldaGame.Enemy;
 
@@ -14,6 +14,7 @@ public class WizzRobe : IEnemy {
 	private Vector2 position;
 	private State state;
 	private Direction direction;
+	private Vector2 scale;
     private Vector2 knockback;
     private int knockbackTimer;
     private readonly int knockbackScale = 8;
@@ -28,7 +29,7 @@ public class WizzRobe : IEnemy {
 	private EnemyProjectileFactory enemyProjectileFactory;
     private float damage = 0.5f;
 
-    public WizzRobe(Texture2D texture, Vector2 position, EnemyProjectileFactory enemyProjectileFactory, string color) {
+    public WizzRobe(Texture2D texture, Vector2 position, EnemyProjectileFactory enemyProjectileFactory, string color, Vector2 scale) {
 		rand_seed = new Random().Next();
 		this.texture = texture;
 		this.position = position;
@@ -41,6 +42,7 @@ public class WizzRobe : IEnemy {
             character_sprites[2, 1] = 107;
             character_sprites[3, 1] = 107;
         }
+		this.scale = scale;
     }
 
     public float DoDamage()

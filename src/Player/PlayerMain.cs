@@ -169,11 +169,6 @@ namespace ZeldaGame.Player {
             }
 		}
 
-		public void GetItem() {
-			animTimer = 63;
-			sprite = actionHandler.GetItem();
-		}
-
 		public bool isHurting()
 		{
 			return false;
@@ -211,7 +206,7 @@ namespace ZeldaGame.Player {
 		public void Draw(SpriteBatch spriteBatch, Color color)
 		{
 			weaponHandler.Draw(spriteBatch, scale);
-			sprite.Draw(spriteBatch, position, color);
+			sprite.Draw(spriteBatch, position, color, scale);
 		}
 
         private void UpdateMovementVector()
@@ -236,7 +231,7 @@ namespace ZeldaGame.Player {
             }
             if (animTimer == 0)
             {
-				sprite = PlayerSpriteFactory.Instance.CreateWalkSprite(direction);
+                sprite = PlayerSpriteFactory.Instance.CreateWalkSprite(direction);
                 Idle();
             }
 

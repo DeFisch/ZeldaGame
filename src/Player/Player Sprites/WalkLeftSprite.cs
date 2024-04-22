@@ -16,10 +16,10 @@ public class WalkLeftSprite : PlayerSprite {
 		this.sprite = sprite;
     }
 
-    public override void Draw(SpriteBatch spriteBatch, Vector2 location, Color color)
+    public override void Draw(SpriteBatch spriteBatch, Vector2 location, Color color, Vector2 scale)
 	{
         Rectangle srcRectangle = new Rectangle(35 + (17 * currentFrame), 11, 16, 16);
-        destRectangle = new Rectangle((int)location.X, (int)location.Y, (int)(srcRectangle.Width * Globals.scale.X), (int)(srcRectangle.Height * Globals.scale.Y));
+        destRectangle = new Rectangle((int)location.X, (int)location.Y, (int)(srcRectangle.Width * scale.X), (int)(srcRectangle.Height * scale.Y));
 		SpriteEffects effect = SpriteEffects.FlipHorizontally;
 
 		spriteBatch.Draw(sprite, destRectangle, srcRectangle, color, rotation: 0, new Vector2(0, 0), effects: effect, 1);

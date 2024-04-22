@@ -4,7 +4,6 @@ using System.Diagnostics;
 using ZeldaGame.Map;
 using ZeldaGame.Player;
 using ZeldaGame.Enemy;
-using ZeldaGame.Enemy.Projectiles;
 using System.Collections.Generic;
 using ZeldaGame.Items;
 using ZeldaGame.NPCs;
@@ -12,9 +11,8 @@ using System.Linq;
 using static ZeldaGame.Globals;
 using Microsoft.Xna.Framework.Graphics;
 using System;
-using System.Reflection.Metadata.Ecma335;
 
-namespace ZeldaGame.Collision;
+namespace ZeldaGame;
 public class CollisionHandler {
     private readonly Game1 game;
     private readonly EnemyCollisionHandler enemyCollisionHandler;
@@ -204,26 +202,12 @@ public class CollisionHandler {
                             game.itemFactory.RemoveItem(lifePotion);
                             Debug.WriteLine("Bought life potion using 5 rupees.");
                             break;
-                        case IItemSprite keyItem when (keyItem.GetID().Contains("Sword") || keyItem.GetID().Equals("Triforce")):
-							game.Link = new PlayerKeyItem(game.Link, game);
-							game.Link.GetItem();
-							audioLoader.Play("LOZ_Get_Item");
 
-							Vector2 itemPos = keyItem.GetHitBox().Location.ToVector2();
-							game.Link.SetPlayerPosition(itemPos + new Vector2(8 * Globals.scale.X, 16 * Globals.scale.Y));
-
-							Vector2 playerPos = game.Link.GetPlayerPosition();
-							Debug.WriteLine(itemPos.X + ", " + itemPos.Y);
-							Debug.WriteLine(playerPos.X + ", " + playerPos.Y);
-
-							game.itemFactory.RemoveItem(keyItem);
-							break;
-						default:
+                        default:
                             audioLoader.Play("LOZ_Get_Item");
-                            string itemID = item.GetID();
-                            Debug.WriteLine("Obtained Item \"" + itemID + "\"");
+                            Debug.WriteLine("Obtained Item \"" + item.GetID() + "\"");
                             game.itemFactory.RemoveItem(item);
-							break;
+                            break;
                     }
                 }
             }

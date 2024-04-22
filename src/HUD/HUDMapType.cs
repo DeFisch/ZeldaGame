@@ -1,7 +1,6 @@
 using Microsoft.Xna.Framework;
 using System.Collections.Generic;
 using System.Diagnostics;
-using ZeldaGame.Collision;
 using ZeldaGame.Map;
 
 

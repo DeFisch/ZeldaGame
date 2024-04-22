@@ -2,7 +2,7 @@
 
 namespace ZeldaGame.Player {
 	public class PlayerActionHandler {
-		public enum State {Idle, Walk, Attack, UseItem, GetItem}
+		public enum State {Idle, Walk, Attack, UseItem}
 		public Direction direction;
 		public Direction prevDirection;
 		public State state;
@@ -62,12 +62,6 @@ namespace ZeldaGame.Player {
 		public IPlayerSprite UseItem() {
 			state = State.UseItem;
 			sprite = PlayerSpriteFactory.Instance.CreateUseItemSprite(direction);
-			return sprite;
-		}
-
-		public IPlayerSprite GetItem() {
-			state = State.GetItem;
-			sprite = PlayerSpriteFactory.Instance.CreateGetItemSprite();
 			return sprite;
 		}
 	}

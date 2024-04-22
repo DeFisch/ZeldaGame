@@ -42,8 +42,8 @@ public class MapHandler {
 			}
 		}
     }
-    public void GetWindowScale(Vector3 mapSize) {
-		Globals.scale = new Vector2(mapSize.X / room_size.X, mapSize.Y / room_size.Y);
+    public Vector2 GetWindowScale(Vector3 mapSize) {
+		return new Vector2(mapSize.X / room_size.X, mapSize.Y / room_size.Y);
 	}
     private Rectangle get_map_location(int x, int y) {
         return new Rectangle(1 + x * 257, 1 + y * 177, (int)room_size.X, (int)room_size.Y);

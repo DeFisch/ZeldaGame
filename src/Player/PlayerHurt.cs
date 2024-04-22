@@ -1,7 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System.Collections.Generic;
-using ZeldaGame.Items;
 using static ZeldaGame.Globals;
 
 namespace ZeldaGame.Player {
@@ -32,10 +31,6 @@ namespace ZeldaGame.Player {
 		}
 		public void UseItem(PlayerProjectiles item) {
 			decoratedPlayer.UseItem(item);
-		}
-
-		public void GetItem() {
-			decoratedPlayer.GetItem();
 		}
 		public Swords GetSword() {
 			return decoratedPlayer.GetSword();

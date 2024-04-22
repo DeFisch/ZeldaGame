@@ -12,6 +12,7 @@ public class DarkNut : IEnemy {
 	private Vector2 position;
 	private State state;
 	private Direction direction;
+	private Vector2 scale;
     private Vector2 knockback;
     private int knockbackTimer;
     private readonly int knockbackScale = 8;
@@ -23,7 +24,7 @@ public class DarkNut : IEnemy {
 	private int iFrame = -100;
 	private float damage = 0.5f;
 
-	public DarkNut(Texture2D texture, Vector2 position, string color) {
+	public DarkNut(Texture2D texture, Vector2 position, string color, Vector2 scale) {
 		this.texture = texture;
 		this.position = position;
 		state = State.Walking;
@@ -35,6 +36,7 @@ public class DarkNut : IEnemy {
             character_sprites[3, 1] = 107;
             character_sprites[4, 1] = 107;
         }
+		this.scale = scale;
     }
 
     public float DoDamage()

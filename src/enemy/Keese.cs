@@ -11,6 +11,7 @@ public class Keese : IEnemy {
 	private Texture2D texture;
 	private Vector2 position;
 	private State state;
+	private Vector2 scale;
     private Vector2 knockback;
     private int knockbackTimer;
     private readonly int knockbackScale = 8;
@@ -24,7 +25,7 @@ public class Keese : IEnemy {
 	private int iFrame = -100;
     private float damage = 0.5f;
 
-    public Keese(Texture2D texture, Vector2 position, string color, Vector3 map_size) {
+    public Keese(Texture2D texture, Vector2 position, string color, Vector3 map_size, Vector2 scale) {
 		this.texture = texture;
 		this.position = position;
 		state = State.Walking;
@@ -35,6 +36,7 @@ public class Keese : IEnemy {
 			character_sprites[1, 1] = 28;
 		}
 		this.map_size = map_size;
+		this.scale = scale;
     }
 
     public float DoDamage()

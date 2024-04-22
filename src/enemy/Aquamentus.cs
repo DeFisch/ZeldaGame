@@ -1,7 +1,7 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Enemy;
 using static ZeldaGame.Globals;
-using ZeldaGame.Enemy.Projectiles;
 
 namespace ZeldaGame.Enemy;
 public class Aquamentus : IEnemy {
@@ -10,6 +10,7 @@ public class Aquamentus : IEnemy {
 	private Texture2D texture;
 	private Vector2 position;
 	private State state;
+	private Vector2 scale;
     private static int[,] character_sprites = new int[,] { { 1, 11, 24, 32 }, { 26, 11, 24, 32 }, { 51, 11, 24, 32 }, { 76, 11, 24, 32 } }; // x, y, width, height
 	private int currentFrame = 0;
 	private int speed = 2;
@@ -19,11 +20,12 @@ public class Aquamentus : IEnemy {
 	private int iFrame = -100;
     private EnemyProjectileFactory enemyProjectileFactory;
 	private float damage = 0.5f;
-	public Aquamentus(Texture2D texture, Vector2 position, EnemyProjectileFactory enemyProjectileFactory) {
+	public Aquamentus(Texture2D texture, Vector2 position, EnemyProjectileFactory enemyProjectileFactory, Vector2 scale) {
 		this.texture = texture;
 		this.position = position;
 		state = State.Walking;
         this.enemyProjectileFactory = enemyProjectileFactory;
+		this.scale = scale;
     }
 
     public float DoDamage()
