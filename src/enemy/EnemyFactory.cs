@@ -4,6 +4,7 @@ using Enemy;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using ZeldaGame.Items;
+using ZeldaGame.Map;
 namespace ZeldaGame.Enemy;
 
 
@@ -17,9 +18,11 @@ public class EnemyFactory {
 	public EnemyProjectileFactory enemyProjectileFactory;
 	ItemSpriteFactory itemSpriteFactory;
 	private Vector3 map_size;
-	public EnemyFactory(Texture2D[] textures, Vector2 scale, Vector3 map_size, ItemSpriteFactory itemSpriteFactory) {
+	private MapHandler mapHandler;
+	public EnemyFactory(Texture2D[] textures, Vector2 scale, Vector3 map_size, ItemSpriteFactory itemSpriteFactory, MapHandler mapHandler) {
 		enemies = new List<IEnemy>();
 		this.itemSpriteFactory = itemSpriteFactory;
+		this.mapHandler = mapHandler;
 		this.map_size = map_size;
 		this.textures = textures;
 		enemyProjectileFactory = new EnemyProjectileFactory(textures);
@@ -100,7 +103,10 @@ public class EnemyFactory {
 					int x = (int)(position.X / tile_width) - 2;
 					int y = (int)(position.Y / tile_height) - 2;
 					string[] available_items = itemSpriteFactory.GetAvailableItems();
-					itemSpriteFactory.AddItem(available_items[new Random().Next(0, available_items.Length)], new Vector2(x, y));
+					if(mapHandler.hasBreakableWall())
+						itemSpriteFactory.AddItem("k", new Vector2(x, y)); // guaranteed key drop if breakable wall is present
+					else
+						itemSpriteFactory.AddItem(available_items[new Random().Next(0, available_items.Length)], new Vector2(x, y));
 				}
 				dead_enemies.Add(enemies[i]);
 				enemies.RemoveAt(i);

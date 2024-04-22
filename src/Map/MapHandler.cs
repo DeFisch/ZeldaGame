@@ -81,6 +81,15 @@ public class MapHandler {
         return mapLoader.isRoomAvailable(direction);
     }
 
+    public bool hasBreakableWall(){
+        foreach (string key in mapLoader.door_type.Keys){
+            if (mapLoader.door_type[key] == 3){
+                return true;
+            }
+        }
+        return false;
+    }
+
     public bool switch_map(int y, int x) {
         Dictionary<string, int> door_type_old = mapLoader.door_type;
         if (mapLoader.load_map(x, y)) {

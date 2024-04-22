@@ -115,7 +115,7 @@ namespace ZeldaGame
             pushableBlockHandler = new PushableBlockHandler(map_texture, mapScale,mapSize,Link,map);
 			itemFactory = new ItemSpriteFactory(Items, npcs, mapScale, Link, map);
             NPCFactory = new NPCFactory(npcs, Items, mapScale, font, map, itemFactory);
-            enemyFactory = new EnemyFactory(enemy_texture, mapScale, mapSize, itemFactory);
+            enemyFactory = new EnemyFactory(enemy_texture, mapScale, mapSize, itemFactory, map);
             headUpDisplay = new HeadUpDisplay(HUD, mapScale, map, collisionHandler, Link, font);
 			playerInfoHUD = new PlayerInfoHUD(HUD, mapScale, map, font, collisionHandler, Link, headUpDisplay);
 		
