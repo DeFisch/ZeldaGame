@@ -7,6 +7,7 @@ public class PlayerEnemy
     private Vector2 position;
     private Vector2 resetPosition;
     private Vector2 scale;
+    private bool isActive;
 
     private readonly float speedPlayer = 3f;
     private readonly float speedAI = 1.5f;
@@ -21,9 +22,15 @@ public class PlayerEnemy
 
     public Rectangle GetHitBox()
     {
-        Rectangle hitbox = sprite.GetHitBox();
-        hitbox.Inflate(-6, -8);
-        return hitbox;
+        if (isActive)
+        {
+            Rectangle hitbox = sprite.GetHitBox();
+            hitbox.Inflate(-6, -8);
+            return hitbox;
+        } else
+        {
+            return new();   // Return no hitbox if not active
+        }
     }
 
     public void OnCollision(Rectangle collision)
@@ -74,6 +81,7 @@ public class PlayerEnemy
 
     public void Draw(SpriteBatch spriteBatch, Color color)
     {
+        isActive = true;    // If being drawn, means it is active
         sprite.Draw(spriteBatch, position, color, scale);
     }
 
@@ -90,6 +98,7 @@ public class PlayerEnemy
 
     public void Reset()
     {
+        isActive = false;
         position = resetPosition;
     }
 }
