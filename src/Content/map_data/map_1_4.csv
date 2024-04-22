@@ -7,4 +7,4 @@ cl,-,-,-,-,-,-,-,-,b,b,b
 -,-,-,-,-,-,-,b,b,b,b,b
 door,down,,,,,,,,,,
 enemy,Aquamentus,,,,,,,,,,
-keyedDoor,down,,,,,,,,,,
+keyedDoor,down,right,,,,,,,,,
