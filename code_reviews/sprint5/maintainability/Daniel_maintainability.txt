@@ -1,1 +1,7 @@
-Author: Dan
+Author: Dan Perry
+Date: April 22, 2024
+Sprint number: 5
+Name of the .cs file being reviewed: FlashlightMode.cs, Game1.cs modifications
+Author of the .cs files being reviewed: Daniel Feng
+Number of minutes taken for the review: 15 mins
+Comments: In the Game1 modifications, I believe it is as maintainable as it can be. It is clear and concise on what to draw when in flashlight mode. Presented well, easy to change and in a easily accessible location. Note I also really enjoyed the command line mode = !mode to flip it. I feel like mine would have been a couple extra lines. It's no secret, however that FlashlightMode.cs is a lot to look at. Although it definitely has it's share of necessary evils, it is all fit into one draw method, and I believe to make it more maintainable you could have split it up. Maybe have DrawProjectileLight() and DrawEnemyLight() methods, or something of that nature, in your draw command. It would become more abstract, clearer methods, and utilizes the practice of making methods do very simple thing to reduce bugs/debugging. It also would be easy to go in and add a method, maybe reference the other ones. Still, the mode is extremely difficult to do and you did it so well! I thought the mode would be a good few classes, but the totality of it seemed less than 100 lines. Well done!
