@@ -331,14 +331,18 @@ public class CollisionHandler {
             }
         }
     }
-    private void PlayerKeyedDoorCollision(IPlayer player, MapHandler map)
+    private void PlayerKeyedDoorCollision(IPlayer player, MapHandler map, Vector3 map_size)
     {
         Rectangle playerHitBox = player.GetHitBox();
+        Rectangle up_door = new Rectangle((int)(0.46875 * map_size.X), (int)(map_size.Z), (int)(0.0625 * map_size.X), (int)(0.18 * map_size.Y));
+        Rectangle down_door = new Rectangle((int)(0.46875 * map_size.X), (int)((0.82 * map_size.Y) + map_size.Z), (int)(0.0625 * map_size.X), (int)(0.18 * map_size.Y));
+        Rectangle left_door = new Rectangle(0, (int)((0.45 * map_size.Y) + map_size.Z), (int)(0.125 * map_size.X), (int)(0.1 * map_size.Y));
+        Rectangle right_door = new Rectangle((int)(0.875 * map_size.X), (int)((0.45 * map_size.Y) + map_size.Z), (int)(0.125 * map_size.X), (int)(0.1 * map_size.Y));
         Dictionary<string, Rectangle> door_type = new Dictionary<string, Rectangle>(){
-            {"up", new Rectangle((int)(game.mapSize.X * 0.43875), (int)(game.mapSize.Z + 1.5), 32 * (int)map.GetWindowScale(game.mapSize).X, 32 * (int)map.GetWindowScale(game.mapSize).Y)},
-            {"down", new Rectangle((int)(game.mapSize.X * 0.43875), (int)(game.mapSize.Y + 70), 32 * (int)map.GetWindowScale(game.mapSize).X, 32 * (int)map.GetWindowScale(game.mapSize).Y)},
-            {"left", new Rectangle(0, (int)((game.mapSize.X * 0.43875) + game.mapSize.Z - 15), 32 * (int)map.GetWindowScale(game.mapSize).X, 32 * (int)map.GetWindowScale(game.mapSize).Y)},
-            {"right", new Rectangle((int)(game.mapSize.X - (32 * map.GetWindowScale(game.mapSize).X)), (int)((game.mapSize.Y * 0.43875) + game.mapSize.Z - 15), 32 * (int)map.GetWindowScale(game.mapSize).X, 32 * (int)map.GetWindowScale(game.mapSize).Y)}
+            {"up", up_door},
+            {"down", down_door},
+            {"left", left_door},
+            {"right", right_door}
         };
         foreach (string key in door_type.Keys)
         {
@@ -363,6 +367,6 @@ public class CollisionHandler {
         EnemyObjectCollision();
         PushableBlockCollision();
         PlayerBombCollision();
-        PlayerKeyedDoorCollision(game.Link, game.map);
+        PlayerKeyedDoorCollision(game.Link, game.map, game.mapSize);
     }
 }
