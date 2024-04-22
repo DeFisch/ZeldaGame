@@ -5,6 +5,7 @@ using Microsoft.Xna.Framework.Graphics;
 using ZeldaGame.Items;
 using ZeldaGame.Map;
 namespace ZeldaGame.NPCs;
+using static ZeldaGame.Globals;
 
 public class NPCFactory
 {
@@ -12,7 +13,6 @@ public class NPCFactory
 	private Texture2D npcTexture;
     private Texture2D itemsTexture;
     private Vector2 position;
-	private Vector2 scale;
 	private int npclistLength;
 	private SpriteFont font;
     private MapHandler mapHandler;
@@ -21,7 +21,7 @@ public class NPCFactory
     private Vector2 itemPosition;
     private Vector2 itemPosition2;
     private ItemSpriteFactory itemSpriteFactory;
-    public NPCFactory(Texture2D npcTexture, Texture2D itemsTexture, Vector2 scale, SpriteFont font, MapHandler mapHandler, ItemSpriteFactory itemSpriteFactory)
+    public NPCFactory(Texture2D npcTexture, Texture2D itemsTexture, SpriteFont font, MapHandler mapHandler, ItemSpriteFactory itemSpriteFactory)
 	{
 		npcList = new List<INPC>();
 		npcRooms = new List<Vector2>();
@@ -29,7 +29,6 @@ public class NPCFactory
 		this.npcTexture = npcTexture;
         this.itemsTexture = itemsTexture;
         npclistLength = 0;
-		this.scale = scale;
 		this.font = font;
 		this.mapHandler = mapHandler;
 		inRoom = false;
@@ -63,28 +62,28 @@ public class NPCFactory
                                 npcList.Add(new Merchant(npcTexture, position));
                                 if (itemSpriteFactory.IsMapChanged())
                                 {
-                                    itemSpriteFactory.AddItem("k", itemPosition);
+                                    itemSpriteFactory.AddItem("Key", itemPosition);
                                 }
                                 break;
                             case 1:
                                 npcList.Add(new OldMan(npcTexture, position));
 								if (itemSpriteFactory.IsMapChanged()) {
-									itemSpriteFactory.AddItem("2s", itemPosition);
+									itemSpriteFactory.AddItem("WhiteSword", itemPosition);
 								}
 								break;
                             case 2:
                                 npcList.Add(new OldWoman(npcTexture, position));
                                 if (itemSpriteFactory.IsMapChanged())
                                 {
-                                    itemSpriteFactory.AddItem("lp", itemPosition);
+                                    itemSpriteFactory.AddItem("LifePotion", itemPosition);
                                 }
                                 break;
                             case 3:
                                 npcList.Add(new Fairy(npcTexture, position));
                                 if (itemSpriteFactory.IsMapChanged())
                                 {
-                                    itemSpriteFactory.AddItem("h", itemPosition);
-                                    itemSpriteFactory.AddItem("hc", itemPosition2);
+                                    itemSpriteFactory.AddItem("Heart", itemPosition);
+                                    itemSpriteFactory.AddItem("HeartContainer", itemPosition2);
                                 }
                                 break;
                             case 4:
@@ -106,7 +105,7 @@ public class NPCFactory
 	{
         for (int i = 0; i < npclistLength; i++)
         {
-            npcList[i].Draw(spriteBatch, scale, font);
+            npcList[i].Draw(spriteBatch, font);
 
             if (npcList[i] is Merchant)
             {

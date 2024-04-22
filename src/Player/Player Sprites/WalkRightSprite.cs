@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System.Diagnostics;
+using static ZeldaGame.Globals;
 
 namespace ZeldaGame.Player;
 public class WalkRightSprite : PlayerSprite {
@@ -16,7 +17,7 @@ public class WalkRightSprite : PlayerSprite {
 		this.sprite = sprite;
     }
 
-    public override void Draw(SpriteBatch spriteBatch, Vector2 location, Color color, Vector2 scale)
+    public override void Draw(SpriteBatch spriteBatch, Vector2 location, Color color)
     {
         Rectangle srcRectangle = new Rectangle(35 + (17 * currentFrame), 11, 16, 16);
         destRectangle = new Rectangle((int)location.X, (int)location.Y, (int)(srcRectangle.Width * scale.X), (int)(srcRectangle.Height * scale.Y));

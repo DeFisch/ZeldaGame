@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using ZeldaGame.Map;
 using ZeldaGame.Player;
 using static ZeldaGame.Game1;
+using static ZeldaGame.Globals;
 
 namespace ZeldaGame.Items {
 	public class ItemSpriteFactory {
@@ -17,7 +18,6 @@ namespace ZeldaGame.Items {
 		Texture2D texture2;
 		PlayerMain player;
 		Vector2 pos;
-		Vector2 scale;
 		private int k = 0;
 		private List<int> collCheck;
 		private int switchCheck;
@@ -29,13 +29,12 @@ namespace ZeldaGame.Items {
 		List<IItemSprite>[,] arrayOfLists;
 
 
-        public ItemSpriteFactory(Texture2D texture, Texture2D texture2, Vector2 scale, IPlayer player, MapHandler mapHandler) {
+        public ItemSpriteFactory(Texture2D texture, Texture2D texture2, IPlayer player, MapHandler mapHandler) {
 			objectList = new List<IItemSprite>();
 			this.texture = texture;
 			this.texture2 = texture2;
 			this.player = (PlayerMain)player;
 			pos = new Vector2(300, 150);
-			this.scale = scale;
 			this.mapHandler = mapHandler;
             arrayOfLists = new List<IItemSprite>[7, 6];
 			collCheck = new List<int>(objectList.Count);
@@ -54,7 +53,7 @@ namespace ZeldaGame.Items {
 		public string[] GetAvailableItems()
 #pragma warning restore CA1822 // Mark members as static
 		{
-			return new string[] { "br", "yr", "cl", "h", "bm"};
+			return new string[] { "BlueRuby", "YellowRuby", "Clock", "Heart", "Bomb"};
 		}
 
 		public List<IItemSprite> GetAllItems() {
@@ -64,49 +63,49 @@ namespace ZeldaGame.Items {
 		public void AddItem(string item_char, Vector2 pos) {
 			switch (item_char)
 			{
-				case "br":
+				case "BlueRuby":
 					objectList.Add(new BlueRuby(this.texture, pos));
 					break;
-				case "yr":
+				case "YellowRuby":
 					objectList.Add(new YellowRuby(this.texture, pos));
 					break;
-				case "k":
+				case "Key":
 					objectList.Add(new Key(this.texture, pos));
 					break;
-				case "cl":
+				case "Clock":
 					objectList.Add(new Clock(this.texture, pos));
 					break;
-				case "co":
+				case "Compass":
 					objectList.Add(new Compass(this.texture, pos));
 					break;
-				case "h":
+				case "Heart":
 					objectList.Add(new Heart(this.texture, pos));
 					break;
-				case "hc":
+				case "HeartCompass":
 					objectList.Add(new HeartContainer(this.texture, pos));
 					break;
-				case "tr":
+				case "Triforce":
 					objectList.Add(new Triforce(this.texture, pos));
 					break;
-				case "bo":
+				case "Bow":
 					objectList.Add(new Bow(this.texture, pos));
 					break;
-				case "bm":
+				case "Bomb":
 					objectList.Add(new Bomb(this.texture, pos));
 					break;
-				case "mp":
+				case "Map":
 				    objectList.Add(new Map(this.texture, pos));
 					break;
-				case "1s":
+				case "WoodSword":
 					objectList.Add(new WoodSword(this.texture, pos));
 					break;
-				case "2s":
+				case "WhiteSword":
 					objectList.Add(new WhiteSword(this.texture, pos));
 					break;
-				case "3s":
+				case "MagicSword":
 					objectList.Add(new MagicSword(this.texture, pos));
 					break;
-				case "lp":
+				case "LifePotion":
                     objectList.Add(new LifePotion(this.texture, pos));
                     break;
                 default:
@@ -152,7 +151,7 @@ namespace ZeldaGame.Items {
 			{
 				for (k = 0; k < count; k++)
 				{
-						objectList[k].Draw(spriteBatch, pos, Color.White, scale);
+						objectList[k].Draw(spriteBatch, pos, Color.White);
 				}
 			}
         }

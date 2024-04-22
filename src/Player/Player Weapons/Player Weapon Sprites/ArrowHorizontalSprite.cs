@@ -62,7 +62,7 @@ public class ArrowHorizontalSprite : IPlayerProjectile {
         collided = true;
     }
 
-    public void Draw(SpriteBatch spriteBatch, Vector2 scale) {
+    public void Draw(SpriteBatch spriteBatch) {
         if (!collided)
         {
             sourceRectangle = new Rectangle(10, 185, 16, 16);

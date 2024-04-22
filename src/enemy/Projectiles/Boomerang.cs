@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
+using static ZeldaGame.Globals;
 
 namespace Enemy.Projectiles
 {
@@ -11,7 +12,6 @@ namespace Enemy.Projectiles
         private Vector2 direction;
         private Vector2 location;
         private Texture2D texture;
-        private int scale = 3;
         private int currentFrame = 0;
         private int frameID = 0;
         private int duration = 180;
@@ -52,13 +52,13 @@ namespace Enemy.Projectiles
         public void Draw(SpriteBatch spriteBatch)
         {
             sourceRectangle = Boomerang_sprites[currentFrame];
-            Rectangle destinationRectangle = new Rectangle((int)location.X, (int)location.Y, sourceRectangle.Width * scale, sourceRectangle.Height * scale);
+            Rectangle destinationRectangle = new Rectangle((int)location.X, (int)location.Y, (int)(sourceRectangle.Width * scale.X), (int)(sourceRectangle.Height * scale.Y));
             spriteBatch.Draw(texture, destinationRectangle, sourceRectangle, Color.White, rotation: 0, new Vector2(0, 0), effects: sprite_effect, 1);
         }
 
         public Rectangle GetRectangle()
         {
-            return new Rectangle((int)location.X, (int)location.Y, Boomerang_sprites[currentFrame].Width * scale, Boomerang_sprites[currentFrame].Height * scale);
+            return new Rectangle((int)location.X, (int)location.Y, (int)(Boomerang_sprites[currentFrame].Width * scale.X), (int)(Boomerang_sprites[currentFrame].Height * scale.Y));
         }
 
         public string GetDirection() {

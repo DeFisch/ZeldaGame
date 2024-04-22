@@ -82,16 +82,17 @@ public class WeaponHandler {
 		}
     }
 
-    public void Draw(SpriteBatch spriteBatch, Vector2 scale) {
+    public void Draw(SpriteBatch spriteBatch) {
 		foreach (IPlayerProjectile projectile in activeProjectiles)
 		{
-			projectile.Draw(spriteBatch, scale);
+			projectile.Draw(spriteBatch);
 		}
     }
 
 	public void Reset() {
 		activeProjectiles.Clear();
 		expiredProjectiles.Clear();
+		currSword = Swords.Wood;
 	}
 }
 

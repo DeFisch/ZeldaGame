@@ -63,7 +63,7 @@ public class FireballSprite : IPlayerProjectile {
         isActive = false;
     }
 
-    public void Draw(SpriteBatch spriteBatch, Vector2 scale) {
+    public void Draw(SpriteBatch spriteBatch) {
 
 		Rectangle sourceRectangle = new Rectangle(191, 185, 16, 16);
 		destinationRectangle = new Rectangle((int)position.X, (int)position.Y, (int)(sourceRectangle.Width * scale.X), (int)(sourceRectangle.Height * scale.Y));

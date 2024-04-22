@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using static ZeldaGame.Globals;
 
 namespace ZeldaGame.NPCs;
 
@@ -24,7 +25,7 @@ public class Fairy : INPC {
 
     }
 
-	public void Draw(SpriteBatch spriteBatch, Vector2 scale, SpriteFont font) {
+	public void Draw(SpriteBatch spriteBatch, SpriteFont font) {
         int sprite_id = currentFrame % 2;
         sourceRectangle = new Rectangle(character_sprites[sprite_id, 0], character_sprites[sprite_id, 1], character_sprites[sprite_id, 2], character_sprites[sprite_id, 3]);
         destinationRectangle = new Rectangle((int)position.X, (int)position.Y, (int)(sourceRectangle.Width * scale.X), (int)(sourceRectangle.Height * scale.Y));

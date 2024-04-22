@@ -6,6 +6,7 @@ using ZeldaGame.Items;
 using ZeldaGame.Player;
 using ZeldaGame.Map;
 using System.Diagnostics;
+using static ZeldaGame.Globals;
 
 namespace ZeldaGame.HUD
 {
@@ -13,7 +14,6 @@ namespace ZeldaGame.HUD
     {
         private Texture2D texture;
         private SpriteFont font;
-        private Vector2 scale;
 
         private Rectangle fullHeartSR;
         private Rectangle halfHeartSR;
@@ -41,10 +41,9 @@ namespace ZeldaGame.HUD
         private HeadUpDisplay headUpDisplay;
 
 
-        public PlayerInfoHUD(Texture2D texture, Vector2 scale, MapHandler map, SpriteFont font, CollisionHandler collisionHandler, IPlayer Link, HeadUpDisplay headUpDisplay)
+        public PlayerInfoHUD(Texture2D texture, MapHandler map, SpriteFont font, CollisionHandler collisionHandler, IPlayer Link, HeadUpDisplay headUpDisplay)
         {
             this.texture = texture;
-            this.scale = scale;
             this.font = font;
             this.collisionHandler = collisionHandler;
             this.Link = Link;
@@ -64,7 +63,7 @@ namespace ZeldaGame.HUD
 			currentSwordDR = new Rectangle((int)(152 * scale.X), (int)(24 * scale.Y), (int)(8 * scale.X), (int)(16 * scale.Y));
 
 			itemActionHandler = collisionHandler.itemActionHandler;
-            mapHandler = new HUDMapHandler(texture, scale, map, collisionHandler);
+            mapHandler = new HUDMapHandler(texture, map, collisionHandler);
         }
 
         public void Draw(SpriteBatch spriteBatch, bool isDisplayed)

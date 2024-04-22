@@ -70,7 +70,7 @@ public class WoodSwordHorizontalProjectileSprite : IPlayerProjectile {
 		collided = true;
 	}
 
-	public void Draw(SpriteBatch spriteBatch, Vector2 scale) {
+	public void Draw(SpriteBatch spriteBatch) {
 		if (!collided) {
 			sourceRectangle = new Rectangle(10, 154, 16, 16);
 			if (direction == Direction.Right) {
@@ -97,7 +97,7 @@ public class WoodSwordHorizontalProjectileSprite : IPlayerProjectile {
 		if (!collided)
 			spriteBatch.Draw(Sprite, destinationRectangle, sourceRectangle, Color.White, rotation: 0, new Vector2(0, 0), effects: effect, 1);
 		else
-            swordExplosion.Draw(spriteBatch, scale);
+            swordExplosion.Draw(spriteBatch);
 	}
 
 	public void Update() {

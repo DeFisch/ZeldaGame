@@ -6,27 +6,26 @@ using Microsoft.Xna.Framework.Graphics;
 using ZeldaGame.Items;
 using ZeldaGame.Map;
 namespace ZeldaGame.Enemy;
+using static ZeldaGame.Globals;
 
 
 public class EnemyFactory {
 	private List<IEnemy> enemies;
 	private List<IEnemy> dead_enemies = new List<IEnemy>();
 	private Texture2D[] textures;
-	private Vector2 scale;
 	public int current_enemy = 0;
 	public string[] enemy_types = new string[] { "Stalfos", "Gibdo", "Keese", "WizzRobe", "DarkNut", "Goriya", "Aquamentus" };
 	public EnemyProjectileFactory enemyProjectileFactory;
 	ItemSpriteFactory itemSpriteFactory;
 	private Vector3 map_size;
 	private MapHandler mapHandler;
-	public EnemyFactory(Texture2D[] textures, Vector2 scale, Vector3 map_size, ItemSpriteFactory itemSpriteFactory, MapHandler mapHandler) {
+	public EnemyFactory(Texture2D[] textures, Vector3 map_size, ItemSpriteFactory itemSpriteFactory, MapHandler mapHandler) {
 		enemies = new List<IEnemy>();
 		this.itemSpriteFactory = itemSpriteFactory;
 		this.mapHandler = mapHandler;
 		this.map_size = map_size;
 		this.textures = textures;
 		enemyProjectileFactory = new EnemyProjectileFactory(textures);
-		this.scale = scale;
 	}
 
 	// create new enemy based on enemy name
@@ -55,26 +54,26 @@ public class EnemyFactory {
 		string color_variation = new Random().Next(0, 2) == 0 ? "blue" : "red";
 		switch (enemy_name) {
 			case "Stalfos":
-				enemy = new Stalfos(textures[0], position, scale);
+				enemy = new Stalfos(textures[0], position);
 				break;
 			case "Gibdo":
-				enemy = new Gibdo(textures[0], position, scale);
+				enemy = new Gibdo(textures[0], position);
 				break;
 			case "Keese":
-				enemy = new Keese(textures[0], position, color_variation, map_size, scale);
+				enemy = new Keese(textures[0], position, color_variation, map_size);
 				break;
 			case "WizzRobe":
-				enemy = new WizzRobe(textures[0], position, enemyProjectileFactory, color_variation, scale);
+				enemy = new WizzRobe(textures[0], position, enemyProjectileFactory, color_variation);
 				break;
 			case "DarkNut":
-				enemy = new DarkNut(textures[0], position, color_variation, scale);
+				enemy = new DarkNut(textures[0], position, color_variation);
 				break;
 			case "Goriya":
-				enemy = new Goriya(textures[0], position, enemyProjectileFactory, color_variation, scale);
+				enemy = new Goriya(textures[0], position, enemyProjectileFactory, color_variation);
 				break;
 			case "Aquamentus":
 				if (enemies.Count == 0) // Only one Aquamentus allowed
-					enemy = new Aquamentus(textures[1], position, enemyProjectileFactory, scale);
+					enemy = new Aquamentus(textures[1], position, enemyProjectileFactory);
 				break; 
 			default:
 				return;

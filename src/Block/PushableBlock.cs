@@ -2,6 +2,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
 using ZeldaGame.Player;
 using ZeldaGame.Map;
+using static ZeldaGame.Globals;
 using System;
 
 namespace ZeldaGame.Block {
@@ -46,7 +47,7 @@ namespace ZeldaGame.Block {
             CollisionAfterPush();
 		}
 
-		public void Draw(SpriteBatch spriteBatch, Texture2D texture, Vector3 map_size, Vector2 scale) {
+		public void Draw(SpriteBatch spriteBatch, Texture2D texture, Vector3 map_size) {
             room = map.getMapXY();
             if (!roomCheck().Equals(3))
             {

@@ -4,6 +4,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using ZeldaGame.Player;
 using ZeldaGame.Map;
+using static ZeldaGame.Globals;
 
 namespace ZeldaGame.HUD
 {
@@ -14,7 +15,6 @@ namespace ZeldaGame.HUD
         public HUDInventory HUDInventory;
         private PlayerInfoHUD playerInfoHUD;
         private Texture2D texture;
-        private Vector2 scale;
         private Rectangle inventorySR;
         private Rectangle mapSR;
         private Rectangle playerInfoSR;
@@ -23,14 +23,13 @@ namespace ZeldaGame.HUD
         private Rectangle playerInfoDR;
         private bool isDisplayed = false;
 
-        public HeadUpDisplay (Texture2D texture, Vector2 scale, MapHandler map, CollisionHandler collisionHandler, IPlayer Link, SpriteFont font)
+        public HeadUpDisplay (Texture2D texture, MapHandler map, CollisionHandler collisionHandler, IPlayer Link, SpriteFont font)
         {
             this.texture = texture;
-            this.scale = scale;
             this.collision = collisionHandler;
-            playerInfoHUD = new PlayerInfoHUD(texture, scale, map, font, collisionHandler, Link, this);
-            HUDInventory = new HUDInventory(texture, scale, Link);
-            HUDMapHandler = new HUDMapHandler(texture, scale, map, collisionHandler);
+            playerInfoHUD = new PlayerInfoHUD(texture, map, font, collisionHandler, Link, this);
+            HUDInventory = new HUDInventory(texture, Link);
+            HUDMapHandler = new HUDMapHandler(texture, map, collisionHandler);
             inventorySR = new Rectangle(1, 11, 256, 88);
             mapSR = new Rectangle(258, 112, 256, 88);
             playerInfoSR = new Rectangle(258, 11, 256, 56);

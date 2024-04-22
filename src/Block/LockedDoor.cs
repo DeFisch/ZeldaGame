@@ -2,6 +2,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
 using ZeldaGame.Map;
 using ZeldaGame.Player;
+using static ZeldaGame.Globals;
 using System.Data.Common;
 
 namespace ZeldaGame.Block {
@@ -27,7 +28,7 @@ namespace ZeldaGame.Block {
                 player.OnCollision(destinationRectangle);
 		}
 
-		public void Draw(SpriteBatch spriteBatch, Texture2D texture, Vector2 scale) {
+		public void Draw(SpriteBatch spriteBatch, Texture2D texture) {
             if(!pushableBlock.isOpen() && map.getMapXY().Equals(new Vector2(1,2)))
             {
 		        destinationRectangle = new Rectangle((int)position.X, (int)position.Y, (int)(sourceRectangle.Width * scale.X), (int)(sourceRectangle.Height * scale.Y));

@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Reflection.Metadata.Ecma335;
 using System.Runtime.CompilerServices;
 using ZeldaGame.Map;
+using static ZeldaGame.Globals;
 
 namespace ZeldaGame.HUD
 {
@@ -17,17 +18,15 @@ namespace ZeldaGame.HUD
         private List<Rectangle> targetRectangle;
         private Dictionary<string, Rectangle> playerPosition;
         private CollisionHandler collision;
-        private Vector2 scale;
 
-        public HUDMapHandler(Texture2D texture, Vector2 scale, MapHandler map, CollisionHandler collisionHandler)
+        public HUDMapHandler(Texture2D texture, MapHandler map, CollisionHandler collisionHandler)
         {
             this.texture = texture;
             this.collision = collisionHandler;
-            this.scale = scale;
             sourceRectangle = new List<Rectangle>();
             targetRectangle = new List<Rectangle>();
             playerPosition = new Dictionary<string, Rectangle>();
-            mapType = new HUDMapType(scale, map, collisionHandler);
+            mapType = new HUDMapType(map, collisionHandler);
             mapTeleport = new HUDMapTeleport(mapType, map);
         }
 

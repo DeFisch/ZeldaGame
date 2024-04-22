@@ -5,7 +5,7 @@ namespace ZeldaGame.NPCs {
 	public interface INPC {
 		void Update();
 
-		void Draw(SpriteBatch spriteBatch, Vector2 scale, SpriteFont font);
+		void Draw(SpriteBatch spriteBatch, SpriteFont font);
         public Rectangle GetNPCHitBox();
     }
 }

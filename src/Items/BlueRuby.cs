@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ZeldaGame.Map;
+using static ZeldaGame.Globals;
 
 namespace ZeldaGame.Items {
 	public class BlueRuby : IItemSprite {
@@ -21,7 +22,7 @@ namespace ZeldaGame.Items {
 			this.id = "BlueRuby";
 		}
 
-		public void Draw(SpriteBatch spriteBatch, Vector2 location, Color color, Vector2 scale) {
+		public void Draw(SpriteBatch spriteBatch, Vector2 location, Color color) {
 			int scaled_x = ((int)(scale.X * (16 * pos.X + 32)));
 			int scaled_y = ((int)(scale.Y * (16 * pos.Y + 32 + 56)));
 			sourceRectangle = new Rectangle(72, 16, 8, 16);

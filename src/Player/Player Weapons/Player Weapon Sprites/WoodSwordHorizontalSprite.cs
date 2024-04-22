@@ -56,7 +56,7 @@ public class WoodSwordHorizontalSprite : IPlayerProjectile {
         //isActive = false;
     }
 
-    public void Draw(SpriteBatch spriteBatch, Vector2 scale) {
+    public void Draw(SpriteBatch spriteBatch) {
 		switch (currFrames) {
 			case 0:
 				offset.X = 12;
