@@ -66,6 +66,10 @@ OSU CSE 3902 Zelda Game Project
 Try the challenging curse of Darkness game mode in our Zelda game! In this game mode, you can only see a small area around yourself, while the flame weapon and bombs can help you illuminate a bigger area! Activate this game mode with button "F", have fun!
 ![curse of darkness visual](https://github.com/DeFisch/ZeldaGame/blob/main/README_img/darkness.png)
 
+## New Level: Insanest
+Try our new level Insanest! In this difficulty level we have a new friend, The Annoying Hand, who will always follow and push you around (Insanest 1P). So please be mindful, don't get pushed into the enemies! If you happen to have a friend around, he/she can also join to control the annoying hand in difficulty Insanest (2P), try to annoy you as much as possible!
+![level insanest visual](https://github.com/DeFisch/ZeldaGame/blob/main/README_img/hand.png)
+
 ## Updates:
 - Arrow and Sword Mechanics Updates
   - Using normal arrows costs one ruby each when used. Magical arrows cost three rubies each when used.
