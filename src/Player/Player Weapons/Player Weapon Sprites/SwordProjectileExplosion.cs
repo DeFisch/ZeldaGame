@@ -11,10 +11,6 @@ public class SwordProjectileExplosion : IPlayerProjectile
     private Texture2D texture;
 
     private List<Vector2> positions;
-    private Vector2 positionTL;
-    private Vector2 positionTR;
-    private Vector2 positionBL;
-    private Vector2 positionBR;
 
     private int hitBoxReturnIndex;
     private readonly int projectileSpeed = 3;
@@ -37,7 +33,7 @@ public class SwordProjectileExplosion : IPlayerProjectile
         destinationRectangleBL = new();
         destinationRectangleBR = new();
         destinationRectangles = new() { destinationRectangleTL, destinationRectangleTR, destinationRectangleBL, destinationRectangleBR };
-        positions = new() { positionTL, positionTR, positionBL, positionBR };
+        positions = new() { Vector2.Zero, Vector2.Zero, Vector2.Zero, Vector2.Zero };
         for (int i = 0; i < positions.Count; i++)
             positions[i] = position;
         isActive = true;

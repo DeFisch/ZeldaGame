@@ -14,7 +14,7 @@ public class DifficultyUpCommand : ICommand
     {
         Debug.WriteLine("Difficulty Up Command");
         game.level++;
-        if (game.level > 2)
+        if (game.level > 4)
         {
             game.level = 0;
         }
