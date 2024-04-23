@@ -1,0 +1,9 @@
+Author: Leslie Cobbold
+Date: April 22, 2024
+Sprint number: 5
+Name of the .cs file being reviewed: Files in the HUD folder relating to HUD teleport
+Author of code: Zhiyang Xu
+Number of minutes taken for the review: 15 mins
+
+Comments:
+Brilliant idea to incorporate teleport to rooms from the HUD. Relating to the HUDMapTeleport class, its easily readable as it gets stores the room visted in a dictionary and also keeping track of the index to help cycle through. It had the same code to you mostly use cycle through lists or in this case transition between room on the HUD. This shows the reusability of the code segment. It also calls the switch map method in the teleport method to easily switch to the targeted room. Also the variable names are clearly defined which makes it easy to follow on what is being done in the HUDMapTeleport class. Overall, great work in implementing this feature and making it easy to follow.

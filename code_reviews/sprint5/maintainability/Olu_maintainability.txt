@@ -1,0 +1,9 @@
+Author: Leslie Cobbold
+Date: April 22, 2024
+Sprint number: 4
+Name of the .cs file being reviewed: Files relating to white sword addition and global scale.
+Author of the .cs files being reviewed: Olu Fasoro
+Number of minutes taken for the review: 15 mins
+
+Comments: 
+The addition of the white sword element is very maintainable as it follows the structure of previous codes for an addition of an item/weapon. This makes it easier to address any bugs as it follows a pattern. In terms of the globalized scale, it makes the code simple to maintain as it eliminates the passing of a scale to parameters for classes. It gives all the classes access to utilize the scale. Overall, most of the code were refactored well to make it maintainable for future changes.
