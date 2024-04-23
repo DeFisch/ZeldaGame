@@ -1,0 +1,7 @@
+Author: Dan Perry
+Date: April 22, 2024
+Sprint number: 5
+Name of the .cs file being reviewed: FlashlightMode.cs, Game1.cs modifications
+Author of the .cs files being reviewed: Daniel Feng
+Number of minutes taken for the review: 15 mins
+Comments: Your Game 1 additions are very easy to read, you've left comments and blocked your code up well so it's clear what each part is doing. It's also sectioned well off from the rest of the code so I can easily locate the flashlight portion of the Draw method. Your FlashlightMode.cs also had good readability. In my comments in your maintainablility, I mentioned making separate methods for each foreach method, making it clearer if you are drawing the light around the enemy, projectiles, the player, etc. Regardless, I can still tell where and what each foreach loop is doing, and I could clearly understand the class. Excellent work!
