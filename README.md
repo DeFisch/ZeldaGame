@@ -64,8 +64,15 @@ OSU CSE 3902 Zelda Game Project
 - Bomb: 2 damage, can damage/kill player
 - Flame: 0 damage, purely cosmetic (has knockback) 
 
+## Difficulty
+- Easy: Introduction to the game, ~1/3 of the available enemies
+- Hard: ~2/3 of the available enemies
+- Insane: All of the available enemies are spawned! (Are you sure?)
+- Insanest (1P): Insane + a new buddy "Annoying Hand" (for details see section below)
+- Insanest (2P): Insane + 2nd player controlled "Annoying Hand"!
+
 ## Curse of Darkness Game Mode
-Try the challenging curse of Darkness game mode in our Zelda game! In this game mode, you can only see a small area around yourself, while the flame weapon and bombs can help you illuminate a bigger area! Activate this game mode with button "F", have fun!
+Wanna step up the difficulty to a new level? Try the challenging curse of Darkness game mode in our Zelda game! In this game mode, you can only see a small area around yourself, while the flame weapon and bombs can help you illuminate a bigger area! Activate this game mode with button "F", have fun!
 ![curse of darkness visual](https://github.com/DeFisch/ZeldaGame/blob/main/README_img/darkness.png)
 
 ## New Level: Insanest
@@ -77,5 +84,7 @@ Try our new level Insanest! In this difficulty level we have a new friend, The A
   - Using normal arrows costs one ruby each when used. Magical arrows cost three rubies each when used.
   - When Link has full health, the sword is able to shoot out as an exploding projectile!
 - Inventory
-  - To change the item in Link's offhand, go to the inventory by pressing "h". Use the mouse keys to pick Link's offhand item, press space to exit the inventory, and then use "b" to use that item. 
+  - To change the item in Link's offhand, go to the inventory by pressing "h". Use the mouse keys to pick Link's offhand item, press space to exit the inventory, and then use "b" to use that item.
+ 
+<sub><sup>Cheat Code: 3902</sup></sub>
 
