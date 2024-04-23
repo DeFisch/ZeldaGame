@@ -1,0 +1,7 @@
+Author: Daniel Feng
+Date: April 22nd, 2024
+Sprint number: 5
+Name of the .cs file being reviewed: src/NPCs/*.cs, CollisionHandler.cs
+Number of minuteos taken for the review: 15 mins
+Comments:
+Nice implementation on NPC shops! Most of the functions in NPCFactory.cs looks good. However, the AddNPC function could be shortened by putting the item spawning lines insied the NPC, since it's more of an intrinsic property each of the NPC has (for example, Zelda only spawn key, old man only spawn small). Also, the use of switch statement can be avoided by putting a list of NPCs in dictionary and generate a random index to access, reduce the cyclomatic complexity and easier for us if we were to modify the NPC spawning logic in the future. The keyed door implementation also contain a lot of "magic numbers" regarding the position of the locked door on screen, it will make future modification harder if we were to change the sprites of the door. However, that's the same mistake I also made when implementing the player door collision as well :) so just keep in mind it's a bad coding practice on my part.
