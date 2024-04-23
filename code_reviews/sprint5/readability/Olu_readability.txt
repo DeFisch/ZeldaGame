@@ -1,0 +1,8 @@
+Author: Olivia Maynard
+Date: April 22, 2024
+Reviewing: Globals.cs
+Author of code: Olu Fasoro
+Time for code review: 10 minutes
+
+This is a cleanly written piece of code and provides concise/convenient support for many of our global enums and variables. Good usage of public and static
+quantifiers in appropriate ways. Variable names are also consistent/in a consistent style. Everything is readable in this file, nice work!
